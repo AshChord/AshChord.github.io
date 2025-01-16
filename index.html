@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="/assets/favicon.svg" type="image/x-icon" />
+  <title>AshChord.log</title>
+
+  <!-- Marked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/14.1.0/marked.min.js"></script>
+
+  <!-- Highlight -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css" />
+
+  <!-- Style -->
+  <link rel="stylesheet" href="/css/header.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/markdown.css" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <!-- Blog Title -->
+      <a href="/index.html" class="blog-title">AshChord.log</a>
+
+      <!-- Menu -->
+      <button class="menu-button"></button>
+      <div class="menu">
+        <a href="/html/home.html" class="menu-item">Home</a>
+        <a href="/html/posts.html" class="menu-item">Posts</a>
+        <a href="/html/about.html" class="menu-item">About</a>
+      </div>
+
+      <!-- Search -->
+      <button class="search-button"></button>
+      <div class="search-bar">
+        <input type="text" class="input-field" placeholder="Keyword" />
+        <div class="button-panel">
+          <button class="reset-button"></button>
+          <button class="submit-button"></button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <!-- Posts List -->
+      <div class="posts-list"></div>
+
+      <!-- Contents -->
+      <div class="contents"></div>
+
+      <!-- Pagination -->
+      <div class="pagination"></div>
+    </article>
+    <section class="category-search">
+      <div class="category-search-header">
+        <h2 class="category-search-title">content</h2>
+        <button class="category-search-button"></button>
+      </div>
+      <aside></aside>
+    </section>
+  </main>
+
+  <!-- External JavaScript -->
+  <script src="/js/header-toggle.js"></script>
+  <script src="/js/load-posts-list.js"></script>
+  <script src="/js/load-markdown.js"></script>
+</body>
+
+</html>

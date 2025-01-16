@@ -1,0 +1,20 @@
+[
+  {
+      "title": "blog1",
+      "date": "2024/10/01",
+      "categories": ["개발", "학습"],
+      "description": "프로그래밍의 기초를 배우는 과정입니다."
+  },
+  {
+      "title": "blog2",
+      "date": "2024/10/05",
+      "categories": ["여행"],
+      "description": "다음 여행을 위한 준비와 계획."
+  },
+  {
+      "title": "blog3",
+      "date": "2024/10/10",
+      "categories": ["건강", "요리"],
+      "description": "건강을 위한 영양 식단을 짜는 방법."
+  }
+]
