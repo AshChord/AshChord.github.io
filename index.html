@@ -4,11 +4,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/assets/favicon.svg" type="image/x-icon">
   <title>AshChord.log</title>
+
+  <!-- Marked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.7/marked.min.js"></script>
+
+  <!-- Highlight -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css">
+
+  <!-- Style -->
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/markdown.css">
 </head>
 
 <body>
-  <h1>Blank Page</h1>
+  <header>
+    <nav>
+      <!-- Blog Title -->
+      <h1 class="blog-title">AshChord.log</h1>
+
+      <!-- Menu -->
+      <button class="menu-button"></button>
+      <div class="menu">
+        <p class="menu-item">Home</p>
+        <p class="menu-item">Posts</p>
+        <p class="menu-item">About</p>
+      </div>
+
+      <!-- Search -->
+      <button class="search-button"></button>
+      <div class="search-bar">
+        <input type="text" class="input-field" placeholder="Keyword">
+        <div class="button-panel">
+          <button class="reset-button"></button>
+          <button class="submit-button"></button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <!-- Posts List -->
+      <div class="post-list"></div>
+
+      <!-- Contents -->
+      <div class="content"></div>
+
+      <!-- Pagination -->
+      <div class="pagination"></div>
+    </article>
+    <section class="category-search">
+      <div class="category-search-header">
+        <h2 class="category-search-title">CATEGORIES</h2>
+        <button class="category-search-button"></button>
+      </div>
+      <aside></aside>
+    </section>
+  </main>
+
+  <!-- External JavaScript -->
+  <script src="/js/toggle.js"></script>
+  <script src="/js/search.js"></script>
+  <script src="/js/render.js"></script>
+  <script src="/js/paginate.js"></script>
+  <script src="/js/router.js"></script>
+  <script src="/js/init.js"></script>
 </body>
 
 </html>
