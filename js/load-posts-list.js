@@ -43,7 +43,6 @@ function renderPosts(postData) {
 // 마크다운 파일을 불러와서 HTML로 변환하고 contents 요소에 삽입하는 함수
 async function loadMarkdown(postTitle) {
   try {
-    // 제목에 맞는 마크다운 파일 경로 (예: /posts/{title}.md)
     const markdownUrl = `/posts/${postTitle.toLowerCase().replace(/\s+/g, '-')}.md`;
 
     const response = await fetch(markdownUrl);
@@ -55,18 +54,42 @@ async function loadMarkdown(postTitle) {
     // 마크다운을 HTML로 변환
     const htmlContent = marked.parse(markdownText);
 
-    // contents 클래스를 가진 요소에 HTML 삽입
+    // contents 요소에 HTML 삽입
     const contents = document.querySelector('.contents');
     contents.innerHTML = htmlContent;
 
+    // posts-list 숨김 처리
+    const postsList = document.querySelector('.posts-list');
+    postsList.style.display = 'none';
+
     // 코드 블록 하이라이팅
     hljs.highlightAll();
+
+    // URL 업데이트
+    const newUrl = `/posts/${postTitle.toLowerCase().replace(/\s+/g, '-')}`;
+    history.pushState({ postTitle }, postTitle, newUrl);
+
   } catch (error) {
     console.error('Error loading markdown:', error);
     const contents = document.querySelector('.contents');
     contents.innerHTML = '<p class="error">게시물 내용을 불러오는데 실패했습니다.</p>';
   }
 }
+
+window.addEventListener('popstate', (event) => {
+  const contents = document.querySelector('.contents');
+  const postsList = document.querySelector('.posts-list');
+
+  if (event.state && event.state.postTitle) {
+    // 특정 게시물이 로드된 상태로 이동
+    loadMarkdown(event.state.postTitle);
+  } else {
+    // 게시물 목록을 보여주는 초기 상태로 복원
+    postsList.style.display = 'grid';
+    contents.innerHTML = '';
+  }
+});
+
 
 // 검색 기능 처리 함수
 function handleSearch(event) {
