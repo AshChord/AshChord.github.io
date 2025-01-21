@@ -4,7 +4,7 @@ main {
   height: 200vh
 }
 
-.posts-list {
+.post-list {
   display: grid;
   gap: 16px;
   margin-bottom: 20px;
