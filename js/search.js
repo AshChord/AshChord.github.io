@@ -30,14 +30,14 @@ resetButton.addEventListener('click', () => {
 inputField.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     const keyword = inputField.value;
-    history.pushState({ keyword, category: null }, '', `/posts?keyword=${encodeURIComponent(keyword)}`);
+    history.pushState(null, null, `/posts?keyword=${encodeURIComponent(keyword)}`);
     router();
   }
 });
 
 submitButton.addEventListener('click', () => {
   const keyword = inputField.value;
-  history.pushState({ keyword, category: null }, '', `/posts?keyword=${encodeURIComponent(keyword)}`);
+  history.pushState(null, null, `/posts?keyword=${encodeURIComponent(keyword)}`);
   router();
 });
 
@@ -45,7 +45,7 @@ postList.addEventListener('click', (event) => {
   if (event.target.className === 'category') {
     event.stopPropagation(); // 게시물 클릭 이벤트로 전파 방지
     const category = event.target.textContent;
-    history.pushState({ category }, '', `/posts?category=${encodeURIComponent(category)}`);
+    history.pushState(null, null, `/posts?category=${encodeURIComponent(category)}`);
     router();
   }
 });
