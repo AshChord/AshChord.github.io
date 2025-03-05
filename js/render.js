@@ -18,6 +18,7 @@ function renderPostList(postsToRender = posts, currentPage = 1) {
     const postCard = document.createElement('div');
     postCard.classList.add('post-card');
     postCard.innerHTML = `
+      <img src="${post.thumbnail || '/assets/thumbnail.png'}" alt="${post.title}" class="thumbnail">
       <h2 class="title">${post.title}</h2>
       <p class="description">${post.description}</p>
       <div class="category-list">
@@ -45,9 +46,12 @@ function renderPostList(postsToRender = posts, currentPage = 1) {
 async function renderContent(post) {
   const postList = document.querySelector('.post-list');
   const content = document.querySelector('.content');
+  const pagination = document.querySelector(".pagination");
+
 
   // .post-list를 빈 요소로 만들기
   postList.innerHTML = '';
+  pagination.innerHTML = '';
 
   // .content에 게시물 내용 렌더링
   const response = await fetch(`/posts/${post.title}.md`);
@@ -55,4 +59,16 @@ async function renderContent(post) {
 
   content.innerHTML = marked.parse(markdownContent);
   hljs.highlightAll();
+
+  // 테이블 감싸는 div 추가
+  const tables = content.querySelectorAll("table");
+  tables.forEach((table) => {
+    // table을 감쌀 div 생성
+    const tableWrapper = document.createElement("div");
+    tableWrapper.classList.add("table-wrapper"); // CSS 클래스 추가
+
+    // table을 tableWrapper로 감싸기
+    table.parentNode.insertBefore(tableWrapper, table);
+    tableWrapper.appendChild(table);
+  });
 }

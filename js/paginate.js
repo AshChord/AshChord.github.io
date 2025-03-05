@@ -1,66 +1,74 @@
-let currentPage = 1;
+let currentPage;
 
-// 페이지네이션 처리 함수들
+
 function initPagination(totalPosts) {
-  totalPage = Math.ceil(totalPosts / POSTS_PER_PAGE); // 총 페이지 계산
-  const pagination = document.querySelector(".pagination"); // 클래스 선택
-  pagination.style.display = "flex";
+  totalPage = Math.ceil(totalPosts / POSTS_PER_PAGE);
+  currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1; // 맨 윗줄에서 page 값 읽어오기
 
-  const prevButton = createPaginationButton("Prev", "page-prev", handlePrevPage);
-  const nextButton = createPaginationButton("Next", "page-next", handleNextPage);
+  const pagination = document.querySelector(".pagination");
+  pagination.style.display = "flex"; // 페이지네이션 스타일 설정
 
-  const pageNav = document.createElement("nav");
-  pageNav.setAttribute("id", "pagination-list");
+  // 페이지네이션 요소가 비어 있으면 내용 갱신
+  if (pagination.innerHTML === "") {
+    const prevButton = createPaginationButton("Prev", "page-prev", handlePrevPage);
+    const nextButton = createPaginationButton("Next", "page-next", handleNextPage);
 
-  const pageNumbersFragment = document.createDocumentFragment();
+    const pageList = document.createElement("div");
+    pageList.classList.add("page-list");
+
+    pagination.append(prevButton, pageList, nextButton);
+  } else {
+    // 기존 페이지 번호 제거
+    const pageList = pagination.querySelector(".page-list");
+    pageList.innerHTML = "";
+  }
+
+  const pageListFragment = document.createDocumentFragment();
   for (let i = 1; i <= totalPage; i++) {
     const pageButton = document.createElement("button");
     pageButton.classList.add("page-number");
     pageButton.textContent = i;
     pageButton.addEventListener("click", () => handlePageChange(i));
-    pageNumbersFragment.appendChild(pageButton);
+    pageListFragment.appendChild(pageButton);
   }
-  pageNav.appendChild(pageNumbersFragment);
 
-  pagination.append(prevButton, pageNav, nextButton);
-}
+  const pageList = pagination.querySelector(".page-list");
+  pageList.appendChild(pageListFragment);
 
-function renderPagination() {
-  const prevButton = document.getElementById("page-prev");
-  const nextButton = document.getElementById("page-next");
+  // 페이지 상태 렌더링
+  const prevButtonElement = document.getElementById("page-prev");
+  const nextButtonElement = document.getElementById("page-next");
 
-  // 이전/다음 버튼의 활성화 여부 처리
-  prevButton.disabled = currentPage === 1;
-  nextButton.disabled = currentPage === totalPage;
-
-  // 페이지 버튼 상태 업데이트
-  const pageNav = document.querySelector(".pagination nav");
-  const pageButtons = pageNav.querySelectorAll("button");
-  pageButtons.forEach((button, index) => {
-    const pageNumber = index + 1;
-    button.classList.toggle("active", pageNumber === currentPage);
-  });
+  prevButtonElement.disabled = currentPage === 1;
+  nextButtonElement.disabled = currentPage === totalPage;
 }
 
 function handlePageChange(pageNumber) {
   currentPage = pageNumber;
-  renderPostList(posts, currentPage); // currentPage를 함께 전달
-  renderPagination(); // 페이지네이션 상태 업데이트
+  const searchParams = new URLSearchParams(window.location.search);
+  searchParams.set('page', currentPage); // page 파라미터 업데이트
+  window.history.pushState({}, '', `/posts?${searchParams.toString()}`);
+  router();
 }
 
 function handlePrevPage() {
   if (currentPage > 1) {
     currentPage--;
-    renderPostList(posts, currentPage); // currentPage를 함께 전달
-    renderPagination();
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('page', currentPage);
+    window.history.pushState({}, '', `/posts?${searchParams.toString()}`);
+    router();
   }
 }
 
 function handleNextPage() {
+  const totalPage = Math.ceil(posts.length / POSTS_PER_PAGE);
   if (currentPage < totalPage) {
     currentPage++;
-    renderPostList(posts, currentPage); // currentPage를 함께 전달
-    renderPagination();
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('page', currentPage);
+    window.history.pushState({}, '', `/posts?${searchParams.toString()}`);
+    router();
   }
 }
 
@@ -71,11 +79,4 @@ function createPaginationButton(text, id, onClickHandler) {
   button.textContent = text;
   button.addEventListener("click", onClickHandler);
   return button;
-}
-
-// 게시물 데이터 로드 후 초기화
-async function initializePagination() {
-  initPagination(posts.length); // 총 페이지 수 계산 후 페이지네이션 초기화
-  renderPostList(posts); // 첫 페이지 게시물 렌더링 (render.js에서 수정 예정)
-  renderPagination(); // 페이지네이션 상태 렌더링
 }

@@ -21,7 +21,7 @@
 
 문단 내용입니다. 이 문장은 간단한 예시를 보여주기 위한 문장입니다.  <!-- p -->
 
-![이미지 설명](https://cdn.inflearn.com/public/files/posts/8d4983fa-7dd4-4322-9a56-83df1c8d26bc/%EC%9C%84%EB%8B%88%EB%B8%8C%EC%A6%88.png)  <!-- img -->
+![이미지 설명](/assets/thumbnail.png)  <!-- img -->
 
 [링크 텍스트](https://example.com)  <!-- a -->
 
