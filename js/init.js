@@ -6,6 +6,7 @@ async function initialize() {
 
   // 2. 현재 URL에 맞는 화면 렌더링
   router();
+  renderBlogCategory();
 }
 
 // 📌 DOM 로드 완료 후 초기화 실행

@@ -72,3 +72,65 @@ async function renderContent(post) {
     tableWrapper.appendChild(table);
   });
 }
+
+function renderBlogCategory() {
+  /*
+    posts에서 카테고리를 소문자로 추출하여 카테고리 목록을 aside 항목으로 렌더링
+    */
+  const categoryList = {};
+  posts.forEach((post) => {
+    if (post.categories) { // 카테고리가 존재할 경우
+      post.categories.forEach((category) => { // 여러 카테고리를 순회
+        const categoryName = category.toLowerCase(); // 카테고리 이름을 소문자로 변환
+        if (categoryList[categoryName]) {
+          categoryList[categoryName] += 1; // 카테고리의 개수 증가
+        } else {
+          categoryList[categoryName] = 1; // 새로운 카테고리 추가
+        }
+      });
+    }
+  });
+  const categoryArray = Object.keys(categoryList);
+  categoryArray.sort();
+
+  const categoryContainer = document.querySelector("aside");
+  const categoryWrapper = document.querySelector(".category-search");
+  const categoryTitle = categoryWrapper.querySelector(".category-search-title");
+  const categoryButton = document.querySelector(".category-search-button");
+  window.addEventListener("click", (evt) => {
+    // categoryButton을 눌렀을 때
+    if (evt.target === categoryButton) {
+      categoryWrapper.classList.toggle("active"); // 'active' 클래스 토글
+      categoryTitle.classList.toggle("active");
+      categoryContainer.classList.toggle("active");
+      categoryButton.classList.toggle("active");
+    } else if (
+      categoryWrapper.classList.contains("active") &&
+      !categoryWrapper.contains(evt.target)
+    ) {
+      categoryWrapper.classList.remove("active"); // 'active' 클래스 제거
+      categoryTitle.classList.remove("active");
+      categoryContainer.classList.remove("active");
+      categoryButton.classList.remove("active");
+    }
+  });
+
+  categoryArray.forEach((category) => {
+    // category div
+    const categoryItem = document.createElement("div");
+
+    // category count span
+    const categoryCount = document.createElement("span");
+
+    categoryItem.textContent = category;
+    categoryCount.textContent = `(${categoryList[category]})`;
+    categoryItem.onclick = () => {
+      history.pushState(null, null, `/posts?category=${encodeURIComponent(category)}`);
+      router();
+    };
+
+
+    categoryItem.appendChild(categoryCount);
+    categoryContainer.appendChild(categoryItem);
+  });
+}
