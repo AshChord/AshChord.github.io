@@ -1,9 +1,11 @@
 let currentPage;
 let currentGroup = 1; // 현재 페이지 그룹 (예: 1~5, 6~10)
+let totalPage; // 현재 총 게시물 수 저장
+
 
 // 페이지네이션 초기화
 function initPagination(totalPosts) {
-  const totalPage = Math.ceil(totalPosts / POSTS_PER_PAGE);
+  totalPage = Math.ceil(totalPosts / POSTS_PER_PAGE);
   currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
   currentGroup = Math.ceil(currentPage / 5); // 현재 페이지가 속한 그룹 계산
 
@@ -62,10 +64,10 @@ function updatePaginationUI(totalPage) {
   });
 
   // Prev, Next, First, Last 버튼 상태 업데이트
-  document.querySelector(".page-first").disabled = currentGroup === 1;
+  document.querySelector(".page-first").disabled = currentPage === 1;
   document.querySelector(".page-prev").disabled = currentGroup === 1;
   document.querySelector(".page-next").disabled = endPage === totalPage;
-  document.querySelector(".page-last").disabled = endPage === totalPage;
+  document.querySelector(".page-last").disabled = currentPage === totalPage;
 }
 
 // 페이지 변경 함수
@@ -84,7 +86,6 @@ function handleFirstPage() {
 
 // 마지막 페이지로 이동
 function handleLastPage() {
-  const totalPage = Math.ceil(posts.length / POSTS_PER_PAGE);
   currentPage = totalPage;
   currentGroup = Math.ceil(totalPage / 5);
   updatePageState();
@@ -94,7 +95,7 @@ function handleLastPage() {
 function handlePrevGroup() {
   if (currentGroup > 1) {
     currentGroup--;
-    currentPage = (currentGroup - 1) * 5 + 1; // 이전 그룹의 첫 페이지
+    currentPage = currentGroup * 5; // 이전 그룹의 첫 페이지
     updatePageState();
   }
 }

@@ -3,7 +3,7 @@ function router() {
   const queryParams = new URLSearchParams(window.location.search);
 
   // 1. path가 루트(/)인 경우
-  if (path === '/') {
+  if (path === '/' || path === '/index.html') {
     initPagination(posts.length); // 페이지네이션 초기화
     renderPostList(posts, currentPage); // 루트 페이지는 전체 게시물 목록 렌더링
   }
@@ -44,6 +44,8 @@ function router() {
   else {
     showNotFound(); // 404 페이지 표시
   }
+
+  window.scrollTo(0, 0);
 }
 
 

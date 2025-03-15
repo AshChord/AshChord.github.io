@@ -23,13 +23,14 @@ inputField.addEventListener('input', toggleResetButton);
 resetButton.addEventListener('click', () => {
   inputField.value = '';
   toggleResetButton();
-  inputField.focus();
 });
 
 // 검색 이벤트 리스너
 inputField.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     const keyword = inputField.value;
+    inputField.value = '';
+    toggleResetButton();
     history.pushState(null, null, `/posts?keyword=${encodeURIComponent(keyword)}`);
     router();
   }
@@ -37,6 +38,8 @@ inputField.addEventListener('keypress', (event) => {
 
 submitButton.addEventListener('click', () => {
   const keyword = inputField.value;
+  inputField.value = '';
+  toggleResetButton();
   history.pushState(null, null, `/posts?keyword=${encodeURIComponent(keyword)}`);
   router();
 });
