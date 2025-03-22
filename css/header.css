@@ -26,6 +26,7 @@ nav {
   font-size: 18px;
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
 
   @media (min-width: 768px) {
     font-size: 24px;
@@ -77,6 +78,7 @@ nav {
   line-height: 20px;
   text-decoration: none;
   transition: color 0.3s ease;
+  cursor: pointer;
 
   &:hover {
     color: #8d9299;
