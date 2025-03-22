@@ -27,12 +27,10 @@ function router() {
     });
   }
 
-  const page = parseInt(queryParams.get('page')) || 1;
-
   // 1. path가 루트(/)인 경우
   if (path === '/' || path === '/index.html') {
     initPagination(posts.length); // 페이지네이션 초기화
-    renderPostList(posts, page); // 루트 페이지는 전체 게시물 목록 렌더링
+    renderPostList(posts, currentPage); // 루트 페이지는 전체 게시물 목록 렌더링
   }
 
   // 2. path가 /posts인 경우
@@ -42,7 +40,7 @@ function router() {
       const keyword = queryParams.get('keyword');
       const category = queryParams.get('category');
       initPagination(search(keyword, category).length); // 검색된 게시물 개수에 맞게 페이지네이션 초기화
-      renderPostList(search(keyword, category), page); // 검색 필터링 후 페이지에 맞는 게시물 렌더링
+      renderPostList(search(keyword, category), currentPage); // 검색 필터링 후 페이지에 맞는 게시물 렌더링
     }
     // 2.2. /posts 인데 postTitle이 있는 경우: 게시물 제목에 맞는 게시물 내용 렌더링
     else if (path.replace('/posts', '')) {
@@ -53,7 +51,7 @@ function router() {
     // 2.3. /posts 인데 키워드, 카테고리, 제목이 모두 없는 경우: 전체 게시물 목록 렌더링
     else {
       initPagination(posts.length); // 전체 게시물 개수에 맞게 페이지네이션 초기화
-      renderPostList(posts, page);
+      renderPostList(posts, currentPage);
     }
   }
 
