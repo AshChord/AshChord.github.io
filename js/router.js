@@ -2,10 +2,16 @@ function router() {
   const path = window.location.pathname;
   const queryParams = new URLSearchParams(window.location.search);
 
-
   // 🚀 "?p="가 있으면 URL 정리
   if (queryParams.has("p")) {
-    history.replaceState(null, null, queryParams.get("p")); // path를 변경하지 않고 바로 적용
+    history.replaceState(null, "", queryParams.get("p") + (queryParams.has("q") ? "?" + queryParams.get("q").replace(/~and~/g, "&") : ""));
+  }
+
+  // ✅ "q" 파라미터를 해석해서 기존 URLSearchParams로 변환
+  if (queryParams.has("q")) {
+    const fixedSearch = new URLSearchParams(queryParams.get("q").replace(/~and~/g, "&"));
+    queryParams.delete("q"); // 기존 q 제거 후 복원된 값을 추가
+    fixedSearch.forEach((value, key) => queryParams.set(key, value));
   }
 
   // 1. path가 루트(/)인 경우
