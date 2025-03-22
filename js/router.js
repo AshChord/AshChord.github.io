@@ -1,17 +1,30 @@
 function router() {
-  const path = window.location.pathname;
+  let path = window.location.pathname;
   const queryParams = new URLSearchParams(window.location.search);
 
-  // 🚀 "?p="가 있으면 URL 정리
-  if (queryParams.has("p")) {
-    history.replaceState(null, "", queryParams.get("p") + (queryParams.has("q") ? "?" + queryParams.get("q").replace(/~and~/g, "&") : ""));
+  // 쿼리 파라미터 'p'가 있으면, path를 p 파라미터로 설정
+  if (queryParams.has('p')) {
+    path = queryParams.get('p');
   }
 
-  // ✅ "q" 파라미터를 해석해서 기존 URLSearchParams로 변환
-  if (queryParams.has("q")) {
-    const fixedSearch = new URLSearchParams(queryParams.get("q").replace(/~and~/g, "&"));
-    queryParams.delete("q"); // 기존 q 제거 후 복원된 값을 추가
-    fixedSearch.forEach((value, key) => queryParams.set(key, value));
+  // 2. 쿼리 파라미터 'q'가 있으면 원래의 검색 파라미터로 복원
+  if (queryParams.has('q')) {
+    const qValue = queryParams.get('q');
+    const restoredParams = new URLSearchParams();
+
+    // 'q' 값을 '~and~' 기준으로 분리하여 복원
+    const keyValuePairs = qValue.split('~and~');
+    keyValuePairs.forEach(pair => {
+      const [key, value] = pair.split('=');
+      if (key && value) {
+        restoredParams.set(key, decodeURIComponent(value));
+      }
+    });
+
+    // 복원된 쿼리 파라미터를 queryParams에 덮어씌우기
+    restoredParams.forEach((value, key) => {
+      queryParams.set(key, value);
+    });
   }
 
   // 1. path가 루트(/)인 경우
