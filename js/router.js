@@ -2,6 +2,12 @@ function router() {
   const path = window.location.pathname;
   const queryParams = new URLSearchParams(window.location.search);
 
+
+  // 🚀 "?p="가 있으면 URL 정리
+  if (queryParams.has("p")) {
+    history.replaceState(null, null, queryParams.get("p")); // path를 변경하지 않고 바로 적용
+  }
+
   // 1. path가 루트(/)인 경우
   if (path === '/' || path === '/index.html') {
     initPagination(posts.length); // 페이지네이션 초기화
