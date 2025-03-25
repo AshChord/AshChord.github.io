@@ -26,6 +26,9 @@ function router() {
         queryParams.set(key, value);
       });
 
+      queryParams.delete('p');
+      queryParams.delete('q');
+
       history.replaceState(null, '', `${path}?${queryParams.toString()}`);
     }
 
