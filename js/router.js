@@ -18,7 +18,7 @@ function router() {
       keyValuePairs.forEach(pair => {
         const [key, value] = pair.split('=');
         if (key && value) {
-          restoredParams.set(key, decodeURIComponent(value));
+          restoredParams.set(key, value);
         }
       });
 
