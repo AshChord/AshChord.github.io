@@ -31,7 +31,7 @@ function router() {
 
     else {
       // 주소창을 새로운 URL로 변경
-      history.replaceState(null, '', `${path}}`);
+      history.replaceState(null, '', `${path}`);
     }
   }
 
