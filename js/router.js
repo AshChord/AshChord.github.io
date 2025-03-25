@@ -25,15 +25,14 @@ function router() {
       restoredParams.forEach((value, key) => {
         queryParams.set(key, value);
       });
+
+      history.replaceState(null, '', `${path}?${queryParams.toString()}`);
     }
 
-    // 'p'와 'q'를 고려하여 새로운 URL을 만듬
-    const currentParams = new URLSearchParams(queryParams);
-    currentParams.delete('p'); // 'p' 파라미터는 URL에서 제거
-    const newUrl = `${path}?${currentParams.toString()}`; // 새로운 URL을 생성
-
-    // 주소창을 새로운 URL로 변경
-    history.replaceState(null, '', newUrl);
+    else {
+      // 주소창을 새로운 URL로 변경
+      history.replaceState(null, '', `${path}}`);
+    }
   }
 
   // 1. path가 루트(/)인 경우
