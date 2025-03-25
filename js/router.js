@@ -2,29 +2,38 @@ function router() {
   let path = window.location.pathname;
   const queryParams = new URLSearchParams(window.location.search);
 
-  // 쿼리 파라미터 'p'가 있으면, path를 p 파라미터로 설정
+  // p 파라미터가 있는지 확인
   if (queryParams.has('p')) {
+    // p가 있으면 path를 p 파라미터로 설정
     path = queryParams.get('p');
-  }
 
-  // 2. 쿼리 파라미터 'q'가 있으면 원래의 검색 파라미터로 복원
-  if (queryParams.has('q')) {
-    const qValue = queryParams.get('q');
-    const restoredParams = new URLSearchParams();
+    // q 파라미터가 있으면 복원
+    if (queryParams.has('q')) {
+      const qValue = queryParams.get('q');
+      const restoredParams = new URLSearchParams();
 
-    // 'q' 값을 '~and~' 기준으로 분리하여 복원
-    const keyValuePairs = qValue.split('~and~');
-    keyValuePairs.forEach(pair => {
-      const [key, value] = pair.split('=');
-      if (key && value) {
-        restoredParams.set(key, decodeURIComponent(value));
-      }
-    });
+      // 'q' 값을 '~and~' 기준으로 분리하여 복원
+      const keyValuePairs = qValue.split('~and~');
+      keyValuePairs.forEach(pair => {
+        const [key, value] = pair.split('=');
+        if (key && value) {
+          restoredParams.set(key, decodeURIComponent(value));
+        }
+      });
 
-    // 복원된 쿼리 파라미터를 queryParams에 덮어씌우기
-    restoredParams.forEach((value, key) => {
-      queryParams.set(key, value);
-    });
+      // 복원된 쿼리 파라미터를 queryParams에 덮어씌우기
+      restoredParams.forEach((value, key) => {
+        queryParams.set(key, value);
+      });
+    }
+
+    // 'p'와 'q'를 고려하여 새로운 URL을 만듬
+    const currentParams = new URLSearchParams(queryParams);
+    currentParams.delete('p'); // 'p' 파라미터는 URL에서 제거
+    const newUrl = `${path}?${currentParams.toString()}`; // 새로운 URL을 생성
+
+    // 주소창을 새로운 URL로 변경
+    history.replaceState(null, '', newUrl);
   }
 
   // 1. path가 루트(/)인 경우
