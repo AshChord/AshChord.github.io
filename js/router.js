@@ -6,6 +6,7 @@ function router() {
   if (queryParams.has('p')) {
     // p가 있으면 path를 p 파라미터로 설정
     path = queryParams.get('p');
+    queryParams.delete('p');
 
     // q 파라미터가 있으면 복원
     if (queryParams.has('q')) {
@@ -26,7 +27,6 @@ function router() {
         queryParams.set(key, value);
       });
 
-      queryParams.delete('p');
       queryParams.delete('q');
 
       history.replaceState(null, '', `${path}?${queryParams.toString()}`);
