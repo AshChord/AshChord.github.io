@@ -11,7 +11,6 @@ function router() {
     // q 파라미터가 있으면 복원
     if (queryParams.has('q')) {
       const qValue = queryParams.get('q');
-      console.log(qValue);
       const restoredParams = new URLSearchParams();
 
       queryParams.delete('q');
@@ -19,9 +18,12 @@ function router() {
       // 'q' 값을 '~and~' 기준으로 분리하여 복원
       const keyValuePairs = qValue.split('~and~');
       keyValuePairs.forEach(pair => {
-        const [key, value] = pair.split('=');
+        // 첫 번째 '='까지만 기준으로 분리 (key와 value를 나눔)
+        const [key, ...valueParts] = pair.split('=');
+        const value = valueParts.join('='); // 나머지 부분을 value로 합침
+
         if (key && value) {
-          restoredParams.set(key, value);
+          restoredParams.set(key, value); // 복원된 값 그대로 추가
         }
       });
 
@@ -32,7 +34,7 @@ function router() {
 
       // 쿼리 파라미터를 encodeURIComponent로 안전하게 처리하고, URL 생성
       const queryString = [...queryParams.entries()]
-        .map(([key, value]) => `${key}=${value}`)
+        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
         .join("&");
 
       history.replaceState(null, '', `${path}?${queryString}`);
