@@ -115,7 +115,12 @@ function handleNextGroup() {
 function updatePageState() {
   const searchParams = new URLSearchParams(window.location.search);
   searchParams.set("page", currentPage);
-  window.history.pushState({}, "", `/posts?${searchParams.toString()}`);
+  // 수동으로 인코딩된 쿼리스트링 생성
+  const queryString = [...searchParams.entries()]
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+    .join("&");
+
+  window.history.pushState({}, "", `/posts?${queryString}`);
 
   updatePaginationUI(Math.ceil(posts.length / POSTS_PER_PAGE));
   router();
