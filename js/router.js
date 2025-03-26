@@ -13,6 +13,8 @@ function router() {
       const qValue = queryParams.get('q');
       const restoredParams = new URLSearchParams();
 
+      queryParams.delete('q');
+
       // 'q' 값을 '~and~' 기준으로 분리하여 복원
       const keyValuePairs = qValue.split('~and~');
       keyValuePairs.forEach(pair => {
@@ -27,9 +29,12 @@ function router() {
         queryParams.set(key, value);
       });
 
-      queryParams.delete('q');
+      // 쿼리 파라미터를 encodeURIComponent로 안전하게 처리하고, URL 생성
+      const queryString = [...queryParams.entries()]
+        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+        .join("&");
 
-      history.replaceState(null, '', `${path}?${queryParams.toString()}`);
+      history.replaceState(null, '', `${path}?${queryString}`);
     }
 
     else {
