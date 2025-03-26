@@ -31,7 +31,7 @@ function router() {
 
       // 쿼리 파라미터를 encodeURIComponent로 안전하게 처리하고, URL 생성
       const queryString = [...queryParams.entries()]
-        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+        .map(([key, value]) => `${key}=${value}`)
         .join("&");
 
       history.replaceState(null, '', `${path}?${queryString}`);
