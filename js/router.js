@@ -11,6 +11,7 @@ function router() {
     // q 파라미터가 있으면 복원
     if (queryParams.has('q')) {
       const qValue = queryParams.get('q');
+      console.log(qValue);
       const restoredParams = new URLSearchParams();
 
       queryParams.delete('q');
