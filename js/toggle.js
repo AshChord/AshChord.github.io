@@ -15,7 +15,7 @@ document.addEventListener('click', function (event) {
 });
 
 // Prevent closing when clicking inside menu or search bar
-menu.addEventListener('click', () => menu.classList.toggle('mobile'));
+menu.addEventListener('click', () => menu.classList.remove('mobile'));
 searchBar.addEventListener('click', (event) => event.stopPropagation());
 
 // Toggle menu and search bar on button click
