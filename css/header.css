@@ -136,6 +136,7 @@ nav {
     padding: 16px;
     border: 1px solid #d1d5db;
     border-radius: 16px;
+    background-color: #ffffff;
   }
 
   @media (min-width: 768px) {

@@ -10,7 +10,7 @@ function search(keyword, category) {
 const inputField = document.querySelector('.input-field');
 const resetButton = document.querySelector('.reset-button');
 const submitButton = document.querySelector('.submit-button');
-const postList = document.querySelector('.post-list');
+const article = document.querySelector('article');
 
 function toggleResetButton() {
   resetButton.style.display = inputField.value ? 'block' : 'none';
@@ -44,7 +44,7 @@ submitButton.addEventListener('click', () => {
   router();
 });
 
-postList.addEventListener('click', (event) => {
+article.addEventListener('click', (event) => {
   if (event.target.className === 'category') {
     event.stopPropagation(); // 게시물 클릭 이벤트로 전파 방지
     const category = event.target.textContent;
