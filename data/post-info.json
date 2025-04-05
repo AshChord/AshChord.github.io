@@ -1,5 +1,11 @@
 [
   {
+    "title": "Penetration Testing | Week 1",
+    "date": "2025/04/05",
+    "categories": ["모의 해킹"],
+    "description": "웹 서버의 기본 개념과 동적 페이지 처리"
+  },
+  {
     "title": "test",
     "date": "2025/02/13",
     "categories": ["예시"],
