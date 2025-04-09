@@ -55,6 +55,7 @@
 
 .content img {
   display: block;
+  box-sizing: border-box;
   max-width: 100%;
   height: auto;
   margin: 40px auto;
@@ -101,7 +102,9 @@
 
 .content blockquote {
   border-left: 4px solid #2e6ff2;
-  padding-left: 16px;
+  padding: 5px 24px;
+  margin: 16px 0;
+  background-color: #f3f5fa;
 }
 
 .content pre {

@@ -110,7 +110,7 @@ article {
 .content {
   margin-top: 24px; /* mt-6: 위쪽 여백 1.5rem (24px) */
   margin-bottom: 112px; /* mb-28: 아래쪽 여백 7rem (112px) */
-  max-width: 990px; /* 최대 너비 990px로 설정 */
+  max-width: 800px; /* 최대 너비 990px로 설정 */
   margin-left: auto; /* 왼쪽 마진 자동으로 설정 (가운데 정렬을 위해) */
   margin-right: auto; /* 오른쪽 마진 자동으로 설정 (가운데 정렬을 위해) */
 }
