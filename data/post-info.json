@@ -1,5 +1,11 @@
 [
   {
+    "title": "Penetration Testing | Week 2",
+    "date": "2025/04/14",
+    "categories": ["모의 해킹"],
+    "description": "데이터베이스 연동 및 기본 SQL 쿼리 구조"
+  },
+  {
     "title": "Penetration Testing | Week 1",
     "date": "2025/04/05",
     "categories": ["모의 해킹"],
