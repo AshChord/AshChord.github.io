@@ -1,56 +1,55 @@
 .content h1 {
-  margin-top: 24px;
-  margin-bottom: 16px;
-  padding-bottom: 10px;
+  margin: 24px 0;
   border-bottom: 1px solid #d9dbe0;
-  font-size: 40px;
-  line-height: 60px;
+  font-size: 32px;
+  line-height: 64px;
+
+  .post-header & {
+    margin: 12px 0;
+  }
 }
 
 .content h2 {
-  margin-top: 24px;
-  margin-bottom: 16px;
-  padding-bottom: 10px;
+  margin: 24px 0;
   border-bottom: 1px solid #d9dbe0;
-  font-size: 32px;
-  line-height: 48px;
+  font-size: 28px;
+  line-height: 56px;
 }
 
 .content h3 {
-  margin-top: 24px;
-  margin-bottom: 16px;
-  padding-bottom: 10px;
+  margin: 24px 0;
   border-bottom: 1px solid #d9dbe0;
-  font-size: 28px;
-  line-height: 42px;
+  font-size: 24px;
+  line-height: 48px;
 }
 
 .content h4 {
-  margin-top: 16px;
-  margin-bottom: 8px;
-  font-size: 24px;
-  line-height: 36px;
+  margin: 24px 0;
+  font-size: 20px;
+  line-height: 40px;
 }
 
 .content h5 {
-  margin-top: 16px;
-  margin-bottom: 8px;
-  font-size: 20px;
-  line-height: 30px;
+  margin: 24px 0;
+  font-size: 16px;
+  line-height: 32px;
 }
 
 .content h6 {
-  margin-top: 16px;
-  margin-bottom: 8px;
-  font-size: 18px;
-  line-height: 27px;
+  margin: 24px 0;
+  font-size: 14px;
+  line-height: 28px;
 }
 
 .content p {
   margin: 24px 0;
   text-align: justify;
-  font-size: 18px;
-  line-height: 27px;
+  font-size: 16px;
+  line-height: 32px;
+
+  .post-header & {
+    margin: 12px 0;
+  }
 }
 
 .content img {
@@ -61,10 +60,14 @@
   margin: 40px auto;
   border: 4px solid #f3f5fa;
   border-radius: 4px;
+
+  .post-header & {
+    margin-bottom: 80px;
+  }
 }
 
 .content a {
-  font-size: 18px;
+  font-size: 16px;
   color: #2e6ff2;
   transition: color 0.3s ease;
 }
@@ -76,8 +79,8 @@
 .content ul {
   margin: 8px 0;
   padding-left: 20px;
-  font-size: 18px;
-  line-height: 27px;
+  font-size: 16px;
+  line-height: 32px;
   font-weight: 400;
   text-align: justify;
 }
@@ -86,25 +89,33 @@
   list-style-type: decimal;
   margin: 8px 0;
   padding-left: 20px;
-  font-size: 18px;
-  line-height: 27px;
+  font-size: 16px;
+  line-height: 32px;
   font-weight: 400;
   text-align: justify;
 }
 
 .content li {
-  padding-left: 16px;
+  padding-left: 12px;
   margin-bottom: 8px;
-  font-size: 18px;
-  line-height: 27px;
+  font-size: 16px;
+  line-height: 32px;
   text-align: justify;
 }
 
 .content blockquote {
-  border-left: 4px solid #2e6ff2;
-  padding: 5px 24px;
-  margin: 16px 0;
+  border-left: 4px solid #a78bfa;
+  padding: 20px 24px;
+  margin: 32px 0;
   background-color: #f3f5fa;
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
 }
 
 .content pre {
@@ -112,11 +123,11 @@
   overflow: auto;
   overflow-wrap: break-word;
   height: auto;
-  margin-bottom: 24px;
-  padding: 16px;
+  margin: 32px 0;
+  padding: 10px;
   border-radius: 10px;
   background-color: #f3f5fa;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   text-align: justify;
   vertical-align: middle;
@@ -125,8 +136,8 @@
 
 .content code {
   font-family: monospace;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 28px;
   background-color: transparent;
 }
 
@@ -159,7 +170,7 @@
   height: 20px;
   bottom: 20px;
   transform: translateX(-50%);
-  background-color: #47494d; /* 초록색 배경 */
+  background-color: #47494d;
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
@@ -178,17 +189,18 @@
 .content .table-wrapper {
   width: auto;           /* 너비 자동 설정 */
   min-width:0;
-  max-width: 990px;      /* 최대 너비 990px */
+  max-width: 800px;      /* 최대 너비 990px */
+  text-align: center;
   overflow: auto;      /* 가로 스크롤 활성화 */
   overflow-y: visible;   /* 세로 스크롤은 필요 없음 */
-  margin-bottom: 24px;   /* 아래쪽 여백 */
+  margin: 32px 0;   /* 아래쪽 여백 */
 }
 
 .content table {
   table-layout: auto;
   width: auto;
   height: auto;
-  margin-bottom: 24px;
+  margin: 0 auto;
   border-collapse: collapse;
   border-color: #d9dbe0;
   text-align: center;
@@ -201,6 +213,7 @@
   border: 1px solid #d9dbe0;
   background-color: #f3f5fa;
   font-size: 14px;
+  line-height: 21px;
   font-weight: 500;
   white-space: nowrap;
 }
@@ -209,6 +222,7 @@
   padding: 10px 16px;
   border: 1px solid #d1d5db;
   font-size: 14px;
+  line-height: 28px;
   color: #4a5568;
   word-break: keep-all;
 }
@@ -222,14 +236,14 @@
 
 .content em {
   padding-right: 2px;
-  font-size: 18px;
-  line-height: 27px;
+  font-size: 16px;
+  line-height: 28px;
   font-weight: 500;
   font-style: italic;
 }
 
 .content strong {
-  font-size: 18px;
-  line-height: 27px;
+  font-size: 16px;
+  line-height: 28px;
   font-weight: bold;
 }
