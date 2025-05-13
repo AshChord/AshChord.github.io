@@ -1,9 +1,15 @@
 [
   {
+    "title": "Penetration Testing | Week 6",
+    "date": "2025/05/13",
+    "categories": ["모의 해킹"],
+    "description": "UNION SQL Injection과 데이터 추출"
+  },
+  {
     "title": "Penetration Testing | Week 5",
     "date": "2025/05/06",
     "categories": ["모의 해킹"],
-    "description": "SQL Injection 기초"
+    "description": "SQL Injection의 개념과 인증 우회"
   },
   {
     "title": "Penetration Testing | Week 4",
