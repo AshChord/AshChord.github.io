@@ -110,6 +110,7 @@ User-Agent 필드의 값을 segfaultDevice로 수정 후 요청을 서버로 전
 ![Prac 1](/data/Penetration%20Testing%20|%20Week%204/21.png)
 
 비교 결과, `b.html` 파일에만 segfault와 {<span style="filter: blur(5px);">lookEasy</span>}라는 텍스트가 추가되어 있음을 확인할 수 있었다.
+
 <p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">lookEasy</span>}</span></p>
 
 <br>

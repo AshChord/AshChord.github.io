@@ -146,7 +146,6 @@ SELECT [column_1], [column_2], ... FROM [table_name] WHERE [conditions];
 SELECT company_name FROM stock_list WHERE company_id = 3;
 SELECT * FROM stock_list WHERE market = 'NASDAQ';
 SELECT * FROM stock_list WHERE market = 'NASDAQ' AND stock_symbol = 'AAPL';
-
 ```
 
 WHERE 명령어는 위와 같이 사용 가능하다.  
