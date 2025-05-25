@@ -1,5 +1,11 @@
 [
   {
+    "title": "Penetration Testing | Week 7",
+    "date": "2025/05/25",
+    "categories": ["모의 해킹"],
+    "description": "Error-Based SQL Injection과 <br> Blind SQL Injection"
+  },
+  {
     "title": "Penetration Testing | Week 6",
     "date": "2025/05/13",
     "categories": ["모의 해킹"],
