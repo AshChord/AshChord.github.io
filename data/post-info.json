@@ -1,5 +1,11 @@
 [
   {
+    "title": "Penetration Testing | Week 8",
+    "date": "2025/06/01",
+    "categories": ["모의 해킹"],
+    "description": "SQL Injection 취약점 탐색"
+  },
+  {
     "title": "Penetration Testing | Week 7",
     "date": "2025/05/25",
     "categories": ["모의 해킹"],
