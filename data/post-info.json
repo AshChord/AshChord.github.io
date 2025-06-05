@@ -1,5 +1,11 @@
 [
   {
+    "title": "Penetration Testing | Week 9",
+    "date": "2025/06/05",
+    "categories": ["모의 해킹"],
+    "description": "Cross Site Scripting"
+  },
+  {
     "title": "Penetration Testing | Week 8",
     "date": "2025/06/01",
     "categories": ["모의 해킹"],
