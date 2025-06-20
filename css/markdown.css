@@ -1,5 +1,5 @@
 .content h1 {
-  margin: 24px 0;
+  margin: 32px 0;
   border-bottom: 1px solid #d9dbe0;
   font-size: 32px;
   line-height: 64px;
@@ -10,14 +10,14 @@
 }
 
 .content h2 {
-  margin: 24px 0;
+  margin: 32px 0;
   border-bottom: 1px solid #d9dbe0;
   font-size: 28px;
   line-height: 56px;
 }
 
 .content h3 {
-  margin: 24px 0;
+  margin: 32px 0;
   border-bottom: 1px solid #d9dbe0;
   font-size: 24px;
   line-height: 48px;
@@ -31,20 +31,20 @@
 
 .content h5 {
   margin: 24px 0;
-  font-size: 16px;
-  line-height: 32px;
+  font-size: 18px;
+  line-height: 36px;
 }
 
 .content h6 {
   margin: 24px 0;
-  font-size: 14px;
-  line-height: 28px;
+  font-size: 16px;
+  line-height: 32px;
 }
 
 .content p {
   margin: 24px 0;
-  text-align: justify;
   font-size: 16px;
+  text-align: justify;
   line-height: 32px;
 
   .post-header & {
@@ -54,12 +54,12 @@
 
 .content img {
   display: block;
-  box-sizing: border-box;
   max-width: 100%;
   height: auto;
   margin: 40px auto;
   border: 4px solid #f3f5fa;
   border-radius: 4px;
+  box-sizing: border-box;
 
   .post-header & {
     margin-bottom: 80px;
@@ -67,46 +67,46 @@
 }
 
 .content a {
-  font-size: 16px;
   color: #2e6ff2;
+  font-size: 16px;
   transition: color 0.3s ease;
-}
 
-.content a:hover {
+  &:hover {
   color: #2ea0f2;
+  }
 }
 
 .content ul {
   margin: 8px 0;
   padding-left: 20px;
   font-size: 16px;
-  line-height: 32px;
   font-weight: 400;
   text-align: justify;
+  line-height: 32px;
 }
 
 .content ol {
-  list-style-type: decimal;
   margin: 8px 0;
   padding-left: 20px;
+  list-style-type: decimal;
   font-size: 16px;
-  line-height: 32px;
   font-weight: 400;
   text-align: justify;
+  line-height: 32px;
 }
 
 .content li {
-  padding-left: 12px;
   margin-bottom: 8px;
+  padding-left: 12px;
   font-size: 16px;
-  line-height: 32px;
   text-align: justify;
+  line-height: 32px;
 }
 
 .content blockquote {
-  border-left: 4px solid #a78bfa;
-  padding: 20px 24px;
   margin: 32px 0;
+  padding: 20px 24px;
+  border-left: 4px solid #a78bfa;
   background-color: #f3f5fa;
 
   > :first-child {
@@ -120,11 +120,10 @@
 
 .content pre {
   position: relative;
-  overflow: auto;
-  overflow-wrap: break-word;
   height: auto;
   margin: 32px 0;
   padding: 10px;
+  overflow: auto;
   border-radius: 10px;
   background-color: #f3f5fa;
   font-size: 14px;
@@ -132,118 +131,136 @@
   text-align: justify;
   vertical-align: middle;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
+
+  blockquote & {
+    border: 1px solid #d9dbe0;
+  }
 }
 
 .content code {
-  font-family: monospace;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background-color: #d9dbe0;
   font-size: 14px;
+  font-family: monospace;
   line-height: 28px;
-  background-color: transparent;
+  vertical-align: 1px;
+  word-break: break-all;
+
+  pre & {
+    background-color: transparent;
+  }
+
+  table & {
+    font-size: 12px;
+  }
+
 }
 
 .content .copy-button {
-  border: 1px solid #d9dbe0; /* 'border-lv2' 색상으로 지정 */
-  background-color: #ffffff;
-  border-radius: 10px;
-  opacity: 0.7;
+  display: flex;
   position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 8px; /* 'p-2'에 해당하는 값 */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 'shadow-md'에 해당하는 값 */
+  top: 17px;
+  right: 17px;
   width: 42px;
   height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("../assets/icon-copy.svg");
-  background-size: 60%;
+  padding: 8px;
+  border: 1px solid #d9dbe0;
+  border-radius: 10px;
+  background-color: #ffffff;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("../assets/icon-copy.svg");
   background-repeat: no-repeat;
   background-position: center center;
-}
-.content .copy-button:hover {
+  background-size: 60%;
+  opacity: 0.7;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
   background-image: url("../assets/icon-copy.svg");
+  }
 }
 
 .toast {
-  height: 20px;
+  visibility: hidden;
   bottom: 20px;
-  transform: translateX(-50%);
-  background-color: #47494d;
-  color: white;
+  height: 20px;
   padding: 10px 20px;
   border-radius: 5px;
-  opacity: 0; /* 처음엔 투명 */
-  visibility: hidden; /* 처음엔 보이지 않음 */
-  transition: opacity 1s ease, visibility 1s ease; /* 부드럽게 변화 */
+  background-color: #47494d;
+  opacity: 0;
+  color: white;
   font-size: 14px;
   line-height: 21px;
+  transform: translateX(-50%);
+  transition: opacity 1s ease, visibility 1s ease;
 }
 
 .toast.show {
-  opacity: 1; /* 보이도록 */
-  visibility: visible; /* 보이도록 */
+  visibility: visible;
+  opacity: 1;
+
 }
 
 .content .table-wrapper {
-  width: auto;           /* 너비 자동 설정 */
-  min-width:0;
-  max-width: 800px;      /* 최대 너비 990px */
+  width: auto;
+  min-width: 0;
+  max-width: 800px;
+  margin: 32px 0;
+  overflow: auto;
   text-align: center;
-  overflow: auto;      /* 가로 스크롤 활성화 */
-  overflow-y: visible;   /* 세로 스크롤은 필요 없음 */
-  margin: 32px 0;   /* 아래쪽 여백 */
+  overflow-y: visible;
 }
 
 .content table {
-  table-layout: auto;
-  width: auto;
+  width: 800px;
   height: auto;
   margin: 0 auto;
+  table-layout: auto;
   border-collapse: collapse;
   border-color: #d9dbe0;
-  text-align: center;
+  text-align: left;
   vertical-align: middle;
 }
 
 .content th {
-  overflow: auto;
   padding: 10px 16px;
-  border: 1px solid #d9dbe0;
+  overflow: auto;
+  border-bottom: 1px solid #8d9299;
   background-color: #f3f5fa;
   font-size: 14px;
-  line-height: 21px;
   font-weight: 500;
+  line-height: 21px;
   white-space: nowrap;
 }
 
 .content td {
   padding: 10px 16px;
-  border: 1px solid #d1d5db;
+  border-top: 1px solid #d9dbe0;
+  color: #4a5568;
   font-size: 14px;
   line-height: 28px;
-  color: #4a5568;
   word-break: keep-all;
 }
 
 .content hr {
-  margin: 16px 0;
-  border-color: #b0b0b0;
-  border-width: 2px;
-  border-radius: 8px;
+  height: 1px;
+  margin: 32px 0;
+  border: none;
+  background-color: #e6e8ed;
 }
 
 .content em {
   padding-right: 2px;
-  font-size: 16px;
-  line-height: 28px;
-  font-weight: 500;
   font-style: italic;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
 }
 
 .content strong {
-  font-size: 16px;
-  line-height: 28px;
   font-weight: bold;
 }

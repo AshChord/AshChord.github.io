@@ -5,8 +5,8 @@ main {
 
 .post-list {
   display: grid;
-  gap: 16px;
   margin-bottom: 20px;
+  gap: 16px;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -20,30 +20,29 @@ main {
 }
 
 .post-card {
-  overflow: hidden;
-  background-color: white;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
   width: auto;
-  border-radius: 12px; /* 모서리를 둥글게 하는 속성 */
-  padding: 24px; /* 안쪽 여백 추가 */
-  /* border: 1px solid #d9dbe0; */ /* 기존 border 제거 */
-  box-shadow: 0 2px 8px #e0e0e0; /* 기본 상태: 연한 회색 그림자 */
+  padding: 24px;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 2px 8px #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
-    transform: translateY(-2px) scale(1.02); /* 위쪽으로 2px 이동하고 1.02배 확대 */
-    box-shadow: 0 4px 16px #c0c0c0; /* 호버 시: 연한 회색 그림자 */
+    box-shadow: 0 4px 16px #c0c0c0;
+    transform: translateY(-2px) scale(1.02);
   }
 }
 
 .thumbnail {
-  margin: 0 0 12px 0;
   width: 100%;
   height: 200px;
+  margin: 0 0 12px 0;
+  overflow: hidden;
+  border-radius: 16px;
   object-fit: cover;
   object-position: center;
-  border-radius: 16px;
-  overflow: hidden;
 }
 
 .title {
@@ -57,8 +56,8 @@ main {
   margin: 0 0 12px 0;
   color: #47494d;
   font-size: 16px;
-  line-height: 24px;
   font-weight: normal;
+  line-height: 24px;
 }
 
 .date {
@@ -77,14 +76,14 @@ main {
 .category {
   display: inline-block;
   margin-right: 10px;
+  padding: 6px 12px;
+  border-radius: 8px;
   background-color: #ddd6fe;
   color: #8b5cf6;
   font-size: 14px;
   font-weight: 500;
-  padding: 6px 12px;
-  border-radius: 8px;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .category:hover {
@@ -92,17 +91,15 @@ main {
   color: #ffffff;
 }
 
-/*article*/
-
 article {
+  width: 100%;
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 32px 20px 16px 20px;
   grid-row-start: 1;
   grid-column-start: 1;
   box-sizing: border-box;
-  width: 100%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 32px 20px 16px 20px;
 
   @media (min-width: 768px) {
     padding-top: 60px;
@@ -110,19 +107,18 @@ article {
 }
 
 .content {
-  margin-top: 24px; /* mt-6: 위쪽 여백 1.5rem (24px) */
-  margin-bottom: 40px; /* mb-28: 아래쪽 여백 7rem (112px) */
-  max-width: 800px; /* 최대 너비 990px로 설정 */
-  margin-left: auto; /* 왼쪽 마진 자동으로 설정 (가운데 정렬을 위해) */
-  margin-right: auto; /* 오른쪽 마진 자동으로 설정 (가운데 정렬을 위해) */
+  max-width: 800px;
+  margin-top: 24px;
+  margin-right: auto;
+  margin-bottom: 40px;
+  margin-left: auto;
 }
 
 /* 페이지네이션 섹션 */
-
 .pagination {
+  display: flex;
   margin-top: 20px;
   margin-bottom: 40px;
-  display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
@@ -136,11 +132,11 @@ article {
   mask-size: 100%;
 
   &:hover {
-    background-color: #47494d; /* graylv4 */
+    background-color: #47494d;
   }
 
   &:disabled {
-    background-color: #d9dbe0; /* graylv4 */
+    background-color: #d9dbe0;
   }
 }
 
@@ -152,11 +148,11 @@ article {
   mask-size: 100%;
 
   &:hover {
-    background-color: #47494d; /* graylv4 */
+    background-color: #47494d;
   }
 
   &:disabled {
-    background-color: #d9dbe0; /* graylv4 */
+    background-color: #d9dbe0;
   }
 }
 
@@ -168,11 +164,11 @@ article {
   mask-size: 100%;
 
   &:hover {
-    background-color: #47494d; /* graylv4 */
+    background-color: #47494d;
   }
 
   &:disabled {
-    background-color: #d9dbe0; /* graylv4 */
+    background-color: #d9dbe0;
   }
 }
 
@@ -184,11 +180,11 @@ article {
   mask-size: 100%;
 
   &:hover {
-    background-color: #47494d; /* graylv4 */
+    background-color: #47494d;
   }
 
   &:disabled {
-    background-color: #d9dbe0; /* graylv4 */
+    background-color: #d9dbe0;
   }
 }
 
@@ -201,42 +197,38 @@ article {
 
 .page-number {
   all: unset;
-  text-align: center;
-  align-items: center;
   width: 40px;
   height: 40px;
+  color: #8d9299;
   font-size: 16px;
   font-weight: normal;
-  color: #8d9299; /* graylv3 */
+  text-align: center;
+  align-items: center;
 }
 
 .page-number.active {
-  color: #8b5cf6; /* primary color */
+  color: #8b5cf6;
   font-weight: bold;
 }
 
-
 /* 카테고리 버튼 섹션 */
-
 .category-search {
-  grid-row-start: 1;
-  grid-column-start: 1;
   display: none;
-  flex-direction: column;
-  border: 1px solid #d9dbe0;
-  background-color: white;
-  border-radius: 10px;
   position: sticky;
   top: 32px;
-  margin: 32px;
-  overflow-y: auto;
   width: fit-content;
   height: fit-content;
+  margin: 32px;
+  border: 1px solid #d9dbe0;
+  border-radius: 10px;
+  background-color: white;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  flex-direction: column;
+  overflow-y: auto;
   justify-self: end;
-}
 
-@media (min-width: 768px) {
-  .category-search {
+  @media (min-width: 768px) {
     display: flex;
   }
 }
@@ -248,10 +240,10 @@ article {
 
 .category-search-title {
   display: none;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 600;
   margin-left: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
 
   &.active {
     display: block;
@@ -259,11 +251,11 @@ article {
 }
 
 .category-search-button {
+  display: flex;
   width: 50px;
   height: 50px;
   padding: 13px;
   background-color: #47494d;
-  display: flex;
   align-items: center;
   justify-content: center;
   mask-image: url("../assets/icon-chapter.svg");
@@ -283,12 +275,12 @@ article {
 
 aside {
   display: none;
-  flex-direction: column;
-  overflow-y: auto;
+  z-index: 10;
   border-radius: 6px;
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  flex-direction: column;
+  overflow-y: auto;
 
   &.active {
     display: flex;
@@ -300,20 +292,20 @@ aside {
 }
 
 aside div {
+  padding: 9px 20px;
   font-size: 16px;
   font-weight: 400;
-  padding: 9px 20px;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 }
 
 aside div:hover {
-  background-color: #f3f5fa; /* graylv1 */
+  background-color: #f3f5fa;
 }
 
 aside span {
+  margin-left: 4px;
+  color: #8d9299;
   font-size: 16px;
   font-weight: 400;
-  color: #8d9299; /* graylv3 */
-  margin-left: 4px;
 }

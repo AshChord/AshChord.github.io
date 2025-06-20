@@ -9,11 +9,11 @@ header {
 
 nav {
   display: flex;
-  align-items: center;
-  box-sizing: border-box;
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px;
+  align-items: center;
+  box-sizing: border-box;
 
   @media (min-width: 768px) {
     padding: 20px;
@@ -38,9 +38,9 @@ nav {
   height: 24px;
   padding: 0;
   background-color: #8d9299;
+  cursor: pointer;
   mask-image: url("/assets/icon-dropdown-menu.svg");
   mask-size: 100%;
-  cursor: pointer;
 
   &:hover {
     background-color: #121314;
@@ -55,11 +55,11 @@ nav {
   display: none;
 
   &.mobile {
+    display: block;
     position: absolute;
     z-index: 10;
     top: 56px;
     left: 0;
-    display: block;
     width: 100%;
     border-bottom: 1px solid #d9dbe0;
     background-color: #ffffff;
@@ -75,10 +75,10 @@ nav {
   color: #121314;
   font-size: 16px;
   font-weight: 500;
-  line-height: 20px;
   text-decoration: none;
-  transition: color 0.3s ease;
+  line-height: 20px;
   cursor: pointer;
+  transition: color 0.3s ease;
 
   &:hover {
     color: #8d9299;
@@ -110,15 +110,15 @@ nav {
   margin-left: 40px;
   padding: 0;
   background-color: #8d9299;
+  cursor: pointer;
   mask-image: url("/assets/icon-search.svg");
   mask-size: 100%;
-  cursor: pointer;
 
   &:hover {
     background-color: #121314;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width:768px) {
     display: none;
   }
 }
@@ -127,11 +127,11 @@ nav {
   display: none;
 
   &.mobile {
+    display: block;
     position: absolute;
     z-index: 10;
     top: 69px;
     right: 12px;
-    display: block;
     width: 320px;
     padding: 16px;
     border: 1px solid #d1d5db;
@@ -140,24 +140,24 @@ nav {
   }
 
   @media (min-width: 768px) {
-    position: relative;
     display: block;
+    position: relative;
     width: 320px;
     margin-left: 40px;
   }
 }
 
 .input-field {
-  box-sizing: border-box;
   width: 100%;
   padding: 10px 20px;
   border: none;
   border-radius: 10px;
+  outline: 0;
   background-color: #f3f5fa;
   box-shadow: 0 1px 2px #e6e6e6;
   font-size: 16px;
   line-height: 24px;
-  outline: 0;
+  box-sizing: border-box;
 
   &::placeholder {
     color: #8d9299;
@@ -165,11 +165,11 @@ nav {
 }
 
 .button-panel {
+  display: flex;
   position: absolute;
   top: 50%;
   right: 32px;
   transform: translateY(-50%);
-  display: flex;
   align-items: center;
   gap: 8px;
 
