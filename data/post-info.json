@@ -1,5 +1,11 @@
 [
   {
+    "title": "Penetration Testing | Week 12",
+    "date": "2025/07/02",
+    "categories": ["모의 해킹"],
+    "description": "Cross Site Request Forgery(CSRF)"
+  },
+  {
     "title": "Penetration Testing | Week 11",
     "date": "2025/06/25",
     "categories": ["모의 해킹"],
