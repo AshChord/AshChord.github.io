@@ -1,5 +1,11 @@
 [
   {
+    "title": "Penetration Testing | Week 13",
+    "date": "2025/07/05",
+    "categories": ["모의 해킹"],
+    "description": "CSRF 대응 방안 및 웹 보안 정책"
+  },
+  {
     "title": "Penetration Testing | Week 12",
     "date": "2025/07/02",
     "categories": ["모의 해킹"],
