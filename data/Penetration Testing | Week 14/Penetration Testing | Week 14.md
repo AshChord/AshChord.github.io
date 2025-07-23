@@ -203,3 +203,25 @@ cat /flag.txt
 `flag.txt` 파일의 내용이 출력됨에 따라 플래그를 획득하였다.
 
 <p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">You_Got_SecretCode</span>}</span></p>
+
+<br>
+
+##### Web Shell 2
+
+<img src="/data/Penetration%20Testing%20%7C%20Week%2014/14.png" alt="Web Shell 2" style="padding: 0 25%; background-color: white;">
+
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/15.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/16.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/17.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/18.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/19.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/20.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/21.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/22.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/23.png)
+
+> <strong>디렉터리 인덱싱(Directory Indexing)</strong>
+>
+> **디렉터리 인덱싱**이란 웹 서버의 특정 디렉터리에 인덱스 파일(`index.html` 등)이 없을 때, 해당 디렉터리 내 모든 파일 목록을 클라이언트에게 자동으로 보여주는 설정 문제를 의미한다. 디렉터리 트래버설과 함께 묶여 흔히 **디렉터리 취약점**이라고 불린다.
+
+segfault{Stupid_CODE}

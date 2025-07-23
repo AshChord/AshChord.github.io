@@ -172,7 +172,7 @@ targetDoc.getElementsByTagName('p');
 
 ![ClientScript CTF](/data/Penetration%20Testing%20%7C%20Week%2011/2.png)
 
-ClientScript CTF를 해결하며 XSS 취약점을 활용한 다양한 공격 기법들을 실습해 보자.
+CTF를 해결하며 XSS 취약점을 활용한 다양한 공격 기법들을 실습해 보자.
 
 <br>
 

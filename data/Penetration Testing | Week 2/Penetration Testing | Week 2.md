@@ -53,13 +53,13 @@ if (isset($_POST['Submit'])) {
 ...
 ```
 
-사용자가 로그인 폼을 제출하면, `UserId`와 `Password` 값을 받아 `login()` 함수가 호출된다. 그 결과가 참이면 로그인 성공으로 간주하고, 사용자의 로그인 정보를 쿼리 스트링 형식(GET 방식)으로 `login_id`에 담아 `index.php`로 리다이렉트한다. 로그인 실패 시에는 "로그인 실패" 메시지를 출력한다.
+사용자가 로그인 양식을 제출하면, `UserId`와 `Password` 값을 받아 `login()` 함수가 호출된다. 그 결과가 참이면 로그인에 성공한 것으로 간주하고, 사용자의 로그인 정보를 쿼리 스트링 형식(GET 방식)으로 `login_id`에 담아 `index.php`로 리다이렉트한다. `login()` 함수의 반환 결과가 거짓인 경우에는 로그인 실패 메시지를 출력한다.
 
 <hr>
 
 #### 데이터베이스
 
-**데이터베이스**란 웹 애플리케이션에서 필요한 데이터를 저장 및 관리하는 시스템을 말한다. 구조적으로 우리가 흔히 사용하는 엑셀 프로그램과 유사한 점이 있는데, 데이터베이스의 주요 개념은 엑셀의 구성 요소와 다음과 같이 비교할 수 있다.
+**데이터베이스**란 웹 애플리케이션에서 필요한 데이터를 저장 및 관리하는 시스템을 말한다. 흔히 사용하는 엑셀 프로그램과 구조적으로 유사한 점이 있는데, 데이터베이스의 주요 개념은 엑셀의 구성 요소와 다음과 같이 비교할 수 있다.
 
 | 데이터베이스 주요 개념 | 엑셀 구성 요소 | 설명 |
 |------------------|-------------|-----|
@@ -167,15 +167,15 @@ SELECT * FROM stock_list WHERE market = 'NASDAQ' AND stock_symbol = 'AAPL';
 
 MySQL을 통해 `dev` 데이터베이스를 생성한 후, 다음과 같은 `score` 테이블을 추가하였다.
 
-| id | name     | score |
-|----|----------|-------|
-| 1  | AshChord | 100   |
+| id | name   | score |
+|----|--------|-------|
+| 1  | testee | 100   |
 
 PHP 코드에서 위 테이블의 데이터를 사용하려면 어떻게 해야 할까?  
-아래의 `db_test.php` 코드를 보자.
+아래의 `db_check.php` 코드를 보자.
 
 ```php
-// db_test.php
+// db_check.php
 
 <?php
   // Database Connection Settings
@@ -210,7 +210,7 @@ PHP 코드에서 위 테이블의 데이터를 사용하려면 어떻게 해야 
 서버 주소, 사용자명, 비밀번호, 사용할 데이터베이스 이름을 `define()` 함수를 이용해 상수로 선언한다.
 
 **2\. 데이터베이스 연결:**  
-`mysqli_connect()` 함수에 위에서 정의한 상수들을 인자로 넘겨 데이터베이스 서버에 연결을 시도한다.  
+위에서 정의한 상수들을`mysqli_connect()` 함수에 인자로 넘겨 데이터베이스 서버에 연결을 시도한다.  
 연결 성공 시 `$db_conn` 변수에 연결 객체(데이터베이스와의 연결을 다루는 리소스)가 저장되며, 실패 시 `false`가 저장된다.
 
 **3\. 연결 결과 출력:**  
@@ -224,9 +224,9 @@ PHP 코드에서 위 테이블의 데이터를 사용하려면 어떻게 해야 
 `mysqli_fetch_array()`를 통해 `$result`에서 첫 번째 행을 가져와 `$row` 변수에 배열 형태로 저장한다.  
 `var_dump()` 함수로 배열 구조를 출력할 수 있으며, 특정 필드의 값만 가져오려면 `$row['name']`과 같이 사용할 수 있다.
 
-`db_test.php` 파일의 실행 결과는 다음과 같다.
+`db_check.php` 파일의 실행 결과는 다음과 같다.
 
-![db_test.php](/data/Penetration%20Testing%20%7C%20Week%202/1.png)
+![db_check.php](/data/Penetration%20Testing%20%7C%20Week%202/1.png)
 
 <br>
 <br>
@@ -275,7 +275,7 @@ sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
 sudo systemctl restart apache2
 ```
 
-이제 웹 브라우저에서 `http://[example-ip]/phpmyadmin`을 입력하여 phpMyAdmin에 접속할 수 있다.  
+이제 웹 브라우저에서 `http://x.x.x.x/phpmyadmin`을 입력하여 phpMyAdmin에 접속할 수 있다.  
 
 ![phpMyAdmin](/data/Penetration%20Testing%20%7C%20Week%202/2.png)
 
@@ -285,6 +285,12 @@ sudo systemctl restart apache2
 
 위의 `score` 테이블을 사용하여, GET 방식으로 이름을 전달받아 점수를 출력하는 코드를 만들어 보자.  
 `db_test.php`를 약간 수정하여 해당 기능을 구현할 수 있다.
+
+<style>
+  .hljs-subst {
+    color: #e36209;
+  }
+</style>
 
 <pre><code class="language-php hljs" data-highlighted="yes"><span class="hljs-comment">// get_score.php</span>
 
@@ -538,71 +544,80 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 
 로그인 페이지와 회원 가입 페이지에 공통으로 적용되는 일관된 스타일을 정의한다.
 
-```css
-/* style.css */
+<style>
+  .hljs-selector-class, .hljs-selector-pseudo {
+    color: #6f42c1;
+  }
 
-body {
-  display: flex;
-  height: 100vh;
-  margin: 0;
-  background-color: gray;
-  font-family: Arial, sans-serif;
-  justify-content: center;
-  align-items: center;
+  .hljs-number {
+    color: #d73a49;
+  }
+</style>
+
+<pre><code class="language-css hljs" data-highlighted="yes"><span class="hljs-comment">/* style.css */</span>
+
+<span class="hljs-selector-tag">body</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100vh</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">background-color</span>: gray;
+  <span class="hljs-attribute">font-family</span>: Arial, sans-serif;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">align-items</span>: center;
 }
 
-.signup-container,
-.login-container {
-  width: 300px;
-  padding: 30px;
-  border-radius: 8px;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+<span class="hljs-selector-class">.signup-container</span>,
+<span class="hljs-selector-class">.login-container</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">300px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">30px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">8px</span>;
+  <span class="hljs-attribute">background-color</span>: white;
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">4px</span> <span class="hljs-number">8px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.1</span>);
+  <span class="hljs-attribute">text-align</span>: center;
 }
 
-input {
-  width: 100%;
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid gray;
-  border-radius: 4px;
-  font-size: 14px;
-  box-sizing: border-box;
+<span class="hljs-selector-tag">input</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid gray;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;
+  <span class="hljs-attribute">box-sizing</span>: border-box;
 }
 
-button {
-  width: 100%;
-  margin: 20px 0;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  background-color: #a78bfa;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+<span class="hljs-selector-tag">button</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#a78bfa</span>;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
 
-  &:hover {
-    background-color: #8b5cf6;
+  <span style="color: #22863a;">&amp;</span><span class="hljs-selector-pseudo">:hover</span> {
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#8b5cf6</span>;
   }
 }
 
-a {
-  display: block;
-  color: #a78bfa;
+<span class="hljs-selector-tag">a</span> {
+  <span class="hljs-attribute">display</span>: block;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#a78bfa</span>;
 
-  button & {
-    color: white;
-    text-decoration: none;
+  <span class="hljs-selector-tag">button</span> <span style="color: #22863a;">&amp;</span> {
+    <span class="hljs-attribute">color</span>: white;
+    <span class="hljs-attribute">text-decoration</span>: none;
   }
 }
-```
+</code></pre>
 
 <br>
 
 ##### 실행 결과
 
-브라우저에서 `http://[example-ip]/sign_up.php`로 접속하면 다음과 같은 회원 가입 페이지가 나타난다.  
+브라우저에서 `http://x.x.x.x/sign_up.php`로 접속하면 다음과 같은 회원 가입 페이지가 나타난다.  
 
 ![회원 가입 페이지](/data/Penetration%20Testing%20%7C%20Week%202/6.png)
 
@@ -612,9 +627,9 @@ a {
 
 이때 `users` 테이블을 확인해 보면 다음과 같이 레코드가 추가되었음을 알 수 있다.
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%202/8.png" alt="users 테이블" style="padding: 0 100px; background-color: white">
+<img src="/data/Penetration%20Testing%20%7C%20Week%202/8.png" alt="users 테이블" style="padding: 0 12.5%; background-color: white">
 
-`admin`이라는 사용자가 데이터베이스에 등록된 이후 다시 `admin`이라는 `username`으로 중복 회원 가입 시도를 하면 다음과 같은 알림 창이 표시된다.
+`test` 사용자가 데이터베이스에 등록된 이후 다시 `test`라는 `username`으로 중복 회원 가입 시도를 하면 다음과 같은 알림 창이 표시된다.
 
 ![중복 회원 가입 시도](/data/Penetration%20Testing%20%7C%20Week%202/9.png)
 
@@ -622,14 +637,14 @@ a {
 
 ![로그인 페이지](/data/Penetration%20Testing%20%7C%20Week%202/10.png)
 
-`admin`/`admin1234`를 입력하여 로그인에 성공하면 로그인 성공 화면으로 이동한다.
+`test`/`test`를 입력하여 로그인에 성공하면 로그인 성공 화면으로 이동한다.
 
 ![로그인 성공](/data/Penetration%20Testing%20%7C%20Week%202/11.png)
 
-`admin`/`admin123`과 같이 잘못된 비밀번호를 입력하면 비밀번호 불일치로 인한 로그인 실패 메시지가 출력된다.
+`test`/`tset`과 같이 잘못된 비밀번호를 입력하면 비밀번호 불일치로 인한 로그인 실패 메시지가 출력된다.
 
-![로그인 실패(1)](/data/Penetration%20Testing%20%7C%20Week%202/12.png)
+![로그인 실패](/data/Penetration%20Testing%20%7C%20Week%202/12.png)
 
 현재 데이터베이스에 등록되지 않은 아이디를 통해 로그인을 시도하면 `username`이 존재하지 않는다는 메시지가 출력된다.
 
-![로그인 실패(2)](/data/Penetration%20Testing%20%7C%20Week%202/13.png)
+![로그인 실패](/data/Penetration%20Testing%20%7C%20Week%202/13.png)

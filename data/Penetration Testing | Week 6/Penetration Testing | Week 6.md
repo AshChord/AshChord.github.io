@@ -151,6 +151,12 @@ SELECT 0, 'OTHER', 'Unknown', 'N/A';
 
 `UNION`의 활용 예시를 보면 해당 연산자가 SQL Injection 공격에 유용하게 사용될 수 있다는 점을 추론할 수 있다. 이를테면 다음과 같은 로그인 처리 코드를 생각해 보자.
 
+<style>
+  .hljs-subst {
+    color: #e36209;
+  }
+</style>
+
 ```php
 $username = $_POST['UserId'];
 $password = $_POST['Password']

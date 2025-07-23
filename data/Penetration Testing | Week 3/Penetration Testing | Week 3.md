@@ -18,6 +18,12 @@
 
 로그인 로직은 크게 **식별·인증 동시 처리 방식**과 **식별·인증 분리 처리 방식**이 있다. 각 로직을 예시 코드와 함께 살펴보자.
 
+<style>
+  .hljs-subst {
+    color: #e36209;
+  }
+</style>
+
 ```php
 // 식별·인증 동시 처리
 
@@ -31,7 +37,7 @@ $db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$sql = "SELECT * FROM users WHERE username == '$username' AND password == '$password'";
+$sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
 $res = mysqli_query($db_conn, $sql);
 
 if (mysqli_num_rows($res) == 1) {
@@ -56,7 +62,7 @@ $db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$sql = "SELECT * FROM users WHERE username == '$username'";
+$sql = "SELECT * FROM users WHERE username = '$username'";
 $res = mysqli_query($db_conn, $sql);
 
 if (mysqli_num_rows($res) == 1) {
@@ -70,6 +76,7 @@ if (mysqli_num_rows($res) == 1) {
   // Login Failed
 }
 ```
+
 식별·인증 분리 처리 방식에서는 `username`을 먼저 확인한 후, 그에 해당하는 `password`가 데이터베이스에 저장된 값과 일치하는지를 확인한다.
 
 두 로직은 겉보기에 비슷해 보이지만, 대표적인 보안 공격 중 하나인 로그인 우회 기법에서 차이가 발생하며 이에 따른 대응 방식 역시 달라진다.
@@ -160,9 +167,9 @@ Login successful!
 
 ![users 테이블 생성](/data/Penetration%20Testing%20%7C%20Week%203/1.png)
 
-`users` 테이블에는 다음과 같이 관리자 계정 `admin`/`admin1234`가 저장되어 있다.
+`users` 테이블에는 다음과 같이 시험용 계정 `test`/`test`가 저장되어 있다.
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%203/2.png" alt="users 테이블" style="padding: 0 175px; background-color: white">
+<img src="/data/Penetration%20Testing%20%7C%20Week%203/2.png" alt="users 테이블" style="padding: 0 25%; background-color: white">
 
 2주차에 제작했던 로그인 처리 코드(`login_proc.php`)를 조금씩 수정하여 구현하도록 한다.
 
@@ -243,10 +250,10 @@ Login successful!
 
 ##### 3\. 식별·인증 동시 처리 방식(with Hash)
 
-해시 함수를 활용한 로그인 로직을 구현하려면, 데이터베이스에는 사용자의 실제 비밀번호가 아닌 해당 비밀번호의 해시 값이 저장되어 있어야 한다. 따라서 기존에 저장된 원본 비밀번호 `admin1234`를 해시 값으로 변환한다. 이 작업은 회원 가입 페이지(`sign_up.php`)에서 사용자 정보를 저장할 때 비밀번호를 해시 처리한 후 삽입하도록 구현할 수 있다.  
+해시 함수를 활용한 로그인 로직을 구현하려면, 데이터베이스에는 사용자의 실제 비밀번호가 아닌 해당 비밀번호의 해시 값이 저장되어 있어야 한다. 따라서 기존에 저장된 원본 비밀번호 `test`를 해시 값으로 변환한다. 이 작업은 회원 가입 페이지(<code>sign_<wbr>up<wbr>.php</code>)에서 사용자 정보를 저장할 때 비밀번호를 해시 처리한 후 삽입하도록 구현할 수 있다.  
 이후 `users` 테이블은 다음과 같은 형태가 된다.
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%203/3.png" alt="users 테이블" style="padding: 0 50px; background-color: white">
+<img src="/data/Penetration%20Testing%20%7C%20Week%203/3.png" alt="users 테이블" style="padding: 0 8%; background-color: white">
 
 해시 함수로는 대표적인 해시 알고리즘 중 하나인 SHA-256을 사용하였다.
 
