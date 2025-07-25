@@ -1,100 +1,111 @@
+// 상세 게시물 페이지를 렌더링하는 함수
+function resolveContent(path, _queryParams) {
+  // URL 경로에서 '/posts/' 부분을 제거하여 순수한 글 제목을 추출
+  const postTitle = decodeURIComponent(path.replace('/posts/', ''));
+  // 전체 posts 배열에서 제목이 일치하는 게시물을 찾음
+  const post = posts.find(p => p.title === postTitle);
+  // 게시물이 있으면 내용을 렌더링하고, 없으면 404 페이지를 보여줌
+  if (post) {
+    document.title = postTitle + " - AshChord.log"; // 탭 제목 변경
+    renderContent(post);
+  } else {
+    document.title = "Page Not Found - AshChord.log"; // 탭 제목 변경
+    renderNotFound();
+  }
+}
+
+// 필터링된(검색 또는 카테고리) 또는 전체 게시물 목록을 렌더링하는 함수
+function resolveFeed(path, queryParams) {
+  // URL의 쿼리 파라미터에서 keyword와 category 값을 가져옴
+  const keyword = queryParams.get('keyword');
+  const category = queryParams.get('category');
+  
+  let postsToRender = (keyword || category) ? search(keyword, category) : posts;
+
+  if (keyword) document.title = `Search: ${keyword} - AshChord.log`;
+  else if (category) document.title = `Category: ${category} - AshChord.log`;
+  else if (path === '/posts') document.title = "Posts - AshChord.log";
+  else document.title = "AshChord.log";
+
+  // 이후의 렌더링 로직은 동일
+  initPagination(postsToRender.length);
+  renderFeed(postsToRender, pageState.currentPage);
+
+}
+
+
+const routes = [
+  {
+    // 조건: 경로가 /posts/로 시작하고 그 뒤에 글 제목이 있을 때 (예: /posts/내-첫-글)
+    match: (path) => path.startsWith('/posts/') && path.split('/')[2],
+    handler: resolveContent
+  },
+  {
+    // 조건: 경로가 메인(/), /posts, 또는 /index.html일 때
+    match: (path) => ['/', '/posts', '/index.html'].includes(path),
+    handler: resolveFeed
+  },
+  // { match: (path) => path === '/about', handler: renderAbout }, // 나중에 about 페이지 추가 시 이 줄의 주석만 풀면 됨
+];
+
 function router() {
   let path = window.location.pathname;
-  const queryParams = new URLSearchParams(window.location.search);
+  let queryParams = new URLSearchParams(window.location.search);
 
-  // p 파라미터가 있는지 확인
+  // 📌 Github Pages SPA 라우팅을 위한 리디렉션 처리 로직 (복원)
+  // 404.html에서 ?p=/posts/글제목 과 같은 형태로 리디렉션된 경우를 처리합니다.
   if (queryParams.has('p')) {
-    // p가 있으면 path를 p 파라미터로 설정
+    // 'p' 파라미터 값을 실제 경로로 사용합니다.
     path = queryParams.get('p');
-    queryParams.delete('p');
+    queryParams.delete('p'); // 더 이상 필요 없으므로 'p' 파라미터는 제거합니다.
 
-    // q 파라미터가 있으면 복원
+    // 'q' 파라미터가 있다면 원래의 쿼리 파라미터들을 복원합니다.
     if (queryParams.has('q')) {
       const qValue = queryParams.get('q');
       const restoredParams = new URLSearchParams();
-
-      queryParams.delete('q');
-
-      // 'q' 값을 '~and~' 기준으로 분리하여 복원
-      const keyValuePairs = qValue.split('~and~');
-      keyValuePairs.forEach(pair => {
-        // 첫 번째 '='까지만 기준으로 분리 (key와 value를 나눔)
+      qValue.split('~and~').forEach(pair => {
         const [key, ...valueParts] = pair.split('=');
-        const value = valueParts.join('='); // 나머지 부분을 value로 합침
-
-        if (key && value) {
-          restoredParams.set(key, value); // 복원된 값 그대로 추가
-        }
+        if (key) {
+          restoredParams.set(key, valueParts.join('='))
+        };
       });
-
-      // 복원된 쿼리 파라미터를 queryParams에 덮어씌우기
-      restoredParams.forEach((value, key) => {
-        queryParams.set(key, value);
-      });
-
-      // 쿼리 파라미터를 encodeURIComponent로 안전하게 처리하고, URL 생성
-      const queryString = [...queryParams.entries()]
-        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-        .join("&");
-
-      history.replaceState(null, '', `${path}?${queryString}`);
+      queryParams = restoredParams; // 복원된 파라미터로 교체
     }
 
-    else {
-      // 주소창을 새로운 URL로 변경
-      history.replaceState(null, '', `${path}`);
-    }
+    // 최종적으로 정리된 경로와 파라미터로 브라우저 주소창의 URL을 깔끔하게 변경합니다.
+    // 사용자는 리디렉션 과정을 눈치채지 못하고 원래 주소로 접속한 것처럼 보입니다.
+    const queryString = queryParams.toString();
+    history.replaceState(null, null, queryString ? `${path}?${queryString}` : path);
   }
 
-  // 1. path가 루트(/)인 경우
-  if (path === '/' || path === '/index.html') {
-    initPagination(posts.length); // 페이지네이션 초기화
-    renderPostList(posts, currentPage); // 루트 페이지는 전체 게시물 목록 렌더링
+  // 라우팅 테이블(routes 배열)에서 현재 경로와 일치하는 규칙을 찾음
+  const matchedRoute = routes.find(route => route.match(path, queryParams));
+
+  // 일치하는 경로 규칙을 찾았다면 해당 핸들러를 실행, 없으면 404 핸들러 실행
+  if (matchedRoute) {
+    matchedRoute.handler(path, queryParams);
+  } else {
+    document.title = "Page Not Found - AshChord.log"; // 탭 제목 변경
+    renderNotFound();
   }
 
-  // 2. path가 /posts인 경우
-  else if (path.startsWith('/posts')) {
-    // 2.1. /posts 인데 keyword 혹은 category가 있는 경우: 검색 결과 필터링 후 게시물 목록 렌더링
-    if (queryParams.has('keyword') || queryParams.has('category')) {
-      const keyword = queryParams.get('keyword');
-      const category = queryParams.get('category');
-      initPagination(search(keyword, category).length); // 검색된 게시물 개수에 맞게 페이지네이션 초기화
-      renderPostList(search(keyword, category), currentPage); // 검색 필터링 후 페이지에 맞는 게시물 렌더링
-    }
-    // 2.2. /posts 인데 postTitle이 있는 경우: 게시물 제목에 맞는 게시물 내용 렌더링
-    else if (path.replace('/posts', '')) {
-      const postTitle = decodeURIComponent(path.replace(/^\/posts\//, ''));
-      const post = posts.find(p => p.title === postTitle);
-      post ? renderContent(post) : showNotFound();
-    }
-    // 2.3. /posts 인데 키워드, 카테고리, 제목이 모두 없는 경우: 전체 게시물 목록 렌더링
-    else {
-      initPagination(posts.length); // 전체 게시물 개수에 맞게 페이지네이션 초기화
-      renderPostList(posts, currentPage);
-    }
-  }
-
-  // 3. path가 /home인 경우
-  else if (path === '/home') {
-    renderHome(); // 블로그 설명 페이지 렌더링
-  }
-
-  // 4. path가 /about인 경우
-  else if (path === '/about') {
-    renderAbout(); // 저자 소개 페이지 렌더링
-  }
-
-  // 5. 그 외의 경우: 404 페이지
-  else {
-    showNotFound(); // 404 페이지 표시
-  }
-
+  // 페이지가 변경될 때마다 화면 상단으로 스크롤
   window.scrollTo(0, 0);
 }
 
 
-function showNotFound() {
-  document.querySelector('.post-list').innerHTML = `<h1>404 - Not Found</h1>`;
-}
+document.querySelector(".blog-title").addEventListener("click", () => {
+  window.history.pushState(null, null, "/"); // URL 변경
+  router(); // 라우터 실행
+});
 
-window.onpopstate = router;
+document.querySelectorAll(".menu-item").forEach((item) => {
+  item.addEventListener("click", () => {
+    const path = item.textContent.toLowerCase(); // 텍스트를 URL 경로로 변환
+    window.history.pushState(null, null, `/${path}`); // URL 변경
+    router(); // 라우터 실행
+  });
+});
+
+// 브라우저의 뒤로가기/앞으로가기 버튼을 눌렀을 때도 router 함수가 실행되도록 설정
+window.addEventListener('popstate', router);

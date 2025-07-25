@@ -128,7 +128,6 @@
   background-color: #f3f5fa;
   font-size: 14px;
   font-weight: 500;
-  text-align: justify;
   vertical-align: middle;
   white-space: pre-wrap;
   overflow-wrap: break-word;
@@ -146,7 +145,6 @@
   font-family: monospace;
   line-height: 28px;
   vertical-align: 1px;
-  word-break: break-all;
 
   pre & {
     background-color: transparent;

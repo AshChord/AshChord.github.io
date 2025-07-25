@@ -147,7 +147,7 @@ nav {
   }
 }
 
-.input-field {
+.search-input {
   width: 100%;
   padding: 10px 20px;
   border: none;
@@ -164,7 +164,7 @@ nav {
   }
 }
 
-.button-panel {
+.search-actions {
   display: flex;
   position: absolute;
   top: 50%;
@@ -178,7 +178,7 @@ nav {
   }
 }
 
-.reset-button {
+.search-reset-button {
   width: 16px;
   height: 16px;
   padding: 0;
@@ -194,7 +194,7 @@ nav {
   }
 }
 
-.submit-button {
+.search-submit-button {
   width: 21px;
   height: 21px;
   padding: 0;

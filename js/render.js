@@ -1,84 +1,73 @@
-// 게시물 한 페이지에 표시할 수
-const POSTS_PER_PAGE = 6; // 예시로 6개로 설정
+const feed = document.querySelector('.feed');
+const content = document.querySelector('.content');
 
-function renderPostList(postsToRender = posts, currentPage = 1) {
-  const postList = document.querySelector('.post-list');
-  const content = document.querySelector('.content');
-
-  postList.innerHTML = '';
+function renderFeed(postsToRender = posts, currentPage = 1) {
+  feed.innerHTML = '';
   content.innerHTML = '';
 
   // 현재 페이지에 해당하는 게시물 인덱스를 계산하여 게시물 추출
-  const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-  const endIndex = startIndex + POSTS_PER_PAGE;
+  const startIndex = (currentPage - 1) * pageState.postsPerPage;
+  const endIndex = startIndex + pageState.postsPerPage;
   const postsForCurrentPage = postsToRender.slice(startIndex, endIndex);
 
-  // 게시물 렌더링
+    // 검색 결과가 없을 때 메시지
+  if (postsForCurrentPage.length === 0) {
+    feed.innerHTML = '<p class="no-results">검색 결과가 없습니다.</p>';
+    return;
+  }
+
   postsForCurrentPage.forEach(post => {
-    const postCard = document.createElement('div');
-    postCard.classList.add('post-card');
-    postCard.innerHTML = `
+    const feedItem = document.createElement('div');
+    feedItem.classList.add('feed-item');
+
+    feedItem.innerHTML = `
       <img src="/data/${post.title}/thumbnail.png" alt="${post.title}" class="thumbnail">
       <h2 class="title">${post.title}</h2>
-      <p class="description">${post.description}</p>
+      <p class="excerpt">${post.excerpt}</p>
       <div class="category-list">
-        ${post.categories.map(cat => `<span class="category">${cat}</span>`).join('')}
+        ${post.categories.map(category => `<span class="category">${category}</span>`).join('')}
       </div>
       <p class="date">${post.date}</p>
     `;
-    // 클릭 시 URL을 변경하고 router() 호출
-    postCard.addEventListener('click', (event) => {
-      if (event.target.className !== 'category') {
-        const postTitle = encodeURIComponent(post.title);
-        history.pushState(null, null, `/posts/${postTitle}`);
-        router();
-      } // 라우터 호출로 해당 게시물의 상세 내용 렌더링
-    });
-    postList.appendChild(postCard);
-  });
 
-  // 검색 결과가 없을 때 메시지
-  if (postsForCurrentPage.length === 0) {
-    postList.innerHTML = '<p class="no-results">검색 결과가 없습니다.</p>';
-  }
+    feedItem.addEventListener('click', (event) => {
+      if (!event.target.classList.contains('category')) {
+        history.pushState(null, null, `/posts/${encodeURIComponent(post.title)}`);
+        router();
+      }
+    });
+
+    feed.appendChild(feedItem);
+  });
 }
 
 async function renderContent(post) {
-  const postList = document.querySelector('.post-list');
-  const content = document.querySelector('.content');
-  const pagination = document.querySelector(".pagination");
-
-
-  // .post-list를 빈 요소로 만들기
-  postList.innerHTML = '';
+  // .feed를 빈 요소로 만들기
+  feed.innerHTML = '';
+  content.innerHTML = '';
   pagination.innerHTML = '';
 
-  // 게시물 메타데이터 (제목, 카테고리, 날짜) 렌더링
   const postHeader = document.createElement('div');
   postHeader.classList.add('post-header');
 
   postHeader.innerHTML = `
-      <div class="category-list">
-        ${post.categories.map(cat => `<span class="category">${cat}</span>`).join('')}
-      </div>
-      <h1 class="title">${post.title}</h1>
-      <p class="date">${post.date}</p>
-      <img src="/data/${post.title}/thumbnail.png" alt="${post.title}" class="thumbnail">
+    <div class="category-list">
+      ${post.categories.map(category => `<span class="category">${category}</span>`).join('')}
+    </div>
+    <h1 class="title">${post.title}</h1>
+    <p class="date">${post.date}</p>
+    <img src="/data/${post.title}/thumbnail.png" alt="${post.title}" class="thumbnail">
+  `;
 
-    `;
-
-  // .content에 게시물 메타데이터 추가
-  content.innerHTML = ''; // 기존 내용 지우기
   content.appendChild(postHeader);
 
   // .content에 게시물 내용 렌더링
-  const response = await fetch(`/data/${post.title}/${post.title}.md`);
-  const markdownContent = await response.text();
+  const markdownContent = await fetch(`/data/${post.title}/${post.title}.md`);
 
   // 마크다운을 HTML로 변환하여 추가
   const postBody = document.createElement('div');
   postBody.classList.add('post-body');
-  postBody.innerHTML = marked.parse(markdownContent);
+  postBody.innerHTML = marked.parse(await markdownContent.text());
   content.appendChild(postBody);
 
   hljs.highlightAll();
@@ -92,40 +81,10 @@ async function renderContent(post) {
     copyButton.classList.add("copy-button");
 
     // 복사 버튼 클릭 이벤트
-    copyButton.addEventListener("click", async function (event) {
+    copyButton.addEventListener("click", async () => {
       await navigator.clipboard.writeText(code); // 클립보드에 코드 복사
 
-      // 버튼 위치 계산
-      const buttonRect = copyButton.getBoundingClientRect();
-      const buttonTop = buttonRect.top + window.scrollY; // 버튼의 상단 위치
-      const buttonLeft = buttonRect.left + window.scrollX; // 버튼의 좌측 위치
-
-      // 복사 성공 메시지 (toast) 생성
-      const toast = document.createElement('div');
-      toast.classList.add('toast');
-      toast.textContent = '복사함';
-
-      // 토스트 메시지 위치 설정
-      toast.style.position = 'absolute'; // 절대 위치
-      toast.style.top = `${buttonTop - 50}px`; // 버튼보다 50px 위
-      toast.style.left = `${buttonLeft + buttonRect.width / 2 - toast.offsetWidth / 2}px`; // 버튼 중앙에 맞춤
-
-      content.appendChild(toast); // content 요소에 추가
-
-      // 1초 후에 토스트 메시지 보이도록 클래스 추가
-      setTimeout(() => {
-        toast.classList.add('show');
-      }, 100);
-
-      // 3초 후에 메시지 숨기기
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 1000); // 메시지가 3초 동안 보인 후
-
-      // 3.5초 후에 실제로 toast 요소를 제거
-      setTimeout(() => {
-        toast.remove();
-      }, 2000); // 애니메이션이 끝난 후 제거
+      // 복사 버튼 이미지를 체크로 변경
     });
 
     // pre 요소 안에 복사 버튼 삽입
@@ -144,77 +103,70 @@ async function renderContent(post) {
   });
 }
 
-function renderBlogCategory() {
-  /*
-    posts에서 카테고리를 소문자로 추출하여 카테고리 목록을 aside 항목으로 렌더링
-    */
-  const categoryList = {};
-  posts.forEach((post) => {
-    if (post.categories) { // 카테고리가 존재할 경우
-      post.categories.forEach((category) => { // 여러 카테고리를 순회
-        const categoryName = category.toLowerCase(); // 카테고리 이름을 소문자로 변환
-        if (categoryList[categoryName]) {
-          categoryList[categoryName] += 1; // 카테고리의 개수 증가
-        } else {
-          categoryList[categoryName] = 1; // 새로운 카테고리 추가
-        }
-      });
-    }
-  });
-  const categoryArray = Object.keys(categoryList);
-  categoryArray.sort();
 
-  const categoryContainer = document.querySelector("aside");
-  const categoryWrapper = document.querySelector(".category-search");
-  const categoryTitle = categoryWrapper.querySelector(".category-search-title");
-  const categoryButton = document.querySelector(".category-search-button");
-  window.addEventListener("click", (evt) => {
-    // categoryButton을 눌렀을 때
-    if (evt.target === categoryButton) {
-      categoryWrapper.classList.toggle("active"); // 'active' 클래스 토글
-      categoryTitle.classList.toggle("active");
-      categoryContainer.classList.toggle("active");
-      categoryButton.classList.toggle("active");
-    } else if (
-      categoryWrapper.classList.contains("active") &&
-      !categoryWrapper.contains(evt.target)
-    ) {
-      categoryWrapper.classList.remove("active"); // 'active' 클래스 제거
-      categoryTitle.classList.remove("active");
-      categoryContainer.classList.remove("active");
-      categoryButton.classList.remove("active");
-    }
-  });
+function renderCategoryDropdown() {
+  // --- 1. 데이터 처리: 카테고리별 게시물 수를 계산하고 정렬합니다. ---
+  const categoryCounts = posts
+    .flatMap(post => post.categories.map(cat => cat.toLowerCase())) // 모든 카테고리를 소문자로 변환해 하나의 배열로 합침
+    .reduce((counts, category) => {
+      counts[category] = (counts[category] || 0) + 1; // 각 카테고리의 개수를 셈
+      return counts;
+    }, {});
 
-  categoryArray.forEach((category) => {
-    // category div
-    const categoryItem = document.createElement("div");
+  // { name, count } 형태의 객체 배열로 변환 후, 이름순으로 정렬
+  const categoryCountsArray = Object.entries(categoryCounts)
+    .map(([categoryName, count]) => ({ categoryName, count }))
+    .sort((a, b) => a.categoryName.localeCompare(b.categoryName));
 
-    // category count span
-    const categoryCount = document.createElement("span");
+  // --- 2. UI 렌더링: 계산된 데이터를 기반으로 HTML을 생성하고 삽입합니다. ---
+  const categoryMenu = document.querySelector(".category-menu");
+  
+  // map과 join을 사용해 전체 HTML 문자열을 한 번에 생성
+  categoryMenu.innerHTML = categoryCountsArray.map(category => `
+    <div class="category-menu-item">
+      <span class="category-name">${category.categoryName}</span>
+      <span class="count">(${category.count})</span>
+    </div>
+  `).join('');
 
-    categoryItem.textContent = category;
-    categoryCount.textContent = `(${categoryList[category]})`;
-    categoryItem.onclick = () => {
-      history.pushState(null, null, `/posts?category=${encodeURIComponent(category)}`);
+  // --- 3. 이벤트 리스너 등록 ---
+  const categoryDropdown = document.querySelector(".category-dropdown");
+  const categoryDropdownButton = categoryDropdown.querySelector(".category-dropdown-button");
+
+  // [개선] 카테고리 클릭 이벤트 (이벤트 위임)
+  // aside 전체에 리스너를 한 번만 등록해서 모든 하위 카테고리의 클릭을 처리합니다.
+  categoryMenu.addEventListener('click', (event) => {
+    const categoryItem = event.target.closest('.category-menu-item');
+    if (categoryItem) {
+      const categoryName = categoryItem.querySelector(".category-name").textContent;
+      history.pushState(null, null, `/posts?category=${encodeURIComponent(categoryName)}`);
       router();
-    };
+    }
+  });
 
-
-    categoryItem.appendChild(categoryCount);
-    categoryContainer.appendChild(categoryItem);
+  // [유지] 메뉴 토글 및 바깥 클릭 시 닫기 이벤트
+  // 이 로직은 창 전체의 클릭을 감지해야 하므로 window에 등록합니다.
+  document.addEventListener('click', (event) => {
+    // 메뉴 버튼 자체를 클릭한 경우 토글
+    if (categoryDropdownButton.contains(event.target)) {
+      categoryDropdown.classList.toggle('active');
+    } 
+    // 메뉴가 열려있고, 메뉴 영역 바깥을 클릭한 경우 닫기
+    else if (categoryDropdown.classList.contains('active') && !categoryDropdown.contains(event.target)) {
+      categoryDropdown.classList.remove('active');
+    }
   });
 }
 
-document.querySelector(".blog-title").addEventListener("click", () => {
-  window.history.pushState({}, "", "/"); // URL 변경
-  router(); // 라우터 실행
-});
+// 404 Not Found 페이지를 표시하는 함수
+function renderNotFound() {
+  content.innerHTML = '';
+  pagination.innerHTML = '';
 
-document.querySelectorAll(".menu-item").forEach((item) => {
-  item.addEventListener("click", () => {
-    const path = item.textContent.toLowerCase(); // 텍스트를 URL 경로로 변환
-    window.history.pushState({}, "", `/${path}`); // URL 변경
-    router(); // 라우터 실행
-  });
-});
+  feed.innerHTML = `
+    <div class="not-found" style="grid-column: 1 / -1; text-align: center; padding: 50px;">
+      <h1>404</h1>
+      <p>페이지를 찾을 수 없습니다.</p>
+    </div>
+  `;
+}

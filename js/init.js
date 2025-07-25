@@ -4,9 +4,11 @@ async function initialize() {
   const response = await fetch('/data/post-info.json');
   posts = await response.json();  // 게시물 데이터 로드
 
+  posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
   // 2. 현재 URL에 맞는 화면 렌더링
   router();
-  renderBlogCategory();
+  renderCategoryDropdown();
 }
 
 // 📌 DOM 로드 완료 후 초기화 실행

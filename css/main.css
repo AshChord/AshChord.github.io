@@ -3,7 +3,7 @@ main {
   grid-template-columns: 100%;
 }
 
-.post-list {
+.feed {
   display: grid;
   margin-bottom: 20px;
   gap: 16px;
@@ -19,7 +19,7 @@ main {
   }
 }
 
-.post-card {
+.feed-item {
   width: auto;
   padding: 24px;
   overflow: hidden;
@@ -51,7 +51,7 @@ main {
   font-weight: bold;
 }
 
-.description {
+.excerpt {
   height: 64px;
   margin: 0 0 12px 0;
   color: #47494d;
@@ -212,7 +212,7 @@ article {
 }
 
 /* 카테고리 버튼 섹션 */
-.category-search {
+.category-dropdown {
   display: none;
   position: sticky;
   top: 32px;
@@ -233,24 +233,24 @@ article {
   }
 }
 
-.category-search-header {
+.category-dropdown-header {
   display: flex;
   align-items: center;
 }
 
-.category-search-title {
+.category-dropdown-title {
   display: none;
   margin-left: 20px;
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
 
-  &.active {
+  .category-dropdown.active & {
     display: block;
   }
 }
 
-.category-search-button {
+.category-dropdown-button {
   display: flex;
   width: 50px;
   height: 50px;
@@ -263,7 +263,7 @@ article {
   mask-repeat: no-repeat;
   mask-position: center center;
 
-  &.active {
+  .category-dropdown.active & {
     margin-left: auto;
     mask-image: url("../assets/icon-side-close-right.svg");
   }
@@ -273,7 +273,7 @@ article {
   }
 }
 
-aside {
+.category-menu {
   display: none;
   z-index: 10;
   border-radius: 6px;
@@ -282,7 +282,7 @@ aside {
   flex-direction: column;
   overflow-y: auto;
 
-  &.active {
+  .category-dropdown.active & {
     display: flex;
   }
 
@@ -291,19 +291,21 @@ aside {
   }
 }
 
-aside div {
+.category-menu-item {
   padding: 9px 20px;
   font-size: 16px;
   font-weight: 400;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #f3f5fa;
+
+  }
 }
 
-aside div:hover {
-  background-color: #f3f5fa;
-}
 
-aside span {
+.count {
   margin-left: 4px;
   color: #8d9299;
   font-size: 16px;

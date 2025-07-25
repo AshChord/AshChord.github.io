@@ -7,9 +7,9 @@ function search(keyword, category) {
 }
 
 // 검색 입력 필드 및 리셋 버튼
-const inputField = document.querySelector('.input-field');
-const resetButton = document.querySelector('.reset-button');
-const submitButton = document.querySelector('.submit-button');
+const inputField = document.querySelector('.search-input');
+const resetButton = document.querySelector('.search-reset-button');
+const submitButton = document.querySelector('.search-submit-button');
 const article = document.querySelector('article');
 
 function toggleResetButton() {
@@ -44,8 +44,8 @@ submitButton.addEventListener('click', () => {
   router();
 });
 
-article.addEventListener('click', (event) => {
-  if (event.target.className === 'category') {
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('category')) {
     event.stopPropagation(); // 게시물 클릭 이벤트로 전파 방지
     const category = event.target.textContent;
     history.pushState(null, null, `/posts?category=${encodeURIComponent(category)}`);
