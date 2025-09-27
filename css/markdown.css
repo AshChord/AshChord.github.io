@@ -1,0 +1,264 @@
+.content h1 {
+  margin: 32px 0;
+  border-bottom: 1px solid #d9dbe0;
+  font-size: 32px;
+  line-height: 64px;
+
+  .post-header & {
+    margin: 12px 0;
+  }
+}
+
+.content h2 {
+  margin: 32px 0;
+  border-bottom: 1px solid #d9dbe0;
+  font-size: 28px;
+  line-height: 56px;
+}
+
+.content h3 {
+  margin: 32px 0;
+  border-bottom: 1px solid #d9dbe0;
+  font-size: 24px;
+  line-height: 48px;
+}
+
+.content h4 {
+  margin: 24px 0;
+  font-size: 20px;
+  line-height: 40px;
+}
+
+.content h5 {
+  margin: 24px 0;
+  font-size: 18px;
+  line-height: 36px;
+}
+
+.content h6 {
+  margin: 24px 0;
+  font-size: 16px;
+  line-height: 32px;
+}
+
+.content p {
+  margin: 24px 0;
+  font-size: 16px;
+  text-align: justify;
+  line-height: 32px;
+
+  .post-header & {
+    margin: 12px 0;
+  }
+}
+
+.content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 40px auto;
+  border: 4px solid #f3f5fa;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  .post-header & {
+    margin-bottom: 80px;
+  }
+}
+
+.content a {
+  color: #2e6ff2;
+  font-size: 16px;
+  transition: color 0.3s ease;
+
+  &:hover {
+  color: #2ea0f2;
+  }
+}
+
+.content ul {
+  margin: 8px 0;
+  padding-left: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: justify;
+  line-height: 32px;
+}
+
+.content ol {
+  margin: 8px 0;
+  padding-left: 20px;
+  list-style-type: decimal;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: justify;
+  line-height: 32px;
+}
+
+.content li {
+  margin-bottom: 8px;
+  padding-left: 12px;
+  font-size: 16px;
+  text-align: justify;
+  line-height: 32px;
+}
+
+.content blockquote {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-left: 4px solid #a78bfa;
+  background-color: #f3f5fa;
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.content pre {
+  position: relative;
+  height: auto;
+  margin: 32px 0;
+  padding: 10px;
+  overflow: auto;
+  border-radius: 10px;
+  background-color: #f3f5fa;
+  font-size: 14px;
+  font-weight: 500;
+  vertical-align: middle;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+
+  blockquote & {
+    border: 1px solid #d9dbe0;
+  }
+}
+
+.content code {
+  padding: 2px 4px;
+  border-radius: 4px;
+  background-color: #d9dbe0;
+  font-size: 14px;
+  font-family: monospace;
+  line-height: 28px;
+  vertical-align: 1px;
+
+  pre & {
+    background-color: transparent;
+  }
+
+  table & {
+    font-size: 12px;
+  }
+
+}
+
+.content .copy-button {
+  display: flex;
+  position: absolute;
+  top: 17px;
+  right: 17px;
+  width: 42px;
+  height: 42px;
+  padding: 8px;
+  border: 1px solid #d9dbe0;
+  border-radius: 10px;
+  background-color: #ffffff;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("../assets/icon-copy.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 60%;
+  opacity: 0.7;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+  background-image: url("../assets/icon-copy.svg");
+  }
+}
+
+.toast {
+  visibility: hidden;
+  bottom: 20px;
+  height: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #47494d;
+  opacity: 0;
+  color: white;
+  font-size: 14px;
+  line-height: 21px;
+  transform: translateX(-50%);
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+
+}
+
+.content .table-wrapper {
+  width: auto;
+  min-width: 0;
+  max-width: 800px;
+  margin: 32px 0;
+  overflow: auto;
+  text-align: center;
+  overflow-y: visible;
+}
+
+.content table {
+  width: 800px;
+  height: auto;
+  margin: 0 auto;
+  table-layout: auto;
+  border-collapse: collapse;
+  border-color: #d9dbe0;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.content th {
+  padding: 10px 16px;
+  overflow: auto;
+  border-bottom: 1px solid #8d9299;
+  background-color: #f3f5fa;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  white-space: nowrap;
+}
+
+.content td {
+  padding: 10px 16px;
+  border-top: 1px solid #d9dbe0;
+  color: #4a5568;
+  font-size: 14px;
+  line-height: 28px;
+  word-break: keep-all;
+}
+
+.content hr {
+  height: 1px;
+  margin: 32px 0;
+  border: none;
+  background-color: #e6e8ed;
+}
+
+.content em {
+  padding-right: 2px;
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.content strong {
+  font-weight: bold;
+}
