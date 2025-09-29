@@ -3,6 +3,20 @@ main {
   grid-template-columns: 100%;
 }
 
+article {
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 32px 20px 16px 20px;
+  box-sizing: border-box;
+  grid-row-start: 1;
+  grid-column-start: 1;
+
+  @media (min-width: 768px) {
+    padding-top: 60px;
+  }
+}
+
 .feed {
   display: grid;
   margin-bottom: 20px;
@@ -17,10 +31,15 @@ main {
     grid-template-columns: repeat(3, 1fr);
     gap: 40px 25px;
   }
+
+  .not-found {
+    padding: 50px;
+    text-align: center;
+    grid-column: 1 / -1;
+  }
 }
 
 .feed-item {
-  width: auto;
   padding: 24px;
   overflow: hidden;
   border-radius: 12px;
@@ -55,21 +74,16 @@ main {
   height: 64px;
   margin: 0 0 12px 0;
   color: #47494d;
-  font-size: 16px;
-  font-weight: normal;
   line-height: 24px;
 }
 
 .date {
-  display: block;
   margin: 0;
   color: #8d9299;
   font-size: 14px;
-  font-weight: normal;
 }
 
 .category-list {
-  display: block;
   margin: 0 0 12px 0;
 }
 
@@ -91,21 +105,6 @@ main {
   color: #ffffff;
 }
 
-article {
-  width: 100%;
-  max-width: 1200px;
-  margin-right: auto;
-  margin-left: auto;
-  padding: 32px 20px 16px 20px;
-  grid-row-start: 1;
-  grid-column-start: 1;
-  box-sizing: border-box;
-
-  @media (min-width: 768px) {
-    padding-top: 60px;
-  }
-}
-
 .content {
   max-width: 800px;
   margin-top: 24px;
@@ -114,7 +113,6 @@ article {
   margin-left: auto;
 }
 
-/* 페이지네이션 섹션 */
 .pagination {
   display: flex;
   margin-top: 20px;
@@ -200,21 +198,19 @@ article {
   width: 40px;
   height: 40px;
   color: #8d9299;
-  font-size: 16px;
-  font-weight: normal;
   text-align: center;
   align-items: center;
+
+  &.active {
+    color: #8b5cf6;
+    font-weight: bold;
+  }
 }
 
-.page-number.active {
-  color: #8b5cf6;
-  font-weight: bold;
-}
-
-/* 카테고리 버튼 섹션 */
 .category-dropdown {
   display: none;
   position: sticky;
+  z-index: 10;
   top: 32px;
   width: fit-content;
   height: fit-content;
@@ -224,9 +220,9 @@ article {
   background-color: white;
   grid-row-start: 1;
   grid-column-start: 1;
+  justify-self: end;
   flex-direction: column;
   overflow-y: auto;
-  justify-self: end;
 
   @media (min-width: 768px) {
     display: flex;
@@ -242,7 +238,6 @@ article {
   display: none;
   margin-left: 20px;
   font-size: 14px;
-  font-weight: 600;
   line-height: 20px;
 
   .category-dropdown.active & {
@@ -275,7 +270,6 @@ article {
 
 .category-menu {
   display: none;
-  z-index: 10;
   border-radius: 6px;
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -293,8 +287,6 @@ article {
 
 .category-menu-item {
   padding: 9px 20px;
-  font-size: 16px;
-  font-weight: 400;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 
@@ -304,10 +296,6 @@ article {
   }
 }
 
-
 .count {
-  margin-left: 4px;
   color: #8d9299;
-  font-size: 16px;
-  font-weight: 400;
 }
