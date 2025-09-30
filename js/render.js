@@ -10,7 +10,7 @@ function renderFeed(postsToRender = posts, currentPage = 1) {
   const endIndex = startIndex + pageState.postsPerPage;
   const postsForCurrentPage = postsToRender.slice(startIndex, endIndex);
 
-    // 검색 결과가 없을 때 메시지
+  // 검색 결과가 없을 때 메시지
   if (postsForCurrentPage.length === 0) {
     feed.innerHTML = '<p class="no-results">검색 결과가 없습니다.</p>';
     return;
@@ -42,14 +42,14 @@ function renderFeed(postsToRender = posts, currentPage = 1) {
 }
 
 async function renderContent(post) {
-  // .feed를 빈 요소로 만들기
+  // .feed, .content, .pagination 초기화
   feed.innerHTML = '';
   content.innerHTML = '';
   pagination.innerHTML = '';
 
+  // 게시물 헤더 생성
   const postHeader = document.createElement('div');
   postHeader.classList.add('post-header');
-
   postHeader.innerHTML = `
     <div class="category-list">
       ${post.categories.map(category => `<span class="category">${category}</span>`).join('')}
@@ -58,52 +58,72 @@ async function renderContent(post) {
     <p class="date">${post.date}</p>
     <img src="/data/${post.title}/thumbnail.png" alt="${post.title}" class="thumbnail">
   `;
-
   content.appendChild(postHeader);
 
-  // .content에 게시물 내용 렌더링
+  // 마크다운 불러오기 및 변환
   const markdownContent = await fetch(`/data/${post.title}/${post.title}.md`);
   const markdownText = (await markdownContent.text()).replace(/^---\smeta\n([\s\S]*?)\n---/, '').trim();
 
-  // 마크다운을 HTML로 변환하여 추가
+  // 변환된 HTML 삽입
   const postBody = document.createElement('div');
   postBody.classList.add('post-body');
   postBody.innerHTML = marked.parse(markdownText);
   content.appendChild(postBody);
 
+  // 코드 하이라이트
   hljs.highlightAll();
 
-  // 코드 블록에 복사 버튼 추가
-  postBody.querySelectorAll("pre").forEach((pre) => {
-    const code = pre.textContent; // 코드 내용 가져오기
+  // 부가 요소 추가
+  addCopyButtons(postBody);
+  makeCodeBreakable(postBody);
+}
 
-    // 복사 버튼 생성
+function addCopyButtons(postBody) {
+  postBody.querySelectorAll("pre").forEach((pre) => {
+    const code = pre.textContent;
+
     const copyButton = document.createElement("button");
     copyButton.classList.add("copy-button");
 
-    // 복사 버튼 클릭 이벤트
     copyButton.addEventListener("click", async () => {
-      await navigator.clipboard.writeText(code); // 클립보드에 코드 복사
+      await navigator.clipboard.writeText(code);
+      copyButton.classList.add("copied");
 
-      // 복사 버튼 이미지를 체크로 변경
+      setTimeout(() => {
+        copyButton.classList.remove("copied");
+      }, 2000);
     });
 
-    // pre 요소 안에 복사 버튼 삽입
     pre.appendChild(copyButton);
-  });
-
-  // 테이블 감싸는 div 추가
-  postBody.querySelectorAll("table").forEach((table) => {
-    // table을 감쌀 div 생성
-    const tableWrapper = document.createElement("div");
-    tableWrapper.classList.add("table-wrapper"); // CSS 클래스 추가
-
-    // table을 tableWrapper로 감싸기
-    table.parentNode.insertBefore(tableWrapper, table);
-    tableWrapper.appendChild(table);
   });
 }
 
+function makeCodeBreakable(postBody) {
+  const isAlphanumeric = char => /[a-zA-Z0-9\s]/.test(char);
+
+  for (const code of postBody.querySelectorAll('code')) {
+    if (code.closest('pre')) continue;
+
+    const codeText = code.textContent;
+    let breakableCodeText = '';
+
+    for (let i = 0; i < codeText.length; i++) {
+      const currentChar = codeText[i];
+      if (i > 0) {
+        const prevChar = codeText[i - 1];
+        if (
+          (isAlphanumeric(prevChar) !== isAlphanumeric(currentChar)) ||
+          (!isAlphanumeric(prevChar) && !isAlphanumeric(currentChar))
+        ) {
+          breakableCodeText += '<wbr>';
+        }
+      }
+      breakableCodeText += currentChar;
+    }
+
+    code.innerHTML = breakableCodeText;
+  }
+}
 
 function renderCategoryDropdown() {
   // --- 1. 데이터 처리: 카테고리별 게시물 수를 계산하고 정렬합니다. ---
@@ -121,7 +141,7 @@ function renderCategoryDropdown() {
 
   // --- 2. UI 렌더링: 계산된 데이터를 기반으로 HTML을 생성하고 삽입합니다. ---
   const categoryMenu = document.querySelector(".category-menu");
-  
+
   // map과 join을 사용해 전체 HTML 문자열을 한 번에 생성
   categoryMenu.innerHTML = categoryCountsArray.map(category => `
     <div class="category-menu-item">
@@ -151,7 +171,7 @@ function renderCategoryDropdown() {
     // 메뉴 버튼 자체를 클릭한 경우 토글
     if (categoryDropdownButton.contains(event.target)) {
       categoryDropdown.classList.toggle('active');
-    } 
+    }
     // 메뉴가 열려있고, 메뉴 영역 바깥을 클릭한 경우 닫기
     else if (categoryDropdown.classList.contains('active') && !categoryDropdown.contains(event.target)) {
       categoryDropdown.classList.remove('active');
@@ -165,7 +185,7 @@ function renderNotFound() {
   pagination.innerHTML = '';
 
   feed.innerHTML = `
-    <div class="not-found" style="grid-column: 1 / -1; text-align: center; padding: 50px;">
+    <div class="not-found">
       <h1>404</h1>
       <p>페이지를 찾을 수 없습니다.</p>
     </div>
