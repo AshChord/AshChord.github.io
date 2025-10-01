@@ -13,7 +13,7 @@ categories: 모의 해킹
 
 `UNION`의 사용법을 실행 예시와 함께 알아보자. 사용 예시는 다음의 `stock_list`와 `company_ranking` 테이블을 기준으로 한다.
 
-<table style="width: 100%; table-layout: fixed;">
+<table>
   <caption style="margin-bottom: 24px; text-align: left; font-weight: bold;">stock_list</caption>
   <thead>
     <tr>
@@ -57,7 +57,7 @@ categories: 모의 해킹
   </tbody>
 </table>
 
-<table style="width: 100%; table-layout: fixed;">
+<table>
   <caption style="margin-bottom: 24px; text-align: left; font-weight: bold;">company_ranking</caption>
   <thead>
     <tr>
