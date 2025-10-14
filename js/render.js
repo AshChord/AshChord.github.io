@@ -1,9 +1,11 @@
 const feed = document.querySelector('.feed');
 const content = document.querySelector('.content');
+const tableOfContents = document.querySelector('.table-of-contents');
 
 function renderFeed(postsToRender = posts, currentPage = 1) {
   feed.innerHTML = '';
   content.innerHTML = '';
+  tableOfContents.innerHTML = '';  // 기존 목차 내용 초기화
 
   // 현재 페이지에 해당하는 게시물 인덱스를 계산하여 게시물 추출
   const startIndex = (currentPage - 1) * pageState.postsPerPage;
@@ -45,6 +47,7 @@ async function renderContent(post) {
   // .feed, .content, .pagination 초기화
   feed.innerHTML = '';
   content.innerHTML = '';
+  tableOfContents.innerHTML = '';  // 기존 목차 내용 초기화
   pagination.innerHTML = '';
 
   // 게시물 헤더 생성
@@ -76,6 +79,7 @@ async function renderContent(post) {
   // 부가 요소 추가
   addCopyButtons(postBody);
   makeCodeBreakable(postBody);
+  renderTableOfContents();
 }
 
 function addCopyButtons(postBody) {
@@ -125,10 +129,66 @@ function makeCodeBreakable(postBody) {
   }
 }
 
+function renderTableOfContents() {
+  const headings = content.querySelectorAll('h3, h4, h5, h6');
+  const contentsList = document.createElement('ul');
+
+  // 제목에 대한 id 설정 및 목록 항목 추가
+  headings.forEach((heading, index) => {
+    // id 없으면 자동 생성
+    if (!heading.id) {
+      heading.id = `${index}`;
+    }
+
+    const listItem = document.createElement('li');
+    const indentationLevel = parseInt(heading.tagName.substring(1)) - 3;
+    listItem.style.paddingLeft = `${indentationLevel * 12}px`;
+
+    const linkToHeading = document.createElement('a');
+    linkToHeading.href = `#${heading.id}`;
+    linkToHeading.textContent = heading.textContent;
+    linkToHeading.addEventListener('click', (event) => {
+      event.preventDefault();
+      document.getElementById(heading.id).scrollIntoView({ behavior: 'smooth' });
+    });
+
+    listItem.appendChild(linkToHeading);
+    contentsList.appendChild(listItem);
+  });
+
+  tableOfContents.appendChild(contentsList);
+
+  // 스크롤 이벤트 최적화 (isPending 사용)
+  let isPending = false;
+
+  window.addEventListener('scroll', () => {
+    if (!isPending) {
+      window.requestAnimationFrame(() => {
+        const scrollPosition = window.scrollY;
+        let currentIndex = -1;
+
+        headings.forEach((heading, i) => {
+          if (scrollPosition >= heading.offsetTop - 10) {
+            currentIndex = i;
+          }
+        });
+
+        tableOfContents.querySelectorAll('a').forEach((link, i) => {
+          link.classList.toggle('active', i === currentIndex);
+        });
+
+        isPending = false;
+      });
+
+      isPending = true;
+    }
+  });
+}
+
 function renderCategoryDropdown() {
   // --- 1. 데이터 처리: 카테고리별 게시물 수를 계산하고 정렬합니다. ---
   const categoryCounts = posts
-    .flatMap(post => post.categories.map(cat => cat.toLowerCase())) // 모든 카테고리를 소문자로 변환해 하나의 배열로 합침
+    .flatMap(post => post.categories) // 모든 카테고리를 소문자로 변환해 하나의 배열로 합침
     .reduce((counts, category) => {
       counts[category] = (counts[category] || 0) + 1; // 각 카테고리의 개수를 셈
       return counts;
@@ -182,6 +242,7 @@ function renderCategoryDropdown() {
 // 404 Not Found 페이지를 표시하는 함수
 function renderNotFound() {
   content.innerHTML = '';
+  tableOfContents.innerHTML = '';  // 기존 목차 내용 초기화
   pagination.innerHTML = '';
 
   feed.innerHTML = `
