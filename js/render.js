@@ -1,23 +1,26 @@
+// Elements for the current page layout
 const feed = document.querySelector('.feed');
 const content = document.querySelector('.content');
 const tableOfContents = document.querySelector('.table-of-contents');
 
+// Renders the feed
 function renderFeed(postsToRender = posts, currentPage = 1) {
   feed.innerHTML = '';
   content.innerHTML = '';
-  tableOfContents.innerHTML = '';  // 기존 목차 내용 초기화
+  tableOfContents.innerHTML = '';
 
-  // 현재 페이지에 해당하는 게시물 인덱스를 계산하여 게시물 추출
+  // Calculate the start and end indices for the posts on the current page
   const startIndex = (currentPage - 1) * pageState.postsPerPage;
   const endIndex = startIndex + pageState.postsPerPage;
   const postsForCurrentPage = postsToRender.slice(startIndex, endIndex);
 
-  // 검색 결과가 없을 때 메시지
+  // Show a message if no posts are found
   if (postsForCurrentPage.length === 0) {
     feed.innerHTML = '<p class="no-results">검색 결과가 없습니다.</p>';
     return;
   }
 
+  // Loop through each post and create the feed item
   postsForCurrentPage.forEach(post => {
     const feedItem = document.createElement('div');
     feedItem.classList.add('feed-item');
@@ -32,6 +35,7 @@ function renderFeed(postsToRender = posts, currentPage = 1) {
       <p class="date">${post.date}</p>
     `;
 
+    // Handle routing when the post is clicked
     feedItem.addEventListener('click', (event) => {
       if (!event.target.classList.contains('category')) {
         history.pushState(null, null, `/posts/${encodeURIComponent(post.title)}`);
@@ -43,14 +47,14 @@ function renderFeed(postsToRender = posts, currentPage = 1) {
   });
 }
 
+// Render the content of a single post
 async function renderContent(post) {
-  // .feed, .content, .pagination 초기화
   feed.innerHTML = '';
   content.innerHTML = '';
-  tableOfContents.innerHTML = '';  // 기존 목차 내용 초기화
+  tableOfContents.innerHTML = '';
   pagination.innerHTML = '';
 
-  // 게시물 헤더 생성
+  // Create and append the post header
   const postHeader = document.createElement('div');
   postHeader.classList.add('post-header');
   postHeader.innerHTML = `
@@ -63,25 +67,26 @@ async function renderContent(post) {
   `;
   content.appendChild(postHeader);
 
-  // 마크다운 불러오기 및 변환
+  // Fetch and parse the markdown content of the post
   const markdownContent = await fetch(`/data/${post.title}/${post.title}.md`);
   const markdownText = (await markdownContent.text()).replace(/^---\smeta\n([\s\S]*?)\n---/, '').trim();
 
-  // 변환된 HTML 삽입
+  // Convert markdown to HTML and append to post body
   const postBody = document.createElement('div');
   postBody.classList.add('post-body');
   postBody.innerHTML = marked.parse(markdownText);
   content.appendChild(postBody);
 
-  // 코드 하이라이트
+  // Apply syntax highlighting to code blocks
   hljs.highlightAll();
 
-  // 부가 요소 추가
+  // Add additional functionalities
   addCopyButtons(postBody);
   makeCodeBreakable(postBody);
   renderTableOfContents();
 }
 
+// Add copy button for each code block
 function addCopyButtons(postBody) {
   postBody.querySelectorAll("pre").forEach((pre) => {
     const code = pre.textContent;
@@ -102,6 +107,7 @@ function addCopyButtons(postBody) {
   });
 }
 
+// Breaks long lines of code into smaller chunks for better readability
 function makeCodeBreakable(postBody) {
   const isAlphanumeric = char => /[a-zA-Z0-9\s]/.test(char);
 
@@ -118,9 +124,7 @@ function makeCodeBreakable(postBody) {
         if (
           (isAlphanumeric(prevChar) !== isAlphanumeric(currentChar)) ||
           (!isAlphanumeric(prevChar) && !isAlphanumeric(currentChar))
-        ) {
-          breakableCodeText += '<wbr>';
-        }
+        ) breakableCodeText += '<wbr>';
       }
       breakableCodeText += currentChar;
     }
@@ -129,13 +133,12 @@ function makeCodeBreakable(postBody) {
   }
 }
 
+// Render table of contents based on the headings in the post
 function renderTableOfContents() {
   const headings = content.querySelectorAll('h3, h4, h5, h6');
   const contentsList = document.createElement('ul');
 
-  // 제목에 대한 id 설정 및 목록 항목 추가
   headings.forEach((heading, index) => {
-    // id 없으면 자동 생성
     if (!heading.id) {
       heading.id = `${index}`;
     }
@@ -147,6 +150,8 @@ function renderTableOfContents() {
     const linkToHeading = document.createElement('a');
     linkToHeading.href = `#${heading.id}`;
     linkToHeading.textContent = heading.textContent;
+
+    // Smooth scroll to heading on click
     linkToHeading.addEventListener('click', (event) => {
       event.preventDefault();
       document.getElementById(heading.id).scrollIntoView({ behavior: 'smooth' });
@@ -158,7 +163,7 @@ function renderTableOfContents() {
 
   tableOfContents.appendChild(contentsList);
 
-  // 스크롤 이벤트 최적화 (isPending 사용)
+  // Optimize scroll event
   let isPending = false;
 
   window.addEventListener('scroll', () => {
@@ -166,43 +171,39 @@ function renderTableOfContents() {
       window.requestAnimationFrame(() => {
         const scrollPosition = window.scrollY;
         let currentIndex = -1;
-
         headings.forEach((heading, i) => {
           if (scrollPosition >= heading.offsetTop - 10) {
             currentIndex = i;
           }
         });
-
+        // Highlight the link for the current index
         tableOfContents.querySelectorAll('a').forEach((link, i) => {
           link.classList.toggle('active', i === currentIndex);
         });
-
         isPending = false;
       });
-
       isPending = true;
     }
   });
 }
 
+// Render category dropdown menu 
 function renderCategoryDropdown() {
-  // --- 1. 데이터 처리: 카테고리별 게시물 수를 계산하고 정렬합니다. ---
+  // Calculate the number of posts per category
   const categoryCounts = posts
-    .flatMap(post => post.categories) // 모든 카테고리를 소문자로 변환해 하나의 배열로 합침
+    .flatMap(post => post.categories)
     .reduce((counts, category) => {
-      counts[category] = (counts[category] || 0) + 1; // 각 카테고리의 개수를 셈
+      counts[category] = (counts[category] || 0) + 1;
       return counts;
     }, {});
 
-  // { name, count } 형태의 객체 배열로 변환 후, 이름순으로 정렬
+  // Convert to an array of objects { name, count } and sort by name
   const categoryCountsArray = Object.entries(categoryCounts)
     .map(([categoryName, count]) => ({ categoryName, count }))
     .sort((a, b) => a.categoryName.localeCompare(b.categoryName));
 
-  // --- 2. UI 렌더링: 계산된 데이터를 기반으로 HTML을 생성하고 삽입합니다. ---
+  // Create category itmes based on the calculated data
   const categoryMenu = document.querySelector(".category-menu");
-
-  // map과 join을 사용해 전체 HTML 문자열을 한 번에 생성
   categoryMenu.innerHTML = categoryCountsArray.map(category => `
     <div class="category-menu-item">
       <span class="category-name">${category.categoryName}</span>
@@ -210,12 +211,9 @@ function renderCategoryDropdown() {
     </div>
   `).join('');
 
-  // --- 3. 이벤트 리스너 등록 ---
+  // Handle routing when a category item is clicked
   const categoryDropdown = document.querySelector(".category-dropdown");
   const categoryDropdownButton = categoryDropdown.querySelector(".category-dropdown-button");
-
-  // [개선] 카테고리 클릭 이벤트 (이벤트 위임)
-  // aside 전체에 리스너를 한 번만 등록해서 모든 하위 카테고리의 클릭을 처리합니다.
   categoryMenu.addEventListener('click', (event) => {
     const categoryItem = event.target.closest('.category-menu-item');
     if (categoryItem) {
@@ -225,24 +223,21 @@ function renderCategoryDropdown() {
     }
   });
 
-  // [유지] 메뉴 토글 및 바깥 클릭 시 닫기 이벤트
-  // 이 로직은 창 전체의 클릭을 감지해야 하므로 window에 등록합니다.
+  // Toggle category dropdown
   document.addEventListener('click', (event) => {
-    // 메뉴 버튼 자체를 클릭한 경우 토글
     if (categoryDropdownButton.contains(event.target)) {
       categoryDropdown.classList.toggle('active');
     }
-    // 메뉴가 열려있고, 메뉴 영역 바깥을 클릭한 경우 닫기
     else if (categoryDropdown.classList.contains('active') && !categoryDropdown.contains(event.target)) {
       categoryDropdown.classList.remove('active');
     }
   });
 }
 
-// 404 Not Found 페이지를 표시하는 함수
+// Render 404 page
 function renderNotFound() {
   content.innerHTML = '';
-  tableOfContents.innerHTML = '';  // 기존 목차 내용 초기화
+  tableOfContents.innerHTML = '';
   pagination.innerHTML = '';
 
   feed.innerHTML = `
