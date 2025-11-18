@@ -8,12 +8,14 @@ article {
   grid-row-start: 1;
   box-sizing: border-box;
   max-width: 1200px;
-  margin-right: auto;
-  margin-left: auto;
-  padding: 32px 20px 16px 20px;
+  padding: 32px 32px 16px 32px;
 
   @media (min-width: 768px) {
     padding-top: 60px;
+  }
+
+  @media (min-width: 1024px) {
+    margin: 0 auto;
   }
 }
 
@@ -23,12 +25,12 @@ article {
   gap: 16px;
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px 25px;
   }
 
   @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 40px 25px;
   }
 
@@ -66,6 +68,9 @@ article {
   margin: 0 0 12px 0;
   font-size: 20px;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .excerpt {
@@ -89,6 +94,7 @@ article {
   display: inline-block;
   margin-right: 10px;
   padding: 6px 12px;
+  height: 18px;
   border-radius: 8px;
   background-color: #ddd6fe;
   color: #8b5cf6;
