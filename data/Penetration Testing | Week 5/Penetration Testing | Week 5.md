@@ -145,7 +145,7 @@ Fire 버튼을 클릭하면 플래그가 출력된다.
 <img src="/data/Penetration%20Testing%20%7C%20Week%205/18.png" alt="Admin is Mine" style="padding: 0 25%; background-color: white">
 
 링크의 주소로 접속하면 Get Admin에서와 같은 로그인 페이지로 이동한다.  
-주어진 계정으로 로그인을 시도하기 전에 한 가지 특이점을 발견했는데, 바로 `login.php`에 접속하면 실행되는 Javascript 코드들이 존재한다는 사실이었다.
+주어진 계정으로 로그인을 시도하기 전에 한 가지 특이점을 발견했는데, 바로 `login.php`에 접속하면 실행되는 JavaScript 코드들이 존재한다는 사실이었다.
 
 <img src="/data/Penetration%20Testing%20%7C%20Week%205/19.png" alt="Admin is Mine" style="padding: 0 25%; background-color: #2b2b2b">
 

@@ -58,11 +58,11 @@ Black List 필터링의 다양한 우회 기법들을 살펴 보자. 예를 들�
 
 <br>
 
-##### Javascript URL
+##### JavaScript URL
 
 웹 브라우저의 주소 창에서 직접 javascript 코드를 실행할 수 있다는 점을 악용하는 방법도 존재한다. 예를 들어, 브라우저 주소 창에 `javascript:alert(1);`을 입력하면 `alert(1)`이 실행되어 다음과 같이 알림 창이 표시된다.
 
-![Javascript URL](/data/Penetration%20Testing%20%7C%20Week%2011/1.png)
+![JavaScript URL](/data/Penetration%20Testing%20%7C%20Week%2011/1.png)
 
 이와 같은 특성을 활용하여 스크립트를 삽입하는 방법으로는 `<a>` 태그를 이용하는 방식이 있다. 다음의 예시 코드를 보자.
 
@@ -88,7 +88,7 @@ Black List 필터링의 다양한 우회 기법들을 살펴 보자. 예를 들�
 
 ---
 
-#### XSS에서의 Javascript 활용
+#### XSS에서의 JavaScript 활용
 
 지금까지 XSS 취약점을 탐지하는 방법과 이에 대한 대응 및 우회 기법에 대해 고찰하였다. 그러나 이러한 XSS 취약점을 실제 공격에 활용하는 방식에 대해서는 주로 쿠키 탈취에 국한된 예시만을 다루었다. 이제 자바스크립트를 활용하여 구현할 수 있는 다양한 기능들을 학습함으로써 XSS 취약점을 통해 실질적으로 수행 가능한 공격 기법 전반에 대해 살펴 보자.
 

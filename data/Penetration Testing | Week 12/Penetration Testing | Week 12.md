@@ -228,7 +228,7 @@ HTML 공식 문서를 통해 해결책을 찾을 수 있었다. `<iframe>` 태�
 ![GET Admin 3](/data/Penetration%20Testing%20%7C%20Week%2012/24.png)
 ![GET Admin 3](/data/Penetration%20Testing%20%7C%20Week%2012/25.png)
 
-이번에는 CSRF 토큰이 사용되고 있으며, 마찬가지로 POST 방식의 요청만이 허용됨을 알 수 있었다. 따라서 비밀번호 변경 요청을 서버에 전송시키기 위해서는 관리자의 CSRF 토큰을 탈취하는 과정이 선행되어야 한다. 이를 위해선 Javascript의 사용이 필수적이므로, 우선 XSS 취약점을 탐색해 보았다.
+이번에는 CSRF 토큰이 사용되고 있으며, 마찬가지로 POST 방식의 요청만이 허용됨을 알 수 있었다. 따라서 비밀번호 변경 요청을 서버에 전송시키기 위해서는 관리자의 CSRF 토큰을 탈취하는 과정이 선행되어야 한다. 이를 위해선 JavaScript의 사용이 필수적이므로, 우선 XSS 취약점을 탐색해 보았다.
 
 ![GET Admin 3](/data/Penetration%20Testing%20%7C%20Week%2012/26.png)
 

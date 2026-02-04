@@ -38,7 +38,7 @@ CSRF 공격을 방지하기 위해 서버는 요청을 수신할 때마다 `Refe
 <blockquote>
 <ul>
 <li>HTTP 헤더 이름으로 사용되는 <code>Referer</code>는 <code>Referrer</code>의 오기이며, 초기 HTTP 사양에서 잘못 표기된 것이 그대로 표준으로 굳어지게 되었다.  </li>
-<li style="margin-bottom: 0;"><code>&lt;meta&gt;</code> 태그의 <code>name</code> 속성, Javascript의 <code>document</code> 객체 속성 등에서는 올바른 표기인 <code>referrer</code>를 사용한다.</li>
+<li style="margin-bottom: 0;"><code>&lt;meta&gt;</code> 태그의 <code>name</code> 속성, JavaScript의 <code>document</code> 객체 속성 등에서는 올바른 표기인 <code>referrer</code>를 사용한다.</li>
 </ul>
 </blockquote>
 
@@ -89,7 +89,7 @@ CSRF 공격을 방어하기 위한 보다 근본적인 방안으로는, 요청 �
 
 ##### SOP
 
-<strong>SOP(Same-Origin Policy, 동일 출처 정책)</strong>란 웹 브라우저의 보안 메커니즘 중 하나로, 서로 다른 출처(Origin) 간의 자원 접근을 엄격하게 제한하는 정책을 말한다. SOP는 웹 페이지 내의 Javascript가 자신의 출처와 일치하는 자원에만 자유롭게 접근할 수 있도록 허용하고 다른 출처의 자원에는 기본적으로 접근을 차단함으로써, 악의적인 사이트가 사용자의 민감한 데이터에 무단으로 접근하거나 조작하는 것을 방지한다. 예를 들어, `http://malicious.com`에 포함된 스크립트는 `http://example.com`의 DOM 요소에 접근하거나 쿠키를 조회하는 등의 행위를 할 수 없다.
+<strong>SOP(Same-Origin Policy, 동일 출처 정책)</strong>란 웹 브라우저의 보안 메커니즘 중 하나로, 서로 다른 출처(Origin) 간의 자원 접근을 엄격하게 제한하는 정책을 말한다. SOP는 웹 페이지 내의 JavaScript가 자신의 출처와 일치하는 자원에만 자유롭게 접근할 수 있도록 허용하고 다른 출처의 자원에는 기본적으로 접근을 차단함으로써, 악의적인 사이트가 사용자의 민감한 데이터에 무단으로 접근하거나 조작하는 것을 방지한다. 예를 들어, `http://malicious.com`에 포함된 스크립트는 `http://example.com`의 DOM 요소에 접근하거나 쿠키를 조회하는 등의 행위를 할 수 없다.
 
 > <strong>출처(Origin)</strong>
 >
