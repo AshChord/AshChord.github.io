@@ -96,7 +96,7 @@ HTTP 요청의 헤더를 조작해야 하므로 Burp Suite의 Intercept 기능�
 ![Burp Suite Prac 1](/data/Penetration%20Testing%20|%20Week%204/14.png)
 ![Burp Suite Prac 1](/data/Penetration%20Testing%20|%20Week%204/15.png)
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">ModRequest</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">ModRequest</span>}</span></p>
 
 <br>
 
@@ -122,9 +122,9 @@ HTTP 요청의 헤더를 조작해야 하므로 Burp Suite의 Intercept 기능�
 
 ![Burp Suite Prac 2](/data/Penetration%20Testing%20|%20Week%204/22.png)
 
-비교 결과, `b.html` 파일에만 segfault와 {<span style="filter: blur(5px);">lookEasy</span>}라는 텍스트가 추가되어 있음을 확인할 수 있었다.
+비교 결과, `b.html` 파일에만 segfault와 {<span style="filter: blur(5px); overflow-wrap:anywhere;">lookEasy</span>}라는 텍스트가 추가되어 있음을 확인할 수 있었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">lookEasy</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">lookEasy</span>}</span></p>
 
 <br>
 
@@ -152,7 +152,7 @@ Repeater에서 `answer` 값을 변경하면서 반복적으로 요청을 전송�
 
 ![Burp Suite Prac 3](/data/Penetration%20Testing%20|%20Week%204/28.png)
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">RePeatAgain</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">RePeatAgain</span>}</span></p>
 
 <br>
 
@@ -185,7 +185,7 @@ Repeater에서 `answer` 값을 변경하면서 반복적으로 요청을 전송�
 
 base64 디코딩을 3번 반복하여 플래그를 획득할 수 있었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">DecodeRepeat</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">DecodeRepeat</span>}</span></p>
 
 ---
 

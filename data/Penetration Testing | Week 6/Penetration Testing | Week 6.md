@@ -465,7 +465,7 @@ CTF를 해결하며 지금까지 학습한 내용을 바탕으로 인증 우회 
 
 로그인에 성공하고 플래그를 획득하였다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">UniUniONONON</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">UniUniONONON</span>}</span></p>
 
 <br>
 
@@ -532,7 +532,7 @@ MySQL 공식 문서를 보니 `MD5`, `SHA-1`, `SHA-2`와 같은 주요 해시 �
 
 로그인에 성공하고 플래그를 획득하였다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">H4shBrown</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">H4shBrown</span>}</span></p>
 
 <br>
 
@@ -554,7 +554,7 @@ MySQL 공식 문서를 보니 `MD5`, `SHA-1`, `SHA-2`와 같은 주요 해시 �
 
 로그인에 성공하고 플래그를 획득하였다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">C00kiesYummy</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">C00kiesYummy</span>}</span></p>
 
 <br>
 
@@ -651,7 +651,7 @@ MySQL 공식 문서를 보니 `MD5`, `SHA-1`, `SHA-2`와 같은 주요 해시 �
 
 ![SQL Injection 1](/data/Penetration%20Testing%20|%20Week%206/47.png)
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">Basic_Union_SQLi</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">Basic_Union_SQLi</span>}</span></p>
 
 <br>
 
@@ -741,4 +741,4 @@ MySQL 공식 문서를 보니 `MD5`, `SHA-1`, `SHA-2`와 같은 주요 해시 �
 
 `' union select 1, 2, 3, 4, 5, flag from secret limit 1, 1#`를 입력하여 마침내 플래그를 획득할 수 있었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">UnionOnlyOneColumn</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">UnionOnlyOneColumn</span>}</span></p>

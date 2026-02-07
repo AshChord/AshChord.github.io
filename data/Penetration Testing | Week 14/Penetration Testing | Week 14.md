@@ -209,7 +209,7 @@ cat /flag.txt
 
 `flag.txt` 파일의 내용이 출력됨에 따라 플래그를 획득하였다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">You_Got_SecretCode</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">You_Got_SecretCode</span>}</span></p>
 
 <br>
 

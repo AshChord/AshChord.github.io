@@ -272,7 +272,7 @@ Burp Suite를 활용하여 해당 위치가 정확히 어떤 요소인지 확인
 
 <img src="/data/Penetration%20Testing%20%7C%20Week%2011/13.png" alt="Basic Script Prac" style="height: 200px; padding: 0 150px; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">BasicScriptSOEaasy</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">BasicScriptSOEaasy</span>}</span></p>
 
 <br>
 
@@ -320,7 +320,7 @@ Burp Suite를 활용하여 해당 위치가 정확히 어떤 요소인지 확인
 
 <img src="/data/Penetration%20Testing%20%7C%20Week%2011/20.png" alt="Steal Info" style="height: 200px; padding: 0 150px; background-color: white;">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">steaLInfo</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">steaLInfo</span>}</span></p>
 
 <br>
 
@@ -376,4 +376,4 @@ Steal Info와 달리 `Uncaught TypeError: Cannot read properties of undefined`�
 
 <img src="/data/Penetration%20Testing%20%7C%20Week%2011/25.png" alt="Steal Info 2" style="height: 200px; padding: 0 150px; background-color: white;">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">GETITGETIT!</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">GETITGETIT!</span>}</span></p>

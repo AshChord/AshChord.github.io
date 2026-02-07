@@ -155,7 +155,7 @@ CTF를 해결하며 실제 웹 페이지와 유사한 환경에서 SQL Injection
 
 모든 절차를 수행한 뒤 플래그를 획득할 수 있었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">youDidIt!GOOOD</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">youDidIt!GOOOD</span>}</span></p>
 
 <br>
 
@@ -200,7 +200,7 @@ CTF를 해결하며 실제 웹 페이지와 유사한 환경에서 SQL Injection
 
 ![SQL Injection Point 2](/data/Penetration%20Testing%20%7C%20Week%208/21.png)
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">columnCanBeDangerous</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">columnCanBeDangerous</span>}</span></p>
 
 <br>
 
@@ -286,7 +286,7 @@ while True:
 
 데이터 추출 과정을 거쳐 최종적으로 플래그를 획득하였다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">orderBySQLPossible</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">orderBySQLPossible</span>}</span></p>
 
 <br>
 
@@ -329,4 +329,4 @@ SQL Injection 취약점을 탐색하던 도중 SQL Injection Point 2에서 발�
 
 ![SQL Injection Point 5](/data/Penetration%20Testing%20%7C%20Week%208/35.png)
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px);">isHard?Nope!</span>}</span></p>
+<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">isHard?Nope!</span>}</span></p>
