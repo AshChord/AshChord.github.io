@@ -35,7 +35,7 @@ article {
     gap: 40px 25px;
   }
 
-  .not-found {
+  .not-found, .no-results{
     grid-column: 1 / -1;
     padding: 50px;
     text-align: center;

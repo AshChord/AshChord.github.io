@@ -132,6 +132,12 @@
     }
   }
 
+  data {
+    display: block;
+    padding-left: var(--indent);
+    text-indent: calc(-1 * var(--indent));
+  }
+
   .copy-button {
     position: absolute;
     top: 17px;
@@ -228,7 +234,7 @@
   grid-row-start: 1;
   justify-self: end;
   position: sticky;
-  top: 135px;
+  top: 120px;
   box-sizing: border-box;
   width: 350px;
   height: fit-content;
