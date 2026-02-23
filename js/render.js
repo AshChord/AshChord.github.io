@@ -77,60 +77,76 @@ async function renderContent(post) {
   postBody.innerHTML = marked.parse(markdownText);
   content.appendChild(postBody);
 
-  // Apply syntax highlighting to code blocks
-  hljs.highlightAll();
-
-  // Add additional functionalities
-  addCopyButtons(postBody);
-  makeCodeBreakable(postBody);
+  renderCode();
   renderTableOfContents();
 }
 
-// Add copy button for each code block
-function addCopyButtons(postBody) {
-  postBody.querySelectorAll("pre").forEach((pre) => {
-    const code = pre.textContent;
+// Render code snippets within the post
+function renderCode() {
+  // Split code into lines with syntax highlighting and indentation
+  document.querySelectorAll('pre').forEach((pre) => {
+    const codeBlock = pre.querySelector('code');
 
+    if (codeBlock.hasAttribute('data-highlighted')) return;
+
+    const codeText = codeBlock.textContent;
+    const codeFragment = document.createDocumentFragment();
+    const lang = Array.from(codeBlock.classList).find(cls => cls.startsWith('language'));
+    const lines = codeText.match(/.*?\n|.+$/g);
+
+    lines.forEach((lineText, index) => {
+      const line = document.createElement('data');
+      line.textContent = lineText;
+      line.classList.add(lang);
+      codeBlock.appendChild(line);
+
+      hljs.highlightElement(line);
+
+      line.className = 'code-line';
+      line.value = index + 1;
+      delete line.dataset.highlighted;
+
+      const indent = lineText.search(/\S/);
+      if (indent > 0) {
+        line.style.setProperty('--indent', `${indent}ch`);
+      }
+
+      codeFragment.appendChild(line);
+    });
+
+    codeBlock.innerHTML = '';
+    codeBlock.appendChild(codeFragment);
+    codeBlock.classList.add('hljs');
+    codeBlock.dataset.highlighted = 'yes';
+
+  // Add copy button for each code block
     const copyButton = document.createElement("button");
     copyButton.classList.add("copy-button");
 
-    copyButton.addEventListener("click", async () => {
-      await navigator.clipboard.writeText(code);
+    copyButton.onclick = async () => {
+      await navigator.clipboard.writeText(codeText);
       copyButton.classList.add("copied");
-
-      setTimeout(() => {
-        copyButton.classList.remove("copied");
-      }, 2000);
-    });
+      setTimeout(() => copyButton.classList.remove("copied"), 2000);
+    };
 
     pre.appendChild(copyButton);
   });
-}
 
-// Breaks long lines of code into smaller chunks for better readability
-function makeCodeBreakable(postBody) {
+  // Breaks long inline code into smaller chunks for better readability
   const isAlphanumeric = char => /[a-zA-Z0-9\s]/.test(char);
-
-  for (const code of postBody.querySelectorAll('code')) {
-    if (code.closest('pre')) continue;
-
+  document.querySelectorAll('code:not(pre code)').forEach((code) => {
     const codeText = code.textContent;
-    let breakableCodeText = '';
 
-    for (let i = 0; i < codeText.length; i++) {
-      const currentChar = codeText[i];
-      if (i > 0) {
-        const prevChar = codeText[i - 1];
-        if (
-          (isAlphanumeric(prevChar) !== isAlphanumeric(currentChar)) ||
-          (!isAlphanumeric(prevChar) && !isAlphanumeric(currentChar))
-        ) breakableCodeText += '<wbr>';
+    code.innerHTML = codeText.split('').reduce((breakableCodeText, curChar, index, chars) => {
+      if (index > 0) {
+        const prevChar = chars[index - 1];
+        if (!isAlphanumeric(prevChar) || !isAlphanumeric(curChar)) {
+          breakableCodeText += '<wbr>';
+        }
       }
-      breakableCodeText += currentChar;
-    }
-
-    code.innerHTML = breakableCodeText;
-  }
+      return breakableCodeText + curChar;
+    }, '');
+  });
 }
 
 // Render table of contents based on the headings in the post
