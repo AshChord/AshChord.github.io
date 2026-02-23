@@ -40,9 +40,9 @@ if (!in_array(strtolower($ext), $allowed)) {
 
 > **Null Byte Injection**
 >
-> <strong>널 바이트(Null Byte)</strong>란 ASCII 코드 값이 0인 제어 문자(`\0`)로, 주로 C 언어 계열에서 문자열의 종료를 나타내기 위해 사용된다. 이러한 널 바이트 문자를 문자열 입력 값에 삽입하여 문자열 처리 로직을 우회하거나 조작하는 공격 기법을 <strong>널 바이트 인젝션(Null Byte Injection)</strong>이라고 한다.
+> <strong>널 바이트(Null Byte)</strong>란 ASCII 코드 값이 0인 제어 문자(`\0`)로, 주로 C 언어 계열에서 문자열의 종료를 나타내기 위해 사용된다. 이러한 널 바이트 문자를 문자열 입력값에 삽입하여 문자열 처리 로직을 우회하거나 조작하는 공격 기법을 <strong>널 바이트 인젝션(Null Byte Injection)</strong>이라고 한다.
 
-다음의 예시 코드를 살펴 보자.
+다음의 예시 코드를 살펴보자.
 
 ```php
 <?php
@@ -207,7 +207,7 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 ![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/12.png)
 ![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/13.png)
 
-왜 안될까? 웹쉘 코드엔 분명 이렇게 써 있다. `system($_GET['cmd']);` 이건 URL의 쿼리 스트링에서 cmd라는 파라미터의 값을 명령어로서 실행하라는 의미이다. 그런데 URL의 쿼리 스트링을 보면..? 아무것도 없다. /index.php로 요청을 보낸 거니까.. 그러니까 우리는 103_webshell.php 뒤에 ?cmd=ls를 붙이는 게 아니라 /index.php?cmd=ls로 요청을 보내야 하는 거다.
+왜 안될까? 웹셸 코드엔 분명 이렇게 써 있다. `system($_GET['cmd']);` 이건 URL의 쿼리 스트링에서 cmd라는 파라미터의 값을 명령어로서 실행하라는 의미이다. 그런데 URL의 쿼리 스트링을 보면..? 아무것도 없다. /index.php로 요청을 보낸 거니까.. 그러니까 우리는 103_webshell.php 뒤에 ?cmd=ls를 붙이는 게 아니라 /index.php?cmd=ls로 요청을 보내야 하는 거다.
 
 ![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/14.png)
 ![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/15.png)

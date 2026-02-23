@@ -43,7 +43,7 @@ URL의 파일 경로는 <strong>웹 루트(Web Root)</strong>라 불리는 특�
 
 > **Web Server - WAS - DB**
 > ![Web Application Architecture 구조](/data/Penetration%20Testing%20%7C%20Week%201/1.png)
-> 웹 애플리케이션 아키텍쳐는 크게 **Web Server, Web Application Server, Database**로 구성된다.  
+> 웹 애플리케이션 아키텍처는 크게 **Web Server, Web Application Server, Database**로 구성된다.  
 > **- Web Server**: 웹 브라우저의 요청을 받아 파일(정적 웹 페이지) 전송  
 > **- Web Application Server**: 동적 웹 페이지 생성 및 처리  
 > **- Database**: 웹 애플리케이션에 필요한 데이터 저장 및 관리
@@ -54,13 +54,13 @@ URL의 파일 경로는 <strong>웹 루트(Web Root)</strong>라 불리는 특�
 
 다음과 같은 `score.php` 파일을 생각해 보자.
 
-<pre><code class="language-php hljs" data-highlighted="yes"><span class="hljs-comment">// score.php</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Score<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Name: <span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> <span class="hljs-variable">$_GET</span>[<span class="hljs-string">'name'</span>]; <span class="hljs-meta">?&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
-</code></pre>
+<pre><code class="language-php hljs" data-highlighted="yes"><data class="code-line" value="1">// score.php
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+</data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Score<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+</data><data class="code-line" value="5" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Name: <span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> <span class="hljs-variable">$_GET</span>[<span class="hljs-string">'name'</span>]; <span class="hljs-meta">?&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+</data><data class="code-line" value="6"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;
+</data></code></pre>
 
 위 코드에서 ```<?php ... ?>``` 태그 안의 PHP 코드는 **GET 방식**으로 `name`이라는 파라미터에 전달된 값을 출력하라는 의미이다.  
 이 파일에 접근하려면 `http://x.x.x.x/score.php?name=testee`와 같은 URL을 이용한다.
@@ -70,13 +70,13 @@ URL의 형태에서 알 수 있듯이, **GET 방식**은 클라이언트가 서�
 
 웹 서버가 `score.php`를 요청받으면, 파일 내의 PHP 구문(동적 웹 페이지 생성 코드)를 확인하고 해당 처리를 WAS에 위임한다. WAS는 PHP 코드를 실행한 결과를 웹 서버에 반환하며, 이때의 `score.php`는 다음과 같은 정적인 HTML 형식으로 변환된다.
 
-<pre><code class="language-php hljs" data-highlighted="yes"><span class="hljs-comment">// score.php</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Score<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Name: testee<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
-</code></pre>
+<pre><code class="language-html hljs" data-highlighted="yes"><data class="code-line" value="1">// score.php
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+</data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Score<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+</data><data class="code-line" value="5" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Name: testee<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+</data><data class="code-line" value="6"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;
+</data></code></pre>
 
 웹 서버는 최종적으로 정적인 결과물을 웹 브라우저로 전송하게 된다.
 
@@ -88,23 +88,23 @@ URL의 형태에서 알 수 있듯이, **GET 방식**은 클라이언트가 서�
 GET 방식으로 데이터를 전달할 때 반드시 URL에 직접 쿼리 스트링을 작성할 필요는 없다.  
 아래의 `name.php` 파일을 보자.
 
-<pre><code class="language-php hljs" data-highlighted="yes"><span class="hljs-comment">// name.php</span>
+<pre><code class="language-php hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment">// name.php</span>
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"GET"</span>&gt;</span>
+</data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"id"</span>&gt;</span>
+</data><data class="code-line" value="5"><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</data><data class="code-line" value="6">
+</data><data class="code-line" value="7"><span class="hljs-meta">&lt;?php</span>
+</data><data class="code-line" value="8" style="--indent: 2ch;">  <span class="hljs-keyword">echo</span> <span class="hljs-variable">$_GET</span>[<span class="hljs-string">'id'</span>];
+</data><data class="code-line" value="9"><span class="hljs-meta">?&gt;</span>
+</data></code></pre>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"GET"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"id"</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
-
-<span class="hljs-meta">&lt;?php</span>
-  <span class="hljs-keyword">echo</span> <span class="hljs-variable">$_GET</span>[<span class="hljs-string">'id'</span>];
-<span class="hljs-meta">?&gt;</span>
-</code></pre>
-
-위 코드는 입력 란을 통해 데이터(`id` 파라미터)를 GET 방식으로 전달받고 출력하는 기능을 한다.  
-`http://x.x.x.x/name.php`과 같은 URL로 접속하면 입력 란이 표시된다.
+위 코드는 입력란을 통해 데이터(`id` 파라미터)를 GET 방식으로 전달받고 출력하는 기능을 한다.  
+`http://x.x.x.x/name.php`과 같은 URL로 접속하면 입력란이 표시된다.
 
 ![GET 방식](/data/Penetration%20Testing%20%7C%20Week%201/2.png)
 
-입력 란에 `test`를 입력하고 전송하면, 브라우저는 `http://x.x.x.x/name.php?id=test`로 이동하며 전달된 값이 페이지에 출력된다.
+입력란에 `test`를 입력하고 전송하면, 브라우저는 `http://x.x.x.x/name.php?id=test`로 이동하며 전달된 값이 페이지에 출력된다.
 
 ![GET 방식](/data/Penetration%20Testing%20%7C%20Week%201/3.png)
 
@@ -112,18 +112,18 @@ GET 방식으로 데이터를 전달할 때 반드시 URL에 직접 쿼리 스�
 
 그렇다면 **POST 방식**은 무엇일까? `name.php`를 다음과 같이 수정해 보자.
 
-<pre><code class="language-php hljs" data-highlighted="yes"><span class="hljs-comment">// name.php</span>
+<pre><code class="language-php hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment">// name.php</span>
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"POST"</span>&gt;</span>
+</data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"id"</span>&gt;</span>
+</data><data class="code-line" value="5"><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</data><data class="code-line" value="6">
+</data><data class="code-line" value="7"><span class="hljs-meta">&lt;?php</span>
+</data><data class="code-line" value="8" style="--indent: 2ch;">  <span class="hljs-keyword">echo</span> <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'id'</span>];
+</data><data class="code-line" value="9"><span class="hljs-meta">?&gt;</span>
+</data></code></pre>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"POST"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"id"</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
-
-<span class="hljs-meta">&lt;?php</span>
-  <span class="hljs-keyword">echo</span> <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'id'</span>];
-<span class="hljs-meta">?&gt;</span>
-</code></pre>
-
-`http://x.x.x.x/name.php`에 접속하여 입력 란에 `test`를 입력하고 전송하면 다음과 같은 결과를 확인할 수 있다.
+`http://x.x.x.x/name.php`에 접속하여 입력란에 `test`를 입력하고 전송하면 다음과 같은 결과를 확인할 수 있다.
 
 ![POST 방식](/data/Penetration%20Testing%20%7C%20Week%201/4.png)
 
@@ -223,37 +223,37 @@ Apache의 웹 루트에 해당하는 `/var/www/html` 경로에 로그인 기능�
 `login.php` 파일은 사용자로부터 아이디와 비밀번호를 입력받는 간단한 HTML 입력 양식으로 구성되어 있다.  
 데이터를 입력하면 POST 방식을 통해 `login_proc.php`로 전송된다.
 
-<pre><code class="language-html hljs language-xml" data-highlighted="yes"><span class="hljs-comment">// login.php</span>
-
-<span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"ko"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Login Page<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
-
-    <span class="hljs-comment">// External CSS File for Styling</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"style.css"</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-
-  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-comment">// Container that Holds the Login Form</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"login-container"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Login<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
-
-      <span class="hljs-comment">// Form Submission Directed to 'login_proc.php' with POST Method</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"login_proc.php"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"POST"</span>&gt;</span>
-
-        <span class="hljs-comment">// Input Fields for Username and Password, and the Submit Button</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"ID"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"PW"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Login<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-        
-      <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
-</code></pre>
+<pre><code class="language-html hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment">// login.php</span>
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+</data><data class="code-line" value="4"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"ko"</span>&gt;</span>
+</data><data class="code-line" value="5" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+</data><data class="code-line" value="6" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+</data><data class="code-line" value="7" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
+</data><data class="code-line" value="8" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Login Page<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+</data><data class="code-line" value="9">
+</data><data class="code-line" value="10" style="--indent: 4ch;">    <span class="hljs-comment">// External CSS File for Styling</span>
+</data><data class="code-line" value="11" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"style.css"</span>&gt;</span>
+</data><data class="code-line" value="12" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</data><data class="code-line" value="13">
+</data><data class="code-line" value="14" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+</data><data class="code-line" value="15" style="--indent: 4ch;">    <span class="hljs-comment">// Container that Holds the Login Form</span>
+</data><data class="code-line" value="16" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"login-container"</span>&gt;</span>
+</data><data class="code-line" value="17" style="--indent: 6ch;">      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Login<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+</data><data class="code-line" value="18">
+</data><data class="code-line" value="19" style="--indent: 6ch;">      <span class="hljs-comment">// Form Submission Directed to 'login_proc.php' with POST Method</span>
+</data><data class="code-line" value="20" style="--indent: 6ch;">      <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"login_proc.php"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"POST"</span>&gt;</span>
+</data><data class="code-line" value="21">
+</data><data class="code-line" value="22" style="--indent: 8ch;">        <span class="hljs-comment">// Input Fields for Username and Password, and the Submit Button</span>
+</data><data class="code-line" value="23" style="--indent: 8ch;">        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"ID"</span>&gt;</span>
+</data><data class="code-line" value="24" style="--indent: 8ch;">        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"PW"</span>&gt;</span>
+</data><data class="code-line" value="25" style="--indent: 8ch;">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Login<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</data><data class="code-line" value="26" style="--indent: 8ch;">        
+</data><data class="code-line" value="27" style="--indent: 6ch;">      <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</data><data class="code-line" value="28" style="--indent: 4ch;">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</data><data class="code-line" value="29" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</data><data class="code-line" value="30"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;
+</data></code></pre>
 
 <br>
 
@@ -262,51 +262,51 @@ Apache의 웹 루트에 해당하는 `/var/www/html` 경로에 로그인 기능�
 `login_proc.php`에서는 전달받은 아이디와 비밀번호를 확인하여 로그인 성공 여부를 판단한다.  
 예시에서는 간단한 하드코딩 방식으로 처리하였다.
 
-<pre><code class="language-php hljs" data-highlighted="yes"><span class="hljs-comment">// login_proc.php</span>
-
-<span class="hljs-meta">&lt;?php</span>
-  <span class="hljs-comment">// Initialize Message Variable</span>
-  <span class="hljs-variable">$message</span> = <span class="hljs-string">""</span>;
-
-  <span class="hljs-comment">// Get Username and Password from POST Request</span>
-  <span class="hljs-variable">$username</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">"username"</span>];
-  <span class="hljs-variable">$password</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">"password"</span>];
-
-  <span class="hljs-comment">// Check if Credentials Match</span>
-  <span class="hljs-keyword">if</span> (<span class="hljs-variable">$username</span> == <span class="hljs-string">"test"</span> &amp;&amp; <span class="hljs-variable">$password</span> == <span class="hljs-string">"test"</span>) {
-    <span class="hljs-comment">// Successful Login Message</span>
-    <span class="hljs-variable">$message</span> = <span class="hljs-string">"&lt;p style='color: green;'&gt;Login Successful!&lt;/p&gt;"</span>;
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// Failed Login Message</span>
-    <span class="hljs-variable">$message</span> = <span class="hljs-string">"&lt;p style='color: red;'&gt;Login Failed. Please Try Again.&lt;/p&gt;"</span>;
-  }
-<span class="hljs-meta">?&gt;</span>
-
-<span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"ko"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Login Result<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
-
-    <span class="hljs-comment">// External CSS File for Styling</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"style.css"</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-
-  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-comment">// Container that Displays the Login Result</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"login-container"</span>&gt;</span>
-      
-      <span class="hljs-comment">// Display Login Message(Success or Failure)</span>
-      <span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> <span class="hljs-meta">$message</span>; <span class="hljs-meta">?&gt;</span>
-
-      <span class="hljs-comment">// Link to Return to the Login Page</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"login.php"</span>&gt;</span>Back to Login Page<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
-      
-    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
-</code></pre>
+<pre><code class="language-php hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment">// login_proc.php</span>
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span class="hljs-meta">&lt;?php</span>
+</data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-comment">// Initialize Message Variable</span>
+</data><data class="code-line" value="5" style="--indent: 2ch;">  <span class="hljs-variable">$message</span> = <span class="hljs-string">""</span>;
+</data><data class="code-line" value="6">
+</data><data class="code-line" value="7" style="--indent: 2ch;">  <span class="hljs-comment">// Get Username and Password from POST Request</span>
+</data><data class="code-line" value="8" style="--indent: 2ch;">  <span class="hljs-variable">$username</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">"username"</span>];
+</data><data class="code-line" value="9" style="--indent: 2ch;">  <span class="hljs-variable">$password</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">"password"</span>];
+</data><data class="code-line" value="10">
+</data><data class="code-line" value="11" style="--indent: 2ch;">  <span class="hljs-comment">// Check if Credentials Match</span>
+</data><data class="code-line" value="12" style="--indent: 2ch;">  <span class="hljs-keyword">if</span> (<span class="hljs-variable">$username</span> == <span class="hljs-string">"test"</span> &amp;&amp; <span class="hljs-variable">$password</span> == <span class="hljs-string">"test"</span>) {
+</data><data class="code-line" value="13" style="--indent: 4ch;">    <span class="hljs-comment">// Successful Login Message</span>
+</data><data class="code-line" value="14" style="--indent: 4ch;">    <span class="hljs-variable">$message</span> = <span class="hljs-string">"&lt;p style='color: green;'&gt;Login Successful!&lt;/p&gt;"</span>;
+</data><data class="code-line" value="15" style="--indent: 2ch;">  } <span class="hljs-keyword">else</span> {
+</data><data class="code-line" value="16" style="--indent: 4ch;">    <span class="hljs-comment">// Failed Login Message</span>
+</data><data class="code-line" value="17" style="--indent: 4ch;">    <span class="hljs-variable">$message</span> = <span class="hljs-string">"&lt;p style='color: red;'&gt;Login Failed. Please Try Again.&lt;/p&gt;"</span>;
+</data><data class="code-line" value="18" style="--indent: 2ch;">  }
+</data><data class="code-line" value="19"><span class="hljs-meta">?&gt;</span>
+</data><data class="code-line" value="20">
+</data><data class="code-line" value="21"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+</data><data class="code-line" value="22"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"ko"</span>&gt;</span>
+</data><data class="code-line" value="23" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+</data><data class="code-line" value="24" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+</data><data class="code-line" value="25" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
+</data><data class="code-line" value="26" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Login Result<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+</data><data class="code-line" value="27">
+</data><data class="code-line" value="28" style="--indent: 4ch;">    <span class="hljs-comment">// External CSS File for Styling</span>
+</data><data class="code-line" value="29" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"style.css"</span>&gt;</span>
+</data><data class="code-line" value="30" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</data><data class="code-line" value="31">
+</data><data class="code-line" value="32" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+</data><data class="code-line" value="33" style="--indent: 4ch;">    <span class="hljs-comment">// Container that Displays the Login Result</span>
+</data><data class="code-line" value="34" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"login-container"</span>&gt;</span>
+</data><data class="code-line" value="35" style="--indent: 6ch;">      
+</data><data class="code-line" value="36" style="--indent: 6ch;">      <span class="hljs-comment">// Display Login Message(Success or Failure)</span>
+</data><data class="code-line" value="37" style="--indent: 6ch;">      <span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> <span class="hljs-variable">$message</span>; <span class="hljs-meta">?&gt;</span>
+</data><data class="code-line" value="38">
+</data><data class="code-line" value="39" style="--indent: 6ch;">      <span class="hljs-comment">// Link to Return to the Login Page</span>
+</data><data class="code-line" value="40" style="--indent: 6ch;">      <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"login.php"</span>&gt;</span>Back to Login Page<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</data><data class="code-line" value="41" style="--indent: 6ch;">      
+</data><data class="code-line" value="42" style="--indent: 4ch;">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</data><data class="code-line" value="43" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</data><data class="code-line" value="44"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;
+</data></code></pre>
 
 <br>
 
@@ -324,66 +324,66 @@ Apache의 웹 루트에 해당하는 `/var/www/html` 경로에 로그인 기능�
   }
 </style>
 
-<pre><code class="language-css hljs" data-highlighted="yes"><span class="hljs-comment">/* style.css */</span>
-
-<span class="hljs-selector-tag">body</span> {
-  <span class="hljs-attribute">display</span>: flex;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">100</span>;
-  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
-  <span class="hljs-attribute">background-color</span>: gray;
-  <span class="hljs-attribute">font-family</span>: Arial, sans-serif;
-  <span class="hljs-attribute">justify-content</span>: center;
-  <span class="hljs-attribute">align-items</span>: center;
-}
-
-<span class="hljs-selector-class">.login-container</span> {
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">300px</span>;
-  <span class="hljs-attribute">padding</span>: <span class="hljs-number">30px</span>;
-  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">8px</span>;
-  <span class="hljs-attribute">background-color</span>: white;
-  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">4px</span> <span class="hljs-number">8px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.1</span>);
-  <span class="hljs-attribute">text-align</span>: center;
-}
-
-<span class="hljs-selector-tag">input</span> {
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
-  <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>;
-  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
-  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid gray;
-  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
-  <span class="hljs-attribute">box-sizing</span>: border-box;
-}
-
-<span class="hljs-selector-tag">button</span> {
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
-  <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>;
-  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
-  <span class="hljs-attribute">border</span>: none;
-  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
-  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#a78bfa</span>;
-  <span class="hljs-attribute">color</span>: white;
-  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
-  <span class="hljs-attribute">cursor</span>: pointer;
-
-  <span style="color: #22863a;">&amp;</span><span class="hljs-selector-pseudo">:hover</span> {
-    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#8b5cf6</span>;
-  }
-}
-
-<span class="hljs-selector-tag">a</span> {
-  <span class="hljs-attribute">display</span>: inline-block;
-  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">20px</span>;
-  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">20px</span>;
-  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
-  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#a78bfa</span>;
-  <span class="hljs-attribute">color</span>: white;
-  <span class="hljs-attribute">text-decoration</span>: none;
-
-  <span style="color: #22863a;">&amp;</span><span class="hljs-selector-pseudo">:hover</span> {
-    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#8b5cf6</span>;
-  }
-}
-</code></pre>
+<pre><code class="language-css hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment">/* style.css */</span>
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span class="hljs-selector-tag">body</span> {
+</data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-attribute">display</span>: flex;
+</data><data class="code-line" value="5" style="--indent: 2ch;">  <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+</data><data class="code-line" value="6" style="--indent: 2ch;">  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+</data><data class="code-line" value="7" style="--indent: 2ch;">  <span class="hljs-attribute">background-color</span>: gray;
+</data><data class="code-line" value="8" style="--indent: 2ch;">  <span class="hljs-attribute">font-family</span>: Arial, sans-serif;
+</data><data class="code-line" value="9" style="--indent: 2ch;">  <span class="hljs-attribute">justify-content</span>: center;
+</data><data class="code-line" value="10" style="--indent: 2ch;">  <span class="hljs-attribute">align-items</span>: center;
+</data><data class="code-line" value="11">}
+</data><data class="code-line" value="12">
+</data><data class="code-line" value="13"><span class="hljs-selector-class">.login-container</span> {
+</data><data class="code-line" value="14" style="--indent: 2ch;">  <span class="hljs-attribute">width</span>: <span class="hljs-number">300px</span>;
+</data><data class="code-line" value="15" style="--indent: 2ch;">  <span class="hljs-attribute">padding</span>: <span class="hljs-number">30px</span>;
+</data><data class="code-line" value="16" style="--indent: 2ch;">  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">8px</span>;
+</data><data class="code-line" value="17" style="--indent: 2ch;">  <span class="hljs-attribute">background-color</span>: white;
+</data><data class="code-line" value="18" style="--indent: 2ch;">  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">4px</span> <span class="hljs-number">8px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.1</span>);
+</data><data class="code-line" value="19" style="--indent: 2ch;">  <span class="hljs-attribute">text-align</span>: center;
+</data><data class="code-line" value="20">}
+</data><data class="code-line" value="21">
+</data><data class="code-line" value="22"><span class="hljs-selector-tag">input</span> {
+</data><data class="code-line" value="23" style="--indent: 2ch;">  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+</data><data class="code-line" value="24" style="--indent: 2ch;">  <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>;
+</data><data class="code-line" value="25" style="--indent: 2ch;">  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+</data><data class="code-line" value="26" style="--indent: 2ch;">  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid gray;
+</data><data class="code-line" value="27" style="--indent: 2ch;">  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+</data><data class="code-line" value="28" style="--indent: 2ch;">  <span class="hljs-attribute">box-sizing</span>: border-box;
+</data><data class="code-line" value="29">}
+</data><data class="code-line" value="30">
+</data><data class="code-line" value="31"><span class="hljs-selector-tag">button</span> {
+</data><data class="code-line" value="32" style="--indent: 2ch;">  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+</data><data class="code-line" value="33" style="--indent: 2ch;">  <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>;
+</data><data class="code-line" value="34" style="--indent: 2ch;">  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+</data><data class="code-line" value="35" style="--indent: 2ch;">  <span class="hljs-attribute">border</span>: none;
+</data><data class="code-line" value="36" style="--indent: 2ch;">  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+</data><data class="code-line" value="37" style="--indent: 2ch;">  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#a78bfa</span>;
+</data><data class="code-line" value="38" style="--indent: 2ch;">  <span class="hljs-attribute">color</span>: white;
+</data><data class="code-line" value="39" style="--indent: 2ch;">  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+</data><data class="code-line" value="40" style="--indent: 2ch;">  <span class="hljs-attribute">cursor</span>: pointer;
+</data><data class="code-line" value="41">
+</data><data class="code-line" value="42" style="--indent: 2ch;">  <span class="hljs-selector-tag">&amp;</span><span class="hljs-selector-pseudo">:hover</span> {
+</data><data class="code-line" value="43" style="--indent: 4ch;">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#8b5cf6</span>;
+</data><data class="code-line" value="44" style="--indent: 2ch;">  }
+</data><data class="code-line" value="45">}
+</data><data class="code-line" value="46">
+</data><data class="code-line" value="47"><span class="hljs-selector-tag">a</span> {
+</data><data class="code-line" value="48" style="--indent: 2ch;">  <span class="hljs-attribute">display</span>: inline-block;
+</data><data class="code-line" value="49" style="--indent: 2ch;">  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">20px</span>;
+</data><data class="code-line" value="50" style="--indent: 2ch;">  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">20px</span>;
+</data><data class="code-line" value="51" style="--indent: 2ch;">  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+</data><data class="code-line" value="52" style="--indent: 2ch;">  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#a78bfa</span>;
+</data><data class="code-line" value="53" style="--indent: 2ch;">  <span class="hljs-attribute">color</span>: white;
+</data><data class="code-line" value="54" style="--indent: 2ch;">  <span class="hljs-attribute">text-decoration</span>: none;
+</data><data class="code-line" value="55">
+</data><data class="code-line" value="56" style="--indent: 2ch;">  <span class="hljs-selector-tag">&amp;</span><span class="hljs-selector-pseudo">:hover</span> {
+</data><data class="code-line" value="57" style="--indent: 4ch;">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#8b5cf6</span>;
+</data><data class="code-line" value="58" style="--indent: 2ch;">  }
+</data><data class="code-line" value="59">}
+</data></code></pre>
 
 <br>
 

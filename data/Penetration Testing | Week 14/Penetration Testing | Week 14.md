@@ -20,7 +20,7 @@ categories: 모의 해킹
 **1. 서버 장악**  
 : 업로드된 <strong>웹 셸(Web Shell)</strong> 등을 통해 명령어를 실행하거나 시스템에 접근함으로써 서버를 제어한다.
 
-**2. 피싱(Phising)**  
+**2. 피싱(Phishing)**  
 : 정교하게 제작된 피싱 페이지를 업로드하여 사용자 정보를 탈취한다. 예를 들어, 로그인 페이지를 위장해 사용자 인증 정보를 수집할 수 있다.
 
 **3. 디페이스(Deface) 공격**  
@@ -50,11 +50,11 @@ categories: 모의 해킹
 ?>
 ```
 
-게시판과 같이 파일 업로드가 가능한 웹 애플리케이션 기능을 통해 위의 `webshell.php` 파일을 업로드했다고 가정해 보자. 서버는 이를 `/var/www/html/uplaods/`와 같은 경로에 저장하고, 사용자가 브라우저에서 해당 파일에 접근할 때는 `http://example.com/uploads/webshell.php`와 같은 URL을 사용한다.
+게시판과 같이 파일 업로드가 가능한 웹 애플리케이션 기능을 통해 위의 `webshell.php` 파일을 업로드했다고 가정해 보자. 서버는 이를 `/var/www/html/uploads/`와 같은 경로에 저장하고, 사용자가 브라우저에서 해당 파일에 접근할 때는 `http://example.com/uploads/webshell.php`와 같은 URL을 사용한다.
 
-`system()` 함수에 전달되는 인자는 URL의 쿼리 스트링에 포함된 `cmd` 파라미터의 값이므로, `http://example.com/uploads/webshell.php?cmd=ls`와 같은 URL로 접근하면 웹 서버는 `ls` 명령어(현재 디렉토리 내 파일 및 폴더 목록 조회)를 실행하고 브라우저에 결과를 출력한다. 즉, 공격자는 웹 서버에 원하는 명령을 실행시킬 수 있고, 따라서 서버를 원격으로 제어할 수 있게 된다.
+`system()` 함수에 전달되는 인자는 URL의 쿼리 스트링에 포함된 `cmd` 파라미터의 값이므로, `http://example.com/uploads/webshell.php?cmd=ls`와 같은 URL로 접근하면 웹 서버는 `ls` 명령어(현재 디렉터리 내 파일 및 디렉터리 목록 조회)를 실행하고 브라우저에 결과를 출력한다. 즉, 공격자는 웹 서버에 원하는 명령을 실행시킬 수 있고, 따라서 서버를 원격으로 제어할 수 있게 된다.
 
-웹 셸을 활용한 공격에는 두 가지 핵심 사항이 존재한다. 먼저 **웹 서버에서 실행되는 코드가 포함된 파일을 업로드**할 수 있어야 하며, 이후 **업로드한 파일의 경로를 파악**할 수 있어야 한다. 실제로 웹 셸을 업로드하는 예시와 함께 살펴 보자.
+웹 셸을 활용한 공격에는 두 가지 핵심 사항이 존재한다. 먼저 **웹 서버에서 실행되는 코드가 포함된 파일을 업로드**할 수 있어야 하며, 이후 **업로드한 파일의 경로를 파악**할 수 있어야 한다. 실제로 웹 셸을 업로드하는 예시와 함께 살펴보자.
 
 ![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/1.png)
 
@@ -63,9 +63,9 @@ categories: 모의 해킹
 ![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/2.png)
 ![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/3.png)
 
-파일을 업로드한 후 게시물을 열람하면 첨부 파일 다운로드 링크가 표시되며, 개발자 도구를 통해 해당 요소를 확인해 보면 `<a href="./download.php?file=webshell.php&target_Dir=./file/uploads">다운로드</a>`와 같은 형태임을 알 수 있다. `href` 속성에 지정된 URL을 살펴 보면 쿼리 스트링에 `target_Dir` 파라미터가 포함되어 있어 업로드한 파일이 저장된 디렉토리가 `./file/uploads`임을 유추할 수 있다.
+파일을 업로드한 후 게시물을 열람하면 첨부 파일 다운로드 링크가 표시되며, 개발자 도구를 통해 해당 요소를 확인해 보면 `<a href="./download.php?file=webshell.php&target_Dir=./file/uploads">다운로드</a>`와 같은 형태임을 알 수 있다. `href` 속성에 지정된 URL을 살펴보면 쿼리 스트링에 `target_Dir` 파라미터가 포함되어 있어 업로드한 파일이 저장된 디렉터리가 `./file/uploads`임을 유추할 수 있다.
 
-파일의 경로를 파악했으므로, 주소 창에 `http://ctf.segfaulthub.com:9992/file/uploads/webshell.php`를 입력하면 해당 파일에 접근할 수 있다. 웹 서버에서 `ls` 명령어를 실행시키기 위해 `cmd=ls` 쿼리스트링을 추가하고 접속해 보자.
+파일의 경로를 파악했으므로, 주소 창에 `http://ctf.segfaulthub.com:9992/file/uploads/webshell.php`를 입력하면 해당 파일에 접근할 수 있다. 웹 서버에서 `ls` 명령어를 실행시키기 위해 `cmd=ls` 쿼리 스트링을 추가하고 접속해 보자.
 
 ![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/4.png)
 
@@ -122,7 +122,7 @@ categories: 모의 해킹
 
 악성 스크립트가 포함된 파일을 제한하기 위해 특정 확장자(`.php` 등)를 필터링하는 방식도 고려할 수 있다. 그러나 PHP는 확장자에 대해 대소문자를 구분하지 않아 `pHp`, `PhP`, `PHP` 등 다양한 형태로 우회가 가능하다.
 
-이러한 방법을 방지하기 위해 서버 측에서 대소문자를 구분하지 않고 모든 형태의 `.php` 확장자를 필터링하더라도, 여전히 다른 실행 가능한 확장자를 통해 우회가 가능하다. PHP는 `.php` 외에도 `.phtml`, `.php3`, `.php4`, `.php5` 등의 확장자를 기본적으로 지원한다. 공격자는 이러한 대체 확장자를 활용하여 필터링을 우회할 수 있으므로, 파일 확장자를 검사할 경우에는 허용된 확장자만 White List 방식으로 명시하는 편이 안전하다.
+이러한 방법을 방지하기 위해 서버 측에서 대소문자를 구분하지 않고 모든 형태의 `.php` 확장자를 필터링하더라도, 여전히 다른 실행 가능한 확장자를 통해 우회가 가능하다. PHP는 `.php` 외에도 `.phtml`, `.php3`, `.php4`, `.php5` 등의 확장자를 기본적으로 지원한다. 공격자는 이러한 대체 확장자를 활용하여 필터링을 우회할 수 있으므로, 파일 확장자를 검사할 경우에는 허용된 확장자만 Whitelist 방식으로 명시하는 편이 안전하다.
 
 <br>
 
@@ -180,19 +180,19 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
 ![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/10.png)
 
-첨부 파일을 다운로드할 수 있는 링크를 발견하였다. 개발자 도구를 사용하여 해당 링크 요소를 자세히 살펴 보았다.
+첨부 파일을 다운로드할 수 있는 링크를 발견하였다. 개발자 도구를 사용하여 해당 링크 요소를 자세히 살펴보았다.
 
 보안 업데이트에 의해 주석 처리된 `<a>` 요소의 `href` 속성에 `index.php?page=download&filePath=/var/www/html/uploads/90_webshell.php`라는 경로가 지정되어 있었다. 이를 통해 파일의 위치를 파악함과 동시에, 업로드한 파일의 이름이 서버 측 코드에 의해 임의로 변경되었음을 알 수 있었다.
 
-파일 경로에서 `/var/www/html`은 웹 루트 디렉터리에 해당하므로, `http://ctf.segfaulthub.com:8989/uploads/90_webshell.php`라는 URL로 이동해 보았다. 이때 `webshell.php`에 작성한 스크립트를 고려하여 URL 뒤에 `cmd=ls` 쿼리스트링을 추가하였다.
+파일 경로에서 `/var/www/html`은 웹 루트 디렉터리에 해당하므로, `http://ctf.segfaulthub.com:8989/uploads/90_webshell.php`라는 URL로 이동해 보았다. 이때 `webshell.php`에 작성한 스크립트를 고려하여 URL 뒤에 `cmd=ls` 쿼리 스트링을 추가하였다.
 
 ![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/11.png)
 
 웹 셸이 실행되어 현재 디렉터리에 존재하는 파일들이 출력되었다. 다음으로 `flag.txt` 파일을 찾기 위해 `cmd` 파라미터의 값으로 다음 구문을 사용하였다.
 
-<pre><code class="language-bash hljs" data-highlighted="yes"><span class="hljs-comment"># find: 파일/디렉터리 검색 명령어</span>
-<span class="hljs-built_in">find</span> / -name <span class="hljs-string">"flag.txt"</span>
-</code></pre>
+<pre><code class="language-bash hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment"># find: 파일/디렉터리 검색 명령어</span>
+</data><data class="code-line" value="2"><span class="hljs-built_in">find</span> / -name <span class="hljs-string">"flag.txt"</span>
+</data></code></pre>
 
 위의 명령문은 웹 서버의 루트 디렉터리(`/`)에서 이름이 `flag.txt`인 파일을 검색하여 해당 파일의 경로를 출력한다.
 

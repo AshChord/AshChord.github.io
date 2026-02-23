@@ -178,7 +178,7 @@ Login successful!
 
 <img src="/data/Penetration%20Testing%20%7C%20Week%203/2.png" alt="users 테이블" style="padding: 0 25%; background-color: white">
 
-2주차에 제작했던 로그인 처리 코드(`login_proc.php`)를 조금씩 수정하여 구현하도록 한다.
+2주 차에 제작했던 로그인 처리 코드(`login_proc.php`)를 조금씩 수정하여 구현하도록 한다.
 
 <br>
 

