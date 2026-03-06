@@ -1,44 +1,39 @@
-// Elements within the search bar
-const inputField = document.querySelector('.search-input');
-const resetButton = document.querySelector('.search-reset-button');
-const submitButton = document.querySelector('.search-submit-button');
-
 // Toggle reset button visibility
 function toggleResetButton() {
-  resetButton.style.display = inputField.value ? 'block' : 'none';
+  $.resetBtn.style.display = $.srchInp.value ? 'block' : 'none';
 }
 
 // Initialize reset button state
 toggleResetButton();
 
 // Sync input field with reset button
-inputField.addEventListener('input', toggleResetButton);
-resetButton.addEventListener('click', () => {
-  inputField.value = '';
-  toggleResetButton();
+$.srchInp.addEventListener('input', toggleResetButton);
+$.srchBar.addEventListener('reset', () => {
+  setTimeout(toggleResetButton);
+  $.srchInp.focus();
 });
 
-// Handle keyword submission
-function submitKeyword() {
-  const keyword = inputField.value;
-  inputField.value = '';
-  toggleResetButton();
+// Handle search form submission
+$.srchBar.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const keyword = $.srchInp.value.trim();
+  if (!keyword) return;
+
   history.pushState(null, null, `/posts?keyword=${encodeURIComponent(keyword)}`);
   router();
-}
 
-// Submit keyword via Enter or button click
-inputField.addEventListener('keypress', (event) => {
-  if (event.key === 'Enter') submitKeyword();
+  $.srchInp.value = '';
+  $.srchInp.blur();
+  $.srchBar.classList.remove('open');
 });
-submitButton.addEventListener('click', submitKeyword);
 
-// Handle category clicks
-document.addEventListener('click', (event) => {
-  if (event.target.classList.contains('category')) {
-    event.stopPropagation();
-    const category = event.target.textContent;
-    history.pushState(null, null, `/posts?category=${encodeURIComponent(category)}`);
+// Handle category click events
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('category')) {
+    e.stopPropagation();
+    const cat = e.target.textContent;
+    history.pushState(null, null, `/posts?category=${encodeURIComponent(cat)}`);
     router();
   }
 });

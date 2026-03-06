@@ -1,265 +1,306 @@
-// Elements for the current page layout
-const feed = document.querySelector('.feed');
-const content = document.querySelector('.content');
-const tableOfContents = document.querySelector('.table-of-contents');
+// Render blog feed
+function renderFeed(postsToRender = $.posts, currPage = 1) {
+  $.feed.replaceChildren();
+  $.cont.replaceChildren();
+  $.otl.replaceChildren();
 
-// Renders the feed
-function renderFeed(postsToRender = posts, currentPage = 1) {
-  feed.innerHTML = '';
-  content.innerHTML = '';
-  tableOfContents.innerHTML = '';
+  // Calculate start and end indices of posts on current page
+  const startIdx = (currPage - 1) * pgnData.postLimit;
+  const endIdx = startIdx + pgnData.postLimit;
+  const postsForCurrPage = postsToRender.slice(startIdx, endIdx);
 
-  // Calculate the start and end indices for the posts on the current page
-  const startIndex = (currentPage - 1) * pageState.postsPerPage;
-  const endIndex = startIndex + pageState.postsPerPage;
-  const postsForCurrentPage = postsToRender.slice(startIndex, endIndex);
-
-  // Show a message if no posts are found
-  if (postsForCurrentPage.length === 0) {
-    feed.innerHTML = '<p class="no-results">검색 결과가 없습니다.</p>';
+  // Show message if no posts are found
+  if (postsForCurrPage.length === 0) {
+    const noRes = document.createElement('p');
+    noRes.className = 'no-results';
+    noRes.textContent = '검색 결과가 없습니다.';
+    $.feed.appendChild(noRes);
     return;
   }
 
-  // Loop through each post and create the feed item
-  postsForCurrentPage.forEach(post => {
-    const feedItem = document.createElement('div');
-    feedItem.classList.add('feed-item');
+  // Loop through each post and create feed item
+  postsForCurrPage.forEach(post => {
+    const feedItem = document.createElement('article');
+    feedItem.className = 'feed-item';
 
-    feedItem.innerHTML = `
-      <img src="/data/${post.title}/thumbnail.png" alt="${post.title}" class="thumbnail">
-      <h2 class="title">${post.title}</h2>
-      <p class="excerpt">${post.excerpt}</p>
-      <div class="category-list">
-        ${post.categories.map(category => `<span class="category">${category}</span>`).join('')}
-      </div>
-      <p class="date">${post.date}</p>
-    `;
+    const thumbnail = document.createElement('img');
+    thumbnail.src = `/data/${post.title}/thumbnail.png`;
+    thumbnail.alt = post.title;
+    thumbnail.className = 'thumbnail';
 
-    // Handle routing when the post is clicked
-    feedItem.addEventListener('click', (event) => {
-      if (!event.target.classList.contains('category')) {
-        history.pushState(null, null, `/posts/${encodeURIComponent(post.title)}`);
-        router();
-      }
+    const title = document.createElement('h2');
+    title.className = 'title';
+    title.textContent = post.title;
+
+    const excerpt = document.createElement('p');
+    excerpt.className = 'excerpt';
+    excerpt.textContent = post.excerpt;
+
+    const catDiv = document.createElement('div');
+    catDiv.className = 'category-list';
+    post.categories.forEach(category => {
+      const span = document.createElement('span');
+      span.className = 'category';
+      span.textContent = category;
+      catDiv.appendChild(span);
     });
 
-    feed.appendChild(feedItem);
+    const date = document.createElement('p');
+    date.className = 'date';
+    date.textContent = post.date;
+
+    feedItem.append(thumbnail, title, excerpt, catDiv, date);
+    $.feed.appendChild(feedItem);
   });
 }
 
-// Render the content of a single post
+// Handle feed item click events
+$.feed.addEventListener('click', (e) => {
+  const feedItem = e.target.closest('.feed-item');
+  if (!feedItem) return;
+  if (e.target.classList.contains('category')) return;
+  const postTitle = feedItem.querySelector('.title').textContent;
+  history.pushState(null, null, `/posts/${encodeURIComponent(postTitle)}`);
+  router();
+});
+
+// Render content of single post
 async function renderContent(post) {
-  feed.innerHTML = '';
-  content.innerHTML = '';
-  tableOfContents.innerHTML = '';
-  pagination.innerHTML = '';
+  $.feed.replaceChildren();
+  $.cont.replaceChildren();
+  $.otl.replaceChildren();
+  $.pgn.replaceChildren();
 
-  // Create and append the post header
-  const postHeader = document.createElement('div');
-  postHeader.classList.add('post-header');
-  postHeader.innerHTML = `
-    <div class="category-list">
-      ${post.categories.map(category => `<span class="category">${category}</span>`).join('')}
-    </div>
-    <h1 class="title">${post.title}</h1>
-    <p class="date">${post.date}</p>
-    <img src="/data/${post.title}/thumbnail.png" alt="${post.title}" class="thumbnail">
-  `;
-  content.appendChild(postHeader);
+  // Create and append post header
+  const postHdr = document.createElement('div');
+  postHdr.classList.add('post-header');
 
-  // Fetch and parse the markdown content of the post
-  const markdownContent = await fetch(`/data/${post.title}/${post.title}.md`);
-  const markdownText = (await markdownContent.text()).replace(/^---\smeta\n([\s\S]*?)\n---/, '').trim();
+  const catList = document.createElement('div');
+  catList.classList.add('category-list');
 
-  // Convert markdown to HTML and append to post body
+  post.categories.forEach(category => {
+    const span = document.createElement('span');
+    span.classList.add('category');
+    span.textContent = category;
+    catList.appendChild(span);
+  });
+
+  const title = document.createElement('h1');
+  title.classList.add('title');
+  title.textContent = post.title;
+
+  const date = document.createElement('p');
+  date.classList.add('date');
+  date.textContent = post.date;
+
+  const thumbnail = document.createElement('img');
+  thumbnail.classList.add('thumbnail');
+  thumbnail.src = `/data/${post.title}/thumbnail.png`;
+  thumbnail.alt = post.title;
+
+  postHdr.append(catList, title, date, thumbnail);
+  $.cont.appendChild(postHdr);
+
+  // Fetch and parse markdown content of post
+  const mdCont = await fetch(`/data/${post.title}/${post.title}.md`);
+  const mdText = (await mdCont.text()).replace(/^---\smeta\n([\s\S]*?)\n---/, '').trim();
+  const htmlText = marked.parse(mdText);
+
+  // Append parsed HTML content to post body
   const postBody = document.createElement('div');
+  const htmlTextFrag = document.createRange().createContextualFragment(htmlText);
   postBody.classList.add('post-body');
-  postBody.innerHTML = marked.parse(markdownText);
-  content.appendChild(postBody);
+  postBody.appendChild(htmlTextFrag);
+  $.cont.appendChild(postBody);
 
   renderCode();
-  renderTableOfContents();
+  renderoutline();
 }
 
-// Render code snippets within the post
+// Render code snippets within post
 function renderCode() {
   // Split code into lines with syntax highlighting and indentation
   document.querySelectorAll('pre').forEach((pre) => {
     const codeBlock = pre.querySelector('code');
 
-    if (codeBlock.hasAttribute('data-highlighted')) return;
+    if (codeBlock.hasAttribute('highlighted')) return;
 
     const codeText = codeBlock.textContent;
-    const codeFragment = document.createDocumentFragment();
-    const lang = Array.from(codeBlock.classList).find(cls => cls.startsWith('language'));
-    const lines = codeText.match(/.*?\n|.+$/g);
+    const lang = codeBlock.className.replace('language-', '');
+    const hlCode = hljs.highlight(codeText, { language: lang }).value;
+    const lines = hlCode.match(/.*?\n|.+$/g);
 
-    lines.forEach((lineText, index) => {
+    const codeFrag = document.createDocumentFragment();
+
+    lines.forEach((lineText, idx) => {
       const line = document.createElement('data');
-      line.textContent = lineText;
-      line.classList.add(lang);
-      codeBlock.appendChild(line);
-
-      hljs.highlightElement(line);
+      const lineTextFrag = document.createRange().createContextualFragment(lineText);
+      line.appendChild(lineTextFrag);
 
       line.className = 'code-line';
-      line.value = index + 1;
-      delete line.dataset.highlighted;
+      line.value = idx + 1;
 
       const indent = lineText.search(/\S/);
       if (indent > 0) {
         line.style.setProperty('--indent', `${indent}ch`);
       }
 
-      codeFragment.appendChild(line);
+      codeFrag.appendChild(line);
     });
 
-    codeBlock.innerHTML = '';
-    codeBlock.appendChild(codeFragment);
-    codeBlock.classList.add('hljs');
-    codeBlock.dataset.highlighted = 'yes';
+    codeBlock.replaceChildren(codeFrag);
+    codeBlock.setAttribute('highlighted', '');
 
-  // Add copy button for each code block
-    const copyButton = document.createElement("button");
-    copyButton.classList.add("copy-button");
+    // Add copy button for each code block
+    const copyBtn = document.createElement("button");
+    copyBtn.classList.add("copy-button");
 
-    copyButton.onclick = async () => {
+    copyBtn.onclick = async () => {
       await navigator.clipboard.writeText(codeText);
-      copyButton.classList.add("copied");
-      setTimeout(() => copyButton.classList.remove("copied"), 2000);
+      copyBtn.classList.add("copied");
+      setTimeout(() => copyBtn.classList.remove("copied"), 2000);
     };
 
-    pre.appendChild(copyButton);
+    pre.appendChild(copyBtn);
   });
 
   // Breaks long inline code into smaller chunks for better readability
-  const isAlphanumeric = char => /[a-zA-Z0-9\s]/.test(char);
   document.querySelectorAll('code:not(pre code)').forEach((code) => {
-    const codeText = code.textContent;
+    const tokens = code.textContent.split(/([^a-zA-Z0-9\s])/g);
 
-    code.innerHTML = codeText.split('').reduce((breakableCodeText, curChar, index, chars) => {
-      if (index > 0) {
-        const prevChar = chars[index - 1];
-        if (!isAlphanumeric(prevChar) || !isAlphanumeric(curChar)) {
-          breakableCodeText += '<wbr>';
-        }
-      }
-      return breakableCodeText + curChar;
-    }, '');
+    const brknTokens = tokens.map((token, i) => {
+      if (token === "") return null;
+      if (i === 0) return token;
+
+      const wbr = document.createElement('wbr');
+      return [wbr, token];
+    }).filter(Boolean).flat();
+
+    code.replaceChildren(...brknTokens);
   });
 }
 
-// Render table of contents based on the headings in the post
-function renderTableOfContents() {
-  const headings = content.querySelectorAll('h3, h4, h5, h6');
-  const contentsList = document.createElement('ul');
+// Render outline based on headings in post
+function renderoutline() {
+  const hdgs = $.cont.querySelectorAll('h3, h4, h5, h6');
+  const ul = document.createElement('ul');
 
-  headings.forEach((heading, index) => {
-    if (!heading.id) {
-      heading.id = `${index}`;
-    }
+  hdgs.forEach((hdg, idx) => {
+    if (!hdg.id) hdg.id = `${idx}`;
 
+    // Create heading list with link
     const listItem = document.createElement('li');
-    const indentationLevel = parseInt(heading.tagName.substring(1)) - 3;
-    listItem.style.paddingLeft = `${indentationLevel * 12}px`;
+    const indentLevel = parseInt(hdg.tagName.substring(1)) - 3;
+    listItem.style.paddingLeft = `${indentLevel * 12}px`;
 
-    const linkToHeading = document.createElement('a');
-    linkToHeading.href = `#${heading.id}`;
-    linkToHeading.textContent = heading.textContent;
+    const linkToHdg = document.createElement('a');
+    linkToHdg.href = `#${hdg.id}`;
+    linkToHdg.textContent = hdg.textContent;
 
     // Smooth scroll to heading on click
-    linkToHeading.addEventListener('click', (event) => {
-      event.preventDefault();
-      document.getElementById(heading.id).scrollIntoView({ behavior: 'smooth' });
+    linkToHdg.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById(hdg.id).scrollIntoView({ behavior: 'smooth' });
     });
 
-    listItem.appendChild(linkToHeading);
-    contentsList.appendChild(listItem);
+    listItem.appendChild(linkToHdg);
+    ul.appendChild(listItem);
   });
 
-  tableOfContents.appendChild(contentsList);
+  $.otl.appendChild(ul);
 
-  // Optimize scroll event
-  let isPending = false;
-
-  window.addEventListener('scroll', () => {
-    if (!isPending) {
-      window.requestAnimationFrame(() => {
-        const scrollPosition = window.scrollY;
-        let currentIndex = -1;
-        headings.forEach((heading, i) => {
-          if (scrollPosition >= heading.offsetTop - 10) {
-            currentIndex = i;
-          }
-        });
-        // Highlight the link for the current index
-        tableOfContents.querySelectorAll('a').forEach((link, i) => {
-          link.classList.toggle('active', i === currentIndex);
-        });
-        isPending = false;
-      });
-      isPending = true;
-    }
-  });
+  window.dispatchEvent(new Event('resize'));
+  currHdgIdx = -1;
 }
+
+// Adjust outline to stay vertically centered
+window.addEventListener('resize', () => {
+  $.otl.style.top = `${Math.max(window.innerHeight - $.otl.offsetHeight) / 2}px`;
+});
+
+// Highlight current heading in outline based on scroll position
+let currHdgIdx = -1;
+let ticking = false;
+
+window.addEventListener('scroll', () => {
+  if (ticking || !$.otl.hasChildNodes()) return;
+  window.requestAnimationFrame(() => {
+    const hdgs = $.cont.querySelectorAll('h3, h4, h5, h6');
+    const links = $.otl.querySelectorAll('a');
+    const trigPoint = window.innerHeight * 0.02;
+
+    let newHdgIdx = -1;
+
+    for (let i = hdgs.length - 1; i >= 0; i--) {
+      if (hdgs[i].getBoundingClientRect().top <= trigPoint) {
+        newHdgIdx = i;
+        break;
+      }
+    }
+
+    if (newHdgIdx !== currHdgIdx) {
+      currHdgIdx = newHdgIdx;
+
+      links.forEach((link, i) => {
+        link.classList.toggle('current', i === currHdgIdx);
+      });
+    }
+
+    ticking = false;
+  });
+  ticking = true;
+}, { passive: true });
 
 // Render category dropdown menu 
 function renderCategoryDropdown() {
-  // Calculate the number of posts per category
-  const categoryCounts = posts
-    .flatMap(post => post.categories)
-    .reduce((counts, category) => {
-      counts[category] = (counts[category] || 0) + 1;
-      return counts;
-    }, {});
+  // Create category items
+  const catMenuFrag = document.createDocumentFragment();
 
-  // Convert to an array of objects { name, count } and sort by name
-  const categoryCountsArray = Object.entries(categoryCounts)
-    .map(([categoryName, count]) => ({ categoryName, count }))
-    .sort((a, b) => a.categoryName.localeCompare(b.categoryName));
+  $.postsByCat.sort(([a], [b]) => a.localeCompare(b)).forEach(([name, posts]) => {
+    const li = document.createElement("li");
+    li.className = "category-menu-item";
 
-  // Create category itmes based on the calculated data
-  const categoryMenu = document.querySelector(".category-menu");
-  categoryMenu.innerHTML = categoryCountsArray.map(category => `
-    <div class="category-menu-item">
-      <span class="category-name">${category.categoryName}</span>
-      <span class="count">(${category.count})</span>
-    </div>
-  `).join('');
+    const catName = document.createElement("span");
+    catName.className = "category-name";
+    catName.textContent = name;
 
-  // Handle routing when a category item is clicked
-  const categoryDropdown = document.querySelector(".category-dropdown");
-  const categoryDropdownButton = categoryDropdown.querySelector(".category-dropdown-button");
-  categoryMenu.addEventListener('click', (event) => {
-    const categoryItem = event.target.closest('.category-menu-item');
-    if (categoryItem) {
-      const categoryName = categoryItem.querySelector(".category-name").textContent;
-      history.pushState(null, null, `/posts?category=${encodeURIComponent(categoryName)}`);
-      router();
-    }
+    const catCount = document.createElement("span");
+    catCount.className = "count";
+    catCount.textContent = `(${posts.length})`;
+
+    li.append(catName, catCount);
+    catMenuFrag.appendChild(li);
   });
 
-  // Toggle category dropdown
-  document.addEventListener('click', (event) => {
-    if (categoryDropdownButton.contains(event.target)) {
-      categoryDropdown.classList.toggle('active');
-    }
-    else if (categoryDropdown.classList.contains('active') && !categoryDropdown.contains(event.target)) {
-      categoryDropdown.classList.remove('active');
-    }
-  });
+  $.catMenu.appendChild(catMenuFrag);
 }
+
+// Handle category item click events
+$.catMenu.addEventListener('click', (e) => {
+  const catItem = e.target.closest('.category-menu-item');
+  if (catItem) {
+    const cat = catItem.querySelector(".category-name").textContent;
+    $.catDd.open = false;
+    history.pushState(null, null, `/posts?category=${encodeURIComponent(cat)}`);
+    router();
+  }
+});
 
 // Render 404 page
 function renderNotFound() {
-  content.innerHTML = '';
-  tableOfContents.innerHTML = '';
-  pagination.innerHTML = '';
+  $.cont.replaceChildren();
+  $.otl.replaceChildren();
+  $.pgn.replaceChildren();
 
-  feed.innerHTML = `
-    <div class="not-found">
-      <h1>404</h1>
-      <p>페이지를 찾을 수 없습니다.</p>
-    </div>
-  `;
+  const div = document.createElement('div');
+  div.className = 'not-found';
+
+  const title = document.createElement('h1');
+  title.textContent = '404';
+
+  const desc = document.createElement('p');
+  desc.textContent = '페이지를 찾을 수 없습니다.';
+
+  div.append(title, desc);
+  $.feed.replaceChildren(div);
 }

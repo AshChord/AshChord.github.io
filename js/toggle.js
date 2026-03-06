@@ -1,23 +1,27 @@
-// Moble menu/search bar
-const menuButton = document.querySelector('.menu-button');
-const menu = document.querySelector('.menu');
-const searchButton = document.querySelector('.search-button');
-const searchBar = document.querySelector('.search-bar');
+// Toggle menu and search bar on mobile
+const toggleElement = (el) => {
+  if (window.innerWidth < 768) el.toggleAttribute('open');
+};
 
-// Toggle active states
-menuButton.addEventListener('click', () => menu.classList.toggle('mobile'));
-searchButton.addEventListener('click', () => searchBar.classList.toggle('mobile'));
+// Toggle open states
+$.menu.addEventListener('click', () => toggleElement($.menu));
+$.srch.addEventListener('click', () => toggleElement($.srchBar));
+$.srchBar.addEventListener('click', e => e.stopPropagation());
 
-// Close menu/search bar when clicking outside
+// Close toggle elements when clicking outside
 document.addEventListener('click', ({ target }) => {
-  if (!menuButton.contains(target)) menu.classList.remove('mobile');
-  if (!searchBar.contains(target) && !searchButton.contains(target)) searchBar.classList.remove('mobile');
+  if (!$.menu.contains(target)) $.menu.removeAttribute('open');
+  if (!$.srch.contains(target)) $.srchBar.removeAttribute('open');
+  if (!$.catDd.contains(target)) $.catDd.removeAttribute('open');
 });
 
-// Reset active states on larger screens
+// Reset open states on larger screens
 window.addEventListener('resize', () => {
   if (window.innerWidth >= 768) {
-    menu.classList.remove('mobile');
-    searchBar.classList.remove('mobile');
+    $.menu.removeAttribute('open');
+    $.srchBar.removeAttribute('open');
   }
 });
+
+// Close category dropdown on back/forward navigation
+window.addEventListener('popstate', () => {$.catDd.removeAttribute('open');});

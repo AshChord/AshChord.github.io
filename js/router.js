@@ -1,35 +1,52 @@
-// Resolve the content based on URL path
-function resolveContent(path, _queryParams) {
-  const postTitle = decodeURIComponent(path.replace('/posts/', ''));
-  const post = posts.find(post => post.title === postTitle);
+// Resolve feed based on URL path and query parameters
+function resolveFeed(path, queryParams) {
+  const queryKw = queryParams.get('keyword');
+  const queryCat = queryParams.get('category');
 
-  if (post) {
-    document.title = postTitle;
-    renderContent(post);
-  } else {
-    document.title = "Page Not Found";
-    renderNotFound();
+  let postsToRndr = $.posts;
+  let titlePfx = "";
+
+  // Filter posts based on query parameters
+  if (queryCat) {
+    const postsInCat = $.postsByCat.find(([cat]) => cat === queryCat);
+
+    if ($.postsByCat.find(([cat]) => cat === queryCat)) {
+      postsToRndr = postsInCat[1];
+      titlePfx = `Category: ${queryCat}`;
+    }
+    else {
+      updateTitle("Page Not Found");
+      renderNotFound();
+      return;
+    }
   }
+  else if (queryKw) {
+    postsToRndr = $.posts.filter(post =>
+      post.title.toLowerCase().includes(queryKw.toLowerCase())
+    );
+    titlePfx = `Search: ${queryKw}`;
+  }
+  else if (path === '/posts') {
+    titlePfx = "Posts";
+  }
+
+  updateTitle(titlePfx);
+  initPagination(postsToRndr.length);
+  renderFeed(postsToRndr, pgnData.currPage);
 }
 
-// Resolve the feed based on URL path and query parameters
-function resolveFeed(path, queryParams) {
-  const keyword = queryParams.get('keyword');
-  const category = queryParams.get('category');
+// Resolve content based on URL path
+function resolveContent(path, _queryParams) {
+  const postTitle = decodeURIComponent(path.replace('/posts/', ''));
+  const post = $.posts.find(post => post.title === postTitle);
 
-  let postsToRender = posts.filter(post => {
-    if (keyword) return post.title.toLowerCase().includes(keyword.toLowerCase());
-    if (category) return post.categories.includes(category);
-    return true;
-  });
-
-  if (keyword) document.title = `Search: ${keyword}`;
-  else if (category) document.title = `Category: ${category}`;
-  else if (path === '/posts') document.title = "Posts";
-  else document.title = "AshChord.log";
-
-  initPagination(postsToRender.length);
-  renderFeed(postsToRender, pageState.currentPage);
+  if (post) {
+    updateTitle(postTitle);
+    renderContent(post);
+  } else {
+    updateTitle("Page Not Found");
+    renderNotFound();
+  }
 }
 
 // Route configuration
@@ -58,26 +75,26 @@ function router() {
 
     if (queryParams.has('q')) {
       const qValue = queryParams.get('q');
-      const restoredParams = new URLSearchParams();
+      const origParams = new URLSearchParams();
       qValue.split('~and~').forEach(pair => {
-        const [key, ...valueParts] = pair.split('=');
+        const [key, ...value] = pair.split('=');
         if (key) {
-          restoredParams.set(key, valueParts.join('='))
+          origParams.set(key, value.join('='))
         };
       });
-      queryParams = restoredParams;
+      queryParams = origParams;
     }
 
-    const queryString = queryParams.toString();
-    history.replaceState(null, null, queryString ? `${path}?${queryString}` : path);
+    const queryStr = queryParams.toString();
+    history.replaceState(null, null, queryStr ? `${path}?${queryStr}` : path);
   }
 
   // Find matching route and execute handler
-  const matchedRoute = routes.find(route => route.match(path, queryParams));
-  if (matchedRoute) {
-    matchedRoute.handler(path, queryParams);
+  const matchRoute = routes.find(route => route.match(path, queryParams));
+  if (matchRoute) {
+    matchRoute.handler(path, queryParams);
   } else {
-    document.title = "Page Not Found - AshChord.log";
+    updateTitle("Page Not Found");
     renderNotFound();
   }
 
@@ -85,17 +102,23 @@ function router() {
   window.scrollTo(0, 0);
 }
 
-// Handle routing when the main title is clicked
+// Update document title with optional prefix
+function updateTitle(pfx) {
+  const sfx = "AshChord.log";
+  document.title = pfx ? `${pfx} - ${sfx}` : sfx;
+}
+
+// Handle main title click events
 document.querySelector(".blog-title").addEventListener("click", () => {
   window.history.pushState(null, null, "/");
   router();
 });
 
-// Handle routing when a menu item is clicked
+// Handle menu item click events
 document.querySelectorAll(".menu-item").forEach((item) => {
   item.addEventListener("click", () => {
-    const path = item.textContent.toLowerCase();
-    window.history.pushState(null, null, `/${path}`);
+    const menuItem = item.textContent.toLowerCase();
+    window.history.pushState(null, null, `/${menuItem}`);
     router();
   });
 });
