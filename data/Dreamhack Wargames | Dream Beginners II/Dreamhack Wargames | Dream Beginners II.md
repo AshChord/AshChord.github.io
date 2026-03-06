@@ -173,10 +173,10 @@ dive가 실행되면 다음과 같은 화면이 나타난다.
 
 각 레이어를 탐색하던 도중 다음 3개의 명령을 확인하였다.
 
-<pre><code class="language-dockerfile hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-keyword">WORKDIR</span> /home/chall
+<pre><code class="language-dockerfile" highlighted><data class="code-line" value="1"><span class="hljs-keyword">WORKDIR</span> /home/chall
 </data><data class="code-line" value="2"><span class="hljs-keyword">RUN</span> /bin/sh -c <span class="hljs-built_in">touch</span> <span class="hljs-string">`python3 -c "print(open('./flag', 'r').read())"`</span>
 </data><data class="code-line" value="3"><span class="hljs-keyword">RUN</span> /bin/sh -c <span class="hljs-built_in">rm</span> <span class="hljs-number">*</span>
-</data></code></pre>
+</data></code><button class="copy-button"></button></pre>
 
 각 명령의 동작을 요약하면 다음과 같다.
 
@@ -217,7 +217,7 @@ dive가 실행되면 다음과 같은 화면이 나타난다.
 특정 정규식 표현과 일치하는 문자열을 입력하면 플래그가 출력되는 구조로 예상된다.  
 이후 첨부 파일을 다운로드하여 소스 코드를 확인해 보았다.
 
-<img src="/data/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/33.png" alt="Write-Up" style="padding: 0 10%; background-color: #24292F">
+![Write-Up](/data/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/33.png)
 
 플래그는 `FLAG` 변수에 저장되어 있고, 사용자가 입력한 문자열이 정규식 표현 `r'dr\w{5,7}e\d+am@[a-z]{3,7}\.\w+'`와 일치할 때 출력되는 것을 알 수 있다.
 

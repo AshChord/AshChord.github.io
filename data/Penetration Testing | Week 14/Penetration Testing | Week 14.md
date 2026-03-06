@@ -190,9 +190,9 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
 웹 셸이 실행되어 현재 디렉터리에 존재하는 파일들이 출력되었다. 다음으로 `flag.txt` 파일을 찾기 위해 `cmd` 파라미터의 값으로 다음 구문을 사용하였다.
 
-<pre><code class="language-bash hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment"># find: 파일/디렉터리 검색 명령어</span>
+<pre><code class="language-bash" highlighted><data class="code-line" value="1"><span class="hljs-comment"># find: 파일/디렉터리 검색 명령어</span>
 </data><data class="code-line" value="2"><span class="hljs-built_in">find</span> / -name <span class="hljs-string">"flag.txt"</span>
-</data></code></pre>
+</data></code><button class="copy-button"></button></pre>
 
 위의 명령문은 웹 서버의 루트 디렉터리(`/`)에서 이름이 `flag.txt`인 파일을 검색하여 해당 파일의 경로를 출력한다.
 

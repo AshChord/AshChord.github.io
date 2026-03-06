@@ -328,7 +328,7 @@ sudo systemctl restart apache2
   }
 </style>
 
-<pre><code class="language-php hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment">// get_score.php</span>
+<pre><code class="language-php" highlighted><data class="code-line" value="1"><span class="hljs-comment">// get_score.php</span>
 </data><data class="code-line" value="2">
 </data><data class="code-line" value="3"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"GET"</span>&gt;</span>
 </data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"name"</span>&gt;</span>Name:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
@@ -353,7 +353,7 @@ sudo systemctl restart apache2
 </data><data class="code-line" value="23" style="--indent: 4ch;">    <span class="hljs-keyword">echo</span> <span class="hljs-variable">$row</span>[<span class="hljs-string">'name'</span>] . <span class="hljs-string">"'s score is "</span> . <span class="hljs-variable">$row</span>[<span class="hljs-string">'score'</span>];
 </data><data class="code-line" value="24" style="--indent: 2ch;">  }
 </data><data class="code-line" value="25"><span class="hljs-meta">?&gt;
-</data></code></pre>
+</data></code><button class="copy-button"></button></pre>
 
 사용자가 이름을 입력하고 제출하면, 해당 이름과 일치하는 데이터를 데이터베이스에서 찾아 점수를 출력한다.
 `get_score.php`의 실행 결과는 아래와 같다.
@@ -388,7 +388,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 회원 가입 시 `username`이 중복될 경우 경고 메시지를 출력한다.  
 회원 가입이 완료되면 `login.php?sign_up=success`로 이동한다.
 
-<pre><code class="language-php hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment">// sign_up.php</span>
+<pre><code class="language-php" highlighted><data class="code-line" value="1"><span class="hljs-comment">// sign_up.php</span>
 </data><data class="code-line" value="2">
 </data><data class="code-line" value="3"><span class="hljs-meta">&lt;?php</span>
 </data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-comment">// Database connection settings</span>
@@ -463,7 +463,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 </data><data class="code-line" value="73" style="--indent: 4ch;">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </data><data class="code-line" value="74" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 </data><data class="code-line" value="75"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;
-</data></code></pre>
+</data></code><button class="copy-button"></button></pre>
 
 <br>
 
@@ -472,7 +472,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 회원 가입 완료 후 URL에 `sign_up=success` 쿼리 스트링이 포함된 경우, 알림 창을 통해 회원 가입 성공 메시지를 표시한다.  
 계정이 없는 사용자를 위해 회원 가입 페이지로 이동할 수 있는 링크가 포함되어 있다.
 
-<pre><code class="language-php hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment">// login.php</span>
+<pre><code class="language-php" highlighted><data class="code-line" value="1"><span class="hljs-comment">// login.php</span>
 </data><data class="code-line" value="2">
 </data><data class="code-line" value="3"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
 </data><data class="code-line" value="4"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"ko"</span>&gt;</span>
@@ -506,7 +506,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 </data><data class="code-line" value="32" style="--indent: 4ch;">    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </data><data class="code-line" value="33" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 </data><data class="code-line" value="34"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;
-</data></code></pre>
+</data></code><button class="copy-button"></button></pre>
 
 <br>
 
@@ -515,7 +515,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 `login.php`로부터 전달받은 아이디와 비밀번호를 데이터베이스에 저장된 정보와 비교하여 로그인 여부를 판별한다.  
 로그인 성공 시 성공 메시지를, 실패 시 실패 원인에 따라 다른 메시지를 출력한다.
 
-<pre><code class="language-php hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment">// login_proc.php</span>
+<pre><code class="language-php" highlighted><data class="code-line" value="1"><span class="hljs-comment">// login_proc.php</span>
 </data><data class="code-line" value="2">
 </data><data class="code-line" value="3"><span class="hljs-meta">&lt;?php</span>
 </data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-comment">// Database connection settings</span>
@@ -572,7 +572,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 </data><data class="code-line" value="55" style="--indent: 4ch;">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </data><data class="code-line" value="56" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 </data><data class="code-line" value="57"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;
-</data></code></pre>
+</data></code><button class="copy-button"></button></pre>
 
 <br>
 
@@ -590,7 +590,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
   }
 </style>
 
-<pre><code class="language-css hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment">/* style.css */</span>
+<pre><code class="language-css" highlighted><data class="code-line" value="1"><span class="hljs-comment">/* style.css */</span>
 </data><data class="code-line" value="2">
 </data><data class="code-line" value="3"><span class="hljs-selector-tag">body</span> {
 </data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-attribute">display</span>: flex;
@@ -647,7 +647,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 </data><data class="code-line" value="55" style="--indent: 4ch;">    <span class="hljs-attribute">text-decoration</span>: none;
 </data><data class="code-line" value="56" style="--indent: 2ch;">  }
 </data><data class="code-line" value="57">}
-</data></code></pre>
+</data></code><button class="copy-button"></button></pre>
 
 <br>
 

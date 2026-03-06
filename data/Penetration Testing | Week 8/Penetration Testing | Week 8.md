@@ -224,12 +224,12 @@ CTF를 해결하며 실제 웹 페이지와 유사한 환경에서 SQL Injection
 >
 > 사용 예시는 아래와 같다.
 >
-> <pre><code class="language-sql hljs" data-highlighted="yes"><data class="code-line" value="1"><span class="hljs-comment">/* Syntax */</span>
+> <pre><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-comment">/* Syntax */</span>
 > </data><data class="code-line" value="2"><span class="hljs-keyword">CASE</span> <span class="hljs-keyword">WHEN</span> condition <span class="hljs-keyword">THEN</span> result1 <span class="hljs-keyword">ELSE</span> result2 <span class="hljs-keyword">END</span>
 > </data><data class="code-line" value="3">
 > </data><data class="code-line" value="4"><span class="hljs-comment">/* Example */</span>
 > </data><data class="code-line" value="5"><span class="hljs-keyword">CASE</span> <span class="hljs-keyword">WHEN</span> x <span class="hljs-operator">&gt;</span> <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'pos'</span> <span class="hljs-keyword">ELSE</span> <span class="hljs-string">'neg'</span> <span class="hljs-keyword">END</span> <span class="hljs-comment">-- 반환값: 조건이 참이면 'pos', 거짓이면 'neg'</span>
-> </data></code></pre>
+> </data></code><button class="copy-button"></button></pre>
 
 ![SQL Injection Point 3](/data/Penetration%20Testing%20%7C%20Week%208/24.png)
 

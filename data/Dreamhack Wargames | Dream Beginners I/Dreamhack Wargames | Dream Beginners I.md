@@ -112,7 +112,7 @@ print(flag)
 
 그러자 `No!`라는 메시지가 출력되었다. `flag.txt`의 내용이 `No!`일 가능성은 낮으므로, 단순한 방법으로는 파일 내용을 확인할 수 없도록 처리되어 있는 듯했다. 정확한 서버 측 동작을 알아 내기 위해 첨부 파일을 다운로드하여 소스 코드를 확인해 보았다.
 
-<img src="/data/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/12.png" alt="Write-Up" style="padding: 0 10%; background-color: #24292F">
+![Write-Up](/data/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/12.png)
 
 첨부 파일을 다운로드하고 압축을 해제하면 `app.py` 파일을 확인할 수 있다. 참고로 웹 페이지에서 `cat app.py`를 입력해도 동일한 소스 코드가 출력된다.
 
