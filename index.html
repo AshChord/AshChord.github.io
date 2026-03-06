@@ -8,7 +8,7 @@
   <title>AshChord.log</title>
 
   <!-- Marked -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.7/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.12/marked.min.js"></script>
 
   <!-- Highlight -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
@@ -22,58 +22,55 @@
 
 <body>
   <header>
-    <nav>
-      <!-- Blog Title -->
-      <h1 class="blog-title">AshChord.log</h1>
+    <!-- Blog Title -->
+    <h1 class="blog-title">AshChord.log</h1>
 
-      <!-- Menu -->
-      <button class="menu-button"></button>
-      <div class="menu">
-        <p class="menu-item">Home</p>
-        <p class="menu-item">Posts</p>
-        <p class="menu-item">About</p>
-      </div>
+    <!-- Menu -->
+    <menu>
+      <li class="menu-item"><a href="/home">Home</a></li>
+      <li class="menu-item"><a href="/posts">Posts</a></li>
+      <li class="menu-item"><a href="/about">About</a></li>
+    </menu>
 
-      <!-- Search -->
-      <button class="search-button"></button>
-      <div class="search-bar">
+    <!-- Search -->
+    <search>
+      <form class="search-bar">
         <input type="text" name="keyword" class="search-input" placeholder="Keyword">
-        <div class="search-actions">
-          <button class="search-reset-button"></button>
-          <button type="submit" class="search-submit-button"></button>
-        </div>
-      </div>
-    </nav>
+        <button type="reset" class="search-reset-button"></button>
+        <button type="submit" class="search-submit-button"></button>
+      </form>
+    </search>
   </header>
 
   <main>
-    <article>
-      <!-- Feed -->
-      <div class="feed"></div>
+    <!-- Feed -->
+    <section class="feed"></section>
 
-      <!-- Content -->
-      <div class="content"></div>
+    <!-- Content -->
+    <article class="content"></article>
 
-      <!-- Pagination -->
-      <div class="pagination"></div>
-    </article>
-    <section class="category-dropdown">
-      <div class="category-dropdown-header">
-        <h2 class="category-dropdown-title">CATEGORIES</h2>
-        <button class="category-dropdown-button"></button>
-      </div>
-      <aside class="category-menu"></aside>
-    </section>
-    <section class="table-of-contents"></section>
+    <!-- Outline -->
+    <aside class="outline"></aside>
+
+    <!-- Pagination -->
+    <nav class="pagination"></nav>
+
+    <!-- Category Dropdown -->
+    <details class="category-dropdown">
+      <summary class="category-dropdown-button"></summary>
+      <h2 class="category-dropdown-title">CATEGORIES</h2>
+      <ul class="category-menu"></ul>
+    </details>
   </main>
 
   <!-- External JavaScript -->
+  <script src="/js/registry.js"></script>
   <script src="/js/toggle.js"></script>
   <script src="/js/search.js"></script>
   <script src="/js/paginate.js"></script>
   <script src="/js/render.js"></script>
   <script src="/js/router.js"></script>
-  <script src="/js/init.js"></script>
+  <script src="/js/initialize.js"></script>
 </body>
 
 </html>
