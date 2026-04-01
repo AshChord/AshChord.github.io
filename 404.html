@@ -1,32 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 
 <head>
-  <meta charset="utf-8">
-  <title>Single Page Apps for GitHub Pages</title>
-  <script type="text/javascript">
-    // Single Page Apps for GitHub Pages
-    // https://github.com/rafrex/spa-github-pages
-    // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
-    // ----------------------------------------------------------------------
-    // This script takes the current url and converts the path and query
-    // string into just a query string, and then redirects the browser
-    // to the new url with only a query string and hash fragment,
-    // e.g. http://www.foo.tld/one/two?a=b&c=d#qwe, becomes
-    // http://www.foo.tld/?p=/one/two&q=a=b~and~c=d#qwe
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/assets/favicon.svg" type="image/x-icon">
+  <title>AshChord.log</title>
 
-    var l = window.location;
-    l.replace(
-      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-      l.pathname.split('/').slice(0, 1).join('/') + '/?p=/' +
-      l.pathname.slice(1).replace(/&/g, '~and~') +
-      (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-      l.hash
-    );
-  </script>
+  <!-- Marked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.12/marked.min.js"></script>
+
+  <!-- Highlight -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css">
+
+  <!-- Style -->
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/markdown.css">
 </head>
 
 <body>
+  <header>
+    <!-- Blog Title -->
+    <h1 class="blog-title">AshChord.log</h1>
+
+    <!-- Menu -->
+    <menu>
+      <li class="menu-item"><a href="/home">Home</a></li>
+      <li class="menu-item"><a href="/posts">Posts</a></li>
+      <li class="menu-item"><a href="/about">About</a></li>
+    </menu>
+
+    <!-- Search -->
+    <search>
+      <form class="search-bar">
+        <input type="text" name="keyword" class="search-input" placeholder="Keyword">
+        <button type="reset" class="search-reset-button"></button>
+        <button type="submit" class="search-submit-button"></button>
+      </form>
+    </search>
+  </header>
+
+  <main>
+    <!-- Feed -->
+    <section class="feed"></section>
+
+    <!-- Content -->
+    <article class="content"></article>
+
+    <!-- Outline -->
+    <aside class="outline"></aside>
+
+    <!-- Pagination -->
+    <nav class="pagination"></nav>
+
+    <!-- Category Dropdown -->
+    <details class="category-dropdown">
+      <summary class="category-dropdown-button"></summary>
+      <h2 class="category-dropdown-title">CATEGORIES</h2>
+      <ul class="category-menu"></ul>
+    </details>
+  </main>
+
+  <!-- External JavaScript -->
+  <script src="/js/registry.js"></script>
+  <script src="/js/toggle.js"></script>
+  <script src="/js/search.js"></script>
+  <script src="/js/paginate.js"></script>
+  <script src="/js/render.js"></script>
+  <script src="/js/router.js"></script>
+  <script src="/js/initialize.js"></script>
 </body>
 
 </html>
