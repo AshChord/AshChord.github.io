@@ -10,147 +10,149 @@ header {
   margin: 0 auto;
   padding: 20px;
   align-items: center;
-
-  @media (max-width: 767px) {
-    padding: 16px;
-  }
 }
 
 .blog-title {
   margin: 0 auto 0 0;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
 
-  @media (max-width: 767px) {
-    font-size: 18px;
+  @media (min-width: 768px) {
+    font-size: 24px;
   }
 }
 
 menu {
-  display: flex;
+  display: block;
+  z-index: 10;
+  width: 24px;
+  height: 24px;
   margin: 0;
   padding: 0;
+  background-color: color-mix(white, transparent);
+  background-image: url("/assets/icon-dropdown-menu.svg");
+  background-position: center;
+  background-size: 100%;
+  background-blend-mode: lighten;
+  cursor: pointer;
+  user-select: none;
 
-  @media (max-width: 767px) {
-    display: block;
-    z-index: 10;
-    width: 24px;
-    height: 24px;
-    background-color: color-mix(white, transparent);
-    background-image: url("/assets/icon-dropdown-menu.svg");
-    background-position: center;
-    background-size: 100%;
-    background-blend-mode: lighten;
-    cursor: pointer;
-    user-select: none;
+  &:hover:not(:has(*:hover)) {
+    background-color: transparent;
+  }
 
-    > :last-child {
-      border-bottom: 1px solid gainsboro;
-    }
-
-    &:hover:not(:has(*:hover)) {
-      background-color: transparent;
-    }
+  @media (min-width: 768px) {
+    all: unset;
+    display: flex;
   }
 }
 
 .menu-item {
-  display: block;
-  margin: 16px 0 16px 40px;
+  display: none; 
+  box-sizing: border-box;
+  width: 100vw;
+  margin: 0 0 0 calc(104px - 100vw); 
+  padding: 20px 24px;
   background: white;
-  color: black;
   font-weight: 500;
-  line-height: 20px;
+  transform: translateY(40px);
   transition: color 0.3s ease;
   cursor: pointer;
   user-select: text;
 
-  a {
-    all: unset;
+  menu[open] & {
+    display: block;
+    animation: slideDown 0.3s ease-in-out forwards;
+
+    &:last-child {
+      border-bottom: 1px solid gainsboro;
+    }
   }
 
   &:hover {
     color: gray;
   }
 
-  @media (max-width: 767px) {
-    display: none;
-    width: 100vw;
-    margin: 0 auto 0 calc(104px - 100vw);
-    padding: 20px 24px;
-    transform: translateY(40px);
+  a {
+    all: unset;
+  }
 
-    menu[open] & {
-      display: block;
-      animation: slideDown 0.3s ease-out forwards;
-    }
+  @media (min-width: 768px) {
+    display: block;
+    width: auto;
+    margin-left: 40px; 
+    padding: 0;
+    transform: none;
   }
 }
 
 @keyframes slideDown {
   from {
-    height: 0;
+    height: 40px;
     opacity: 0;
   }
 
   to {
-    height: 20px;
+    height: 60px;
     opacity: 1;
   }
 }
 
 search {
+  width: 24px;
+  height: 24px;
+  margin-left: 40px;
+  padding: 0;
+  background-color: color-mix(white, transparent);
+  background-image: url("/assets/icon-search.svg");
+  background-position: center;
+  background-size: 100%;
+  background-blend-mode: lighten;
+  cursor: pointer;
+  user-select: none;
+
   &:hover:not(:has(*:hover)) {
     background-color: transparent;
   }
 
-  @media (max-width: 767px) {
-    width: 24px;
-    height: 24px;
-    margin-left: 40px;
-    padding: 0;
-    background-color: color-mix(white, transparent);
-    background-image: url("/assets/icon-search.svg");
-    background-position: center;
-    background-size: 100%;
-    background-blend-mode: lighten;
-    cursor: pointer;
-    user-select: none;
+  @media (min-width: 768px) {
+    all: unset;
   }
 }
 
 .search-bar {
-  display: block;
-  position: relative;
-  width: 320px;
-  margin-left: 40px;
+  display: none;
 
   &[open] {
     display: block;
     position: absolute;
     z-index: 10;
-    top: 69px;
-    right: 12px;
+    top: 64px;
+    right: 0;
     width: 320px;
     padding: 16px;
-    border: 1px solid gainsboro;
-    border-radius: 16px;
+    border-bottom: 1px solid gainsboro;
+    border-left: 1px solid gainsboro;
+    border-bottom-left-radius: 16px;
     background-color: white;
     cursor: auto;
   }
 
-  @media (max-width: 767px) {
-    display: none;
+  @media (min-width: 768px) {
+    display: block;
+    position: relative;
+    width: clamp(240px, 30vw, 320px);
+    margin-left: 40px;
   }
 }
 
 .search-input {
   box-sizing: border-box;
   width: 100%;
-  padding: 10px 20px;
+  padding: 12px 72px 12px 20px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   outline: 0;
   background-color: ghostwhite;
   box-shadow: 0 1px 2px gainsboro;
@@ -165,7 +167,7 @@ search {
 .search-reset-button {
   position: absolute;
   top: 50%;
-  right: 48px;
+  right: 64px;
   width: 16px;
   height: 16px;
   padding: 0;
@@ -182,15 +184,15 @@ search {
     background-color: darkgray;
   }
 
-  @media (max-width: 767px) {
-    right: 64px;
+  @media (min-width: 768px) {
+    right: 48px;
   }
 }
 
 .search-submit-button {
   position: absolute;
   top: 50%;
-  right: 16px;
+  right: 32px;
   width: 21px;
   height: 21px;
   padding: 0;
@@ -205,7 +207,7 @@ search {
     background-color: black;
   }
 
-  @media (max-width: 767px) {
-    right: 32px;
+  @media (min-width: 768px) {
+    right: 16px;
   }
 }

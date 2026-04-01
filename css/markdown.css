@@ -62,7 +62,7 @@
   blockquote {
     margin: 32px 0;
     padding: 20px 24px;
-    border-left: 4px solid #a78bfa;
+    border-left: 4px solid mediumslateblue;
     background-color: ghostwhite;
 
     > :first-child {
@@ -225,23 +225,20 @@
 }
 
 .outline {
-  display: block;
+  display: none;
   grid-column-start: 1;
   grid-row-start: 1;
   justify-self: end;
   position: sticky;
-  box-sizing: border-box;
-  width: 350px;
+  top: calc(50vh - var(--height) / 2);
+  width: calc(50vw - 550px);
   height: fit-content;
   max-height: 100vh;
-  margin-top: 275px;
-  margin-right: calc(25vw - 405px);
+  margin: 275px 50px 0 0;
   padding-left: 16px;
-  overflow: auto;
   border-left: 1px solid gainsboro;
   font-size: 14px;
   line-height: 28px;
-  overscroll-behavior: contain;
 
   ul {
     margin: 0;
@@ -252,7 +249,7 @@
   a {
     color: darkgray;
     text-decoration: none;
-    transition: color 0.2s ease, font-size 0.2s ease, font-weight 0.2s ease;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
 
     &:hover {
       text-decoration: underline;
@@ -260,12 +257,11 @@
 
     &.current {
       color: dimgray;
-      font-size: 15px;
-      font-weight: bold;
+      text-shadow: 0 0 1px;
     }
   }
 
-  @media (max-width: 1536px) {
-    display: none;
+  @media (min-width: 1536px) {
+    display: block;
   }
 }

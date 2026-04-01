@@ -6,46 +6,45 @@ main {
 
 .feed {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px 25px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
   grid-column-start: 1;
   grid-row-start: 1;
   box-sizing: border-box;
   max-width: 1200px;
-  margin: 60px auto 20px;
-  padding: 0 20px;
+  margin: 32px 0 20px;
+  padding: 0 32px;
 
-  @media (max-width: 1023px) {
+  @media (min-width: 768px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px 25px;
-    margin-top: 60px 0 20px;
+    gap: 28px;
+    margin: 60px 0 20px;
   }
 
-  @media (max-width: 767px) {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
-    margin: 32px 0 20px;
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    margin: 60px auto 20px;
   }
 
   .not-found,
   .no-results {
     grid-column: 1 / -1;
-    padding: 50px;
+    padding: 48px;
     text-align: center;
   }
 }
 
 .feed-item {
   padding: 24px;
-  border-radius: 12px;
   background-color: white;
   box-shadow: 0 2px 8px gainsboro;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 4px 16px darkgray;
-    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 16px lightgray;
+    transform: translateY(-8px);
   }
 }
 
@@ -53,7 +52,6 @@ main {
   width: 100%;
   height: 200px;
   margin: 0 0 12px 0;
-  border-radius: 16px;
   object-fit: cover;
   object-position: center;
 }
@@ -96,24 +94,23 @@ main {
   font-weight: 500;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   cursor: pointer;
-}
 
-.category:hover {
-  background-color: color-mix(mediumslateblue 70%, white 30%);
-  color: white;
+  &:hover {
+    background-color: color-mix(mediumslateblue 70%, white 30%);
+    color: white;
+  }
 }
 
 .content {
   grid-column-start: 1;
   grid-row-start: 1;
   max-width: 800px;
-  margin: 84px auto 0 auto;
+  margin: 56px auto 0 auto;
   padding: 0 20px;
 
-  @media (max-width: 767px) {
-    margin-top: 56px;
+  @media (min-width: 768px) {
+    margin-top: 84px;
   }
-
 }
 
 .pagination {
@@ -221,8 +218,7 @@ main {
 }
 
 .category-dropdown {
-  display: flex;
-  flex-direction: column;
+  display: none;
   grid-column-start: 1;
   grid-row-start: 1;
   justify-self: end;
@@ -231,12 +227,13 @@ main {
   height: fit-content;
   margin: 32px;
   border: 1px solid gainsboro;
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: white;
   user-select: none;
 
-  @media (max-width: 767px) {
-    display: none;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
   }
 }
 
