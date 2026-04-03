@@ -55,29 +55,37 @@ function loadFromCache(key) {
   return JSON.parse(localStorage.getItem(key) || '[]');
 }
 
-// Initialize posts
+// Initialize application and log key runtime events
 async function initialize() {
+  const logStyle = 'color: var(--sys-color-token-subtle); font-style: italic;';
+  console.clear();
+
   let postMeta = [], postList = [];
 
   // Check post metadata
   if (isCacheValid('postMeta', 1000 * 60 * 10)) {
     postMeta = loadFromCache('postMeta');
+    console.log('%cCache was validated: postList, postMeta', logStyle);
   } else {
     // Check post list if post metadata missing
     if (isCacheValid('postList', 1000 * 60 * 60)) {
       postList = loadFromCache('postList');
+      console.log('%cCache was validated: postList', logStyle);
     } else {
       // Fetch post list from GitHub API if no cache
       postList = await fetchPostList();
       saveToCache('postList', postList);
+      console.log('%cCache was updated: postList', logStyle);
     }
 
     postMeta = await compilePostMeta(postList);
     postMeta.sort((a, b) => new Date(b.date) - new Date(a.date));
     saveToCache('postMeta', postMeta);
+    console.log('%cCache was updated: postMeta', logStyle);
   }
 
   $.posts.push(...postMeta);
+  console.log('%cDataset was synchronized: %s', logStyle, `${$.posts.length} posts`);
 
   // Organize posts by category for quick lookup
   $.postsByCat = Object.entries(
@@ -92,7 +100,12 @@ async function initialize() {
   );
 
   router();
+  const currRoute = window.location.pathname + window.location.search;
+  console.log('%cRoute was resolved: %s', logStyle, currRoute);
+
   renderCategoryDropdown();
+
+  console.log('%cRuntime was initialized', logStyle);
 }
 
 initialize();

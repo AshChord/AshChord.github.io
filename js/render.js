@@ -23,6 +23,10 @@ function renderFeed(postsToRender = $.posts, currPage = 1) {
     const feedItem = document.createElement('article');
     feedItem.className = 'feed-item';
 
+    const preview = document.createElement('a');
+    preview.href = `/posts/${post.title}`;
+    preview.className = 'preview';
+
     const thumbnail = document.createElement('img');
     thumbnail.src = `/data/${post.title}/thumbnail.png`;
     thumbnail.alt = post.title;
@@ -39,17 +43,19 @@ function renderFeed(postsToRender = $.posts, currPage = 1) {
     const catDiv = document.createElement('div');
     catDiv.className = 'category-list';
     post.categories.forEach(category => {
-      const span = document.createElement('span');
-      span.className = 'category';
-      span.textContent = category;
-      catDiv.appendChild(span);
+      const catLink = document.createElement('a');
+      catLink.href = `/posts?category=${category}`
+      catLink.className = 'category';
+      catLink.textContent = category;
+      catDiv.appendChild(catLink);
     });
 
     const date = document.createElement('p');
     date.className = 'date';
     date.textContent = post.date;
 
-    feedItem.append(thumbnail, title, excerpt, catDiv, date);
+    preview.append(thumbnail, title, excerpt, date);
+    feedItem.append(preview, catDiv);
     $.feed.appendChild(feedItem);
   });
 }
@@ -166,15 +172,14 @@ function renderCode() {
 
   // Breaks long inline code into smaller chunks for better readability
   document.querySelectorAll('code:not(pre code)').forEach((code) => {
-    const tokens = code.textContent.split(/([^a-zA-Z0-9\s])/g);
+    const tokens = code.textContent.split(/([^a-zA-Z0-9\s])/g).filter(Boolean);
 
-    const brknTokens = tokens.map((token, i) => {
-      if (token === "") return null;
+    const brknTokens = tokens.flatMap((token, i) => {
       if (i === 0) return token;
 
       const wbr = document.createElement('wbr');
       return [wbr, token];
-    }).filter(Boolean).flat();
+    });
 
     code.replaceChildren(...brknTokens);
   });
@@ -208,15 +213,14 @@ function renderoutline() {
   });
 
   $.otl.appendChild(ul);
+  
+  // Calculate height of heading list and hide outline if it overflows viewport
+  $.otl.style.setProperty('--height', `${ul.offsetHeight}px`);
+  if (window.innerHeight < ul.offsetHeight) $.otl.style.visibility = 'hidden';
 
-  window.dispatchEvent(new Event('resize'));
+  // Initialize current heading
   currHdgIdx = -1;
 }
-
-// Adjust outline to stay vertically centered
-window.addEventListener('resize', () => {
-  $.otl.style.top = `${Math.max(window.innerHeight - $.otl.offsetHeight) / 2}px`;
-});
 
 // Highlight current heading in outline based on scroll position
 let currHdgIdx = -1;

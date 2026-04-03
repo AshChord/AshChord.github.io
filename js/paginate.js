@@ -1,4 +1,4 @@
-// Initialize pagination state
+// Default pagination state
 let pgnData = { currPage: 1, totalPages: 0, pageLimit: 5, postLimit: 6 };
 const { pageLimit, postLimit } = pgnData;
 

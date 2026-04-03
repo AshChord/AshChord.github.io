@@ -24,6 +24,7 @@ $.srchBar.addEventListener('submit', (e) => {
   router();
 
   $.srchInp.value = '';
+  toggleResetButton();
   $.srchInp.blur();
   $.srchBar.classList.remove('open');
 });

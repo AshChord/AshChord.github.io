@@ -23,5 +23,10 @@ window.addEventListener('resize', () => {
   }
 });
 
+// Toggle outline visibility
+window.addEventListener('resize', () => {
+  $.otl.style.visibility = window.innerHeight < $.otl.scrollHeight ? 'hidden' : 'visible';
+});
+
 // Close category dropdown on back/forward navigation
-window.addEventListener('popstate', () => {$.catDd.removeAttribute('open');});
+window.addEventListener('popstate', () => $.catDd.removeAttribute('open'));
