@@ -85,10 +85,11 @@ async function renderContent(post) {
   catList.classList.add('category-list');
 
   post.categories.forEach(category => {
-    const span = document.createElement('span');
-    span.classList.add('category');
-    span.textContent = category;
-    catList.appendChild(span);
+    const catLink = document.createElement('a');
+    catLink.href = `/posts?category=${category}`
+    catLink.className = 'category';
+    catLink.textContent = category;
+    catList.appendChild(catLink);
   });
 
   const title = document.createElement('h1');
@@ -167,7 +168,7 @@ function renderCode() {
       setTimeout(() => copyBtn.classList.remove("copied"), 2000);
     };
 
-    pre.appendChild(copyBtn);
+    pre.prepend(copyBtn);
   });
 
   // Breaks long inline code into smaller chunks for better readability
@@ -260,35 +261,28 @@ function renderCategoryDropdown() {
   // Create category items
   const catMenuFrag = document.createDocumentFragment();
 
-  $.postsByCat.sort(([a], [b]) => a.localeCompare(b)).forEach(([name, posts]) => {
+  $.postsByCat.sort(([a], [b]) => a.localeCompare(b)).forEach(([category, posts]) => {
     const li = document.createElement("li");
     li.className = "category-menu-item";
 
+    const catLink = document.createElement('a');
+    catLink.href = `/posts?category=${category}`;
+
     const catName = document.createElement("span");
     catName.className = "category-name";
-    catName.textContent = name;
+    catName.textContent = category;
 
     const catCount = document.createElement("span");
     catCount.className = "count";
     catCount.textContent = `(${posts.length})`;
 
-    li.append(catName, catCount);
+    catLink.append(catName, catCount);
+    li.append(catLink);
     catMenuFrag.appendChild(li);
   });
 
   $.catMenu.appendChild(catMenuFrag);
 }
-
-// Handle category item click events
-$.catMenu.addEventListener('click', (e) => {
-  const catItem = e.target.closest('.category-menu-item');
-  if (catItem) {
-    const cat = catItem.querySelector(".category-name").textContent;
-    $.catDd.open = false;
-    history.pushState(null, null, `/posts?category=${encodeURIComponent(cat)}`);
-    router();
-  }
-});
 
 // Render 404 page
 function renderNotFound() {

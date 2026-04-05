@@ -19,75 +19,44 @@ function renderPagination() {
     return;
   }
 
-  // Helper function to create a pagination button
-  const createBtn = (clsName, isActive, text = '') => {
-    const btn = document.createElement('button');
-    btn.className = clsName;
-    btn.disabled = !isActive;
-    if (text) btn.textContent = text;
-    return btn;
+  // Helper function to create a pagination link
+  const createPageLink = (page, clsName, isActive, text = '') => {
+    const pageLink = document.createElement('a');
+    pageLink.href = `/posts?page=${page}`;
+    pageLink.className = clsName;
+    if (!isActive) pageLink.removeAttribute('href');
+    pageLink.textContent = text;
+    return pageLink;
   };
 
-  // Create each button and append to pagination
+  // Create each link and append to pagination
   const pgnFrag = document.createDocumentFragment();
 
   const currGroup = Math.ceil(currPage / pageLimit);
   const startPage = (currGroup - 1) * pageLimit + 1;
   const endPage = Math.min(startPage + pageLimit - 1, totalPages);
 
-  pgnFrag.appendChild(createBtn('page-first', currPage !== 1));
-  pgnFrag.appendChild(createBtn('page-prev', currGroup !== 1));
+  const pageFirstLink = createPageLink(
+    1, 'page-first', currPage !== 1
+  );
+  const pagePrevLink = createPageLink(
+    (currGroup - 2) * pageLimit + 1, 'page-prev', currGroup !== 1
+  );
+  const pageNextLink = createPageLink(
+    currGroup * pageLimit + 1, 'page-next', endPage !== totalPages
+  );
+  const pageLastLink = createPageLink(
+    totalPages, 'page-last', currPage !== totalPages
+  );
 
-  const ul = document.createElement('ul');
-  ul.className = 'page-list';
-
+  const pageList = document.createElement('div');
+  pageList.className = 'page-list';
   for (let i = startPage; i <= endPage; i++) {
-    const li = document.createElement('li');
-
-    const pageNumBtn = createBtn('page-number', currPage !== i, i);
-    if (currPage === i) pageNumBtn.classList.add('current');
-
-    li.appendChild(pageNumBtn);
-    ul.appendChild(li);
+    const pageNumLink = createPageLink(i, 'page-number', currPage !== i, i);
+    if (currPage === i) pageNumLink.classList.add('current');
+    pageList.appendChild(pageNumLink);
   }
-  pgnFrag.appendChild(ul);
 
-  pgnFrag.appendChild(createBtn('page-next', endPage !== totalPages));
-  pgnFrag.appendChild(createBtn('page-last', currPage !== totalPages));
-
+  pgnFrag.append(pageFirstLink, pagePrevLink, pageList, pageNextLink, pageLastLink);
   $.pgn.replaceChildren(pgnFrag);
 }
-
-// Handle click events on pagination buttons
-function updatePagination(e) {
-  const { currPage, totalPages } = pgnData;
-
-  // Determine new page based on button type
-  const pageBtn = e.target.closest('button');
-  const navType = pageBtn.className;
-  const currGroup = Math.ceil(currPage / pageLimit);
-
-  if (!pageBtn || pageBtn.disabled) return;
-
-  let newPage;
-
-  switch (navType) {
-    case 'page-number': newPage = parseInt(pageBtn.textContent); break;
-    case 'page-first': newPage = 1; break;
-    case 'page-last': newPage = totalPages; break;
-    case 'page-prev': newPage = (currGroup - 2) * pageLimit + 1; break;
-    case 'page-next': newPage = currGroup * pageLimit + 1; break;
-  }
-
-  // Clamp new page to valid range
-  pgnData.currPage = Math.max(1, Math.min(newPage, totalPages));
-
-  // Handle routing when the page changes
-  const srchParams = new URLSearchParams(window.location.search);
-  srchParams.set("page", pgnData.currPage);
-  history.pushState(null, null, `/posts?${srchParams.toString()}`);
-  renderPagination();
-  router();
-}
-
-$.pgn.addEventListener('click', updatePagination);

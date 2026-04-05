@@ -25,6 +25,7 @@ window.addEventListener('resize', () => {
 
 // Toggle outline visibility
 window.addEventListener('resize', () => {
+  $.otl.style.setProperty('--height', `${$.otl.scrollHeight}px`);
   $.otl.style.visibility = window.innerHeight < $.otl.scrollHeight ? 'hidden' : 'visible';
 });
 
