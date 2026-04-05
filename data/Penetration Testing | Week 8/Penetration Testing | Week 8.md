@@ -75,15 +75,15 @@ if (isValidUsername($user_input)) {
 
 #### 모의 해킹 수행 시 유의 사항
 
-##### 데이터 조작 기반 SQL 구문 테스트 시 안전성 고려
+##### 데이터 조작 구문(DML) 분석
 
 `INSERT`, `DELETE`, `UPDATE` 구문을 대상으로 하는 보안 취약점 분석은 원칙적으로 지양하는 것이 바람직하며, 불가피한 경우에도 최대한의 주의가 요구된다. 특히, `OR` 연산자나 주석 기호 등을 페이로드에 삽입하는 행위는 데이터베이스에 예기치 못한 영향을 초래할 가능성이 있으므로 반드시 신중하게 접근해야 한다. 가능한 한 `AND` 연산자 정도만을 사용하여 테스트하는 것이 상대적으로 안전한 방법으로 권장된다.
 
-##### 주석 기호 사용 최소화 및 구조 중심 접근 권장
+##### 주석 기호 오남용 방지
 
 주석 기호는 SQL Injection 공격 수행 시 강력한 도구가 될 수 있으나, 그 사용은 절제되어야 하며 남용해서는 안 된다. 주석을 이용하여 불필요한 쿼리의 일부를 제거하기보다는, 전체 쿼리 구조를 예측한 후 해당 구조에 부합하는 방식으로 페이로드를 작성하는 것이 보다 안전하고 바람직하다. 이는 특히 실제 운영 환경의 SQL 쿼리가 복수의 행으로 구성되어 있고 복잡한 경우가 많다는 점에서 더욱 그러하며, 이로 인해 주석 기호의 정확한 작동 방식이 예측하기 어려운 경우도 존재하기 때문이다.
 
-##### 식별된 취약점을 이용한 데이터 무결성 훼손 금지
+##### 취약점 식별 후 데이터 무결성 보장
 
 SQL Injection 취약점이 식별되었더라도, 이로 인해 데이터베이스에 저장된 정보를 임의로 변조하거나 삭제하는 행위는 절대적으로 금지된다. 개인정보의 변경, 새로운 사용자 계정의 생성, 또는 기타 시스템 상태를 변경하는 행위는 윤리적·법적 문제를 수반할 수 있으며, 이에 따라 해당 행위는 보안 분석의 범위를 명백히 벗어나는 것으로 간주된다.
 
@@ -103,7 +103,7 @@ CTF를 해결하며 실제 웹 페이지와 유사한 환경에서 SQL Injection
 
 ##### SQL Injection Point 1
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%208/2.png" alt="SQL Injection Point 1" style="padding: 0 200px; background-color: white">
+<img src="/data/Penetration%20Testing%20%7C%20Week%208/2.png" alt="SQL Injection Point 1" style="padding: 0 25%; background-color: white">
 
 링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
 
@@ -161,7 +161,7 @@ CTF를 해결하며 실제 웹 페이지와 유사한 환경에서 SQL Injection
 
 ##### SQL Injection Point 2
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%208/12.png" alt="SQL Injection Point 2" style="padding: 0 200px; background-color: white">
+<img src="/data/Penetration%20Testing%20%7C%20Week%208/12.png" alt="SQL Injection Point 2" style="padding: 0 25%; background-color: white">
 
 링크의 주소로 접속하면 SQL Injection Point 1과 동일한 회원제 게시판 애플리케이션으로 이동한다.
 
@@ -206,7 +206,7 @@ CTF를 해결하며 실제 웹 페이지와 유사한 환경에서 SQL Injection
 
 ##### SQL Injection Point 3
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%208/22.png" alt="SQL Injection Point 3" style="padding: 0 200px; background-color: white">
+<img src="/data/Penetration%20Testing%20%7C%20Week%208/22.png" alt="SQL Injection Point 3" style="padding: 0 25%; background-color: white">
 
 링크의 주소로 접속하면 마찬가지로 회원제 게시판 애플리케이션으로 이동한다.
 
@@ -224,12 +224,12 @@ CTF를 해결하며 실제 웹 페이지와 유사한 환경에서 SQL Injection
 >
 > 사용 예시는 아래와 같다.
 >
-> <pre><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-comment">/* Syntax */</span>
+> <pre><button class="copy-button"></button><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-comment">/* Syntax */</span>
 > </data><data class="code-line" value="2"><span class="hljs-keyword">CASE</span> <span class="hljs-keyword">WHEN</span> condition <span class="hljs-keyword">THEN</span> result1 <span class="hljs-keyword">ELSE</span> result2 <span class="hljs-keyword">END</span>
 > </data><data class="code-line" value="3">
 > </data><data class="code-line" value="4"><span class="hljs-comment">/* Example */</span>
 > </data><data class="code-line" value="5"><span class="hljs-keyword">CASE</span> <span class="hljs-keyword">WHEN</span> x <span class="hljs-operator">&gt;</span> <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'pos'</span> <span class="hljs-keyword">ELSE</span> <span class="hljs-string">'neg'</span> <span class="hljs-keyword">END</span> <span class="hljs-comment">-- 반환값: 조건이 참이면 'pos', 거짓이면 'neg'</span>
-> </data></code><button class="copy-button"></button></pre>
+> </data></code></pre>
 
 ![SQL Injection Point 3](/data/Penetration%20Testing%20%7C%20Week%208/24.png)
 
@@ -291,7 +291,7 @@ while True:
 
 ##### SQL Injection Point 4
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%208/27.png" alt="SQL Injection Point 4" style="padding: 0 200px; background-color: white">
+<img src="/data/Penetration%20Testing%20%7C%20Week%208/27.png" alt="SQL Injection Point 4" style="padding: 0 25%; background-color: white">
 
 링크의 주소로 접속하면 마찬가지로 회원제 게시판 애플리케이션으로 이동한다.
 

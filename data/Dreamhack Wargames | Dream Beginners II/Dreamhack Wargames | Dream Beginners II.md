@@ -173,10 +173,10 @@ dive가 실행되면 다음과 같은 화면이 나타난다.
 
 각 레이어를 탐색하던 도중 다음 3개의 명령을 확인하였다.
 
-<pre><code class="language-dockerfile" highlighted><data class="code-line" value="1"><span class="hljs-keyword">WORKDIR</span> /home/chall
+<pre><button class="copy-button"></button><code class="language-dockerfile" highlighted><data class="code-line" value="1"><span class="hljs-keyword">WORKDIR</span> /home/chall
 </data><data class="code-line" value="2"><span class="hljs-keyword">RUN</span> /bin/sh -c <span class="hljs-built_in">touch</span> <span class="hljs-string">`python3 -c "print(open('./flag', 'r').read())"`</span>
 </data><data class="code-line" value="3"><span class="hljs-keyword">RUN</span> /bin/sh -c <span class="hljs-built_in">rm</span> <span class="hljs-number">*</span>
-</data></code><button class="copy-button"></button></pre>
+</data></code></pre>
 
 각 명령의 동작을 요약하면 다음과 같다.
 
