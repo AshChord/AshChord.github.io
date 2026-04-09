@@ -28,7 +28,7 @@ function renderFeed(postsToRender = $.posts, currPage = 1) {
     preview.className = 'preview';
 
     const thumbnail = document.createElement('img');
-    thumbnail.src = `/data/${post.title}/thumbnail.png`;
+    thumbnail.src = `/data/${post.title}/thumbnail.webp`;
     thumbnail.alt = post.title;
     thumbnail.className = 'thumbnail';
 
@@ -78,7 +78,7 @@ async function renderContent(post) {
   $.pgn.replaceChildren();
 
   // Create and append post header
-  const postHdr = document.createElement('div');
+  const postHdr = document.createElement('header');
   postHdr.classList.add('post-header');
 
   const catList = document.createElement('div');
@@ -102,7 +102,7 @@ async function renderContent(post) {
 
   const thumbnail = document.createElement('img');
   thumbnail.classList.add('thumbnail');
-  thumbnail.src = `/data/${post.title}/thumbnail.png`;
+  thumbnail.src = `/data/${post.title}/thumbnail.webp`;
   thumbnail.alt = post.title;
 
   postHdr.append(catList, title, date, thumbnail);
@@ -114,7 +114,7 @@ async function renderContent(post) {
   const htmlText = marked.parse(mdText);
 
   // Append parsed HTML content to post body
-  const postBody = document.createElement('div');
+  const postBody = document.createElement('section');
   const htmlTextFrag = document.createRange().createContextualFragment(htmlText);
   postBody.classList.add('post-body');
   postBody.appendChild(htmlTextFrag);
@@ -188,7 +188,7 @@ function renderCode() {
 
 // Render outline based on headings in post
 function renderoutline() {
-  const hdgs = $.cont.querySelectorAll('h3, h4, h5, h6');
+  const hdgs = $.cont.querySelectorAll('h2, h3, h4, h5, h6');
   const ul = document.createElement('ul');
 
   hdgs.forEach((hdg, idx) => {
@@ -196,7 +196,7 @@ function renderoutline() {
 
     // Create heading list with link
     const listItem = document.createElement('li');
-    const indentLevel = parseInt(hdg.tagName.substring(1)) - 3;
+    const indentLevel = parseInt(hdg.tagName.substring(1)) - 2;
     listItem.style.paddingLeft = `${indentLevel * 12}px`;
 
     const linkToHdg = document.createElement('a');
