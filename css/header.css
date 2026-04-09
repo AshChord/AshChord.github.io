@@ -1,15 +1,20 @@
 body {
   margin: 0;
+  font-size: 14px;
   font-family: system-ui;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 }
 
 header {
   display: flex;
+  align-items: center;
   box-sizing: border-box;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  align-items: center;
+  padding: 20px 32px;
 }
 
 .blog-title {
@@ -50,10 +55,10 @@ menu {
 }
 
 .menu-item {
-  display: none; 
+  display: none;
   box-sizing: border-box;
   width: 100vw;
-  margin: 0 0 0 calc(104px - 100vw); 
+  margin: 0 0 0 calc(104px - 100vw);
   padding: 20px 24px;
   background: white;
   font-weight: 500;
@@ -82,7 +87,7 @@ menu {
   @media (min-width: 768px) {
     display: block;
     width: auto;
-    margin-left: 40px; 
+    margin-left: 40px;
     padding: 0;
     transform: none;
   }
