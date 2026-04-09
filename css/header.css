@@ -14,7 +14,11 @@ header {
   box-sizing: border-box;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px 32px;
+  padding: 20px;
+
+  @media (min-width: 768px) {
+    padding: 20px 32px;
+  }
 }
 
 .blog-title {
@@ -40,12 +44,12 @@ menu {
   background-image: url("/assets/icon-dropdown-menu.svg");
   background-position: center;
   background-size: 100%;
-  background-blend-mode: lighten;
+  box-shadow: inset 0 0 0 12px color-mix(white, transparent);
   cursor: pointer;
   user-select: none;
 
   &:hover:not(:has(*:hover)) {
-    background-color: transparent;
+    box-shadow: none;
   }
 
   @media (min-width: 768px) {
@@ -58,11 +62,11 @@ menu {
   display: none;
   box-sizing: border-box;
   width: 100vw;
-  margin: 0 0 0 calc(104px - 100vw);
+  margin: 0 0 0 calc(108px - 100vw);
   padding: 20px 24px;
   background: white;
   font-weight: 500;
-  transform: translateY(40px);
+  transform: translateY(44px);
   transition: color 0.3s ease;
   cursor: pointer;
   user-select: text;

@@ -281,19 +281,17 @@
     margin: 0 0 6px 6px;
     border: 1px solid gainsboro;
     border-radius: 4px;
-    background-color: color-mix(white, transparent);
+    background-color: white;
     background-image: url("/assets/icon-copy.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 60%;
-    background-blend-mode: lighten;
-    backdrop-filter: brightness(200%);
-    box-shadow: 0px 2px 4px gainsboro;
+    box-shadow: 0 2px 4px gainsboro, inset 0 0 0 16px color-mix(white, transparent);
     cursor: pointer;
-    transform: scale(1.2) translateZ(0);
+    transform: scale(1.2);
 
     &:hover {
-      background-color: transparent;
+      box-shadow: 0 2px 4px gainsboro;
     }
 
     &.copied {
@@ -305,8 +303,12 @@
       height: 28px;
       margin: 0 0 8px 8px;
       border-radius: 6px;
-      box-shadow: 0px 4px 8px gainsboro;
-      transform: scale(1.5) translateZ(0);
+      box-shadow: 0 4px 8px gainsboro, inset 0 0 0 16px color-mix(white, transparent);
+      transform: scale(1.5);
+
+      &:hover {
+        box-shadow: 0 4px 8px gainsboro;
+      }
     }
   }
 
