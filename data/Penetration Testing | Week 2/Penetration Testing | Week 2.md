@@ -5,9 +5,9 @@ excerpt: 데이터베이스 연동 및 기본 SQL 쿼리 구조
 categories: 모의 해킹
 ---
 
-### 강의 노트
+## 강의 노트
 
-#### 로그인 페이지 구조
+### 로그인 페이지 구조
 
 1주 차 과제로 PHP를 활용해 간단한 로그인 페이지를 제작했다.  
 이번에는 실제 서비스 구조에 조금 더 가까운 흐름을 설계해 보자.
@@ -64,7 +64,7 @@ if (isset($_POST['Submit'])) {
 
 ---
 
-#### 데이터베이스
+### 데이터베이스
 
 **데이터베이스**란 웹 애플리케이션에서 필요한 데이터를 저장 및 관리하는 시스템을 말한다. 흔히 사용하는 엑셀 프로그램과 구조적으로 유사한 점이 있는데, 데이터베이스의 주요 개념은 엑셀의 구성 요소와 다음과 같이 비교할 수 있다.
 
@@ -107,7 +107,7 @@ if (isset($_POST['Submit'])) {
 
 ---
 
-#### SQL
+### SQL
 
 <strong>SQL(Structured Query Language)</strong>은 데이터베이스를 관리하고 조작하기 위해 사용하는 언어이다.  
 SQL의 간단한 명령어들을 실행 예시와 함께 알아보자.
@@ -124,7 +124,7 @@ SQL의 간단한 명령어들을 실행 예시와 함께 알아보자.
 
 <br>
 
-##### SELECT: 데이터 조회
+#### SELECT: 데이터 조회
 
 ```sql
 /* Syntax */
@@ -150,7 +150,7 @@ SELECT stock_symbol, company_name FROM stock_list;
 
 <br>
 
-##### INSERT: 데이터 삽입
+#### INSERT: 데이터 삽입
 
 ```sql
 /* Syntax */
@@ -177,7 +177,7 @@ INSERT INTO stock_list VALUES (6, 'ORCL', 'Oracle', 'NYSE'); -- 컬럼명 생략
 
 <br>
 
-##### WHERE: 조건 지정
+#### WHERE: 조건 지정
 
 ```sql
 /* Syntax */
@@ -199,7 +199,7 @@ SELECT * FROM stock_list WHERE market = 'NASDAQ' AND stock_symbol = 'AAPL';
 
 ---
 
-#### PHP - MySQL 연동
+### PHP - MySQL 연동
 
 MySQL을 통해 `dev` 데이터베이스를 생성한 후, 다음과 같은 `score` 테이블을 추가하였다.
 
@@ -262,15 +262,15 @@ PHP 코드에서 위 테이블의 데이터를 사용하려면 어떻게 해야 
 
 `db_check.php` 파일의 실행 결과는 다음과 같다.
 
-![db_check.php](/data/Penetration%20Testing%20%7C%20Week%202/1.png)
+![db_check.php](/data/Penetration%20Testing%20%7C%20Week%202/1.webp)
 
 <br>
 <br>
 <br>
 
-### 과제
+## 과제
 
-#### phpMyAdmin
+### phpMyAdmin
 
 **phpMyAdmin**은 웹 브라우저를 통해 데이터베이스를 관리할 수 있는 GUI 기반 도구이다.  
 CLI보다 접근성이 좋고 직관적이기 때문에 설치해두면 매우 유용하다.
@@ -279,7 +279,7 @@ phpMyAdmin은 다음 절차를 통해 사용할 수 있다.
 
 <br>
 
-##### 1\. phpMyAdmin 설치
+#### 1\. phpMyAdmin 설치
 
 터미널에서 다음 명령어를 실행한다.
 
@@ -289,7 +289,7 @@ sudo apt install phpmyadmin
 
 <br>
 
-##### 2\. 심볼릭 링크 설정
+#### 2\. 심볼릭 링크 설정
 
 phpMyAdmin의 기본 경로는 `/usr/share/phpmyadmin`이다. 이를 Apache의 웹 서버 디렉터리인 `/var/www/html`에 심볼릭 링크로 연결하여 웹 브라우저에서 phpMyAdmin에 접근할 수 있도록 한다.
 
@@ -303,7 +303,7 @@ sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
 
 <br>
 
-##### 3\. Apache 웹 서버 재시작
+#### 3\. Apache 웹 서버 재시작
 
 심볼릭 링크를 생성한 후 Apache 웹 서버를 재시작한다.
 
@@ -313,11 +313,11 @@ sudo systemctl restart apache2
 
 이제 웹 브라우저에서 `http://x.x.x.x/phpmyadmin`을 입력하여 phpMyAdmin에 접속할 수 있다.  
 
-![phpMyAdmin](/data/Penetration%20Testing%20%7C%20Week%202/2.png)
+![phpMyAdmin](/data/Penetration%20Testing%20%7C%20Week%202/2.webp)
 
 ---
 
-#### 점수 조회 페이지
+### 점수 조회 페이지
 
 위의 `score` 테이블을 사용하여, GET 방식으로 이름을 전달받아 점수를 출력하는 코드를 만들어 보자.  
 `db_test.php`를 약간 수정하여 해당 기능을 구현할 수 있다.
@@ -358,16 +358,16 @@ sudo systemctl restart apache2
 사용자가 이름을 입력하고 제출하면, 해당 이름과 일치하는 데이터를 데이터베이스에서 찾아 점수를 출력한다.
 `get_score.php`의 실행 결과는 아래와 같다.
 
-![get_score.php](/data/Penetration%20Testing%20%7C%20Week%202/3.png)
-![get_score.php](/data/Penetration%20Testing%20%7C%20Week%202/4.png)
+![get_score.php](/data/Penetration%20Testing%20%7C%20Week%202/3.webp)
+![get_score.php](/data/Penetration%20Testing%20%7C%20Week%202/4.webp)
 
 ---
 
-#### 회원 가입 페이지
+### 회원 가입 페이지
 
 phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이블을 추가하였다.
 
-![users](/data/Penetration%20Testing%20%7C%20Week%202/5.png)
+![users](/data/Penetration%20Testing%20%7C%20Week%202/5.webp)
 
 회원 가입 페이지에서는 사용자로부터 정보를 입력받아 `users` 테이블에 저장한다.  
 1주 차에 제작했던 로그인 페이지 역시 데이터베이스와 연동시켜 보자.
@@ -381,7 +381,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 
 <br>
 
-##### 1. 회원 가입 폼(sign_up.php)
+#### 1. 회원 가입 폼(sign_up.php)
 
 사용자 이름, 이메일, 아이디, 비밀번호를 입력받아 `dev` 데이터베이스의 `users` 테이블에 저장하는 폼으로 구성되어 있다.  
 이미 계정이 존재하는 사용자를 위해 로그인 페이지로 이동할 수 있는 링크가 포함되어 있다.    
@@ -467,7 +467,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 
 <br>
 
-##### 2. 로그인 입력 폼(login.php)
+#### 2. 로그인 입력 폼(login.php)
 
 회원 가입 완료 후 URL에 `sign_up=success` 쿼리 스트링이 포함된 경우, 알림 창을 통해 회원 가입 성공 메시지를 표시한다.  
 계정이 없는 사용자를 위해 회원 가입 페이지로 이동할 수 있는 링크가 포함되어 있다.
@@ -510,7 +510,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 
 <br>
 
-##### 3. 로그인 처리(login_proc.php)
+#### 3. 로그인 처리(login_proc.php)
 
 `login.php`로부터 전달받은 아이디와 비밀번호를 데이터베이스에 저장된 정보와 비교하여 로그인 여부를 판별한다.  
 로그인 성공 시 성공 메시지를, 실패 시 실패 원인에 따라 다른 메시지를 출력한다.
@@ -576,7 +576,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 
 <br>
 
-##### 4. 스타일 정의(style.css)
+#### 4. 스타일 정의(style.css)
 
 로그인 페이지와 회원 가입 페이지에 공통으로 적용되는 일관된 스타일을 정의한다.
 
@@ -651,36 +651,36 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 
 <br>
 
-##### 실행 결과
+#### 실행 결과
 
 브라우저에서 `http://x.x.x.x/sign_up.php`로 접속하면 다음과 같은 회원 가입 페이지가 나타난다.  
 
-![회원 가입 페이지](/data/Penetration%20Testing%20%7C%20Week%202/6.png)
+![회원 가입 페이지](/data/Penetration%20Testing%20%7C%20Week%202/6.webp)
 
 필요한 정보를 입력하고 폼을 제출하면, `login.php?sign_up=success`로 리다이렉트되며 회원 가입 성공 알림 창이 뜬다.
 
-![회원 가입 성공](/data/Penetration%20Testing%20%7C%20Week%202/7.png)
+![회원 가입 성공](/data/Penetration%20Testing%20%7C%20Week%202/7.webp)
 
 이때 `users` 테이블을 확인해 보면 다음과 같이 레코드가 추가되었음을 알 수 있다.
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%202/8.png" alt="users 테이블" style="padding: 0 12.5%; background-color: white">
+<img src="/data/Penetration%20Testing%20%7C%20Week%202/8.webp" alt="users 테이블" style="padding: 0 12.5%; background-color: white">
 
 `test` 사용자가 데이터베이스에 등록된 이후 다시 `test`라는 `username`으로 중복 회원 가입 시도를 하면 다음과 같은 알림 창이 표시된다.
 
-![중복 회원 가입 시도](/data/Penetration%20Testing%20%7C%20Week%202/9.png)
+![중복 회원 가입 시도](/data/Penetration%20Testing%20%7C%20Week%202/9.webp)
 
 회원 가입 성공 후 알림 창을 닫으면 다음과 같이 로그인 페이지로 이동한다.
 
-![로그인 페이지](/data/Penetration%20Testing%20%7C%20Week%202/10.png)
+![로그인 페이지](/data/Penetration%20Testing%20%7C%20Week%202/10.webp)
 
 `test`/`test`를 입력하여 로그인에 성공하면 로그인 성공 화면으로 이동한다.
 
-![로그인 성공](/data/Penetration%20Testing%20%7C%20Week%202/11.png)
+![로그인 성공](/data/Penetration%20Testing%20%7C%20Week%202/11.webp)
 
 `test`/`tset`과 같이 잘못된 비밀번호를 입력하면 비밀번호 불일치로 인한 로그인 실패 메시지가 출력된다.
 
-![로그인 실패](/data/Penetration%20Testing%20%7C%20Week%202/12.png)
+![로그인 실패](/data/Penetration%20Testing%20%7C%20Week%202/12.webp)
 
 현재 데이터베이스에 등록되지 않은 아이디를 통해 로그인을 시도하면 `username`이 존재하지 않는다는 메시지가 출력된다.
 
-![로그인 실패](/data/Penetration%20Testing%20%7C%20Week%202/13.png)
+![로그인 실패](/data/Penetration%20Testing%20%7C%20Week%202/13.webp)

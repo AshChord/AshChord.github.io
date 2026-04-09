@@ -5,15 +5,15 @@ excerpt: 파일 업로드 취약점
 categories: 모의 해킹
 ---
 
-### 강의 노트
+## 강의 노트
 
-#### 파일 업로드 취약점
+### 파일 업로드 취약점
 
 <strong>파일 업로드 취약점(File Upload Vulnerability)</strong>은 웹 애플리케이션이 사용자가 업로드하는 파일에 대해 별도의 검증을 하지 않을 때 발생하는 취약점이다. 이 취약점을 악용하면 공격자는 악성 파일을 업로드하고 이를 웹 서버에서 실행시킬 수 있어 심각한 보안 위협으로 이어질 수 있다.
 
 <br>
 
-##### 주요 공격 유형
+#### 주요 공격 유형
 
 다음은 파일 업로드 취약점을 악용하여 수행할 수 있는 주요 공격 유형이다.
 
@@ -34,7 +34,7 @@ categories: 모의 해킹
 
 <br>
 
-##### 웹 셸
+#### 웹 셸
 
 파일 업로드 취약점을 활용한 대표적인 공격인 **웹 셸**에 대해 학습해 보자.
 
@@ -56,18 +56,18 @@ categories: 모의 해킹
 
 웹 셸을 활용한 공격에는 두 가지 핵심 사항이 존재한다. 먼저 **웹 서버에서 실행되는 코드가 포함된 파일을 업로드**할 수 있어야 하며, 이후 **업로드한 파일의 경로를 파악**할 수 있어야 한다. 실제로 웹 셸을 업로드하는 예시와 함께 살펴보자.
 
-![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/1.png)
+![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/1.webp)
 
 파일 업로드 기능이 포함된 간단한 게시판 애플리케이션이다. 앞서 작성했던 `webshell.php` 파일을 업로드해 보자.
 
-![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/2.png)
-![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/3.png)
+![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/2.webp)
+![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/3.webp)
 
 파일을 업로드한 후 게시물을 열람하면 첨부 파일 다운로드 링크가 표시되며, 개발자 도구를 통해 해당 요소를 확인해 보면 `<a href="./download.php?file=webshell.php&target_Dir=./file/uploads">다운로드</a>`와 같은 형태임을 알 수 있다. `href` 속성에 지정된 URL을 살펴보면 쿼리 스트링에 `target_Dir` 파라미터가 포함되어 있어 업로드한 파일이 저장된 디렉터리가 `./file/uploads`임을 유추할 수 있다.
 
 파일의 경로를 파악했으므로, 주소 창에 `http://ctf.segfaulthub.com:9992/file/uploads/webshell.php`를 입력하면 해당 파일에 접근할 수 있다. 웹 서버에서 `ls` 명령어를 실행시키기 위해 `cmd=ls` 쿼리 스트링을 추가하고 접속해 보자.
 
-![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/4.png)
+![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/4.webp)
 
 웹 서버의 현재 경로(`./file/uploads`)에 존재하는 파일 목록들이 출력됨을 확인하였다.
 
@@ -75,9 +75,9 @@ categories: 모의 해킹
 
 ---
 
-#### 파일 업로드 공격 대응 방안 및 우회 기법
+### 파일 업로드 공격 대응 방안 및 우회 기법
 
-##### MIME 타입 검사
+#### MIME 타입 검사
 
 **MIME(Multipurpose Internet Mail Extensions) 타입**은 파일 또는 데이터가 어떤 종류의 콘텐츠인지를 나타내는 표준 형식을 말한다. 예시로 HTML 문서의 경우 `text/html`, PNG 이미지의 경우 `image/png`와 같은 형태로 나타낸다.
 
@@ -98,7 +98,7 @@ categories: 모의 해킹
 
 `multipart/form-data`는 다양한 유형의 데이터를 여러 파트로 분리하여 동시에 전송할 수 있도록 설계된 인코딩 방식이다. 다음은 이러한 방식으로 데이터를 전송하는 실제 요청의 예시이다.
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%2014/5.png" alt="multipart/form-data" style="padding: 0 15%; background-color: #2b2b2b;">
+<img src="/data/Penetration%20Testing%20%7C%20Week%2014/5.webp" alt="multipart/form-data" style="padding: 0 15%; background-color: #2b2b2b;">
 
 요청의 `Content-Type` 헤더에 `multipart/form-data`가 명시되며, 각 데이터 전송 파트를 구분하기 위한 고유의 바운더리 문자열이 함께 지정된다. 요청의 본문은 해당 바운더리를 기준으로 여러 파트로 구분되며, `Content-Disposition` 헤더를 포함하여 해당 데이터가 어떤 파라미터에 대응되는지를 나타낸다.
 
@@ -106,7 +106,7 @@ categories: 모의 해킹
 
 <br>
 
-##### 파일 실행 차단
+#### 파일 실행 차단
 
 파일 업로드 공격의 핵심은 업로드된 파일이 웹 서버에서 실행 가능해야 한다는 점이다. 이에 따라, 업로드된 파일이 서버 측에서 실행되지 않도록 설정하는 것은 매우 효과적인 방어 기법 중 하나이다.
 
@@ -118,7 +118,7 @@ categories: 모의 해킹
 
 <br>
 
-##### 파일 확장자 필터링
+#### 파일 확장자 필터링
 
 악성 스크립트가 포함된 파일을 제한하기 위해 특정 확장자(`.php` 등)를 필터링하는 방식도 고려할 수 있다. 그러나 PHP는 확장자에 대해 대소문자를 구분하지 않아 `pHp`, `PhP`, `PHP` 등 다양한 형태로 우회가 가능하다.
 
@@ -126,7 +126,7 @@ categories: 모의 해킹
 
 <br>
 
-##### 파일 시그니처 필터링
+#### 파일 시그니처 필터링
 
 파일 업로드 공격의 또 다른 대응 방안으로, 파일의 <strong>시그니처(Signature)</strong>를 검사하는 방식이 자주 사용된다. 파일 시그니처란 특정 파일 형식을 식별하기 위해 파일의 첫 부분에 포함된 고유한 바이트 값으로, 일반적으로 16진수(HEX) 값으로 표현된다. 예를 들어, PNG 파일은 `89 50 4E 47 0D 0A 1A 0A`, JPEG 파일은 `FF D8 FF` 등의 시그니처를 갖는다.
 
@@ -142,7 +142,7 @@ categories: 모의 해킹
 
 ---
 
-#### 모의 해킹 시 유의사항
+### 모의 해킹 시 유의사항
 
 모의 해킹 수행 시에는 웹 셸을 무단으로 업로드하거나 사용해서는 안 된다. 실제 공격을 시뮬레이션한다고 하더라도, 사전 협의 없이 웹 셸을 업로드하는 행위는 허가된 범위 외 활동으로 간주될 수 있다.
 
@@ -154,31 +154,31 @@ categories: 모의 해킹
 <br>
 <br>
 
-### 과제
+## 과제
 
-#### File Vuln CTF
+### File Vuln CTF
 
-![File Vuln CTF](/data/Penetration%20Testing%20%7C%20Week%2014/6.png)
+![File Vuln CTF](/data/Penetration%20Testing%20%7C%20Week%2014/6.webp)
 
 CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
 <br>
 
-##### Web Shell 1
+#### Web Shell 1
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%2014/7.png" alt="Web Shell 1" style="padding: 0 25%; background-color: white;">
+<img src="/data/Penetration%20Testing%20%7C%20Week%2014/7.webp" alt="Web Shell 1" style="padding: 0 25%; background-color: white;">
 
 링크의 주소로 접속하면 다음과 같은 회원제 게시판 애플리케이션으로 이동한다.
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/8.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/8.webp)
 
 회원 가입을 진행하여 `any`/`any` 계정을 생성하고, 로그인 후 게시물 작성 페이지로 이동하였다.
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/9.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/9.webp)
 
 파일 업로드 기능이 포함되어 있는 것을 확인할 수 있다. 앞서 활용했던 `webshell.php` 파일을 업로드하고 게시물을 열람해 보았다.
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/10.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/10.webp)
 
 첨부 파일을 다운로드할 수 있는 링크를 발견하였다. 개발자 도구를 사용하여 해당 링크 요소를 자세히 살펴보았다.
 
@@ -186,7 +186,7 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
 파일 경로에서 `/var/www/html`은 웹 루트 디렉터리에 해당하므로, `http://ctf.segfaulthub.com:8989/uploads/90_webshell.php`라는 URL로 이동해 보았다. 이때 `webshell.php`에 작성한 스크립트를 고려하여 URL 뒤에 `cmd=ls` 쿼리 스트링을 추가하였다.
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/11.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/11.webp)
 
 웹 셸이 실행되어 현재 디렉터리에 존재하는 파일들이 출력되었다. 다음으로 `flag.txt` 파일을 찾기 위해 `cmd` 파라미터의 값으로 다음 구문을 사용하였다.
 
@@ -196,7 +196,7 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
 위의 명령문은 웹 서버의 루트 디렉터리(`/`)에서 이름이 `flag.txt`인 파일을 검색하여 해당 파일의 경로를 출력한다.
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/12.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/12.webp)
 
 `flag.txt` 파일의 위치가 `/flag.txt`임을 확인하였다. 마지막으로 `cmd` 파라미터에 다음 구문을 입력하였다.
 
@@ -205,7 +205,7 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 cat /flag.txt
 ```
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/13.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/13.webp)
 
 `flag.txt` 파일의 내용이 출력됨에 따라 플래그를 획득하였다.
 
@@ -213,19 +213,19 @@ cat /flag.txt
 
 <br>
 
-##### Web Shell 2
+#### Web Shell 2
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%2014/14.png" alt="Web Shell 2" style="padding: 0 25%; background-color: white;">
+<img src="/data/Penetration%20Testing%20%7C%20Week%2014/14.webp" alt="Web Shell 2" style="padding: 0 25%; background-color: white;">
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/15.png)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/16.png)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/17.png)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/18.png)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/19.png)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/20.png)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/21.png)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/22.png)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/23.png)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/15.webp)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/16.webp)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/17.webp)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/18.webp)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/19.webp)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/20.webp)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/21.webp)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/22.webp)
+![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/23.webp)
 
 > <strong>디렉터리 인덱싱(Directory Indexing)</strong>
 >
