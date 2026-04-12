@@ -172,11 +172,11 @@ Login successful!
 다음과 같은 간단한 `users` 테이블을 기준으로 4가지 로그인 로직을 구현해 보자.  
 이 예시에서는 `username`을 기본 키로 지정하였다.
 
-![users 테이블 생성](/data/Penetration%20Testing%20%7C%20Week%203/1.png)
+![users 테이블 생성](/data/Penetration%20Testing%20%7C%20Week%203/1.webp)
 
 `users` 테이블에는 다음과 같이 시험용 계정 `test`/`test`가 저장되어 있다.
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%203/2.png" alt="users 테이블" style="padding: 0 25%; background-color: white">
+<img src="/data/Penetration%20Testing%20%7C%20Week%203/2.webp" alt="users 테이블" style="padding: 0 25%; background-color: white">
 
 2주 차에 제작했던 로그인 처리 코드(`login_proc.php`)를 조금씩 수정하여 구현하도록 한다.
 
@@ -260,7 +260,7 @@ Login successful!
 해시 함수를 활용한 로그인 로직을 구현하려면, 데이터베이스에는 사용자의 실제 비밀번호가 아닌 해당 비밀번호의 해시 값이 저장되어 있어야 한다. 따라서 기존에 저장된 원본 비밀번호 `test`를 해시 값으로 변환한다. 이 작업은 회원 가입 페이지(<code>sign_<wbr>up<wbr>.php</code>)에서 사용자 정보를 저장할 때 비밀번호를 해시 처리한 후 삽입하도록 구현할 수 있다.  
 이후 `users` 테이블은 다음과 같은 형태가 된다.
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%203/3.png" alt="users 테이블" style="padding: 0 8%; background-color: white">
+<img src="/data/Penetration%20Testing%20%7C%20Week%203/3.webp" alt="users 테이블" style="padding: 0 8%; background-color: white">
 
 해시 함수로는 대표적인 해시 알고리즘 중 하나인 SHA-256을 사용하였다.
 
