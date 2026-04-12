@@ -169,6 +169,7 @@ function renderCode() {
     };
 
     pre.prepend(copyBtn);
+    void copyBtn.offsetHeight;
   });
 
   // Breaks long inline code into smaller chunks for better readability
@@ -230,7 +231,7 @@ let ticking = false;
 window.addEventListener('scroll', () => {
   if (ticking || !$.otl.hasChildNodes()) return;
   window.requestAnimationFrame(() => {
-    const hdgs = $.cont.querySelectorAll('h3, h4, h5, h6');
+    const hdgs = $.cont.querySelectorAll('h2, h3, h4, h5, h6');
     const links = $.otl.querySelectorAll('a');
     const trigPoint = window.innerHeight * 0.02;
 

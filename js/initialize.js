@@ -55,37 +55,46 @@ function loadFromCache(key) {
   return JSON.parse(localStorage.getItem(key) || '[]');
 }
 
-// Initialize application and log key runtime events
-async function initialize() {
-  const logStyle = 'color: var(--sys-color-token-subtle); font-style: italic;';
-  console.clear();
+// State object for log data
+const appState = {
+  flags: {
+    postMetaCacheHit: false,
+    postListCacheHit: false,
+    postListFetched: false,
+    postMetaCompiled: false
+  },
+  postCount: 0,
+  currentRoute: ''
+};
 
+// Initialize application
+async function initialize() {
   let postMeta = [], postList = [];
 
   // Check post metadata
   if (isCacheValid('postMeta', 1000 * 60 * 10)) {
     postMeta = loadFromCache('postMeta');
-    console.log('%cCache was validated: postList, postMeta', logStyle);
+    appState.flags.postMetaCacheHit = true;
   } else {
     // Check post list if post metadata missing
     if (isCacheValid('postList', 1000 * 60 * 60)) {
       postList = loadFromCache('postList');
-      console.log('%cCache was validated: postList', logStyle);
+      appState.flags.postListCacheHit = true;
     } else {
       // Fetch post list from GitHub API if no cache
       postList = await fetchPostList();
       saveToCache('postList', postList);
-      console.log('%cCache was updated: postList', logStyle);
+      appState.flags.postListFetched = true;
     }
 
     postMeta = await compilePostMeta(postList);
     postMeta.sort((a, b) => new Date(b.date) - new Date(a.date));
     saveToCache('postMeta', postMeta);
-    console.log('%cCache was updated: postMeta', logStyle);
+    appState.flags.postMetaCompiled = true;
   }
 
   $.posts.push(...postMeta);
-  console.log('%cDataset was synchronized: %s', logStyle, `${$.posts.length} posts`);
+  appState.postCount = $.posts.length;
 
   // Organize posts by category for quick lookup
   $.postsByCat = Object.entries(
@@ -100,12 +109,66 @@ async function initialize() {
   );
 
   router();
-  const currRoute = window.location.pathname + window.location.search;
-  console.log('%cRoute was resolved: %s', logStyle, currRoute);
+  appState.currentRoute = window.location.pathname + window.location.search;
 
   renderCategoryDropdown();
-
-  console.log('%cRuntime was initialized', logStyle);
 }
 
-initialize();
+const initProm = initialize();
+
+// Log key runtime events sequentially
+async function printRuntimeLogs() {
+  const logStyle = 'color: var(--sys-color-token-subtle); font-style: italic;';
+
+  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+  await initProm;
+
+  // Clear Console
+  await sleep(50);
+  console.clear();
+
+  // Log cache status
+  await sleep(50);
+  if (appState.flags.postMetaCacheHit) {
+    console.log('%cCache was validated: postList, postMeta', logStyle);
+  } else {
+    if (appState.flags.postListCacheHit) {
+      console.log('%cCache was validated: postList', logStyle);
+    } else if (appState.flags.postListFetched) {
+      console.log('%cCache was updated: postList', logStyle);
+    }
+
+    if (appState.flags.postMetaCompiled) {
+      console.log('%cCache was updated: postMeta', logStyle);
+    }
+  }
+
+  // Log dataset synchronization
+  await sleep(50);
+  console.log('%cDataset was synchronized: %s', logStyle, `${appState.postCount} posts`);
+
+  // Log routing resolution
+  await sleep(50);
+  console.log('%cRoute was resolved: %s', logStyle, appState.currentRoute);
+
+  // Log final runtime initialization
+  await sleep(50);
+  console.log('%cRuntime was initialized', logStyle);
+};
+
+// Log events on initial page load
+window.addEventListener('load', printRuntimeLogs);
+
+// Update route state and log events on history navigation
+window.addEventListener('popstate', () => {
+  appState.currentRoute = window.location.pathname + window.location.search;
+  printRuntimeLogs();
+});
+
+// Log events when page is restored from memory cache
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) { 
+    printRuntimeLogs();
+  }
+});
