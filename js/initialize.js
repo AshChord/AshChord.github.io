@@ -109,7 +109,7 @@ async function initialize() {
   );
 
   router();
-  appState.currentRoute = window.location.pathname + window.location.search;
+  appState.currentRoute = decodeURI(window.location.pathname + window.location.search);
 
   renderCategoryDropdown();
 }
@@ -118,13 +118,12 @@ const initProm = initialize();
 
 // Log key runtime events sequentially
 async function printRuntimeLogs() {
-  const logStyle = 'color: var(--sys-color-token-subtle); font-style: italic;';
-
-  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
   await initProm;
 
+  const logStyle = 'color: var(--sys-color-token-subtle); font-style: italic;';
+
   // Clear Console
+  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
   await sleep(50);
   console.clear();
 
@@ -162,13 +161,13 @@ window.addEventListener('load', printRuntimeLogs);
 
 // Update route state and log events on history navigation
 window.addEventListener('popstate', () => {
-  appState.currentRoute = window.location.pathname + window.location.search;
+  appState.currentRoute = decodeURI(window.location.pathname + window.location.search);
   printRuntimeLogs();
 });
 
 // Log events when page is restored from memory cache
 window.addEventListener('pageshow', (event) => {
-  if (event.persisted) { 
+  if (event.persisted) {
     printRuntimeLogs();
   }
 });

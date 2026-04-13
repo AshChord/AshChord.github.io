@@ -19,7 +19,7 @@ const reg = {
   posts: [],
   postsByCat: [],
   ...Object.fromEntries(
-  Object.entries(regConfig).map(([varName, sel]) => [varName, document.querySelector(sel)])
+    Object.entries(regConfig).map(([varName, sel]) => [varName, document.querySelector(sel)])
   )
 },
-$ = reg;
+  $ = reg;

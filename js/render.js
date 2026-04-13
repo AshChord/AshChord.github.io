@@ -169,7 +169,7 @@ function renderCode() {
     };
 
     pre.prepend(copyBtn);
-    void copyBtn.offsetHeight;
+    void copyBtn.offsetParent;
   });
 
   // Breaks long inline code into smaller chunks for better readability
@@ -215,7 +215,7 @@ function renderoutline() {
   });
 
   $.otl.appendChild(ul);
-  
+
   // Calculate height of heading list and hide outline if it overflows viewport
   $.otl.style.setProperty('--height', `${ul.offsetHeight}px`);
   if (window.innerHeight < ul.offsetHeight) $.otl.style.visibility = 'hidden';
