@@ -162,11 +162,6 @@ function renderCode() {
     const copyBtn = document.createElement("button");
     copyBtn.classList.add("copy-button");
 
-    ['/assets/icon-copy.svg', '/assets/icon-check.svg'].forEach(url => {
-      const img = new Image();
-      img.src = url;
-    });
-
     pre.prepend(copyBtn);
     void copyBtn.offsetWidth;
   });

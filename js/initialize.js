@@ -157,7 +157,7 @@ async function printRuntimeLogs() {
 };
 
 // Log events on initial page load
-window.addEventListener('load', printRuntimeLogs);
+window.addEventListener('DOMContentLoaded', printRuntimeLogs);
 
 // Update route state and log events on history navigation
 window.addEventListener('popstate', () => {
