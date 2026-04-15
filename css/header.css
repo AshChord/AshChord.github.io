@@ -63,7 +63,6 @@ menu {
   box-sizing: border-box;
   width: 100vw;
   margin: 0 0 0 calc(108px - 100vw);
-  padding: 20px 24px;
   background: white;
   font-weight: 500;
   transform: translateY(44px);
@@ -86,6 +85,11 @@ menu {
 
   a {
     all: unset;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px 24px;
+    line-height: 20px;
   }
 
   @media (min-width: 768px) {
@@ -94,6 +98,11 @@ menu {
     margin-left: 40px;
     padding: 0;
     transform: none;
+
+    a {
+      display: inline;
+      padding: 0;
+    }
   }
 }
 
