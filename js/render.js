@@ -168,6 +168,7 @@ function renderCode() {
     });
 
     pre.prepend(copyBtn);
+    void copyBtn.offsetWidth;
   });
 
   // Breaks long inline code into smaller chunks for better readability
