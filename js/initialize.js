@@ -156,7 +156,7 @@ async function printRuntimeLogs() {
   console.log('%cRuntime was initialized', logStyle);
 };
 
-// Log events on initial page load
+/*// Log events on initial page load
 window.addEventListener('load', printRuntimeLogs);
 
 // Update route state and log events on history navigation
@@ -170,4 +170,10 @@ window.addEventListener('pageshow', (event) => {
   if (event.persisted) {
     printRuntimeLogs();
   }
-});
+});*/
+
+window.addEventListener('error', (event) => {
+  if (event.target) {
+    console.log("error");
+  }
+}, true);

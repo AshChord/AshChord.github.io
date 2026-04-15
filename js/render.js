@@ -162,14 +162,12 @@ function renderCode() {
     const copyBtn = document.createElement("button");
     copyBtn.classList.add("copy-button");
 
-    copyBtn.onclick = async () => {
-      await navigator.clipboard.writeText(codeText);
-      copyBtn.classList.add("copied");
-      setTimeout(() => copyBtn.classList.remove("copied"), 2000);
-    };
+    ['/assets/icon-copy.svg', '/assets/icon-check.svg'].forEach(url => {
+      const img = new Image();
+      img.src = url;
+    });
 
     pre.prepend(copyBtn);
-    void copyBtn.offsetParent;
   });
 
   // Breaks long inline code into smaller chunks for better readability
@@ -186,6 +184,19 @@ function renderCode() {
     code.replaceChildren(...brknTokens);
   });
 }
+
+// Handle copy action when the copy button is clicked
+document.addEventListener('click', async (e) => {
+  const copyBtn = e.target.closest('.copy-button');
+  if (!copyBtn) return;
+
+  const pre = copyBtn.closest('pre');
+  const codeBlock = pre.querySelector('code');
+
+  await navigator.clipboard.writeText(codeBlock.textContent);
+  copyBtn.classList.add("copied");
+  setTimeout(() => copyBtn.classList.remove("copied"), 2000);
+});
 
 // Render outline based on headings in post
 function renderoutline() {
