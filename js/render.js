@@ -60,16 +60,6 @@ function renderFeed(postsToRender = $.posts, currPage = 1) {
   });
 }
 
-// Handle feed item click events
-$.feed.addEventListener('click', (e) => {
-  const feedItem = e.target.closest('.feed-item');
-  if (!feedItem) return;
-  if (e.target.classList.contains('category')) return;
-  const postTitle = feedItem.querySelector('.title').textContent;
-  history.pushState(null, null, `/posts/${encodeURIComponent(postTitle)}`);
-  router();
-});
-
 // Render content of single post
 async function renderContent(post) {
   $.feed.replaceChildren();

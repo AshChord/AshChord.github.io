@@ -10,7 +10,7 @@ function resolveFeed(path, queryParams) {
   if (queryCat) {
     const postsInCat = $.postsByCat.find(([cat]) => cat === queryCat);
 
-    if ($.postsByCat.find(([cat]) => cat === queryCat)) {
+    if (postsInCat) {
       postsToRndr = postsInCat[1];
       titlePfx = `Category: ${queryCat}`;
     }

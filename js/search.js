@@ -28,13 +28,3 @@ $.srchBar.addEventListener('submit', (e) => {
   $.srchInp.blur();
   $.srchBar.classList.remove('open');
 });
-
-// Handle category click events
-document.addEventListener('click', (e) => {
-  if (e.target.classList.contains('category')) {
-    e.stopPropagation();
-    const cat = e.target.textContent;
-    history.pushState(null, null, `/posts?category=${encodeURIComponent(cat)}`);
-    router();
-  }
-});
