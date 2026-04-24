@@ -79,17 +79,20 @@ menu {
     }
   }
 
-  &:hover {
-    color: gray;
-  }
-
   a {
     all: unset;
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 20px 24px;
-    line-height: 20px;
+
+    menu[open] &{
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 20px 24px;
+      line-height: 20px;
+    }
+  }
+
+  &:hover {
+    color: gray;
   }
 
   @media (min-width: 768px) {
@@ -98,11 +101,6 @@ menu {
     margin-left: 40px;
     padding: 0;
     transform: none;
-
-    a {
-      display: inline;
-      padding: 0;
-    }
   }
 }
 
