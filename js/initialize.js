@@ -124,11 +124,11 @@ async function printRuntimeLogs() {
 
   // Clear Console
   const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-  await sleep(50);
+  await sleep(100);
   console.clear();
 
   // Log cache status
-  await sleep(50);
+  await sleep(100);
   if (appState.flags.postMetaCacheHit) {
     console.log('%cCache was validated: postList, postMeta', logStyle);
   } else {
@@ -144,20 +144,20 @@ async function printRuntimeLogs() {
   }
 
   // Log dataset synchronization
-  await sleep(50);
+  await sleep(100);
   console.log('%cDataset was synchronized: %s', logStyle, `${appState.postCount} posts`);
 
   // Log routing resolution
-  await sleep(50);
+  await sleep(100);
   console.log('%cRoute was resolved: %s', logStyle, appState.currentRoute);
 
   // Log final runtime initialization
-  await sleep(50);
+  await sleep(100);
   console.log('%cRuntime was initialized', logStyle);
 };
 
 // Log events on initial page load
-window.addEventListener('DOMContentLoaded', printRuntimeLogs);
+window.addEventListener('load', printRuntimeLogs);
 
 // Update route state and log events on history navigation
 window.addEventListener('popstate', () => {
