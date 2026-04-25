@@ -67,6 +67,45 @@ const appState = {
   currentRoute: ''
 };
 
+// Log key runtime events sequentially
+async function printRuntimeLogs() {
+  await initProm;
+
+  const logStyle = 'color: var(--sys-color-token-subtle); font-style: italic;';
+
+  // Clear Console
+  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+  await sleep(50);
+  console.clear();
+
+  // Log cache status
+  await sleep(50);
+  if (appState.flags.postMetaCacheHit) {
+    console.log('%cCache was validated: postList, postMeta', logStyle);
+  } else {
+    if (appState.flags.postListCacheHit) {
+      console.log('%cCache was validated: postList', logStyle);
+    } else if (appState.flags.postListFetched) {
+      console.log('%cCache was updated: postList', logStyle);
+    }
+    if (appState.flags.postMetaCompiled) {
+      console.log('%cCache was updated: postMeta', logStyle);
+    }
+  }
+
+  // Log dataset synchronization
+  await sleep(50);
+  console.log('%cDataset was synchronized: %s', logStyle, `${appState.postCount} posts`);
+
+  // Log routing resolution
+  await sleep(50);
+  console.log('%cRoute was resolved: %s', logStyle, appState.currentRoute);
+
+  // Log final runtime initialization
+  await sleep(50);
+  console.log('%cRuntime was initialized', logStyle);
+}
+
 // Initialize application
 async function initialize() {
   let postMeta = [], postList = [];
@@ -116,48 +155,18 @@ async function initialize() {
 
 const initProm = initialize();
 
-// Log key runtime events sequentially
-async function printRuntimeLogs() {
-  await initProm;
+const consoleImg = new Image();
+let isLogged = false;
 
-  const logStyle = 'color: var(--sys-color-token-subtle); font-style: italic;';
-
-  // Clear Console
-  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-  await sleep(100);
-  console.clear();
-
-  // Log cache status
-  await sleep(100);
-  if (appState.flags.postMetaCacheHit) {
-    console.log('%cCache was validated: postList, postMeta', logStyle);
-  } else {
-    if (appState.flags.postListCacheHit) {
-      console.log('%cCache was validated: postList', logStyle);
-    } else if (appState.flags.postListFetched) {
-      console.log('%cCache was updated: postList', logStyle);
-    }
-
-    if (appState.flags.postMetaCompiled) {
-      console.log('%cCache was updated: postMeta', logStyle);
-    }
+Object.defineProperty(consoleImg, 'id', {
+  get: function() {
+    if (isLogged) return;    
+    printRuntimeLogs();    
+    isLogged = true;
   }
+});
 
-  // Log dataset synchronization
-  await sleep(100);
-  console.log('%cDataset was synchronized: %s', logStyle, `${appState.postCount} posts`);
-
-  // Log routing resolution
-  await sleep(100);
-  console.log('%cRoute was resolved: %s', logStyle, appState.currentRoute);
-
-  // Log final runtime initialization
-  await sleep(100);
-  console.log('%cRuntime was initialized', logStyle);
-};
-
-// Log events on initial page load
-window.addEventListener('load', printRuntimeLogs);
+console.log('%c', 'color: transparent;', consoleImg);
 
 // Update route state and log events on history navigation
 window.addEventListener('popstate', () => {
