@@ -69,6 +69,15 @@ const appState = {
 
 // Log key runtime events sequentially
 async function printRuntimeLogs() {
+  // Check if console is opened
+  if (window.outerWidth - window.innerWidth <= 160) {
+    if (window.outerHeight - window.innerHeight <= 160) {
+      return;
+    }
+  }
+
+  window.removeEventListener('resize', printRuntimeLogs);
+
   await initProm;
 
   const logStyle = 'color: var(--sys-color-token-subtle); font-style: italic;';
@@ -155,18 +164,9 @@ async function initialize() {
 
 const initProm = initialize();
 
-const consoleImg = new Image();
-let isLogged = false;
-
-Object.defineProperty(consoleImg, 'id', {
-  get: function() {
-    if (isLogged) return;    
-    printRuntimeLogs();    
-    isLogged = true;
-  }
-});
-
-console.log('%c', 'color: transparent;', consoleImg);
+// Log events when console opens
+window.addEventListener('resize', printRuntimeLogs);
+setTimeout(printRuntimeLogs, 200);
 
 // Update route state and log events on history navigation
 window.addEventListener('popstate', () => {
