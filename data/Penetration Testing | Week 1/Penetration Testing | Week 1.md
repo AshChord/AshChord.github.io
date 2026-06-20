@@ -1,4 +1,4 @@
---- meta
+---
 title: Penetration Testing | Week 1
 date: 2025/04/05
 excerpt: 웹 서버의 기본 개념과 동적 페이지 처리
