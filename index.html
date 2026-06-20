@@ -23,7 +23,7 @@
 <body>
   <header>
     <!-- Blog Title -->
-    <a href = "/" class="blog-title">AshChord.log</a>
+    <a href="/" class="blog-title">AshChord.log</a>
 
     <!-- Menu -->
     <menu>
@@ -34,7 +34,7 @@
 
     <!-- Search -->
     <search>
-      <form class="search-bar">
+      <form class="search-bar" action="/posts" method="get">
         <input type="text" name="keyword" class="search-input" placeholder="Keyword">
         <button type="reset" class="search-reset-button"></button>
         <button type="submit" class="search-submit-button"></button>
@@ -44,26 +44,58 @@
 
   <main>
     <!-- Feed -->
-    <section class="feed"></section>
+    <section class="feed">
+      <template class="feed-template">
+        <article class="feed-item">
+          <a href class="preview">
+            <img src alt class="thumbnail">
+            <h2 class="title"></h2>
+            <p class="excerpt"></p>
+            <p class="date"></p>
+          </a>
+          <nav class="category-list">
+            <template class="category-template">
+              <a href class="category"></a>
+            </template>
+          </nav>
+        </article>
+      </template>
+    </section>
 
     <!-- Content -->
-    <article class="content"></article>
+    <article class="content">
+      <header class="content-header">
+        <div class="category-list"></div>
+        <h1 class="title"></h1>
+        <p class="date"></p>
+        <img src alt class="thumbnail">
+      </header>
+      <section class="content-body"></section>
+    </article>
 
     <!-- Outline -->
-    <aside class="outline"></aside>
+    <aside class="outline">
+      <nav class="heading-list"></nav>
+    </aside>
 
     <!-- Pagination -->
-    <nav class="pagination"></nav>
+    <nav class="pagination">
+      <a href class="page-first"></a>
+      <a href class="page-previous"></a>
+      <a href class="page-next"></a>
+      <a href class="page-last"></a>
+    </nav>
 
-    <!-- Category Dropdown -->
-    <details class="category-dropdown">
-      <summary class="category-dropdown-button"></summary>
-      <h2 class="category-dropdown-title">CATEGORIES</h2>
+    <!-- Category Panel -->
+    <details class="category-panel">
+      <summary class="category-panel-button"></summary>
+      <h2 class="category-panel-title">CATEGORIES</h2>
       <ul class="category-menu"></ul>
     </details>
   </main>
 
   <!-- External JavaScript -->
+   <!--
   <script src="/js/registry.js"></script>
   <script src="/js/toggle.js"></script>
   <script src="/js/search.js"></script>
@@ -71,6 +103,12 @@
   <script src="/js/render.js"></script>
   <script src="/js/router.js"></script>
   <script src="/js/initialize.js"></script>
+-->
+  <script src="/js/state.js"></script>
+  <script src="/js/dataflow.js"></script>
+  <script src="/js/render2.js"></script>
+  <script src="/js/interaction.js"></script>
+  <script src="/js/router2.js"></script>
 </body>
 
 </html>

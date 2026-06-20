@@ -21,56 +21,27 @@
 </head>
 
 <body>
-  <header>
-    <!-- Blog Title -->
-    <a href = "/" class="blog-title">AshChord.log</a>
+  <script>
+    (async () => {
+      const html = await fetch("/", { cache: "no-store" }).then(res => res.text());
+      const doc = new DOMParser().parseFromString(html, "text/html");
 
-    <!-- Menu -->
-    <menu>
-      <li class="menu-item"><a href="/home">Home</a></li>
-      <li class="menu-item"><a href="/posts">Posts</a></li>
-      <li class="menu-item"><a href="/about">About</a></li>
-    </menu>
+      const scrList = [...doc.querySelectorAll("script")]
+        .map(scr => scr.getAttribute('src'))
+        .filter(src => src && src.startsWith('/js'));
 
-    <!-- Search -->
-    <search>
-      <form class="search-bar">
-        <input type="text" name="keyword" class="search-input" placeholder="Keyword">
-        <button type="reset" class="search-reset-button"></button>
-        <button type="submit" class="search-submit-button"></button>
-      </form>
-    </search>
-  </header>
+      doc.querySelectorAll("script").forEach(scr => scr.remove());
 
-  <main>
-    <!-- Feed -->
-    <section class="feed"></section>
+      document.body.replaceChildren(...doc.body.childNodes);
 
-    <!-- Content -->
-    <article class="content"></article>
-
-    <!-- Outline -->
-    <aside class="outline"></aside>
-
-    <!-- Pagination -->
-    <nav class="pagination"></nav>
-
-    <!-- Category Dropdown -->
-    <details class="category-dropdown">
-      <summary class="category-dropdown-button"></summary>
-      <h2 class="category-dropdown-title">CATEGORIES</h2>
-      <ul class="category-menu"></ul>
-    </details>
-  </main>
-
-  <!-- External JavaScript -->
-  <script src="/js/registry.js"></script>
-  <script src="/js/toggle.js"></script>
-  <script src="/js/search.js"></script>
-  <script src="/js/paginate.js"></script>
-  <script src="/js/render.js"></script>
-  <script src="/js/router.js"></script>
-  <script src="/js/initialize.js"></script>
+      scrList.forEach(src => {
+        const scr = document.createElement("script");
+        scr.src = src;
+        scr.async = false;
+        document.body.appendChild(scr);
+      });
+    })();
+  </script>
 </body>
 
 </html>
