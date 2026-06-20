@@ -28,6 +28,14 @@ const dataflow = new Dataflow();
 
 // 1. posts
 const posts = dataflow.node(async () => {
+  const CACHE_KEY = 'ashchord_posts_cache';
+
+  // 1️⃣ 캐시 확인: 이미 저장된 데이터가 있으면 API 찌르지 않고 즉시 반환! (0.01초 컷)
+  const cachedData = localStorage.getItem(CACHE_KEY);
+  if (cachedData) {
+    return JSON.parse(cachedData);
+  }
+
   const { BASE, OWNER, REPO, PATH } = GITHUB_API;
   const endpoints = {
     postData: `${BASE}/repos/${OWNER}/${REPO}/git/trees/main:${PATH}`,
@@ -93,7 +101,13 @@ const posts = dataflow.node(async () => {
     if (parseMetadata(commits)) break;
   }
 
-  return [...metadataMap.values()].sort((a, b) => new Date(b.date) - new Date(a.date));
+  // 결과물 정렬
+  const finalPosts = [...metadataMap.values()].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  // 2️⃣ 캐시 저장: 다 찾은 결과를 로컬 스토리지에 문자열로 콱 박아둠
+  localStorage.setItem(CACHE_KEY, JSON.stringify(finalPosts));
+
+  return finalPosts;
 });
 
 // 2. categorizedPosts
