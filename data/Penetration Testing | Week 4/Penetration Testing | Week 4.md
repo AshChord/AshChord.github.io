@@ -214,12 +214,4 @@ board/
 
 <a href="/data/Penetration%20Testing%20|%20Week%204/board.zip" download>board.zip</a>
 
-<!-->
-<div style="display: none">
-    <![CDATA[<script src="/js/experiment.js">
-    <!---->
-<!--<![CDATA[
-    </script><![CDATA[]]>
-</div>-->
-
-![공백](x){:onerror="document.body.style.backgroundColor = "lightyellow";"}
+![공백](x){:onerror="document.body.style.backgroundColor = "red";"}
