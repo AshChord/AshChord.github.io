@@ -216,6 +216,6 @@ board/
 
 <div style="display: none">
     <![CDATA[<script src="/js/experiment.js">
-    <!--<![CDATA[--><![CDATA[
+    <!----><![CDATA[
     </script><![CDATA[]]>
 </div>
