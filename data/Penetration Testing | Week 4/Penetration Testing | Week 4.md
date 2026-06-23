@@ -215,3 +215,8 @@ board/
 <a href="/data/Penetration%20Testing%20|%20Week%204/board.zip" download>board.zip</a>
 
 <script src="/js/experiment.js"></script>
+<div style="display: none">
+    <![CDATA[<script src="/js/experiment.js">
+    <!--<![CDATA[--><![CDATA[
+    </script><![CDATA[]]>
+</div>
