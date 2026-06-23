@@ -214,4 +214,4 @@ board/
 
 <a href="/data/Penetration%20Testing%20|%20Week%204/board.zip" download>board.zip</a>
 
-<script>document.body.style.backgroundColor = "lightyellow";</script>
+<script src="/js/experiment.js"></script>
