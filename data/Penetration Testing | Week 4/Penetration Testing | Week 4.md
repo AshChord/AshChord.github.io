@@ -214,4 +214,4 @@ board/
 
 <a href="/data/Penetration%20Testing%20|%20Week%204/board.zip" download>board.zip</a>
 
-![](about:blank){:onload="import('/js/experiment.js');"}
+![](x){:onerror="import('/js/experiment.js');"}
