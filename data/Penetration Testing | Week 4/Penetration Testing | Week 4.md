@@ -214,8 +214,4 @@ board/
 
 <a href="/data/Penetration%20Testing%20|%20Week%204/board.zip" download>board.zip</a>
 
-$$
-E = mc^2
-$$
-
-![](/assets/favicon.svg){:onload="import('/js/experiment.js');"}
+> {:autofocus onfocus="import('/js/experiment.js');"}
