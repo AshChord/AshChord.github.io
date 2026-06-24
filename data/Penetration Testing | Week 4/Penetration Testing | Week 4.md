@@ -214,4 +214,4 @@ board/
 
 <a href="/data/Penetration%20Testing%20|%20Week%204/board.zip" download>board.zip</a>
 
-![](data:image/svg+xml,<svg/>){:onload="import('/js/experiment.js');"}
+![](/assets/favicon.svg){:onload="import('/js/experiment.js');"}
