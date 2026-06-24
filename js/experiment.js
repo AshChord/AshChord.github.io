@@ -3,7 +3,7 @@
   const currentBodyNodes = Array.from(document.body.childNodes);
   console.log("1. 현재 바디에서 가져온 노드 목록:", currentBodyNodes);
 
-  const response = await fetch('/html/index.html');
+  const response = await fetch('/index.html');
   let htmlText = await response.text();
 
   htmlText = htmlText.replace(/^---[\s\S]*?---/, '');
