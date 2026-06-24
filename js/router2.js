@@ -77,4 +77,4 @@ function updateTitle(pfx) {
   document.title = pfx ? `${pfx} - ${sfx}` : sfx;
 }
 
-router();
+// router();
