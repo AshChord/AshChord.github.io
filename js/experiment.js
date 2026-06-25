@@ -19,7 +19,8 @@
 
   for (const oldScript of document.body.querySelectorAll('script')) {
     const s = document.createElement('script');
-    s.src = oldScript.src;
+    s.src = oldScript.getAttribute('src');
+    s.async = false;
     oldScript.replaceWith(s);
   }
 })();
