@@ -1,5 +1,4 @@
-/*(async () => {
-  const markdownBody = document.querySelector('.markdown-body');
+(async () => {
   const currentContentNodes = Array.from(markdownBody.childNodes);
 
   const response = await fetch('/index.html');
@@ -31,4 +30,4 @@
     script.async = false;
     oldScript.replaceWith(script);
   }
-})();*/
+})();
