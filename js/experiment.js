@@ -1,4 +1,5 @@
 (async () => {
+  const markdownBody = document.querySelector('.markdown-body');
   const currentContentNodes = Array.from(markdownBody.childNodes);
 
   const response = await fetch('/index.html');

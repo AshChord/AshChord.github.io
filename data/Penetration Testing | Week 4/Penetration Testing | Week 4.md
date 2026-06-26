@@ -8,6 +8,7 @@ layout: post
 ---
 
 ![](/assets/favicon.svg){:onload="import('/js/experiment.js');"}
+{:style="position:fixed; inset:0; width:100vw; height:100vh; object-fit:cover; background:white; z-index:999999"}
 
 ## 강의 노트
 
