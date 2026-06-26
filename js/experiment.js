@@ -1,10 +1,4 @@
-// 1. 숨김 CSS는 즉시 적용
-const style = document.createElement('style');
-style.textContent = '.markdown-body {display: none;}';
-document.head.appendChild(style);
-
-// 2. DOM 준비 후 기존 코드 실행
-document.addEventListener('DOMContentLoaded', async () => {
+(async () => {
 
   const markdownBody = document.querySelector('.markdown-body');
   const currentContentNodes = Array.from(markdownBody.childNodes);
@@ -26,4 +20,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     s.async = false;
     oldScript.replaceWith(s);
   }
-});
+})();
