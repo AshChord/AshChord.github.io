@@ -6,6 +6,7 @@ categories: 모의 해킹
 permalink: /posts/Penetration Testing | Week 4
 ---
 
+{::style="visibility: hidden;"}
 ![](/assets/favicon.svg){:onload="import('/js/experiment.js');"}
 
 ## 강의 노트
