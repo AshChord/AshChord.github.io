@@ -13,6 +13,18 @@
   newDoc.querySelector('.content').append(...currentContentNodes);
 
   document.head.replaceWith(newDoc.head);
+
+  await Promise.all(
+    [...document.querySelectorAll('link[rel="stylesheet"]')].map(link => {
+      if (link.sheet) return Promise.resolve();
+
+      return new Promise(resolve => {
+        link.addEventListener('load', resolve, { once: true });
+        link.addEventListener('error', resolve, { once: true });
+      });
+    })
+  );
+
   document.body.replaceWith(newDoc.body);
 
   for (const oldScript of document.body.querySelectorAll('script')) {
