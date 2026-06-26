@@ -1,4 +1,4 @@
---- meta
+---
 title: Penetration Testing | Week 2
 date: 2025/04/14
 excerpt: 데이터베이스 연동 및 기본 SQL 쿼리 구조
