@@ -6,7 +6,7 @@ categories: 모의 해킹
 permalink: /posts/Penetration Testing | Week 4
 ---
 
-{::style="display: none;"}
+<style>.markdown-body{display: none;}</style>
 
 ## 강의 노트
 
