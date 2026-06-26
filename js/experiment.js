@@ -26,6 +26,7 @@
   );
 
   document.body.replaceWith(newDoc.body);
+  splash.remove();
 
   for (const oldScript of document.body.querySelectorAll('script')) {
     const script = document.createElement('script');
@@ -34,5 +35,4 @@
     oldScript.replaceWith(script);
   }
 
-  splash.remove();
 })();
