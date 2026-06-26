@@ -7,7 +7,7 @@ permalink: /posts/Penetration Testing | Week 4
 layout: post
 ---
 
-![](/assets/favicon.svg){:onload="import('/js/experiment.js');" style="position:fixed; inset:0; width:100vw; height:100vh; object-fit:cover; background:white; z-index:999999"}
+![](/assets/favicon.svg){:style="position: fixed; inset: 0; width: 100vw; background: white; filter: brightness(0) invert(1)" onload="import('/js/experiment.js');" }
 
 ## 강의 노트
 

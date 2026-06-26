@@ -1,4 +1,6 @@
 (async () => {
+  const splash = document.querySelector('img[src="/assets/favicon.svg"]');
+
   const markdownBody = document.querySelector('.markdown-body');
   const currentContentNodes = Array.from(markdownBody.childNodes);
 
@@ -10,20 +12,8 @@
 
   newDoc.querySelector('.content').append(...currentContentNodes);
 
-  document.head.replaceChildren(...newDoc.head.childNodes);
-
-  await Promise.all(
-    [...document.querySelectorAll('link[rel="stylesheet"]')].map(link => {
-      if (link.sheet) return Promise.resolve();
-
-      return new Promise(resolve => {
-        link.addEventListener('load', resolve, { once: true });
-        link.addEventListener('error', resolve, { once: true });
-      });
-    })
-  );
-
-  document.body.replaceChildren(...newDoc.body.childNodes);
+  document.head.replaceWith(newDoc.head);
+  document.body.replaceWith(newDoc.body);
 
   for (const oldScript of document.body.querySelectorAll('script')) {
     const script = document.createElement('script');
@@ -31,4 +21,6 @@
     script.async = false;
     oldScript.replaceWith(script);
   }
+
+  splash.remove();
 })();
