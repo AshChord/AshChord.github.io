@@ -1,5 +1,4 @@
 (async () => {
-
   const markdownBody = document.querySelector('.markdown-body');
   const currentContentNodes = Array.from(markdownBody.childNodes);
 
@@ -11,13 +10,25 @@
 
   newDoc.querySelector('.content').append(...currentContentNodes);
 
-  document.head.replaceWith(newDoc.head);
-  document.body.replaceWith(newDoc.body);
+  document.head.replaceChildren(...newDoc.head.childNodes);
+
+  await Promise.all(
+    [...document.querySelectorAll('link[rel="stylesheet"]')].map(link => {
+      if (link.sheet) return Promise.resolve();
+
+      return new Promise(resolve => {
+        link.addEventListener('load', resolve, { once: true });
+        link.addEventListener('error', resolve, { once: true });
+      });
+    })
+  );
+
+  document.body.replaceChildren(...newDoc.body.childNodes);
 
   for (const oldScript of document.body.querySelectorAll('script')) {
-    const s = document.createElement('script');
-    s.src = oldScript.getAttribute('src');
-    s.async = false;
-    oldScript.replaceWith(s);
+    const script = document.createElement('script');
+    script.src = oldScript.getAttribute('src');
+    script.async = false;
+    oldScript.replaceWith(script);
   }
 })();
