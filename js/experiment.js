@@ -12,7 +12,7 @@
 
   newDoc.querySelector('.content').append(...currentContentNodes);
 
-  document.head.replaceChildren(...newDoc.head.childNodes);
+  document.head.replaceWith(newDoc.head);
 
   await Promise.all(
     [...document.querySelectorAll('link[rel="stylesheet"]')].map(link => {
@@ -25,7 +25,7 @@
     })
   );
 
-  document.body.replaceChildren(...newDoc.body.childNodes);
+  document.body.replaceWith(newDoc.body);
 
   for (const oldScript of document.body.querySelectorAll('script')) {
     const script = document.createElement('script');
