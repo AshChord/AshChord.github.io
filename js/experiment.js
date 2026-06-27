@@ -20,7 +20,7 @@
     if (node !== oldLink) node.remove();
   });
 
-  document.head.prepend(...Array.from(newDoc.head.childNodes));
+  document.head.append(...Array.from(newDoc.head.childNodes));
   document.head.insertBefore(newLink, document.head.lastChild);
 
   document.body.replaceWith(newDoc.body);
