@@ -16,8 +16,6 @@
   for (const oldScript of document.body.querySelectorAll('script')) {
     const script = document.createElement('script');
     script.src = oldScript.getAttribute('src');
-    script.async = false;
     oldScript.replaceWith(script);
   }
-
 })();
