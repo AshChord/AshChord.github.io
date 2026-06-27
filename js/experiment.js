@@ -15,7 +15,7 @@
 
   newLink.onload = () => oldLink.remove();
 
-  document.head.appendChild(newLink);
+  document.head.insertBefore(newLink, document.head.lastChild);
 
   Array.from(document.head.childNodes).forEach(node => {
     if (node !== oldLink && node !== newLink) node.remove();
@@ -28,6 +28,7 @@
   for (const oldScript of document.body.querySelectorAll('script')) {
     const script = document.createElement('script');
     script.src = oldScript.getAttribute('src');
+    script.async = false;
     oldScript.replaceWith(script);
   }
 })();
