@@ -10,7 +10,19 @@
 
   newDoc.querySelector('.content').append(...currentContentNodes);
 
-  document.head.replaceWith(newDoc.head);
+  const oldLink = document.querySelector('link[href*="style"]');
+  const newLink = newDoc.head.querySelector('link[href*="style"]');
+
+  newLink.onload = () => oldLink.remove();
+
+  document.head.appendChild(newLink);
+
+  Array.from(document.head.childNodes).forEach(node => {
+    if (node !== oldLink && node !== newLink) node.remove();
+  });
+
+  document.head.prepend(...Array.from(newDoc.head.childNodes));
+
   document.body.replaceWith(newDoc.body);
 
   for (const oldScript of document.body.querySelectorAll('script')) {
