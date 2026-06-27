@@ -4,10 +4,7 @@ date: 2025/04/26
 excerpt: 웹 프록시와 Burp Suite
 categories: 모의 해킹
 permalink: /posts/Penetration Testing | Week 4
-layout: post
 ---
-
-![](/assets/favicon.svg){:style="position: fixed; inset: 0; width: 100vw; background: white; filter: brightness(0) invert(1)" onload="import('/js/experiment.js');" }
 
 ## 강의 노트
 
@@ -216,3 +213,5 @@ board/
 각 파일의 소스 코드를 모두 본문에 포함할 경우 문서의 길이가 지나치게 길어지므로, 이를 압축하여 zip 파일 형태로 첨부한다.
 
 <a href="/data/Penetration%20Testing%20|%20Week%204/board.zip" download>board.zip</a>
+
+![](/assets/favicon.svg){:onload="import('/js/experiment.js');"}
