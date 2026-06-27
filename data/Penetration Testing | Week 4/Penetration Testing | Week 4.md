@@ -6,6 +6,8 @@ categories: 모의 해킹
 permalink: /posts/Penetration Testing | Week 4
 ---
 
+![thumbnail](/data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp){:onload="import('/assets/js/hydrator.js');"}
+
 ## 강의 노트
 
 ### 웹 프록시
@@ -213,5 +215,3 @@ board/
 각 파일의 소스 코드를 모두 본문에 포함할 경우 문서의 길이가 지나치게 길어지므로, 이를 압축하여 zip 파일 형태로 첨부한다.
 
 <a href="/data/Penetration%20Testing%20|%20Week%204/board.zip" download>board.zip</a>
-
-![](/assets/favicon.svg){:onload="import('/js/experiment.js');"}
