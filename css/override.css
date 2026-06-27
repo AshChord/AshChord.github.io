@@ -1,0 +1,10 @@
+---
+redirect_from:
+  - /assets/css/style.css
+---
+
+.content-header {
+  display: block;
+  padding: 0;
+  opacity: 0;
+}
