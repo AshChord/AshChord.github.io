@@ -21,8 +21,7 @@
   });
 
   document.head.append(...Array.from(newDoc.head.childNodes));
-  console.log(document.head.lastChild);
-  document.head.insertBefore(newLink, document.head.lastChild);
+  document.head.insertBefore(newLink, document.head.lastElementChild);
 
   document.body.replaceWith(newDoc.body);
 
