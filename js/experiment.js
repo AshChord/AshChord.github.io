@@ -12,16 +12,16 @@
 
   const oldLink = document.querySelector('link[href*="style"]');
   const newLink = newDoc.head.querySelector('link[href*="style"]');
+  newLink.remove();
 
   newLink.onload = () => oldLink.remove();
 
-  document.head.insertBefore(newLink, document.head.lastChild);
-
   Array.from(document.head.childNodes).forEach(node => {
-    if (node !== oldLink && node !== newLink) node.remove();
+    if (node !== oldLink) node.remove();
   });
 
   document.head.prepend(...Array.from(newDoc.head.childNodes));
+  document.head.insertBefore(newLink, document.head.lastChild);
 
   document.body.replaceWith(newDoc.body);
 
