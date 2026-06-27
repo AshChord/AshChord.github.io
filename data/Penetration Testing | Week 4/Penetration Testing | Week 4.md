@@ -6,7 +6,7 @@ categories: 모의 해킹
 permalink: /posts/Penetration Testing | Week 4
 ---
 
-![thumbnail](/data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp){:onload="import('/assets/js/hydrator.js');"}
+![thumbnail](/data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp){:onload="import('/js/hydrator.js');"}
 
 ## 강의 노트
 
