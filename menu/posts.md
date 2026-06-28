@@ -13,8 +13,9 @@ permalink: /posts
 {% assign sorted_posts = filtered_posts | sort: "date" | reverse %}
 
 {% for post in sorted_posts %}
-> {{ post.title }}
-> {{ post.date }}
-> {{ post.path }}
+> {{ post.title }}{: .post-title}
+> {{ post.date }}{: .post-date}
+> {{ post.excerpt }}{: .post-excerpt}
+> {{ post.categories }}{: .post-category}
 {: .post-item}
 {% endfor %}
