@@ -8,7 +8,7 @@
   const parser = new DOMParser();
   const newDoc = parser.parseFromString(htmlText, 'text/html');
 
-  newDoc.querySelector('.content').append(...currentContentNodes);
+  newDoc.querySelector('.content-body').append(...currentContentNodes);
 
   const oldLink = document.querySelector('link[href*="style"]');
   const newLink = newDoc.head.querySelector('link[href*="style"]');
