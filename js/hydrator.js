@@ -1,4 +1,6 @@
 (async () => {
+  document.documentElement.lang = 'ko';
+
   const markdownBody = document.querySelector('.markdown-body');
   const currentContentNodes = Array.from(markdownBody.childNodes);
 
@@ -12,7 +14,7 @@
 
   const oldLink = document.querySelector('link[href*="style"]');
   const newLink = newDoc.head.querySelector('link[href*="style"]');
-  newLink.remove();
+  // newLink.remove();
 
   newLink.onload = () => oldLink.remove();
 
@@ -21,7 +23,7 @@
   });
 
   document.head.append(...Array.from(newDoc.head.childNodes));
-  document.head.insertBefore(newLink, document.head.lastElementChild);
+  // document.head.insertBefore(newLink, document.head.lastElementChild);
 
   document.body.replaceWith(newDoc.body);
 
