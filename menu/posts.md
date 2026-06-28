@@ -2,9 +2,7 @@
 permalink: /posts
 ---
 
-{% assign filtered = site.pages | where_exp: "page", "page.path contains '/data/'" %}
-{% assign filtered = filtered | where_exp: "page", "page.path contains '.md'" %}
-{% assign sorted_posts = filtered | sort: "date" | reverse %}
+{% assign filtered = site.pages | where_exp: "page", "page.path contains '/data'" %}
 
 {% for post in sorted_posts %}
 - {{ post.title | default: "title"| jsonify }}
