@@ -2,12 +2,20 @@
 permalink: /posts
 ---
 
-{% assign sorted_posts = site.pages | where_exp: "page", "page.path contains '/data/' and page.path contains '.md'" | sort: "date" | reverse %}
+{% assign filtered_posts = "" | split: "" %}
+
+{% for post in site.pages %}
+  {% if post.path contains '/data/' and post.path contains '.md' %}
+    {% assign filtered_posts = filtered_posts | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% assign sorted_posts = filtered_posts | sort: "date" | reverse %}
 
 {% for post in sorted_posts %}
 > {{ post.title }}
 > {{ post.date }}
 > {{ post.excerpt }}
 > {{ post.categories }}
-
+{: .post-item}
 {% endfor %}
