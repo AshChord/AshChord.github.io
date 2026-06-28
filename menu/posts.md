@@ -13,9 +13,9 @@ permalink: /posts
 {% assign sorted_posts = filtered_posts | sort: "date" | reverse %}
 
 {% for post in sorted_posts %}
-- {{ post.title | escape }}
-- {{ post.date | escape }}
-- {{ post.excerpt | escape }}
-- {{ post.categories | escape }}
+- {{ post.title | jsonify }}
+- {{ post.date | jsonify }}
+- {{ post.excerpt | jsonify }}
+- {{ post.categories | jsonify }}
 {: .post-item}
 {% endfor %}
