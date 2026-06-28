@@ -18,9 +18,10 @@
 
   newLink.onload = () => oldLink.remove();
 
-  Array.from(document.head.childNodes).forEach(node => {
-    if (node !== oldLink) node.remove();
-  });
+  //Array.from(document.head.childNodes).forEach(node => {
+  //  if (node !== oldLink) node.remove();
+  //});
+  document.head.replaceChildren(oldLink);
 
   document.head.append(...Array.from(newDoc.head.childNodes));
   // document.head.insertBefore(newLink, document.head.lastElementChild);
