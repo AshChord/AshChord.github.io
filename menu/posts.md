@@ -9,6 +9,5 @@ permalink: /posts
 > {{ post.date }}
 > {{ post.excerpt }}
 > {{ post.categories }}
-{: .post-item}
 
 {% endfor %}
