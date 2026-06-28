@@ -2,9 +2,19 @@
 permalink: /posts
 ---
 
+{% assign filtered_posts = "" | split: "" %}
+
 {% for post in site.pages %}
----
-PATH: {{ post.path }}
-CONTAINS DATA?: {% if post.path contains "data" %}YES{% else %}NO{% endif %}
----
+  {% if post.path contains "Week 3" or post.path contains "Week 4" %}
+    {% assign filtered_posts = filtered_posts | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% assign sorted_posts = filtered_posts | sort: "date" | reverse %}
+
+{% for post in sorted_posts %}
+> {{ post.title }}
+> {{ post.date }}
+> {{ post.path }}
+{: .post-item}
 {% endfor %}
