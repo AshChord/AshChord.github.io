@@ -1,6 +1,6 @@
 ---
-title: Penetration Testing
-title_category: Week 4
+title: "my page"
+title_category: "category"
 date: 2025/04/26
 excerpt: 웹 프록시와 Burp Suite
 categories: 모의 해킹
