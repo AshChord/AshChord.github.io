@@ -1,5 +1,6 @@
 ---
 permalink: /posts
+title: posts - AshChord.log · Github Pages
 ---
 
 {% assign posts = site.pages
@@ -7,9 +8,9 @@ permalink: /posts
 %}
 
 {% for post in posts %}
-- {{ post.title | default: "title"| url_encode }}
-- {{ post.date | default: "1970-01-01" | url_encode }}
-- {{ post.excerpt | default: "example post" | url_encode }}
-- {{ post.categories | default: "cat1, cat2" | url_encode }}
+- {{ post.title | default: "title"}}
+- {{ post.date | default: "1970-01-01"}}
+- {{ post.excerpt | default: "example post"}}
+- {{ post.categories | default: "cat1, cat2"}}
 {: .post-item}
 {% endfor %}
