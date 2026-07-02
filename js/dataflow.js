@@ -28,84 +28,23 @@ const dataflow = new Dataflow();
 
 // 1. posts
 const posts = dataflow.node(async () => {
-  const CACHE_KEY = 'ashchord_posts_cache';
+  const res = await fetch('/posts');
+  const htmlText = await res.text();
+  const doc = new DOMParser().parseFromString(htmlText, 'text/html');
 
-  // 1️⃣ 캐시 확인: 이미 저장된 데이터가 있으면 API 찌르지 않고 즉시 반환! (0.01초 컷)
-  const cachedData = localStorage.getItem(CACHE_KEY);
-  if (cachedData) {
-    return JSON.parse(cachedData);
-  }
+  const postContainers = doc.querySelectorAll('ul');
+  const finalPosts = [];
 
-  const { BASE, OWNER, REPO, PATH } = GITHUB_API;
-  const endpoints = {
-    postData: `${BASE}/repos/${OWNER}/${REPO}/git/trees/main:${PATH}`,
-    postMetaData: `${BASE}/repos/${OWNER}/${REPO}/commits?path=${PATH}&per_page=100`,
-  };
-  const responses = await Promise.all(Object.values(endpoints).map(url => fetch(url)));
+  postContainers.forEach(container => {
+    const listItems = container.querySelectorAll('li');
 
-  const postData = (await responses.shift().json()).tree
-    .filter(({ type }) => type === 'tree')
-    .map(({ path }) => path);
-  const postSet = new Set(postData);
-  const metadataMap = new Map();
-
-  const parseMetadata = (commits) => {
-    return commits.some(({ commit }) => {
-      const commitBody = commit.message.trim().split('\n\n')[1];
-      if (!commitBody) return false;
-
-      const metadata = {};
-      const fields = commitBody.split('\n');
-
-      for (const field of fields) {
-        let [match, key, value] = field.match(/^-([^:]+):(.*)|$/);
-        if (!match) continue;
-
-        key = key.trim().toLowerCase();
-        value = value.trim();
-
-        if (key === 'categories') {
-          value = value.split(',').map(item => item.trim());
-        }
-
-        metadata[key] = value;
-      }
-
-      const title = metadata.title;
-      if (postSet.has(title) && !metadataMap.has(title)) {
-        metadataMap.set(title, metadata);
-      }
-
-      return metadataMap.size === postSet.size;
+    finalPosts.push({
+      title: listItems[0].innerText,
+      date: listItems[1].innerText,
+      excerpt: listItems[2].innerText,
+      categories: listItems[3].innerText.split(',').map(cat => cat.trim())
     });
-  };
-
-  // Link header exists (GitHub API pagination)
-  const [postMetadataResponse] = responses;
-  const link = postMetadataResponse.headers.get('Link');
-  if (link) {
-    const lastLink = link.split(',').find(part => part.includes('rel="last"'));
-    const lastPage = Number(lastLink.match(/[?&]page=(\d+)/)[1]);
-
-    const remainingRequests = [];
-    for (let page = 2; page <= lastPage; page++) {
-      remainingRequests.push(fetch(`${endpoints.postMetaData}&page=${page}`));
-    }
-
-    const remainingResponses = await Promise.all(remainingRequests);
-    responses.push(...remainingResponses);
-  }
-
-  for (const response of responses) {
-    const commits = await response.json();
-    if (parseMetadata(commits)) break;
-  }
-
-  // 결과물 정렬
-  const finalPosts = [...metadataMap.values()].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  // 2️⃣ 캐시 저장: 다 찾은 결과를 로컬 스토리지에 문자열로 콱 박아둠
-  localStorage.setItem(CACHE_KEY, JSON.stringify(finalPosts));
+  });
 
   return finalPosts;
 });
@@ -167,19 +106,4 @@ const postsForCurrPage = dataflow.node(async () => {
   const { postLimit } = pgnData;
 
   return (await filteredPosts).slice((currPage - 1) * postLimit, currPage * postLimit);
-});
-
-// 6. contentForCurrPage
-const contentForCurrPage = dataflow.node(async () => {
-  const pathTitle = decodeURIComponent(window.location.pathname.replace('/posts/', ''));
-
-  const res = await fetch(`/data/${pathTitle}/${pathTitle}.md`);
-  if (!res.ok) return null;
-
-  const content = await res.text();
-  const mdText = content.replace(/^---\smeta\n([\s\S]*?)\n---/, '').trim();
-
-  const metadata = (await posts).find(post => post.title === pathTitle) || {};
-
-  return { title: pathTitle, mdText, metadata };
 });

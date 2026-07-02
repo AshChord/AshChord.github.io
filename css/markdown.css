@@ -1,6 +1,11 @@
-.post-header {
+.content-header {
   display: block;
   padding: 0;
+  opacity: 0;
+
+  &:has(.title:not(:empty)) {
+    opacity: 1;
+  }
 
   .category-list {
     display: block;
@@ -60,7 +65,7 @@
   }
 }
 
-.post-body {
+.content-body {
   h1 {
     margin: 36px 0 20px;
     border-bottom: 1px solid gainsboro;
@@ -404,13 +409,8 @@
   font-size: 14px;
   line-height: 28px;
 
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
   a {
+    display: block;
     color: darkgray;
     text-decoration: none;
     transition: color 0.2s ease, text-shadow 0.2s ease;

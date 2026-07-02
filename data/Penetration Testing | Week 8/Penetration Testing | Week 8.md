@@ -1,4 +1,4 @@
---- meta
+---
 title: Penetration Testing | Week 8
 date: 2025/06/01
 excerpt: SQL Injection 취약점 탐색

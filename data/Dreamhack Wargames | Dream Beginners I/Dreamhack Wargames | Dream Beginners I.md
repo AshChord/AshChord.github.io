@@ -1,4 +1,4 @@
---- meta
+---
 title: Dreamhack Wargames | Dream Beginners I
 date: 2025/09/14
 excerpt: Dream Beginners 워게임 풀이 I

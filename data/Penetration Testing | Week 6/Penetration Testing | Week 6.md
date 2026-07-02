@@ -1,4 +1,4 @@
---- meta
+---
 title: Penetration Testing | Week 6
 date: 2025/05/13
 excerpt: UNION SQL Injection과 데이터 추출

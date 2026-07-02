@@ -1,4 +1,4 @@
---- meta
+---
 title: Penetration Testing | Week 11
 date: 2025/06/25
 excerpt: XSS 취약점 응용

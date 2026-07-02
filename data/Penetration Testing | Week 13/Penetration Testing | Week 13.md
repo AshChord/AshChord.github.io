@@ -1,4 +1,4 @@
---- meta
+---
 title: Penetration Testing | Week 13
 date: 2025/07/05
 excerpt: CSRF 대응 방안 및 웹 보안 정책

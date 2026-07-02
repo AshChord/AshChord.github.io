@@ -1,4 +1,4 @@
---- meta
+---
 title: Penetration Testing | Week 15
 date: 2025/07/20
 excerpt: 파일 포함 취약점 및 파일 다운로드 취약점

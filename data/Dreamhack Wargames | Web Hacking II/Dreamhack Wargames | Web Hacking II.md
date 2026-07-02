@@ -1,4 +1,4 @@
---- meta
+---
 title: Dreamhack Wargames | Web Hacking II
 date: 2025/10/11
 excerpt: Dreamhack Wargames 풀이 II

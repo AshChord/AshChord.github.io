@@ -1,4 +1,4 @@
---- meta
+---
 title: Dreamhack Wargames | Dream Beginners II
 date: 2025/09/17
 excerpt: Dream Beginners 워게임 풀이 II
