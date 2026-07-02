@@ -3,8 +3,8 @@ title: Penetration Testing ⋮ Week 4 - AshChord.log
 date: 2025/04/26
 excerpt: 웹 프록시와 Burp Suite
 categories: 모의 해킹
-permalink: /posts/Penetration Testing ⋮ Week 4/
-image: /data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp
+permalink: /posts/Penetration Testing ⋮ Week 4
+image: Penetration%20Testing%20%7C%20Week%204/thumbnail.webp
 ---
 
 ![thumbnail](/data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp){:onload="import('/js/hydrator.js');"}
