@@ -1,5 +1,5 @@
 ---
-title: Penetration Testing | Week 5
+title: Penetration Testing ⋮ Week 5
 date: 2025/05/06
 excerpt: SQL Injection의 개념과 인증 우회
 categories: 모의 해킹

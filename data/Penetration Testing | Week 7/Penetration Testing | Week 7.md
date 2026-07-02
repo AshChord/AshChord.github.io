@@ -1,5 +1,5 @@
 ---
-title: Penetration Testing | Week 7
+title: Penetration Testing ⋮ Week 7
 date: 2025/05/25
 excerpt: Error-Based SQL Injection과 Blind SQL Injection
 categories: 모의 해킹

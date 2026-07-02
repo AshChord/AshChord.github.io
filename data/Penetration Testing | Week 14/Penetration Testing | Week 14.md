@@ -1,5 +1,5 @@
 ---
-title: Penetration Testing | Week 14
+title: Penetration Testing ⋮ Week 14
 date: 2025/07/13
 excerpt: 파일 업로드 취약점
 categories: 모의 해킹

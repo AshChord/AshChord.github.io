@@ -1,5 +1,5 @@
 ---
-title: Penetration Testing | Week 10
+title: Penetration Testing ⋮ Week 10
 date: 2025/06/18
 excerpt: 쿠키 탈취 기법과 DOM-Based XSS
 categories: 모의 해킹

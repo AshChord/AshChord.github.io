@@ -1,5 +1,5 @@
 ---
-title: Penetration Testing | Week 11
+title: Penetration Testing ⋮ Week 11
 date: 2025/06/25
 excerpt: XSS 취약점 응용
 categories: 모의 해킹

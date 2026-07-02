@@ -1,9 +1,9 @@
 ---
-title: Penetration Testing | Week 2
+title: Penetration Testing ⋮ Week 2
 date: 2025/04/14
 excerpt: 데이터베이스 연동 및 기본 SQL 쿼리 구조
 categories: 모의 해킹
-permalink: /posts/Penetration Testing | Week 2
+permalink: /posts/Penetration Testing ⋮ Week 2
 ---
 
 ## 강의 노트

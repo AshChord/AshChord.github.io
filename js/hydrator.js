@@ -7,23 +7,17 @@
   const response = await fetch('/index.html');
   const htmlText = await response.text();
 
-  const parser = new DOMParser();
-  const newDoc = parser.parseFromString(htmlText, 'text/html');
+  const newDoc = new DOMParser().parseFromString(htmlText, 'text/html');
 
   newDoc.querySelector('.content-body').append(...currentContentNodes);
 
-  const oldLink = document.querySelector('link[href*="style"]');
-  const newLink = newDoc.head.querySelector('link[href*="style"]');
-  // newLink.remove();
+  const rawStyle = document.head.querySelectorAll('link')[1];
+  const canonicalStyle = newDoc.head.querySelectorAll('link')[1];
 
-  newLink.onload = () => oldLink.remove();
+  canonicalStyle.onload = () => rawStyle.remove();
 
-  for (const node of [...document.head.childNodes]) {
-    if (node !== oldLink) node.remove();
-  }
-
+  document.head.childNodes.forEach(node => node !== rawStyle && node.remove());
   document.head.append(...Array.from(newDoc.head.childNodes));
-  // document.head.insertBefore(newLink, document.head.lastElementChild);
 
   document.body.replaceWith(newDoc.body);
 
