@@ -1,0 +1,30 @@
+---
+permalink: /posts/Penetration Testing ⋮ Week 46.html
+title: Penetration Testing ⋮ Week 4
+date: 2025/04/26
+excerpt: 웹 프록시와 Burp Suite
+categories: 모의 해킹
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }}</title>
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:description" content="{{ page.excerpt }}">
+  <meta property="og:url" content="{{ page.permalink | absolute_url}}">
+  <meta property="og:image" content="https://ashchord.github.io/data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp">
+  <meta property="og:site_name" content="AshChord.log">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title }}">
+  <meta name="twitter:image" content="https://ashchord.github.io/data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/css/markdown.css">
+</head>
+<body></body>
+</html>
