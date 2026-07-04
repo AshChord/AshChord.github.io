@@ -1,6 +1,6 @@
 ---
 layout: null
-permalink: /posts/Penetration Testing ⋮ Week 4
+permalink: /posts/Penetration Testing ⋮ Week 4/index.html
 title: Penetration Testing ⋮ Week 4 - AshChord.log · GitHub Pages
 date: 2025/04/26
 excerpt: 웹 프록시와 Burp Suite
