@@ -8,9 +8,9 @@ title: posts - AshChord.log · Github Pages
 %}
 
 {% for post in posts %}
-- {{ post.title | default: "title"}}
-- {{ post.date | default: "1970-01-01"}}
-- {{ post.excerpt | default: "example post"}}
-- {{ post.categories | default: "cat1, cat2"}}
+- {{ post.title }}
+- {{ post.date }}
+- {{ post.excerpt }}
+- {{ post.categories }}
 {: .metadata}
 {% endfor %}
