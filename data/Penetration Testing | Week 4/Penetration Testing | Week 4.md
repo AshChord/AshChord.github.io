@@ -1,5 +1,5 @@
 ---
-lang: ko
+layout: post
 permalink: /posts/Penetration Testing ⋮ Week 4
 title: Penetration Testing ⋮ Week 4 - AshChord.log · GitHub Pages
 date: 2025/04/26
@@ -9,9 +9,6 @@ image: /data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp
 ---
 
 ![thumbnail](/data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp){:onload="import('/js/hydrator.js');"}
-
-<p>{{ page.lang }}</p>
-<p>{{ site.lang }}</p>
 
 ## 강의 노트
 
