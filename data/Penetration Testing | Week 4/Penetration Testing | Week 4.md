@@ -9,6 +9,9 @@ image: /data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp
 
 ![thumbnail](/data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp){:onload="import('/js/hydrator.js');"}
 
+{{ site.url }}
+{{ page.permalink }}
+
 ## 강의 노트
 
 ### 웹 프록시
