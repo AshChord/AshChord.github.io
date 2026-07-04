@@ -1,15 +1,14 @@
 ---
-title: Penetration Testing ⋮ Week 4 - AshChord.log
+lang: ko
+permalink: /posts/Penetration Testing ⋮ Week 4
+title: Penetration Testing ⋮ Week 4 - AshChord.log · GitHub Pages
 date: 2025/04/26
 excerpt: 웹 프록시와 Burp Suite
 categories: 모의 해킹
-permalink: /posts/Penetration Testing ⋮ Week 4
 image: /data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp
 ---
 
-![thumbnail]({{ page.image }}){:onload="import('/js/hydrator.js');"}
-
-{{ page.url }}
+![thumbnail](/data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp){:onload="import('/js/hydrator.js');"}
 
 ## 강의 노트
 
@@ -19,7 +18,7 @@ image: /data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp
 
 사용자가 특정 웹 페이지를 요청하면, 해당 요청은 먼저 프록시 서버로 전달된다. 프록시 서버는 이 요청을 대신 처리하여 웹 서버와 통신하며, 응답을 받으면 이를 사용자에게 반환한다.
 
-![웹 프록시]({{ page.image }}/../img/1.webp)
+![웹 프록시](/data/Penetration%20Testing%20|%20Week%204/1.webp)
 
 ---
 
