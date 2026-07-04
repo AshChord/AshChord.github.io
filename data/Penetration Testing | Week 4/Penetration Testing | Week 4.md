@@ -11,6 +11,7 @@ image: /data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp
 
 {{ site.url }}
 {{ page.permalink }}
+{{ page.permalink | absolute_url}}
 
 ## 강의 노트
 
