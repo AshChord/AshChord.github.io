@@ -1,4 +1,5 @@
 ---
+layout: markdown
 permalink: /posts/Penetration Testing ⋮ Week 4
 title: Penetration Testing ⋮ Week 4 - AshChord.log · GitHub Pages
 date: 2025/04/26
