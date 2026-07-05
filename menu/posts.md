@@ -7,8 +7,6 @@ title: posts - AshChord.log · Github Pages
   | where_exp: "page", "page.path contains 'data/'" | sort: "date" | reverse
 %}
 
-{{ site.pages }}
-
 {% for post in posts %}
 - {{ post.title }}
 - {{ post.date }}

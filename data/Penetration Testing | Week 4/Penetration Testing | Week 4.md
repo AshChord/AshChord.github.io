@@ -1,5 +1,5 @@
 ---
-layout: markdown
+layout: article
 permalink: /posts/Penetration Testing ⋮ Week 4
 title: Penetration Testing ⋮ Week 4 - AshChord.log · GitHub Pages
 date: 2025/04/26
@@ -7,7 +7,12 @@ excerpt: 웹 프록시와 Burp Suite
 categories: 모의 해킹
 ---
 
-![thumbnail](/data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp){:onload="import('/js/hydrator.js');"}
+{% assign preview = site.pages 
+  | where: "layout", page.layout 
+  | where_exp: "item", "item.path contains 'assets/'" 
+  | first %}
+
+{{ preview.content }}
 
 ## 강의 노트
 
