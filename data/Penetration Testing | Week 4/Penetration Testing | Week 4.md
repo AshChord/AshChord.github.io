@@ -12,7 +12,7 @@ categories: 모의 해킹
   | where_exp: "item", "item.path contains 'assets/'" 
   | first %}
 
-{{ preview.content }}
+{{ preview.content | replace: "TITLE", page.title | replace: "EXCERPT", page.excerpt | replace: "URL", page.permalink }}
 
 ## 강의 노트
 
