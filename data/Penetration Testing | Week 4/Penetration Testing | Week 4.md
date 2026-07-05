@@ -6,18 +6,13 @@ date: 2025/04/26
 excerpt: 웹 프록시와 Burp Suite
 categories: 모의 해킹
 ---
-<!DOCTYPE html>
 
 {% assign preview = site.pages 
   | where: "layout", page.layout 
   | where_exp: "item", "item.path contains 'assets/'" 
   | first %}
 
-{{ preview.content 
-  | replace: "TITLE", page.title 
-  | replace: "EXCERPT", page.excerpt 
-  | replace: "URL", page.permalink 
-}}
+{{ preview.content }}
 
 ## 강의 노트
 
