@@ -15,9 +15,9 @@ categories: 모의 해킹
   | first %}
 
 {{ preview_snippet.content 
-  | replace: "{{ page.title }}", page.title 
-  | replace: "{{ page.excerpt }}", page.excerpt 
-  | replace: "{{ page.permalink | absolute_url}}", page.url 
+  | replace: "TITLE", page.title 
+  | replace: "EXCERPT", page.excerpt 
+  | replace: "URL", page.permalink 
 }}
 
 ## 강의 노트
