@@ -7,16 +7,18 @@ excerpt: 웹 프록시와 Burp Suite
 categories: 모의 해킹
 ---
 
-{::options parse_block_html="true" /}
+{% raw %}<!DOCTYPE html>{% endraw %}
 
 {% assign preview = site.pages 
   | where: "layout", page.layout 
   | where_exp: "item", "item.path contains 'assets/'" 
   | first %}
 
-{{ preview.content | markdownify}}
-
-{::options parse_block_html="false" /}
+{{ preview_snippet.content 
+  | replace: "{{ page.title }}", page.title 
+  | replace: "{{ page.excerpt }}", page.excerpt 
+  | replace: "{{ page.permalink | absolute_url}}", page.url 
+}}
 
 ## 강의 노트
 
