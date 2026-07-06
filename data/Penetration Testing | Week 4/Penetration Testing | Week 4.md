@@ -8,7 +8,7 @@ categories: 모의 해킹
 ---
 
 {% assign preview = site.pages | where: "layout", page.layout | sort: "path" | first %}
-{{ preview.content | replace: "TITLE", page.title | replace: "EXCERPT", page.excerpt | replace: "URL", page.permalink }}
+{{ preview.content | replace: "TITLE", page.title | replace: "EXCERPT", page.excerpt | replace: "URL", page.url }}
 
 ## 강의 노트
 
