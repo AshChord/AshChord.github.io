@@ -7,7 +7,9 @@ excerpt: 웹 프록시와 Burp Suite
 categories: 모의 해킹
 ---
 
-{::nomarkdown}<!DOCTYPE html>{:/nomarkdown}
+{::nomarkdown}
+<!DOCTYPE html>
+{:/nomarkdown}
 
 {% assign preview = site.pages 
   | where: "layout", page.layout 
