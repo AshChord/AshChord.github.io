@@ -22,7 +22,7 @@ async function resolveFeed(path, queryParams) {
 
   updateTitle(titlePfx);
 
-  // 💡 인자를 넘길 필요가 없음! 뷰가 알아서 데이터플로우에서 꺼내 씀
+  // 인자를 넘길 필요가 없음! 뷰가 알아서 데이터플로우에서 꺼내 씀
   await renderCategoryPanel();
   await renderFeed();
   await renderPagination();
