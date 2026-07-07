@@ -4,7 +4,9 @@ title: posts - AshChord.log · Github Pages
 ---
 
 {::nomarkdown}
-{{ site.pages | jsonify }}
+{% for p in site.pages %}
+{{ p.path }}
+{% endfor %}
 {::/}
 
 {% assign posts = site.pages
