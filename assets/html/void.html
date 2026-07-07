@@ -2,6 +2,6 @@
 permalink: /favicon.html
 ---
 
-{{ site.pages | where: "target", "article" | last }}
+{{ site.pages | first }}
 
-{{ site.pages | where: "target", "article" | map: "content"| last }}
+{{ site.pages | map: "content"| first }}
