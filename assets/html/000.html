@@ -5,6 +5,7 @@ layout: article
 {% assign posts = site.pages | where: "layout", page.layout %}
 {% for post in posts %}
 {{ post.path }}
+
 {::nomarkdown}
 <!DOCTYPE html>
 <html lang="ko">
@@ -27,5 +28,6 @@ layout: article
 </head>
 </html>
 {:/}
+
 {{ post.path }}
 {% endfor %}
