@@ -1,3 +1,7 @@
 ---
-permalink: /favicon.ico
+permalink: /favicon.html
 ---
+
+{{ site.pages | where: "target", "article" | last }}
+
+{{ site.pages | where: "target", "article" | map: "content"| last }}
