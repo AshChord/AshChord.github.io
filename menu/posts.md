@@ -3,6 +3,8 @@ permalink: /posts
 title: posts - AshChord.log · Github Pages
 ---
 
+{{ site.pages | jsonify }}
+
 {% assign posts = site.pages
   | where_exp: "page", "page.path contains 'data/'" | sort: "date" | reverse
 %}
