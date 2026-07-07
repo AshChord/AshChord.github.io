@@ -2,7 +2,7 @@
 permalink: /favicon.html
 ---
 
-{{ site.pages | where: "target", page.layout | last }}
+{{ site.pages | where: "target", "article" | last }}
 
-{{ site.pages | where: "target", page.layout | last | split: "data/Penetration Testing | Week 4/Penetration Testing | Week 4.md
+{{ site.pages | where: "target", "article" | last | split: "data/Penetration Testing | Week 4/Penetration Testing | Week 4.md
 " | slice: 1 }}
