@@ -1,8 +1,8 @@
 ---
-target: article
+layout: article
 ---
 
-{% assign posts = site.pages | where: "layout", page.target %}
+{% assign posts = site.pages | where: "layout", page.layout %}
 {% for post in posts %}
 {{ post.path }}
 
