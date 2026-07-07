@@ -2,6 +2,6 @@
 permalink: /favicon.html
 ---
 
-{{ site.pages | first }}
+{{ site.pages | first | jsonify }}
 
 {{ site.pages | map: "content"| first }}
