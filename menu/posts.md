@@ -3,12 +3,6 @@ permalink: /posts
 title: posts - AshChord.log · Github Pages
 ---
 
-{::nomarkdown}
-{% for p in site.pages %}
-{{ p.path }}
-{% endfor %}
-{::/}
-
 {% assign posts = site.pages
   | where_exp: "page", "page.path contains 'data/'" | sort: "date" | reverse
 %}

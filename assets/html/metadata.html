@@ -1,7 +1,10 @@
 ---
-layout: article
+target: article
 ---
 
+{% assign posts = site.pages | where: "layout", page.target %}
+{% for post in posts %}
+{{ post.path }}
 {::nomarkdown}
 <!DOCTYPE html>
 <html lang="ko">
@@ -9,20 +12,22 @@ layout: article
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TITLE</title>
-  <meta property="og:title" content="TITLE">
-  <meta property="og:description" content="EXCERPT">
-  <meta property="og:url" content="URL">
-  <meta property="og:image" content="https://ashchord.github.io/data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp">
+  <title>{{ post.title }}</title>
+  <meta property="og:title" content="{{ post.title }}">
+  <meta property="og:description" content="{{ post.excerpt }}">
+  <meta property="og:url" content="{{ post.url }}">
+  <meta property="og:image" content="{{ post.url }}/thumbnail.webp">
   <meta property="og:site_name" content="AshChord.log">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="TITLE">
-  <meta name="twitter:image" content="https://ashchord.github.io/data/Penetration%20Testing%20%7C%20Week%204/thumbnail.webp">
+  <meta name="twitter:title" content="{{ post.title }}">
+  <meta name="twitter:image" content="{{ post.url }}/thumbnail.webp">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/css/markdown.css">
   <script src="/js/hydrator.js"></script>
 </head>
+
 </html>
 {:/}
+{{ post.path }}
+{% endfor %}

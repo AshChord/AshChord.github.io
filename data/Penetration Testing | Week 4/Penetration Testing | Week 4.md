@@ -7,12 +7,7 @@ excerpt: 웹 프록시와 Burp Suite
 categories: 모의 해킹
 ---
 
-{% assign preview = site.pages | where: "layout", page.layout | sort: "path" | first %}
-{{ preview.content 
-  | replace: "TITLE", page.title 
-  | replace: "EXCERPT", page.excerpt 
-  | replace: "URL", page.url 
-}}
+{{ site.pages | where: "layout", page.layout | map: "content" | last | split: page.path | slice: 1 }}
 
 ## 강의 노트
 
