@@ -1,11 +1,11 @@
-html[cloak]{
-  visibility: hidden;
-}
-
 body {
   margin: 0;
   font-size: 14px;
   font-family: system-ui;
+
+  &:not(:has(main)) {
+    visibility: hidden;
+  }
 
   @media (min-width: 768px) {
     font-size: 16px;
@@ -86,7 +86,7 @@ menu {
   a {
     all: unset;
 
-    menu[open] &{
+    menu[open] & {
       display: block;
       box-sizing: border-box;
       width: 100%;
