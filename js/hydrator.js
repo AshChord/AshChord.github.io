@@ -9,14 +9,6 @@
 
   newDoc.querySelector('.content-body').append(...currentContentNodes);
 
-  /*const rawStyle = document.head.querySelectorAll('link')[1];
-  const canonicalStyle = newDoc.head.querySelectorAll('link')[1];
-
-  canonicalStyle.onload = () => rawStyle.remove();
-
-  document.head.childNodes.forEach(node => node !== rawStyle && node.remove());
-  document.head.append(...Array.from(newDoc.head.childNodes));*/
-
   document.body.replaceWith(newDoc.body);
 
   for (const oldScript of document.body.querySelectorAll('script')) {
