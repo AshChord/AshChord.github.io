@@ -1,5 +1,5 @@
-.markdown-body{
-  display: none;
+html[clock]{
+  visibility: hidden;
 }
 
 body {

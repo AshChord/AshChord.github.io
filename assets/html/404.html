@@ -1,6 +1,6 @@
 ---
-permalink: /404.html
 layout: article
+permalink: /404.html
 ---
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@ layout: article
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="/assets/favicon.svg" type="image/x-icon">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <title>AshChord.log</title>
   <meta property="og:title" content="404">
   <meta property="og:description" content="Not Found">
@@ -64,10 +64,11 @@ layout: article
 {{ post.path }}
 {::nomarkdown}
 <!DOCTYPE html>
-<html lang="ko" class="loading">
+<html lang="ko" cloak>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <title>{{ post.title }}</title>
   <meta property="og:title" content="{{ post.title }}">
   <meta property="og:description" content="{{ post.excerpt }}">
@@ -77,7 +78,6 @@ layout: article
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ post.title }}">
   <meta name="twitter:image" content="{{ post.permalink | absolute_url }}/thumbnail.webp">
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/css/markdown.css">
 </head>
