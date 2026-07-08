@@ -1,5 +1,5 @@
 (async () => {
-  const markdownBody = document.querySelector('.markdown-body');
+  const markdownBody = document.querySelector('body');
   const currentContentNodes = Array.from(markdownBody.childNodes);
 
   const response = await fetch('/index.html');
@@ -9,13 +9,13 @@
 
   newDoc.querySelector('.content-body').append(...currentContentNodes);
 
-  const rawStyle = document.head.querySelectorAll('link')[1];
+  /*const rawStyle = document.head.querySelectorAll('link')[1];
   const canonicalStyle = newDoc.head.querySelectorAll('link')[1];
 
   canonicalStyle.onload = () => rawStyle.remove();
 
   document.head.childNodes.forEach(node => node !== rawStyle && node.remove());
-  document.head.append(...Array.from(newDoc.head.childNodes));
+  document.head.append(...Array.from(newDoc.head.childNodes));*/
 
   document.body.replaceWith(newDoc.body);
 
