@@ -1,6 +1,6 @@
 ---
-permalink: /posts/Penetration Testing ⋮ Week 3
-title: Penetration Testing ⋮ Week 3
+permalink: /posts/Penetration Testing | Week 3
+title: Penetration Testing | Week 3
 date: 2025/04/22
 excerpt: 로그인 처리 및 상태 관리 방식
 categories: 모의 해킹
