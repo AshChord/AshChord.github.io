@@ -466,15 +466,15 @@ main {
   width: 48px;
   height: 48px;
   background-color: dimgray;
-  mask-image: url("/assets/icon-chapter.svg");
-  mask-size: 50%;
-  mask-repeat: no-repeat;
-  mask-position: center;
+  mask-image: url("/assets/icon-chapter.svg"), url("/assets/icon-side-close-right.svg");
+  mask-size: 50%, 0%;
+  mask-repeat: no-repeat, no-repeat;
+  mask-position: center, center;
   list-style: none;
 
   .category-panel[open] & {
     margin-left: auto;
-    mask-image: url("/assets/icon-side-close-right.svg");
+    mask-size: 0%, 50%;
   }
 
   &:hover {
