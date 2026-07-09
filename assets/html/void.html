@@ -2,6 +2,8 @@
 permalink: /favicon.html
 ---
 
-{{ site.pages | first | jsonify }}
+{{ site.pages | first | url_decode }}
+
+{{ site.pages | first | inspect }}
 
 {{ site.pages | map: "content"| first }}
