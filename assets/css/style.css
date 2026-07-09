@@ -468,8 +468,8 @@ main {
   background-color: dimgray;
   mask-image: url("/assets/icon-chapter.svg"), url("/assets/icon-side-close-right.svg");
   mask-size: 50%, 0%;
-  mask-repeat: no-repeat, no-repeat;
-  mask-position: center, center;
+  mask-repeat: no-repeat;
+  mask-position: center;
   list-style: none;
 
   .category-panel[open] & {
