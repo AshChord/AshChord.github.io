@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 permalink: /posts/Penetration Testing | Week 4
 title: Penetration Testing | Week 4
 date: 2025/04/26
