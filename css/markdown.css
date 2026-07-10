@@ -290,7 +290,7 @@
     background-image: url("/assets/icon-copy.svg"), url("/assets/icon-check.svg");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 60% 0%;
+    background-size: 60%, 0%;
     box-shadow: 0 2px 4px gainsboro, inset 0 0 0 16px color-mix(white, transparent);
     cursor: pointer;
     transform: scale(1.2);
@@ -300,7 +300,7 @@
     }
 
     &.copied {
-      background-size: 0% 60%;
+      background-size: 0%, 60%;
     }
 
     @media (min-width: 768px) {

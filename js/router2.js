@@ -77,6 +77,4 @@ function updateTitle(pfx) {
   document.title = pfx ? `${pfx} - ${sfx}` : sfx;
 }
 
-document.documentElement.removeAttribute('cloak');
-
 // router();

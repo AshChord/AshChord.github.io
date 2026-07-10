@@ -29,7 +29,7 @@ async function renderFeed() {
     preview.href = `/posts/${encodeURIComponent(post.title)}`;
 
     const thumbnail = feedItem.querySelector('.thumbnail');
-    thumbnail.src = `/data/${encodeURIComponent(post.title)}/thumbnail.webp`;
+    thumbnail.src = `/posts/${encodeURIComponent(post.title)}/thumbnail.webp`;
     thumbnail.alt = post.title;
 
     const title = feedItem.querySelector('.title');
@@ -83,7 +83,7 @@ async function renderContent() {
   date.textContent = postContent.metadata.date;
 
   const thumbnail = contentHeader.querySelector('.thumbnail');
-  thumbnail.src = `/data/${postContent.title}/thumbnail.webp`;
+  thumbnail.src = `/posts/${postContent.title}/thumbnail.webp`;
   thumbnail.alt = postContent.title;
 
   // 마크다운 파싱 및 본문 DOM 부착
