@@ -64,17 +64,18 @@ permalink: /404.html
 {{ post.path }}
 {::nomarkdown}
 <!DOCTYPE html>
-<html lang="ko">
+{:/}
+<html lang=ko>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <meta charset=UTF-8>
+  <meta name=viewport content=width=device-width,initial-scale=1.0>
+  <link rel=icon href=/assets/favicon.svg type=image/svg+xml>
   <title>{{ post.title }}</title>
-  <meta property="og:title" content="{{ post.title }}">
-  <meta property="og:description" content="{{ post.excerpt }}">
-  <meta property="og:url" content="{{ post.permalink | absolute_url }}">
-  <meta property="og:image" content="{{ post.permalink | absolute_url }}/thumbnail.webp">
-  <meta property="og:site_name" content="AshChord.log">
+  <meta property=og:title>{: content="{{ post.title }}"}
+  <meta property=og:description content="{{ post.excerpt }}">
+  <meta property=og:url content="{{ post.permalink | absolute_url }}">
+  <meta property=og:image content="{{ post.permalink | absolute_url }}/thumbnail.webp">
+  <meta property=og:site_name content="AshChord.log">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ post.title }}">
   <meta name="twitter:image" content="{{ post.permalink | absolute_url }}/thumbnail.webp">
@@ -82,7 +83,6 @@ permalink: /404.html
   <link rel="stylesheet" href="/css/markdown.css">
 </head>
 </html>
-{:/}
 ![thumbnail]({{ post.permalink }}/thumbnail.webp){:onload="import('/js/hydrator.js');"}
 {{ post.path }}
 {% endfor %}
