@@ -1,9 +1,13 @@
 ---
-title: Penetration Testing ⋮ Week 13
+layout: article
+permalink: /posts/Penetration Testing | Week 13
+title: Penetration Testing | Week 13
 date: 2025/07/05
 excerpt: CSRF 대응 방안 및 웹 보안 정책
 categories: 모의 해킹
 ---
+
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## 강의 노트
 

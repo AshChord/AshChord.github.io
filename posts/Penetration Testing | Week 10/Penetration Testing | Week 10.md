@@ -1,9 +1,13 @@
 ---
-title: Penetration Testing ⋮ Week 10
+layout: article
+permalink: /posts/Penetration Testing | Week 10
+title: Penetration Testing | Week 10
 date: 2025/06/18
 excerpt: 쿠키 탈취 기법과 DOM-Based XSS
 categories: 모의 해킹
 ---
+
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## 강의 노트
 

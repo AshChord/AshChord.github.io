@@ -1,9 +1,13 @@
 ---
-title: Penetration Testing ⋮ Week 6
+layout: article
+permalink: /posts/Penetration Testing | Week 6
+title: Penetration Testing | Week 6
 date: 2025/05/13
 excerpt: UNION SQL Injection과 데이터 추출
 categories: 모의 해킹
 ---
+
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## 강의 노트
 

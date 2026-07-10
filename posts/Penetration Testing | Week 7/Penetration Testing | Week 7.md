@@ -1,9 +1,13 @@
 ---
-title: Penetration Testing ⋮ Week 7
+layout: article
+permalink: /posts/Penetration Testing | Week 7
+title: Penetration Testing | Week 7
 date: 2025/05/25
 excerpt: Error-Based SQL Injection과 Blind SQL Injection
 categories: 모의 해킹
 ---
+
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## 강의 노트
 

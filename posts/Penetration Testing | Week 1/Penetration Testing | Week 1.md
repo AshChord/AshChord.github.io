@@ -1,9 +1,13 @@
 ---
-title: Penetration Testing ⋮ Week 1
+layout: article
+permalink: /posts/Penetration Testing | Week 1
+title: Penetration Testing | Week 1
 date: 2025/04/05
 excerpt: 웹 서버의 기본 개념과 동적 페이지 처리
 categories: 모의 해킹
 ---
+
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## 강의 노트
 

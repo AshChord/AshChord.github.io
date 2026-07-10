@@ -1,9 +1,13 @@
 ---
-title: Penetration Testing ⋮ Week 12
+layout: article
+permalink: /posts/Penetration Testing | Week 12
+title: Penetration Testing | Week 12
 date: 2025/07/02
 excerpt: Cross Site Request Forgery(CSRF)
 categories: 모의 해킹
 ---
+
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## 강의 노트
 

@@ -1,9 +1,13 @@
 ---
-title: Penetration Testing ⋮ Week 8
+layout: article
+permalink: /posts/Penetration Testing | Week 8
+title: Penetration Testing | Week 8
 date: 2025/06/01
 excerpt: SQL Injection 취약점 탐색
 categories: 모의 해킹
 ---
+
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## 강의 노트
 

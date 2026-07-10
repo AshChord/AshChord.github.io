@@ -1,9 +1,13 @@
 ---
+layout: article
+permalink: /posts/Dreamhack Wargames | Web Hacking II
 title: Dreamhack Wargames | Web Hacking II
 date: 2025/10/11
 excerpt: Dreamhack Wargames 풀이 II
 categories: Dreamhack, 워게임
 ---
+
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## csrf-1
 

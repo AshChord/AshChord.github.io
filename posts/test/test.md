@@ -1,9 +1,13 @@
 ---
+layout: article
+permalink: /posts/test
 title: test
 date: 2025/02/13
 excerpt: 테스트 파일
 categories: 예시, 파일
 ---
+
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 # test
 

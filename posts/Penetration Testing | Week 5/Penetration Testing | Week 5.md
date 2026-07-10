@@ -1,9 +1,13 @@
 ---
-title: Penetration Testing ⋮ Week 5
+layout: article
+permalink: /posts/Penetration Testing | Week 5
+title: Penetration Testing | Week 5
 date: 2025/05/06
 excerpt: SQL Injection의 개념과 인증 우회
 categories: 모의 해킹
 ---
+
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## 강의 노트
 

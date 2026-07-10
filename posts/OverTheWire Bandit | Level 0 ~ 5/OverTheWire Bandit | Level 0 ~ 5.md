@@ -1,9 +1,13 @@
 ---
+layout: article
+permalink: /posts/OverTheWire Bandit | Level 0 ~ 5
 title: OverTheWire Bandit | Level 0 ~ 5
 date: 2025/08/03
 excerpt: Bandit Level 0 ~ 5 풀이
 categories: Bandit, 워게임
 ---
+
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## Level 0
 

@@ -1,9 +1,13 @@
 ---
+layout: article
+permalink: /posts/Dreamhack Wargames | Dream Beginners II
 title: Dreamhack Wargames | Dream Beginners II
 date: 2025/09/17
 excerpt: Dream Beginners 워게임 풀이 II
 categories: Dreamhack, 워게임
 ---
+
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## Exercise: Welcome-Beginners
 
