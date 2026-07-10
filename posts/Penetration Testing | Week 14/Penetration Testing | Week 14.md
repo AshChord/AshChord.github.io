@@ -60,18 +60,18 @@ categories: 모의 해킹
 
 웹 셸을 활용한 공격에는 두 가지 핵심 사항이 존재한다. 먼저 **웹 서버에서 실행되는 코드가 포함된 파일을 업로드**할 수 있어야 하며, 이후 **업로드한 파일의 경로를 파악**할 수 있어야 한다. 실제로 웹 셸을 업로드하는 예시와 함께 살펴보자.
 
-![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/1.webp)
+![Web Shell](/posts/Penetration%20Testing%20%7C%20Week%2014/1.webp)
 
 파일 업로드 기능이 포함된 간단한 게시판 애플리케이션이다. 앞서 작성했던 `webshell.php` 파일을 업로드해 보자.
 
-![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/2.webp)
-![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/3.webp)
+![Web Shell](/posts/Penetration%20Testing%20%7C%20Week%2014/2.webp)
+![Web Shell](/posts/Penetration%20Testing%20%7C%20Week%2014/3.webp)
 
 파일을 업로드한 후 게시물을 열람하면 첨부 파일 다운로드 링크가 표시되며, 개발자 도구를 통해 해당 요소를 확인해 보면 `<a href="./download.php?file=webshell.php&target_Dir=./file/uploads">다운로드</a>`와 같은 형태임을 알 수 있다. `href` 속성에 지정된 URL을 살펴보면 쿼리 스트링에 `target_Dir` 파라미터가 포함되어 있어 업로드한 파일이 저장된 디렉터리가 `./file/uploads`임을 유추할 수 있다.
 
 파일의 경로를 파악했으므로, 주소 창에 `http://ctf.segfaulthub.com:9992/file/uploads/webshell.php`를 입력하면 해당 파일에 접근할 수 있다. 웹 서버에서 `ls` 명령어를 실행시키기 위해 `cmd=ls` 쿼리 스트링을 추가하고 접속해 보자.
 
-![Web Shell](/data/Penetration%20Testing%20%7C%20Week%2014/4.webp)
+![Web Shell](/posts/Penetration%20Testing%20%7C%20Week%2014/4.webp)
 
 웹 서버의 현재 경로(`./file/uploads`)에 존재하는 파일 목록들이 출력됨을 확인하였다.
 
@@ -102,7 +102,7 @@ categories: 모의 해킹
 
 `multipart/form-data`는 다양한 유형의 데이터를 여러 파트로 분리하여 동시에 전송할 수 있도록 설계된 인코딩 방식이다. 다음은 이러한 방식으로 데이터를 전송하는 실제 요청의 예시이다.
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%2014/5.webp" alt="multipart/form-data" style="padding: 0 15%; background-color: #2b2b2b;">
+<img src="/posts/Penetration%20Testing%20%7C%20Week%2014/5.webp" alt="multipart/form-data" style="padding: 0 15%; background-color: #2b2b2b;">
 
 요청의 `Content-Type` 헤더에 `multipart/form-data`가 명시되며, 각 데이터 전송 파트를 구분하기 위한 고유의 바운더리 문자열이 함께 지정된다. 요청의 본문은 해당 바운더리를 기준으로 여러 파트로 구분되며, `Content-Disposition` 헤더를 포함하여 해당 데이터가 어떤 파라미터에 대응되는지를 나타낸다.
 
@@ -162,7 +162,7 @@ categories: 모의 해킹
 
 ### File Vuln CTF
 
-![File Vuln CTF](/data/Penetration%20Testing%20%7C%20Week%2014/6.webp)
+![File Vuln CTF](/posts/Penetration%20Testing%20%7C%20Week%2014/6.webp)
 
 CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
@@ -170,19 +170,19 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
 #### Web Shell 1
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%2014/7.webp" alt="Web Shell 1" style="padding: 0 25%; background-color: white;">
+<img src="/posts/Penetration%20Testing%20%7C%20Week%2014/7.webp" alt="Web Shell 1" style="padding: 0 25%; background-color: white;">
 
 링크의 주소로 접속하면 다음과 같은 회원제 게시판 애플리케이션으로 이동한다.
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/8.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/8.webp)
 
 회원 가입을 진행하여 `any`/`any` 계정을 생성하고, 로그인 후 게시물 작성 페이지로 이동하였다.
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/9.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/9.webp)
 
 파일 업로드 기능이 포함되어 있는 것을 확인할 수 있다. 앞서 활용했던 `webshell.php` 파일을 업로드하고 게시물을 열람해 보았다.
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/10.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/10.webp)
 
 첨부 파일을 다운로드할 수 있는 링크를 발견하였다. 개발자 도구를 사용하여 해당 링크 요소를 자세히 살펴보았다.
 
@@ -190,7 +190,7 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
 파일 경로에서 `/var/www/html`은 웹 루트 디렉터리에 해당하므로, `http://ctf.segfaulthub.com:8989/uploads/90_webshell.php`라는 URL로 이동해 보았다. 이때 `webshell.php`에 작성한 스크립트를 고려하여 URL 뒤에 `cmd=ls` 쿼리 스트링을 추가하였다.
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/11.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/11.webp)
 
 웹 셸이 실행되어 현재 디렉터리에 존재하는 파일들이 출력되었다. 다음으로 `flag.txt` 파일을 찾기 위해 `cmd` 파라미터의 값으로 다음 구문을 사용하였다.
 
@@ -200,7 +200,7 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
 위의 명령문은 웹 서버의 루트 디렉터리(`/`)에서 이름이 `flag.txt`인 파일을 검색하여 해당 파일의 경로를 출력한다.
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/12.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/12.webp)
 
 `flag.txt` 파일의 위치가 `/flag.txt`임을 확인하였다. 마지막으로 `cmd` 파라미터에 다음 구문을 입력하였다.
 
@@ -209,7 +209,7 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 cat /flag.txt
 ```
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/13.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/13.webp)
 
 `flag.txt` 파일의 내용이 출력됨에 따라 플래그를 획득하였다.
 
@@ -219,17 +219,17 @@ cat /flag.txt
 
 #### Web Shell 2
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%2014/14.webp" alt="Web Shell 2" style="padding: 0 25%; background-color: white;">
+<img src="/posts/Penetration%20Testing%20%7C%20Week%2014/14.webp" alt="Web Shell 2" style="padding: 0 25%; background-color: white;">
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/15.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/16.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/17.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/18.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/19.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/20.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/21.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/22.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2014/23.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/15.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/16.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/17.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/18.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/19.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/20.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/21.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/22.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/23.webp)
 
 > <strong>디렉터리 인덱싱(Directory Indexing)</strong>
 >

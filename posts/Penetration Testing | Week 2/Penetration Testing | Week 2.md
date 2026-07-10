@@ -266,7 +266,7 @@ PHP 코드에서 위 테이블의 데이터를 사용하려면 어떻게 해야 
 
 `db_check.php` 파일의 실행 결과는 다음과 같다.
 
-![db_check.php](/data/Penetration%20Testing%20%7C%20Week%202/1.webp)
+![db_check.php](/posts/Penetration%20Testing%20%7C%20Week%202/1.webp)
 
 <br>
 <br>
@@ -317,7 +317,7 @@ sudo systemctl restart apache2
 
 이제 웹 브라우저에서 `http://x.x.x.x/phpmyadmin`을 입력하여 phpMyAdmin에 접속할 수 있다.  
 
-![phpMyAdmin](/data/Penetration%20Testing%20%7C%20Week%202/2.webp)
+![phpMyAdmin](/posts/Penetration%20Testing%20%7C%20Week%202/2.webp)
 
 ---
 
@@ -362,8 +362,8 @@ sudo systemctl restart apache2
 사용자가 이름을 입력하고 제출하면, 해당 이름과 일치하는 데이터를 데이터베이스에서 찾아 점수를 출력한다.
 `get_score.php`의 실행 결과는 아래와 같다.
 
-![get_score.php](/data/Penetration%20Testing%20%7C%20Week%202/3.webp)
-![get_score.php](/data/Penetration%20Testing%20%7C%20Week%202/4.webp)
+![get_score.php](/posts/Penetration%20Testing%20%7C%20Week%202/3.webp)
+![get_score.php](/posts/Penetration%20Testing%20%7C%20Week%202/4.webp)
 
 ---
 
@@ -371,7 +371,7 @@ sudo systemctl restart apache2
 
 phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이블을 추가하였다.
 
-![users](/data/Penetration%20Testing%20%7C%20Week%202/5.webp)
+![users](/posts/Penetration%20Testing%20%7C%20Week%202/5.webp)
 
 회원 가입 페이지에서는 사용자로부터 정보를 입력받아 `users` 테이블에 저장한다.  
 1주 차에 제작했던 로그인 페이지 역시 데이터베이스와 연동시켜 보자.
@@ -659,32 +659,32 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 
 브라우저에서 `http://x.x.x.x/sign_up.php`로 접속하면 다음과 같은 회원 가입 페이지가 나타난다.  
 
-![회원 가입 페이지](/data/Penetration%20Testing%20%7C%20Week%202/6.webp)
+![회원 가입 페이지](/posts/Penetration%20Testing%20%7C%20Week%202/6.webp)
 
 필요한 정보를 입력하고 폼을 제출하면, `login.php?sign_up=success`로 리다이렉트되며 회원 가입 성공 알림 창이 뜬다.
 
-![회원 가입 성공](/data/Penetration%20Testing%20%7C%20Week%202/7.webp)
+![회원 가입 성공](/posts/Penetration%20Testing%20%7C%20Week%202/7.webp)
 
 이때 `users` 테이블을 확인해 보면 다음과 같이 레코드가 추가되었음을 알 수 있다.
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%202/8.webp" alt="users 테이블" style="padding: 0 12.5%; background-color: white">
+<img src="/posts/Penetration%20Testing%20%7C%20Week%202/8.webp" alt="users 테이블" style="padding: 0 12.5%; background-color: white">
 
 `test` 사용자가 데이터베이스에 등록된 이후 다시 `test`라는 `username`으로 중복 회원 가입 시도를 하면 다음과 같은 알림 창이 표시된다.
 
-![중복 회원 가입 시도](/data/Penetration%20Testing%20%7C%20Week%202/9.webp)
+![중복 회원 가입 시도](/posts/Penetration%20Testing%20%7C%20Week%202/9.webp)
 
 회원 가입 성공 후 알림 창을 닫으면 다음과 같이 로그인 페이지로 이동한다.
 
-![로그인 페이지](/data/Penetration%20Testing%20%7C%20Week%202/10.webp)
+![로그인 페이지](/posts/Penetration%20Testing%20%7C%20Week%202/10.webp)
 
 `test`/`test`를 입력하여 로그인에 성공하면 로그인 성공 화면으로 이동한다.
 
-![로그인 성공](/data/Penetration%20Testing%20%7C%20Week%202/11.webp)
+![로그인 성공](/posts/Penetration%20Testing%20%7C%20Week%202/11.webp)
 
 `test`/`tset`과 같이 잘못된 비밀번호를 입력하면 비밀번호 불일치로 인한 로그인 실패 메시지가 출력된다.
 
-![로그인 실패](/data/Penetration%20Testing%20%7C%20Week%202/12.webp)
+![로그인 실패](/posts/Penetration%20Testing%20%7C%20Week%202/12.webp)
 
 현재 데이터베이스에 등록되지 않은 아이디를 통해 로그인을 시도하면 `username`이 존재하지 않는다는 메시지가 출력된다.
 
-![로그인 실패](/data/Penetration%20Testing%20%7C%20Week%202/13.webp)
+![로그인 실패](/posts/Penetration%20Testing%20%7C%20Week%202/13.webp)

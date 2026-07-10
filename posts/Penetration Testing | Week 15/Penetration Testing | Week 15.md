@@ -178,20 +178,20 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
 #### Web Shell 3
 
-<img src="/data/Penetration%20Testing%20%7C%20Week%2015/1.webp" alt="Web Shell 1" style="padding: 0 25%; background-color: white;">
+<img src="/posts/Penetration%20Testing%20%7C%20Week%2015/1.webp" alt="Web Shell 1" style="padding: 0 25%; background-color: white;">
 
 링크의 주소로 접속하면 다음과 같은 회원제 게시판 애플리케이션으로 이동한다.
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/2.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/3.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/4.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/5.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/6.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/7.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/8.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/9.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/10.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/11.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/2.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/3.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/4.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/5.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/6.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/7.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/8.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/9.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/10.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/11.webp)
 경고 메시지 출력됨
 그럼 소스 코드에 대충 `include("themes/" . $_COOKIE['theme']);` 이런 코드가 있는거임. 현재 include 함수가 실행되는 위치가 /index.php이니까, themes 디렉터리는 index.php와 같은 위치에 있다.
 
@@ -208,36 +208,36 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 ```
 
 그럼 파일 구조가 대충 위와 같은 형태.
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/12.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/13.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/12.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/13.webp)
 
 왜 안될까? 웹셸 코드엔 분명 이렇게 써 있다. `system($_GET['cmd']);` 이건 URL의 쿼리 스트링에서 cmd라는 파라미터의 값을 명령어로서 실행하라는 의미이다. 그런데 URL의 쿼리 스트링을 보면..? 아무것도 없다. /index.php로 요청을 보낸 거니까.. 그러니까 우리는 103_webshell.php 뒤에 ?cmd=ls를 붙이는 게 아니라 /index.php?cmd=ls로 요청을 보내야 하는 거다.
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/14.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/15.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/16.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/14.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/15.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/16.webp)
 
 segfault{CanExecuteImage}
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/17.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/18.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/19.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/20.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/17.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/18.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/19.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/20.webp)
 Content-Description: File Transfer
 Content-Disposition: attachment; filename="index.php"
 여기서 이거 설명하고 넘어가고.
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/21.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/21.webp)
 segfault{downloadSourceCode}
 
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/22.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/23.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/24.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/25.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/26.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/27.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/28.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/29.webp)
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/30.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/22.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/23.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/24.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/25.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/26.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/27.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/28.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/29.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/30.webp)
 글자비교
-![Web Shell 1](/data/Penetration%20Testing%20%7C%20Week%2015/31.webp)
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/31.webp)
 segfault{byPassFiltering}
