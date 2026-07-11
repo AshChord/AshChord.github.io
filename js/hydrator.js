@@ -1,16 +1,14 @@
 (async () => {
-  const content = Array.from(document.body.childNodes);
+  const rawText = await fetch('/').then(res => res.text());
+  const skeleton = new DOMParser().parseFromString(rawText, 'text/html');
 
-  const htmlText = await fetch('/index.html').then(res => res.text());
-  const newDoc = new DOMParser().parseFromString(htmlText, 'text/html');
+  skeleton.querySelector('.content-body').append(...document.body.childNodes);
+  document.body.replaceWith(skeleton.body);
 
-  newDoc.querySelector('.content-body').append(...content);
-  document.body.replaceWith(newDoc.body);
-
-  for (const oldScript of document.body.querySelectorAll('script')) {
-    const script = document.createElement('script');
-    script.src = oldScript.getAttribute('src');
-    script.async = false;
-    oldScript.replaceWith(script);
+  for (const inertScript of document.body.querySelectorAll('script')) {
+    const activeScript = document.createElement('script');
+    activeScript.src = inertScript.getAttribute('src');
+    activeScript.async = false;
+    inertScript.replaceWith(activeScript);
   }
 })();
