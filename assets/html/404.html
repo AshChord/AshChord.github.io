@@ -61,8 +61,7 @@ permalink: /404.html
 
 {% assign posts = site.pages | where: "layout", page.layout %}
 {% for post in posts %}
-{{ post.path }}
-{::nomarkdown}
+{{ post.path }}{::nomarkdown}
 <!DOCTYPE html>
 <html lang='ko'>
 <head>
