@@ -7,7 +7,7 @@ excerpt: SQL Injection 취약점 탐색
 categories: 모의 해킹
 ---
 
-{{ site.pages.first.content | split: page.path | shift | pop }}
+{{ site.pages.first | split: page.path | shift | pop }}
 
 ## 강의 노트
 

@@ -7,7 +7,7 @@ excerpt: 웹 프록시와 Burp Suite
 categories: 모의 해킹
 ---
 
-{{ site.pages.first.content | split: page.path | shift | pop }}
+{{ site.pages.first | split: page.path | shift | pop }}
 
 ## 강의 노트
 
