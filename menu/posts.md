@@ -6,9 +6,17 @@ title: posts - AshChord.log
 {% assign posts = site.pages | where_exp: "page", "page.date" | sort: "date" | reverse %}
 
 {% for post in posts %}
-- {{ post.title | url_encode }}
+{::nomarkdown}
+- {{ post.title }}
+{:/}
+{::nomarkdown}
 - {{ post.date }}
+{:/}
+{::nomarkdown}
 - {{ post.excerpt }}
+{:/}
+{::nomarkdown}
 - {{ post.categories }}
+{:/}
 {: .metadata}
 {% endfor %}
