@@ -30,7 +30,7 @@ async function resolveFeed(path, queryParams) {
 
 // 본문(단일 포스트) 라우팅
 async function resolveContent(path) {
-  // 데이터플로우를 찔러서 포스트가 존재하는지 확인
+  /*/ 데이터플로우를 찔러서 포스트가 존재하는지 확인
   const postContent = await dataflow.evaluate(contentForCurrPage);
 
   if (postContent) {
@@ -41,7 +41,7 @@ async function resolveContent(path) {
     // 포스트가 없으면 404 처리 (타이틀 변경 포함)
     updateTitle("Page Not Found");
     renderNotFound();
-  }
+  }*/
 }
 
 // 라우트 설정
@@ -77,4 +77,4 @@ function updateTitle(pfx) {
   document.title = pfx ? `${pfx} - ${sfx}` : sfx;
 }
 
-// router();
+router();

@@ -1,6 +1,6 @@
 (async () => {
-  const rawText = await fetch('/').then(res => res.text());
-  const skeleton = new DOMParser().parseFromString(rawText, 'text/html');
+  const skeletonSource = await fetch('/').then(res => res.text());
+  const skeleton = new DOMParser().parseFromString(skeletonSource, 'text/html');
 
   skeleton.querySelector('.content-body').append(...document.body.childNodes);
   document.body.replaceWith(skeleton.body);
