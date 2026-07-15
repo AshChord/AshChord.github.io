@@ -247,6 +247,7 @@ main {
   grid-column-start: 1;
   grid-row-start: 1;
   box-sizing: border-box;
+  width: 100%;
   max-width: 1200px;
   height: fit-content;
   margin: 32px 0;
