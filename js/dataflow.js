@@ -39,7 +39,7 @@ const posts = dataflow.node(async () => {
     const listItems = container.querySelectorAll('li');
 
     finalPosts.push({
-      title: listItems[0].innerText,
+      title: decodeURIComponent(listItems[0].innerText),
       date: listItems[1].innerText,
       excerpt: listItems[2].innerText,
       categories: listItems[3].innerText.split(',').map(cat => cat.trim())
