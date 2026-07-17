@@ -3,7 +3,6 @@
 {{ post.path }}
 {::nomarkdown}
 <!DOCTYPE html>
-{:/}
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -20,9 +19,9 @@
   <meta name="twitter:image" content="{{ post.permalink | absolute_url }}/thumbnail.webp">
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/css/markdown.css">
-  {::nomarkdown}<script{:/}
-  {::nomarkdown} src="/js/hydrator.js"{:/}
-  {::nomarkdown}></script>{:/}</head>
+  <script src="/js/hydrator.js"></script>
+</head>
 </html>
+{:/}
 {{ post.path }}
 {% endfor %}
