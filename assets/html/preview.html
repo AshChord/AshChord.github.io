@@ -19,9 +19,9 @@
   <meta name="twitter:image" content="{{ post.permalink | absolute_url }}/thumbnail.webp">
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/css/markdown.css">
+  <script {::nomarkdown}src="/js/hydrator.js"></script>{:/}
 </head>
 </html>
 {:/}
-![thumbnail]({{ post.permalink }}/thumbnail.webp){:onload="import('/js/hydrator.js');"}
 {{ post.path }}
 {% endfor %}
