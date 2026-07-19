@@ -63,10 +63,10 @@ async function renderContent() {
   feed.replaceChildren();
   pagination.replaceChildren();
 
-  const posts = await dataflow.evaluate(posts);
+  const allPosts = await dataflow.evaluate(posts);
 
   const currentTitle = document.title.replace('- AshChord.log', '').trim();
-  const postContent = posts.find(post => post.title === currentTitle);
+  const postContent = allPosts.find(post => post.title === currentTitle);
 
   // 헤더 렌더링
   const contentHeader = content.querySelector('.content-header');
