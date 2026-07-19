@@ -61,14 +61,18 @@ async function renderFeed() {
 // 본문(단일 포스트) 렌더링
 async function renderContent() {
   feed.replaceChildren();
+  pagination.replaceChildren();
 
-  const postContent = await dataflow.evaluate(contentForCurrPage);
+  const posts = await dataflow.evaluate(posts);
+
+  const currentTitle = document.title.replace('- AshChord.log', '').trim();
+  const postContent = posts.find(post => post.title === currentTitle);
 
   // 헤더 렌더링
   const contentHeader = content.querySelector('.content-header');
   const categoryList = contentHeader.querySelector('.category-list');
 
-  postContent.metadata.categories.forEach(category => {
+  postContent.categories.forEach(category => {
     const categoryLink = document.createElement('a');
     categoryLink.href = `/posts?category=${encodeURIComponent(category)}`;
     categoryLink.className = 'category';
@@ -80,20 +84,14 @@ async function renderContent() {
   title.textContent = postContent.title;
 
   const date = contentHeader.querySelector('.date');
-  date.textContent = postContent.metadata.date;
+  date.textContent = postContent.date;
 
   const thumbnail = contentHeader.querySelector('.thumbnail');
-  thumbnail.src = `/posts/${postContent.title}/thumbnail.webp`;
-  thumbnail.alt = postContent.title;
+  const nativeThumbnail = document.querySelector('img[onload]');
+  nativeThumbnail.className = 'thumbnail';
+  thumbnail.replaceWith(nativeThumbnail);
 
-  // 마크다운 파싱 및 본문 DOM 부착
-  const contentBody = content.querySelector('.content-body');
-  const htmlText = marked.parse(postContent.mdText);
-  const htmlTextFrag = document.createRange().createContextualFragment(htmlText);
-
-  contentBody.replaceChildren(htmlTextFrag);
-
-  (function renderCode() {
+  /*(function renderCode() {
     document.querySelectorAll('pre').forEach((pre) => {
       const codeBlock = pre.querySelector('code');
 
@@ -193,7 +191,7 @@ async function renderContent() {
 
       code.replaceChildren(...brknTokens);
     });
-  })();
+  })();*/
 
   // 목차 렌더링
   (function renderOutline() {

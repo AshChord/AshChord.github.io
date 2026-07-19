@@ -30,6 +30,8 @@ async function resolveFeed(path, queryParams) {
 
 // 본문(단일 포스트) 라우팅
 async function resolveContent(path) {
+  await renderCategoryPanel();
+  await renderContent();
   /*/ 데이터플로우를 찔러서 포스트가 존재하는지 확인
   const postContent = await dataflow.evaluate(contentForCurrPage);
 
