@@ -8,20 +8,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <title>{{ post.title }}</title>
+  <title>{{ post.title }} - AshChord.log</title>
   <meta property="og:title" content="{{ post.title }}">
   <meta property="og:description" content="{{ post.excerpt }}">
-  <meta property="og:url" content="{{ post.permalink | absolute_url }}">
-  <meta property="og:image" content="{{ post.permalink | absolute_url }}/thumbnail.webp">
+  <meta property="og:url" content="{{ post.url | absolute_url }}">
+  <meta property="og:image" content="{{ post.url | absolute_url }}/thumbnail.webp">
   <meta property="og:site_name" content="AshChord.log">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ post.title }}">
-  <meta name="twitter:image" content="{{ post.permalink | absolute_url }}/thumbnail.webp">
+  <meta name="twitter:image" content="{{ post.url | absolute_url }}/thumbnail.webp">
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/css/markdown.css">
 </head>
 </html>
 {:/}
-![thumbnail]({{ post.permalink }}/thumbnail.webp){:onload="import('/js/hydrator.js');"}
+![thumbnail]({{ post.url }}/thumbnail.webp){:onload="import('/js/hydrator.js');"}
+{:
+  .metadata
+  data-title="{{ post.title }}"
+  data-date="{{ post.date }}"
+  data-excerpt="{{ post.excerpt }}"
+  data-categories="{{ post.categories }}"
+}
 {{ post.path }}
 {% endfor %}
