@@ -63,16 +63,13 @@ async function renderContent() {
   feed.replaceChildren();
   pagination.replaceChildren();
 
-  const allPosts = await dataflow.evaluate(posts);
-
-  const currentTitle = document.title.replace('- AshChord.log', '').trim();
-  const postContent = allPosts.find(post => post.title === currentTitle);
+  const metadata = document.querySelector('.metadata');
 
   // 헤더 렌더링
   const contentHeader = content.querySelector('.content-header');
   const categoryList = contentHeader.querySelector('.category-list');
 
-  postContent.categories.forEach(category => {
+  metadata.dataset.categories.split(/\s*,\s*/).forEach(category => {
     const categoryLink = document.createElement('a');
     categoryLink.href = `/posts?category=${encodeURIComponent(category)}`;
     categoryLink.className = 'category';
@@ -81,15 +78,17 @@ async function renderContent() {
   });
 
   const title = contentHeader.querySelector('.title');
-  title.textContent = postContent.title;
+  title.textContent = metadata.dataset.title;
 
   const date = contentHeader.querySelector('.date');
-  date.textContent = postContent.date;
+  date.textContent = metadata.dataset.date;
 
   const thumbnail = contentHeader.querySelector('.thumbnail');
   const nativeThumbnail = document.querySelector('img[onload]');
   nativeThumbnail.className = 'thumbnail';
   thumbnail.replaceWith(nativeThumbnail);
+
+  metadata.remove();
 
   /*(function renderCode() {
     document.querySelectorAll('pre').forEach((pre) => {
