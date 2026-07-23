@@ -63,21 +63,21 @@ async function renderContent() {
   feed.replaceChildren();
   pagination.replaceChildren();
 
-  const metadata = document.querySelector('.metadata');
+  //const metadata = document.querySelector('.metadata');
 
   // 헤더 렌더링
-  const contentHeader = content.querySelector('.content-header');
-  const categoryList = contentHeader.querySelector('.category-list');
+  //const contentHeader = content.querySelector('.content-header');
+  //const categoryList = contentHeader.querySelector('.category-list');
 
-  metadata.dataset.categories.split(/\s*,\s*/).forEach(category => {
-    const categoryLink = document.createElement('a');
-    categoryLink.href = `/posts?category=${encodeURIComponent(category)}`;
-    categoryLink.className = 'category';
-    categoryLink.textContent = category;
-    categoryList.appendChild(categoryLink);
-  });
+  //metadata.dataset.categories.split(/\s*,\s*/).forEach(category => {
+  //  const categoryLink = document.createElement('a');
+  //  categoryLink.href = `/posts?category=${encodeURIComponent(category)}`;
+  //  categoryLink.className = 'category';
+  //  categoryLink.textContent = category;
+  //  categoryList.appendChild(categoryLink);
+  //});
 
-  const title = contentHeader.querySelector('.title');
+  /*const title = contentHeader.querySelector('.title');
   title.textContent = metadata.dataset.title;
 
   const date = contentHeader.querySelector('.date');
@@ -88,7 +88,7 @@ async function renderContent() {
   nativeThumbnail.className = 'thumbnail';
   thumbnail.replaceWith(nativeThumbnail);
 
-  metadata.remove();
+  metadata.remove();*/
 
   /*(function renderCode() {
     document.querySelectorAll('pre').forEach((pre) => {
