@@ -8,7 +8,7 @@
     const contentHeader = skeleton.querySelector('.content-header');
 
     for (let i = 0; i < contentHeader.children.length; i++) {
-      const sourceNode = document.body.firstChild;
+      const sourceNode = document.body.firstElementChild;
 
       if (sourceNode === thumbnail.parentElement) {
         contentHeader.children[i].replaceWith(thumbnail);
