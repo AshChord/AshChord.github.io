@@ -26,8 +26,7 @@
 
 {% assign categories = post.categories | split: ', ' %}
 {% for category in categories %}
-[{{ category }}](/posts?category={{ category | url_encode }}){: .category }
-{% endfor %}
+[{{ category }}](/posts?category={{ category | url_encode }}){: .category }{% endfor %}
 
 # {{ post.title }}
 {: .title }
