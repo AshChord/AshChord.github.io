@@ -22,13 +22,13 @@
 </head>
 </html>
 {:/}
-{% assign categories = page.categories | split: ', ' %}
+{% assign categories = post.categories | split: ', ' %}
 {% for category in categories %}
 [{{ category }}](/posts?category={{ category | url_encode }}){: .category }
 {% endfor %}
-# {{ page.title }}{: .title }
-{{ page.date }}
+# {{ post.title }}{: .title }
+{{ post.date }}
 {: .date }
-![thumbnail]({{ post.url }}/thumbnail.webp){: .thumbnail onload="import('/js/hydrator.js');}
+![thumbnail]({{ post.url | uri_escape }}/thumbnail.webp){: .thumbnail onload="import('/js/hydrator.js');}
 {{ post.path }}
 {% endfor %}
