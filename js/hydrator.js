@@ -6,9 +6,8 @@
 
   if (thumbnail) {
     const contentHeader = skeleton.querySelector('.content-header');
-    let i = 0;
 
-    while (true) {
+    for (let i = 0; i < contentHeader.children.length; i++) {
       const sourceNode = document.body.firstChild;
 
       if (sourceNode === thumbnail.parentElement) {
@@ -19,7 +18,6 @@
 
       contentHeader.children[i].append(...sourceNode.childNodes);
       sourceNode.remove();
-      i++;
     }
 
     skeleton.querySelector('.content-body').append(...document.body.childNodes);
