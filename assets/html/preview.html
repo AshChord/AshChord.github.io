@@ -27,6 +27,7 @@
 {% assign categories = post.categories | split: ', ' %}
 {% for category in categories %}
 [{{ category }}](/posts?category={{ category | url_encode }}){: .category }{% endfor %}
+{: .category-list}
 
 # {{ post.title }}
 {: .title }
@@ -34,10 +35,8 @@
 {{ post.date }}
 {: .date }
 
-![thumbnail]({{ post.url | uri_escape }}/thumbnail.webp){:
-  .thumbnail
-  onload="import('/js/hydrator.js');"
-}
+{% assign thumbnail_url = post.url | uri_escape | append: '/thumbnail.webp' %}
+![thumbnail]({{ thumbnail_url }}){: .thumbnail onload="import('/js/hydrator.js');"}
 
 {{ post.path }}
 {% endfor %}

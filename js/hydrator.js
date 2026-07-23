@@ -5,11 +5,23 @@
   const thumbnail = document.body.querySelector('.thumbnail');
 
   if (thumbnail) {
+    const contentHeader = skeleton.querySelector('.content-header');
+    let i = 0;
+
     while (true) {
-      const node = document.body.firstChild;
-      skeleton.querySelector('.content-header').appendChild(node);
-      if (node === thumbnail.parentElement) break;
+      const sourceNode = document.body.firstChild;
+
+      if (sourceNode === thumbnail.parentElement) {
+        contentHeader.children[i].replaceWith(thumbnail);
+        sourceNode.remove();
+        break;
+      }
+
+      contentHeader.children[i].append(...sourceNode.childNodes);
+      sourceNode.remove();
+      i++;
     }
+
     skeleton.querySelector('.content-body').append(...document.body.childNodes);
   } else {
     skeleton.querySelector('.content').replaceChildren(...document.body.childNodes);
