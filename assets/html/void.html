@@ -1,3 +1,3 @@
 ---
 ---
-{{ site.pages.first }}
+{{ site.pages.first.content | split: "posts/test/test.md" | shift }}
