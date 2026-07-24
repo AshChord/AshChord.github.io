@@ -7,7 +7,7 @@ excerpt: Error-Based SQL Injection과 Blind SQL Injection
 categories: 모의 해킹
 ---
 
-{{ site.pages.first.content | split: page.path | shift | pop }}
+{{ site.pages.first.content | split: page.path | shift }}
 
 ## 강의 노트
 

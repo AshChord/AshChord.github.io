@@ -7,7 +7,7 @@ excerpt: Dream Beginners 워게임 풀이 II
 categories: Dreamhack, 워게임
 ---
 
-{{ site.pages.first.content | split: page.path | shift | pop }}
+{{ site.pages.first.content | split: page.path | shift }}
 
 ## Exercise: Welcome-Beginners
 

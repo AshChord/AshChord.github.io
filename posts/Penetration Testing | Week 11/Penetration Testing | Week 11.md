@@ -7,7 +7,7 @@ excerpt: XSS 취약점 응용
 categories: 모의 해킹
 ---
 
-{{ site.pages.first.content | split: page.path | shift | pop }}
+{{ site.pages.first.content | split: page.path | shift }}
 
 ## 강의 노트
 

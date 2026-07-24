@@ -7,7 +7,7 @@ excerpt: Dreamhack Wargames 풀이 II
 categories: Dreamhack, 워게임
 ---
 
-{{ site.pages.first.content | split: page.path | shift | pop }}
+{{ site.pages.first.content | split: page.path | shift }}
 
 ## csrf-1
 
