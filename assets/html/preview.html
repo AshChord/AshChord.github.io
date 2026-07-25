@@ -38,7 +38,7 @@
 {% assign thumbnail_url = post.url | uri_escape | append: '/thumbnail.webp' %}
 ![thumbnail]({{ thumbnail_url }}){: .thumbnail onload="import('/js/hydrator.js');"}
 
-{::options auto_ids="false" syntax_highlighter_opts="{formatter: 'HTMLLinewise'\}" /}
+{::options auto_ids="false" syntax_highlighter_opts="{formatter: \"HTMLLinewise\"\}" /}
 
 {{ post.path }}
 {% endfor %}
