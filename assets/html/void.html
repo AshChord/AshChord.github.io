@@ -1,4 +1,4 @@
 ---
 ---
 
-{{ site.pages }}
+{{ site.pages | split: "posts/test/test.md" | shift | pop }}
