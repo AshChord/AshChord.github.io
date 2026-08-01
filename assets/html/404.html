@@ -64,5 +64,5 @@ permalink: /404.html
 {% endcapture %}
 
 <!--
-{{ preview | strip_newlines | replace: '"', "'" }}
+{{ preview | strip_newlines | remove: '  ' | replace: '"', "'" }}
 -->
