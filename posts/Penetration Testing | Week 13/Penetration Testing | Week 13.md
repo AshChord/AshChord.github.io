@@ -7,7 +7,7 @@ excerpt: CSRF 대응 방안 및 웹 보안 정책
 categories: 모의 해킹
 ---
 
-{{ site.pages.first.content | split: page.path | shift | pop }}
+{{ site.pages.first | split: page.path | shift | pop }}
 
 ## 강의 노트
 

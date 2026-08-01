@@ -7,7 +7,7 @@ excerpt: 테스트 파일
 categories: 예시, 파일
 ---
 
-{{ site.pages.first.content | split: page.path | shift | pop }}
+{{ site.pages.first | split: page.path | shift | pop }}
 
 # test
 

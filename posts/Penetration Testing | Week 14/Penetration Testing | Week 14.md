@@ -7,7 +7,7 @@ excerpt: 파일 업로드 취약점
 categories: 모의 해킹
 ---
 
-{{ site.pages.first.content | split: page.path | shift | pop }}
+{{ site.pages.first | split: page.path | shift | pop }}
 
 ## 강의 노트
 

@@ -7,7 +7,7 @@ excerpt: Bandit Level 0 ~ 5 풀이
 categories: Bandit, 워게임
 ---
 
-{{ site.pages.first.content | split: page.path | shift | pop }}
+{{ site.pages.first | split: page.path | shift | pop }}
 
 ## Level 0
 
