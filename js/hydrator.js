@@ -1,4 +1,4 @@
-/*(async () => {
+(async () => {
   const skeletonSource = await fetch('/').then(res => res.text());
   const skeleton = new DOMParser().parseFromString(skeletonSource, 'text/html');
 
@@ -33,4 +33,4 @@
     activeScript.async = false;
     inertScript.replaceWith(activeScript);
   }
-})();*/
+})();
