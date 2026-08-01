@@ -7,7 +7,7 @@ excerpt: 쿠키 탈취 기법과 DOM-Based XSS
 categories: 모의 해킹
 ---
 
-{{ site.pages.first.content | split: page.path | shift | pop }}
+{{ site.pages | split: page.path | shift | pop }}
 
 ## 강의 노트
 
