@@ -7,7 +7,7 @@ excerpt: 데이터베이스 연동 및 기본 SQL 쿼리 구조
 categories: 모의 해킹
 ---
 
-{{ site.pages.first | split: page.path | shift | pop }}
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## 강의 노트
 

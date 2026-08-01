@@ -7,7 +7,7 @@ excerpt: UNION SQL Injection과 데이터 추출
 categories: 모의 해킹
 ---
 
-{{ site.pages.first | split: page.path | shift | pop }}
+{{ site.pages.first.content | split: page.path | shift | pop }}
 
 ## 강의 노트
 
