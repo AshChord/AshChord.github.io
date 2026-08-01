@@ -1,6 +1,9 @@
 {% assign posts = site.pages | where: "layout", page.layout %}
 {% for post in posts %}
+{::comment}
 {{ post.path }}
+
+{::options auto_ids="false" /}
 
 {::nomarkdown}
 <!DOCTYPE html>
@@ -20,23 +23,11 @@
   <meta name="twitter:image" content="{{ post.url | absolute_url }}/thumbnail.webp">
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/css/markdown.css">
+  <script src="/js/hydrator.js"></script>
 </head>
 </html>
 {:/nomarkdown}
 
-{% assign categories = post.categories | split: ", " %}
-{% for category in categories %}
-<a href="/posts?category={{ category | url_encode }}" class="category">{{ category }}</a>
-{% endfor %}
-
-<h1 class="title">{{ post.title }}</h1>
-
-<p class="date">{{ post.date }}</p>
-
-{% assign thumbnail_url = post.url | uri_escape | append: "/thumbnail.webp" %}
-![thumbnail]({{ thumbnail_url }}){: .thumbnail onload="import(`/js/hydrator.js`);"}
-
-{::options auto_ids="false" /}
-
 {{ post.path }}
+{:/comment}
 {% endfor %}
