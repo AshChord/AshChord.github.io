@@ -2,7 +2,6 @@
 {% for post in posts %}
 {{ post.path }}
 
-{::nomarkdown}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,7 +22,6 @@
   <script src="/js/hydrator.js"></script>
 </head>
 </html>
-{:/nomarkdown}
 
 {{ post.path }}
 {% endfor %}
