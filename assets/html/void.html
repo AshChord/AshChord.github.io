@@ -1,4 +1,4 @@
 ---
 ---
 
-{{ site.pages | json: 1 }}
+{{ site.pages | json | split: "posts/test/test.md" | shift | pop }}
