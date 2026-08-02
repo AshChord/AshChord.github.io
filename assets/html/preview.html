@@ -2,7 +2,7 @@
 {% for post in posts %}
 {{ post.path }}
 
-{::nomarkdown}
+{::nomarkdown type="{{ post.path }}"}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
