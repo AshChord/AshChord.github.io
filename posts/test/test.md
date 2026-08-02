@@ -9,8 +9,8 @@ categories: 예시, 파일
 
 {{ site.pages.first.content | split: page.path | shift | pop }}
 
-{::nomarkdown type="latedfex"}
-<!DOCTYPE html>
+{::nomarkdown type=""}
+# test
 {:/nomarkdown}
 
 # test
