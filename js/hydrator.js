@@ -1,7 +1,4 @@
-for (const node of [...document.childNodes]) {
-  if (node.nodeType === Node.DOCUMENT_TYPE_NODE) break;
-  if (node.nodeType === Node.COMMENT_NODE) node.remove();
-}
+document.firstChild.remove();
 
 (async () => {
   const skeletonSource = await fetch('/').then(res => res.text());
@@ -16,4 +13,4 @@ for (const node of [...document.childNodes]) {
     activeScript.async = false;
     inertScript.replaceWith(activeScript);
   }
-})
+})();
