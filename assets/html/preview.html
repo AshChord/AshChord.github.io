@@ -2,9 +2,15 @@
 {% for post in posts %}
 
 --{{ post.path }}>
-
 {::nomarkdown type="{{ post.path }}"}
 <!DOCTYPE html>
+{:/nomarkdown}
+
+{% endfor %}
+
+{% for post in posts %}
+
+{::nomarkdown type="{{ post.path }}"}
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
