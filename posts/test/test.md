@@ -7,7 +7,11 @@ excerpt: 테스트 파일
 categories: 예시, 파일
 ---
 
-{{ site.pages.first.content | split: page.path }}
+{{ site.pages.first.content | split: page.path | shift | pop }}
+
+{::nomarkdown type="latex"}
+<!DOCTYPE html>
+{:/nomarkdown}
 
 # test
 
