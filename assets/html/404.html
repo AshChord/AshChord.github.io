@@ -3,7 +3,59 @@ layout: article
 permalink: /404.html
 ---
 
-<!--
-{% include_relative preview.html %}
--->
+<!-- {% include_relative preview.html %} -->
 <!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <title>AshChord.log</title>
+  <meta property="og:title" content="404">
+  <meta property="og:description" content="Not Found">
+  <meta property="og:url" content="https://ashchord.github.io/404">
+  <meta property="og:image" content="https://ashchord.github.io/assets/favicon.svg">
+  <meta property="og:site_name" content="AshChord.log">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="404">
+  <meta name="twitter:image" content="https://ashchord.github.io/assets/favicon.svg">
+
+  <!-- Marked -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.12/marked.min.js"></script>
+
+  <!-- Highlight -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css">
+
+  <!-- Style -->
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/markdown.css">
+</head>
+
+<body>
+  <script>
+    (async () => {
+      const html = await fetch("/", { cache: "no-store" }).then(res => res.text());
+      const doc = new DOMParser().parseFromString(html, "text/html");
+
+      const scrList = [...doc.querySelectorAll("script")]
+        .map(scr => scr.getAttribute('src'))
+        .filter(src => src && src.startsWith('/js'));
+
+      doc.querySelectorAll("script").forEach(scr => scr.remove());
+
+      document.body.replaceChildren(...doc.body.childNodes);
+
+      scrList.forEach(src => {
+        const scr = document.createElement("script");
+        scr.src = src;
+        scr.async = false;
+        document.body.appendChild(scr);
+      });
+    })();
+  </script>
+</body>
+
+</html>
