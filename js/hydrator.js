@@ -1,3 +1,8 @@
+for (const node of [...document.childNodes]) {
+  if (node.nodeType === Node.DOCUMENT_TYPE_NODE) break;
+  if (node.nodeType === Node.COMMENT_NODE) node.remove();
+}
+
 (async () => {
   const skeletonSource = await fetch('/').then(res => res.text());
   const skeleton = new DOMParser().parseFromString(skeletonSource, 'text/html');
