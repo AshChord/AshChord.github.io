@@ -3,8 +3,4 @@ layout: article
 permalink: /404.html
 ---
 
-{% capture preview %}
-  {% include_relative preview.html %}
-{% endcapture %}
-
-{{ preview | split: page.path | join:"" | markdownify }}
+{% include_relative preview.html %}
