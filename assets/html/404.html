@@ -7,4 +7,4 @@ permalink: /404.html
   {% include_relative preview.html %}
 {% endcapture %}
 
-{{ preview | split: page.path | markdownify }}
+{{ preview | split: page.path | join:"" | markdownify }}
