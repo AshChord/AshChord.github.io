@@ -1,6 +1,7 @@
 {% assign posts = site.pages | where: "layout", page.layout %}
 {% for post in posts %}
-{{ post.path }}
+{::comment{{ post.path }}}
+{:/comment{{ post.path }}}
 
 {::nomarkdown}
 <!DOCTYPE html>
@@ -27,5 +28,5 @@
 
 {::options auto_ids="false" /}
 
-{{ post.path }}
+{::comment}
 {% endfor %}
