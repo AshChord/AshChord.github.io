@@ -1,6 +1,12 @@
 {% assign posts = site.pages | where: "layout", page.layout %}
 {% for post in posts %}
 
+<!{{ post.path }}---->
+
+{% endfor %}
+
+{% for post in posts %}
+
 {::nomarkdown type="{{ post.path }}"}
 <!DOCTYPE html>
 <html lang="ko">
