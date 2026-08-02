@@ -9,7 +9,7 @@ categories: 예시, 파일
 
 {{ site.pages.first.content | split: page.path | shift | pop }}
 
-{::nomarkdown type=""}
+{::nomarkdown type="post/test/test.md"}
 # test
 {:/nomarkdown}
 
