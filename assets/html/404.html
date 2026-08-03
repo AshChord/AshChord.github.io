@@ -28,28 +28,8 @@ permalink: /404.html
 </head>
 
 <body>
-  <script>
-    (async () => {
-      const html = await fetch("/", { cache: "no-store" }).then(res => res.text());
-      const doc = new DOMParser().parseFromString(html, "text/html");
-
-      const scrList = [...doc.querySelectorAll("script")]
-        .map(scr => scr.getAttribute('src'))
-        .filter(src => src && src.startsWith('/js'));
-
-      doc.querySelectorAll("script").forEach(scr => scr.remove());
-
-      document.head.replaceChildren(...doc.head.childNodes);
-      document.body.replaceChildren(...doc.body.childNodes);
-
-      scrList.forEach(src => {
-        const scr = document.createElement("script");
-        scr.src = src;
-        scr.async = false;
-        document.body.appendChild(scr);
-      });
-    })();
-  </script>
 </body>
 
 </html>
+
+End{: .end}

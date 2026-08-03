@@ -4,7 +4,7 @@ document.firstChild.remove();
   const skeletonSource = await fetch('/').then(res => res.text());
   const skeleton = new DOMParser().parseFromString(skeletonSource, 'text/html');
 
-  const marker = document.querySelector('.doctype');
+  const marker = document.querySelector('.end');
 
   while (document.body.firstChild !== marker)
     document.body.firstChild.remove();
