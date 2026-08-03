@@ -1,7 +1,7 @@
 {% assign posts = site.pages | where: "layout", page.layout %}
 {% for post in posts %}
 
---{{ post.path }}>
+-{{ post.path }}->
 
 {::nomarkdown type="{{ post.path }}"}
 <!DOCTYPE html>
