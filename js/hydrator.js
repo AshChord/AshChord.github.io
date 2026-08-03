@@ -1,11 +1,12 @@
 document.firstChild.remove();
 
 (async () => {
+  const marker = document.currentScript;
+
   const skeletonSource = await fetch('/').then(res => res.text());
   const skeleton = new DOMParser().parseFromString(skeletonSource, 'text/html');
 
   const nodes = [...document.body.childNodes];
-  const marker = nodes.find(n => n.nodeType === 8 && !n.data);
   const contentNodes = nodes.slice(nodes.indexOf(marker) + 1);
 
   skeleton.querySelector('.content-body').append(...contentNodes);
@@ -13,8 +14,9 @@ document.firstChild.remove();
 
   for (const inertScript of document.body.querySelectorAll('script')) {
     if (inertScript.defer) continue;
+
     const activeScript = document.createElement('script');
-    activeScript.src = inertScript.getAttribute('src');
+    activeScript.src = inertScript.src;
     activeScript.async = false;
     inertScript.replaceWith(activeScript);
   }
