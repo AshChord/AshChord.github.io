@@ -4,6 +4,13 @@ document.firstChild.remove();
   const skeletonSource = await fetch('/').then(res => res.text());
   const skeleton = new DOMParser().parseFromString(skeletonSource, 'text/html');
 
+  const marker = document.querySelector('.marker');
+
+  while (document.body.firstChild !== marker)
+    document.body.firstChild.remove();
+
+  marker.remove();
+
   skeleton.querySelector('.content-body').append(...document.body.childNodes);
   document.body.replaceWith(skeleton.body);
 
