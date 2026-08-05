@@ -91,7 +91,7 @@ async function renderContent() {
   metadata.remove();*/
 
   (async function renderCode() {
-    const highlighter = await Highlighter.get();
+    const highlighter = await window.Highlighter.get();
 
     for (const pre of document.querySelectorAll('pre')) {
       const codeBlock = pre.querySelector('code');
@@ -102,7 +102,7 @@ async function renderContent() {
       const cleanText = codeBlock.textContent;
       const originalLines = cleanText.split('\n');
 
-      await Highlighter.loadLanguage(lang);
+      await window.Highlighter.loadLanguage(lang);
 
       const highlighted = highlighter.codeToHtml(cleanText, {
         lang,
