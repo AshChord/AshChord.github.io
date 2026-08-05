@@ -1,5 +1,3 @@
-document.firstChild.remove();
-
 (async () => {
   const marker = document.currentScript;
 
