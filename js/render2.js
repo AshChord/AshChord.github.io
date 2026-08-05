@@ -90,57 +90,33 @@ async function renderContent() {
 
   metadata.remove();*/
 
-  /*(function renderCode() {
-    document.querySelectorAll('pre').forEach((pre) => {
+  (async function renderCode() {
+    const highlighter = await Highlighter.get();
+
+    for (const pre of document.querySelectorAll('pre')) {
       const codeBlock = pre.querySelector('code');
 
-      if (codeBlock.hasAttribute('highlighted')) return;
+      if (!codeBlock || codeBlock.hasAttribute('highlighted')) continue;
 
-      const lang = codeBlock.className.replace(/^language-/, '');
+      const lang = codeBlock.className.replace(/^language-/, '') || 'plaintext';
       const cleanText = codeBlock.textContent;
       const originalLines = cleanText.split('\n');
 
-      const highlighted = hljs.highlight(cleanText, { language: lang }).value;
+      await Highlighter.loadLanguage(lang);
+
+      const highlighted = highlighter.codeToHtml(cleanText, {
+        lang,
+        theme: 'github-light'
+      });
+
       const parser = new DOMParser();
       const doc = parser.parseFromString(highlighted, 'text/html');
-      const root = doc.body;
 
-      const linesData = [];
-      let currentLineData = [];
-      const styleStack = [];
-
-      const collectData = (node) => {
-        if (node.nodeType === Node.TEXT_NODE) {
-          const parts = node.textContent.split('\n');
-
-          parts.forEach((part, idx) => {
-            if (idx > 0) {
-              linesData.push(currentLineData);
-              currentLineData = [];
-            }
-            currentLineData.push({
-              text: part,
-              styles: [...styleStack]
-            });
-          });
-          return;
-        }
-
-        if (node.nodeType !== Node.ELEMENT_NODE) return;
-
-        if (node.className) styleStack.push(node.className);
-
-        node.childNodes.forEach(child => collectData(child));
-
-        if (node.className) styleStack.pop();
-      };
-
-      // const 선언 이후에 호출하므로 안전하게 동작합니다.
-      root.childNodes.forEach(node => collectData(node));
+      const renderedCode = doc.querySelector('code');
 
       const fragment = document.createDocumentFragment();
 
-      linesData.forEach((linePieces, lineIdx) => {
+      renderedCode.querySelectorAll('.line').forEach((line, lineIdx) => {
         const currentLine = document.createElement('data');
         currentLine.className = 'code-line';
         currentLine.value = lineIdx + 1;
@@ -153,18 +129,7 @@ async function renderContent() {
           }
         }
 
-        linePieces.forEach(({ text, styles }) => {
-          if (!text) return;
-
-          let node = document.createTextNode(text);
-          for (let i = styles.length - 1; i >= 0; i--) {
-            const span = document.createElement('span');
-            span.className = styles[i];
-            span.appendChild(node);
-            node = span;
-          }
-          currentLine.appendChild(node);
-        });
+        currentLine.append(...line.childNodes);
 
         currentLine.appendChild(document.createTextNode('\n'));
         fragment.appendChild(currentLine);
@@ -173,10 +138,10 @@ async function renderContent() {
       codeBlock.replaceChildren(fragment);
       codeBlock.setAttribute('highlighted', '');
 
-      const copyBtn = document.createElement("button");
-      copyBtn.classList.add("copy-button");
+      const copyBtn = document.createElement('button');
+      copyBtn.classList.add('copy-button');
       pre.prepend(copyBtn);
-    });
+    }
 
     document.querySelectorAll('code:not(pre code)').forEach((code) => {
       const tokens = code.textContent.split(/([^a-zA-Z0-9\s])/g).filter(Boolean);
@@ -190,7 +155,7 @@ async function renderContent() {
 
       code.replaceChildren(...brknTokens);
     });
-  })();*/
+  })();
 
   // 목차 렌더링
   (function renderOutline() {
