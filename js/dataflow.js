@@ -107,3 +107,11 @@ const postsForCurrPage = dataflow.node(async () => {
 
   return (await filteredPosts).slice((currPage - 1) * postLimit, currPage * postLimit);
 });
+
+// 6. currentPost
+const currentPost = dataflow.node(async () => {
+  const path = window.location.pathname;
+  const postTitle = decodeURIComponent(path.replace('/posts/', ''));
+
+  return (await posts).find(post => post.title === postTitle);
+});

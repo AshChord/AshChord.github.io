@@ -63,32 +63,29 @@ async function renderContent() {
   feed.replaceChildren();
   pagination.replaceChildren();
 
-  //const metadata = document.querySelector('.metadata');
+  const post = await dataflow.evaluate(currentPost);
 
   // 헤더 렌더링
-  //const contentHeader = content.querySelector('.content-header');
-  //const categoryList = contentHeader.querySelector('.category-list');
+  const contentHeader = content.querySelector('.content-header');
 
-  //metadata.dataset.categories.split(/\s*,\s*/).forEach(category => {
-  //  const categoryLink = document.createElement('a');
-  //  categoryLink.href = `/posts?category=${encodeURIComponent(category)}`;
-  //  categoryLink.className = 'category';
-  //  categoryLink.textContent = category;
-  //  categoryList.appendChild(categoryLink);
-  //});
+  // 카테고리 렌더링
+  const categoryList = contentHeader.querySelector('.category-list');
+  currentPost.categories.forEach(category => {
+    const categoryLink = document.createElement('a');
+    categoryLink.href = `/posts?category=${encodeURIComponent(category)}`;
+    categoryLink.className = 'category';
+    categoryLink.textContent = category;
+    categoryList.appendChild(categoryLink);
+  });
 
-  /*const title = contentHeader.querySelector('.title');
-  title.textContent = metadata.dataset.title;
+  const title = contentHeader.querySelector('.title');
+  title.textContent = currentPost.title;
 
   const date = contentHeader.querySelector('.date');
-  date.textContent = metadata.dataset.date;
+  date.textContent = currentPost.date;
 
   const thumbnail = contentHeader.querySelector('.thumbnail');
-  const nativeThumbnail = document.querySelector('img[onload]');
-  nativeThumbnail.className = 'thumbnail';
-  thumbnail.replaceWith(nativeThumbnail);
-
-  metadata.remove();*/
+  thumbnail.src = `/posts/${encodeURIComponent(currentPost.title)}/thumbnail.webp`;
 
   (async function renderCode() {
     const highlighter = await window.Highlighter.get();
@@ -163,7 +160,7 @@ async function renderContent() {
     const headingList = outline.querySelector('.heading-list');
 
     headings.forEach((hdg, idx) => {
-      if (!hdg.id) hdg.id = `heading-${idx}`;
+      hdg.id = `heading-${idx}`;
 
       const linkToHeading = document.createElement('a');
       const indentLevel = Number(hdg.tagName[1]) - 2;
