@@ -1,4 +1,5 @@
 ---
+layout: null
 permalink: /posts
 title: posts - AshChord.log
 ---

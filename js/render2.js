@@ -85,6 +85,7 @@ async function renderContent() {
   date.textContent = post.date;
 
   const thumbnail = contentHeader.querySelector('.thumbnail');
+  thumbnail.alt = `${encodeURIComponent(post.title)}`;
   thumbnail.src = `/posts/${encodeURIComponent(post.title)}/thumbnail.webp`;
 
   (async function renderCode() {
