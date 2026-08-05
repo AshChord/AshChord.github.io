@@ -1,5 +1,5 @@
 // highlighter.js
-import { createHighlighter } from "https://esm.sh/shiki";
+import { createHighlighter } from "https://esm.sh/shiki?bundle";
 
 // 언어 로딩 상태 저장
 const languageCache = new Map();
