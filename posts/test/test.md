@@ -155,8 +155,6 @@ p {
 
 JavaScript 코드:
 ```javascript
-const = `hello
-my name is`;
 for (let i = 0; i < 10; i++) {
     console.log('Hello, JavaScript!');
 }

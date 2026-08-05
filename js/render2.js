@@ -70,7 +70,7 @@ async function renderContent() {
 
   // 카테고리 렌더링
   const categoryList = contentHeader.querySelector('.category-list');
-  currentPost.categories.split(/\s*,\s*/).forEach(category => {
+  post.categories.split(/\s*,\s*/).forEach(category => {
     const categoryLink = document.createElement('a');
     categoryLink.href = `/posts?category=${encodeURIComponent(category)}`;
     categoryLink.className = 'category';
@@ -79,13 +79,13 @@ async function renderContent() {
   });
 
   const title = contentHeader.querySelector('.title');
-  title.textContent = currentPost.title;
+  title.textContent = post.title;
 
   const date = contentHeader.querySelector('.date');
-  date.textContent = currentPost.date;
+  date.textContent = post.date;
 
   const thumbnail = contentHeader.querySelector('.thumbnail');
-  thumbnail.src = `/posts/${encodeURIComponent(currentPost.title)}/thumbnail.webp`;
+  thumbnail.src = `/posts/${encodeURIComponent(post.title)}/thumbnail.webp`;
 
   (async function renderCode() {
     const highlighter = await window.Highlighter.get();
