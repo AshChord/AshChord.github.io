@@ -99,7 +99,7 @@ async function renderContent() {
       if (!codeBlock || codeBlock.hasAttribute('highlighted')) continue;
 
       const lang = codeBlock.className.replace(/^language-/, '') || 'plaintext';
-      const cleanText = codeBlock.textContent;
+      const cleanText = codeBlock.textContent.trimEnd();
       const originalLines = cleanText.split('\n');
 
       await window.Highlighter.loadLanguage(lang);
