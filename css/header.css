@@ -182,6 +182,7 @@ search {
 }
 
 .search-reset-button {
+  display: none;
   position: absolute;
   top: 50%;
   right: 64px;

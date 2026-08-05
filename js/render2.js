@@ -70,7 +70,7 @@ async function renderContent() {
 
   // 카테고리 렌더링
   const categoryList = contentHeader.querySelector('.category-list');
-  post.categories.split(/\s*,\s*/).forEach(category => {
+  post.categories.forEach(category => {
     const categoryLink = document.createElement('a');
     categoryLink.href = `/posts?category=${encodeURIComponent(category)}`;
     categoryLink.className = 'category';
