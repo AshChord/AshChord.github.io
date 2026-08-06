@@ -89,27 +89,44 @@ async function renderContent() {
   thumbnail.src = `/posts/${encodeURIComponent(post.title)}/thumbnail.webp`;
 
   (async function renderCode() {
-    const highlighter = await window.Highlighter.get();
+    const [core, engine] = await Promise.all([
+      import('https://esm.sh/shiki/core'),
+      import('https://esm.sh/shiki/engine/javascript')
+    ]);
 
-    for (const pre of document.querySelectorAll('pre')) {
-      const codeBlock = pre.querySelector('code');
+    const highlighter = await core.createHighlighterCore({
+      themes: [import('https://esm.sh/@shikijs/themes/github-light')],
+      langs: [],
+      engine: engine.createJavaScriptRegexEngine()
+    });
 
-      if (!codeBlock || codeBlock.hasAttribute('highlighted')) continue;
+    const languageCache = new Map();
 
-      const lang = codeBlock.className.replace(/^language-/, '') || 'plaintext';
+    // pre code 조합을 한 번에 순회
+    for (const codeBlock of document.querySelectorAll('pre code')) {
+      if (codeBlock.hasAttribute('highlighted')) continue;
+
+      let lang = codeBlock.className.replace(/^language-/, '') || 'text';
+
+      if (languageCache.has(lang)) {
+        await languageCache.get(lang);
+      } else {
+        const langImport = import(`https://esm.sh/@shikijs/langs/${lang}`);
+        const loading = highlighter.loadLanguage(langImport);
+
+        languageCache.set(lang, loading);
+        await loading;
+      }
+
       const cleanText = codeBlock.textContent.trimEnd();
       const originalLines = cleanText.split('\n');
-
-      await window.Highlighter.loadLanguage(lang);
 
       const highlighted = highlighter.codeToHtml(cleanText, {
         lang,
         theme: 'github-light'
       });
 
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(highlighted, 'text/html');
-
+      const doc = new DOMParser().parseFromString(highlighted, 'text/html');
       const renderedCode = doc.querySelector('code');
 
       const fragment = document.createDocumentFragment();
@@ -122,13 +139,10 @@ async function renderContent() {
         const rawLineText = originalLines[lineIdx];
         if (rawLineText) {
           const indent = rawLineText.search(/\S/);
-          if (indent > 0) {
-            currentLine.style.setProperty('--indent', `${indent}ch`);
-          }
+          if (indent > 0) currentLine.style.setProperty('--indent', `${indent}ch`);
         }
 
         currentLine.append(...line.childNodes);
-
         currentLine.appendChild(document.createTextNode('\n'));
         fragment.appendChild(currentLine);
       });
@@ -138,20 +152,20 @@ async function renderContent() {
 
       const copyBtn = document.createElement('button');
       copyBtn.classList.add('copy-button');
-      pre.prepend(copyBtn);
+      codeBlock.parentElement.prepend(copyBtn);
     }
 
     document.querySelectorAll('code:not(pre code)').forEach((code) => {
       const tokens = code.textContent.split(/([^a-zA-Z0-9\s])/g).filter(Boolean);
 
-      const brknTokens = tokens.flatMap((token, i) => {
+      const brokenTokens = tokens.flatMap((token, i) => {
         if (i === 0) return token;
 
         const wbr = document.createElement('wbr');
         return [wbr, token];
       });
 
-      code.replaceChildren(...brknTokens);
+      code.replaceChildren(...brokenTokens);
     });
   })();
 
