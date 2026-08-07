@@ -100,23 +100,27 @@ async function renderContent() {
       engine: engine.createJavaScriptRegexEngine()
     });
 
-    const languageCache = new Map();
+    const codeBlocks = [...document.querySelectorAll('pre code')];
+
+    const languages = new Set();
+
+    codeBlocks.forEach((codeBlock) => {
+
+      if (codeBlock.hasAttribute('highlighted')) return;
+      const lang = codeBlock.className.replace(/^language-/, '') || 'text';
+
+      if (lang !== 'text') languages.add(lang);
+    });
+
+    await Promise.all([...languages].map((lang) =>
+      highlighter.loadLanguage(import(`https://esm.sh/@shikijs/langs/${lang}`))
+    ));
 
     // pre code 조합을 한 번에 순회
-    for (const codeBlock of document.querySelectorAll('pre code')) {
+    for (const codeBlock of codeBlocks) {
       if (codeBlock.hasAttribute('highlighted')) continue;
 
       let lang = codeBlock.className.replace(/^language-/, '') || 'text';
-
-      if (languageCache.has(lang)) {
-        await languageCache.get(lang);
-      } else {
-        const langImport = import(`https://esm.sh/@shikijs/langs/${lang}`);
-        const loading = highlighter.loadLanguage(langImport);
-
-        languageCache.set(lang, loading);
-        await loading;
-      }
 
       const cleanText = codeBlock.textContent.trimEnd();
       const originalLines = cleanText.split('\n');
