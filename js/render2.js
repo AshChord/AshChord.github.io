@@ -89,21 +89,17 @@ async function renderContent() {
   thumbnail.src = `/posts/${encodeURIComponent(post.title)}/thumbnail.webp`;
 
   (async function renderCode() {
-    const source = await fetch('https://esm.sh/shiki@4.4.2/es2022/core.bundle.mjs')
-      .then((res) => res.text());
+    const importBlob = async (url) => {
+      const source = await fetch(url).then((res) => res.text());
+      const patched = source.replace(/import[^;]+;/, '');
+      const blob = new Blob([patched], { type: 'text/javascript' });
 
-    const patched = source.replace(
-      /import[^;]+;/,
-      ''
-    );
-
-    const blob = new Blob([patched], {
-      type: 'text/javascript'
-    });
+      return import(URL.createObjectURL(blob));
+    };
 
     const [core, engine, wasm] = await Promise.all([
-      import(URL.createObjectURL(blob)),
-      import('https://esm.sh/@shikijs/engine-oniguruma@4.4.2/es2022/engine-oniguruma.mjs'),
+      importBlob('https://esm.sh/shiki@4.4.2/es2022/core.bundle.mjs'),
+      importBlob('https://esm.sh/@shikijs/engine-oniguruma@4.4.2/es2022/engine-oniguruma.mjs'),
       import('https://esm.sh/@shikijs/engine-oniguruma@4.4.2/es2022/wasm-inlined.mjs')
     ]);
 
