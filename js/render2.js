@@ -88,7 +88,7 @@ async function renderContent() {
   thumbnail.alt = `${encodeURIComponent(post.title)}`;
   thumbnail.src = `/posts/${encodeURIComponent(post.title)}/thumbnail.webp`;
 
-  (async function renderCode() {
+  /*(async function renderCode() {
     const [core, engine] = await Promise.all([
       import('https://esm.sh/shiki/core?bundle'),
       import('https://esm.sh/shiki/engine/javascript?bundle')
@@ -114,6 +114,102 @@ async function renderContent() {
 
     await Promise.all([...languages].map((lang) =>
       highlighter.loadLanguage(import(`https://esm.sh/@shikijs/langs/${lang}`))
+    ));
+
+    // pre code 조합을 한 번에 순회
+    for (const codeBlock of codeBlocks) {
+      if (codeBlock.hasAttribute('highlighted')) continue;
+
+      let lang = codeBlock.className.replace(/^language-/, '') || 'text';
+
+      const cleanText = codeBlock.textContent.trimEnd();
+      const originalLines = cleanText.split('\n');
+
+      const highlighted = highlighter.codeToHtml(cleanText, {
+        lang,
+        theme: 'github-light'
+      });
+
+      const doc = new DOMParser().parseFromString(highlighted, 'text/html');
+      const renderedCode = doc.querySelector('code');
+
+      const fragment = document.createDocumentFragment();
+
+      renderedCode.querySelectorAll('.line').forEach((line, lineIdx) => {
+        const currentLine = document.createElement('data');
+        currentLine.className = 'code-line';
+        currentLine.value = lineIdx + 1;
+
+        const rawLineText = originalLines[lineIdx];
+        if (rawLineText) {
+          const indent = rawLineText.search(/\S/);
+          if (indent > 0) currentLine.style.setProperty('--indent', `${indent}ch`);
+        }
+
+        currentLine.append(...line.childNodes);
+        currentLine.appendChild(document.createTextNode('\n'));
+        fragment.appendChild(currentLine);
+      });
+
+      codeBlock.replaceChildren(fragment);
+      codeBlock.setAttribute('highlighted', '');
+
+      const copyBtn = document.createElement('button');
+      copyBtn.classList.add('copy-button');
+      codeBlock.parentElement.prepend(copyBtn);
+    }
+
+    document.querySelectorAll('code:not(pre code)').forEach((code) => {
+      const tokens = code.textContent.split(/([^a-zA-Z0-9\s])/g).filter(Boolean);
+
+      const brokenTokens = tokens.flatMap((token, i) => {
+        if (i === 0) return token;
+
+        const wbr = document.createElement('wbr');
+        return [wbr, token];
+      });
+
+      code.replaceChildren(...brokenTokens);
+    });
+  })();*/
+  (async function renderCode() {
+    const source = await fetch('https://esm.sh/shiki@4.4.2/es2022/core.bundle.mjs')
+      .then((res) => res.text());
+
+    const patched = source.replace(
+      /import[^;]+;/,
+      ''
+    );
+
+    const blob = new Blob([patched], {
+      type: 'text/javascript'
+    });
+
+    const [core, engine] = await Promise.all([
+      import(URL.createObjectURL(blob)),
+      import('https://esm.sh/shiki@4.4.2/es2022/engine-javascript.bundle.mjs')
+    ]);
+
+    const highlighter = await core.createHighlighterCore({
+      themes: [import('https://esm.sh/@shikijs/themes@4.4.2/es2022/github-light.mjs')],
+      langs: [],
+      engine: engine.createJavaScriptRegexEngine()
+    });
+
+    const codeBlocks = [...document.querySelectorAll('pre code')];
+
+    const languages = new Set();
+
+    codeBlocks.forEach((codeBlock) => {
+
+      if (codeBlock.hasAttribute('highlighted')) return;
+      const lang = codeBlock.className.replace(/^language-/, '') || 'text';
+
+      if (lang !== 'text') languages.add(lang);
+    });
+
+    await Promise.all([...languages].map((lang) =>
+      highlighter.loadLanguage(import(`https://esm.sh/@shikijs/langs@4.4.2/es2022/${lang}.mjs`))
     ));
 
     // pre code 조합을 한 번에 순회
