@@ -90,7 +90,7 @@ async function renderContent() {
 
   (async function renderCode() {
     const [core, engine] = await Promise.all([
-      import('https://esm.sh/shiki/core?bundle&no-polyfill'),
+      import('https://esm.sh/shiki/core?bundle'),
       import('https://esm.sh/shiki/engine/javascript?bundle')
     ]);
 
