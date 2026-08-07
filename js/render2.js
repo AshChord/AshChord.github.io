@@ -90,8 +90,8 @@ async function renderContent() {
 
   (async function renderCode() {
     const [core, engine] = await Promise.all([
-      import('https://esm.sh/shiki/core?bundle&target=browser'),
-      import('https://esm.sh/shiki/engine/javascript?bundle&target=browser')
+      import('https://esm.sh/shiki/core?bundle&no-polyfill'),
+      import('https://esm.sh/shiki/engine/javascript?bundle')
     ]);
 
     const highlighter = await core.createHighlighterCore({
