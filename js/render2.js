@@ -91,7 +91,8 @@ async function renderContent() {
   (async function renderCode() {
     const importBlob = async (url) => {
       const source = await fetch(url).then((res) => res.text());
-      const patched = source.replace(/import[^;]+;/, '');
+      const fileName = url.split('/').pop();
+      const patched = source.replace(/import[^;]+;/, '') + `\n//# sourceURL=${fileName}`;
       const blob = new Blob([patched], { type: 'text/javascript' });
 
       return import(URL.createObjectURL(blob));
