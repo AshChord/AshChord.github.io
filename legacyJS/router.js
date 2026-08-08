@@ -83,6 +83,3 @@ function updateTitle(pfx) {
   const sfx = "AshChord.log";
   document.title = pfx ? `${pfx} - ${sfx}` : sfx;
 }
-
-// Handle routing on back/forward navigation
-window.addEventListener('popstate', router);
