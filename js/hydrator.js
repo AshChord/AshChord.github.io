@@ -13,7 +13,7 @@ document.firstChild.remove();
 
   for (const inertScript of document.body.querySelectorAll('script')) {
     const activeScript = document.createElement('script');
-    activeScript.src = inertScript.src;
+    activeScript.setAttribute("src", inertScript.getAttribute("src"));
     activeScript.async = false;
     inertScript.replaceWith(activeScript);
   }

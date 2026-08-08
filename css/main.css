@@ -11,6 +11,7 @@ main {
   grid-column-start: 1;
   grid-row-start: 1;
   box-sizing: border-box;
+  width: 100%;
   max-width: 1200px;
   height: fit-content;
   margin: 32px 0;
@@ -232,8 +233,8 @@ main {
   background-color: dimgray;
   mask-image: url("/assets/icon-chapter.svg"), url("/assets/icon-side-close-right.svg");
   mask-size: 50%, 0%;
-  mask-repeat: no-repeat, no-repeat;
-  mask-position: center, center;
+  mask-repeat: no-repeat;
+  mask-position: center;
   list-style: none;
 
   .category-panel[open] & {
