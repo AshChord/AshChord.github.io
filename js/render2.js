@@ -133,7 +133,7 @@ async function renderContent() {
     ));
 
     // pre code 조합을 한 번에 순회
-    for (const codeBlock of codeBlocks) {
+    /*for (const codeBlock of codeBlocks) {
       if (codeBlock.hasAttribute('highlighted')) continue;
 
       let lang = codeBlock.className.replace(/^language-/, '') || 'text';
@@ -168,6 +168,71 @@ async function renderContent() {
       });
 
       codeBlock.replaceChildren(fragment);
+      codeBlock.setAttribute('highlighted', '');
+
+      const copyBtn = document.createElement('button');
+      copyBtn.classList.add('copy-button');
+      codeBlock.parentElement.prepend(copyBtn);
+    }*/
+    // pre code 조합을 한 번에 순회
+    for (const codeBlock of codeBlocks) {
+      if (codeBlock.hasAttribute('highlighted')) continue;
+
+      let lang = codeBlock.className.replace(/^language-/, '') || 'text';
+
+      const cleanText = codeBlock.textContent.trimEnd();
+      const originalLines = cleanText.split('\n');
+
+      const highlighted = highlighter.codeToHtml(cleanText, {
+        lang,
+        theme: 'github-light'
+      });
+
+      const doc = new DOMParser().parseFromString(highlighted, 'text/html');
+      const renderedCode = doc.querySelector('code');
+
+      // 1. 테이블 전체 구조 생성
+      const table = document.createElement('table');
+      table.className = 'code-table';
+      const tbody = document.createElement('tbody');
+
+      renderedCode.querySelectorAll('.line').forEach((line, lineIdx) => {
+        // 2. 행(Row) 생성
+        const tr = document.createElement('tr');
+
+        // 3. 1열: 라인 번호 셀 (td)
+        const tdNum = document.createElement('td');
+        tdNum.className = 'line-number';
+        tdNum.textContent = lineIdx + 1;
+        // 선택(드래그 복사) 방지 처리 내장
+        tdNum.style.userSelect = 'none';
+
+        // 4. 2열: 실제 코드 텍스트 셀 (td)
+        const tdCode = document.createElement('td');
+        tdCode.className = 'line-code';
+
+        // 들여쓰기("--indent") 처리가 필요했다면 여기서 tdCode에 바로 적용 가능
+        const rawLineText = originalLines[lineIdx];
+        if (rawLineText) {
+          const indent = rawLineText.search(/\S/);
+          if (indent > 0) {
+            tdCode.style.setProperty('--indent', `${indent}ch`);
+          }
+        }
+
+        // Shiki가 파싱한 라인 내부의 span(토큰) 노드들을 통째로 복사해서 붙여넣기
+        tdCode.append(...line.childNodes);
+
+        // 5. tr에 두 개의 셀을 장착 후 tbody에 추가
+        tr.appendChild(tdNum);
+        tr.appendChild(tdCode);
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(tbody);
+
+      // 6. codeBlock 내부를 방금 만든 table로 교체
+      codeBlock.replaceChildren(table);
       codeBlock.setAttribute('highlighted', '');
 
       const copyBtn = document.createElement('button');
