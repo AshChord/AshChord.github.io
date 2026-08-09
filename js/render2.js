@@ -88,7 +88,13 @@ async function renderContent() {
   thumbnail.alt = `${encodeURIComponent(post.title)}`;
   thumbnail.src = `/posts/${encodeURIComponent(post.title)}/thumbnail.webp`;
 
+  // 바디 렌더링
+  const contentNodes = await window.contentNodes;
+  document.querySelector('.content-body').append(...contentNodes);
+
   (async function renderCode() {
+    const host = 'https://esm.sh'
+
     const importBlob = async (url) => {
       const source = await fetch(url).then((res) => res.text());
       const fileName = url.split('/').pop();
@@ -99,13 +105,13 @@ async function renderContent() {
     };
 
     const [core, engine, wasm] = await Promise.all([
-      importBlob('https://esm.sh/shiki@4.4.2/es2022/core.bundle.mjs'),
-      importBlob('https://esm.sh/@shikijs/engine-oniguruma@4.4.2/es2022/engine-oniguruma.mjs'),
-      import('https://esm.sh/@shikijs/engine-oniguruma@4.4.2/es2022/wasm-inlined.mjs')
+      importBlob(`${host}/shiki@4.4.2/es2022/core.bundle.mjs`),
+      importBlob(`${host}/@shikijs/engine-oniguruma@4.4.2/es2022/engine-oniguruma.mjs`),
+      import(`${host}/@shikijs/engine-oniguruma@4.4.2/es2022/wasm-inlined.mjs`)
     ]);
 
     const highlighter = await core.createHighlighterCore({
-      themes: [import('https://esm.sh/@shikijs/themes@4.4.2/es2022/github-light.mjs')],
+      themes: [import(`${host}/@shikijs/themes@4.4.2/es2022/github-light.mjs`)],
       langs: [],
       engine: await engine.createOnigurumaEngine(wasm.default)
     });
@@ -123,7 +129,7 @@ async function renderContent() {
     });
 
     await Promise.all([...languages].map((lang) =>
-      highlighter.loadLanguage(import(`https://esm.sh/@shikijs/langs@4.4.2/es2022/${lang}.mjs`))
+      highlighter.loadLanguage(import(`${host}/@shikijs/langs@4.4.2/es2022/${lang}.mjs`))
     ));
 
     // pre code 조합을 한 번에 순회
