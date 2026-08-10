@@ -192,11 +192,6 @@ async function renderContent() {
       linkToHeading.textContent = hdg.textContent;
       linkToHeading.style.paddingLeft = `${indentLevel * 12}px`;
 
-      linkToHeading.addEventListener('click', (e) => {
-        e.preventDefault();
-        hdg.scrollIntoView({ behavior: 'smooth' });
-      });
-
       headingList.appendChild(linkToHeading);
     });
   })();

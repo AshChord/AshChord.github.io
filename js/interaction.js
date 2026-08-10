@@ -59,7 +59,7 @@ window.addEventListener('resize', () => {
       outline.style.visibility = window.innerHeight < outlineHeight ? 'hidden' : 'visible';
     }
   }
-}, { passive: true });
+});
 
 window.dispatchEvent(new Event('resize'));
 
@@ -136,9 +136,9 @@ window.addEventListener('scroll', () => {
   const links = outline.querySelectorAll('a');
   links.forEach(link => {
     if (currentHdg && link.getAttribute('href') === `#${currentHdg.id}`) {
-      link.classList.add('active'); // CSS에서 .active로 하이라이팅 처리
+      link.classList.add('current'); // CSS에서 .active로 하이라이팅 처리
     } else {
-      link.classList.remove('active');
+      link.classList.remove('current');
     }
   });
 }, { passive: true });
