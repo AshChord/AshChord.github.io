@@ -93,13 +93,13 @@ async function renderContent() {
   document.querySelector('.content-body').append(...contentNodes);
 
   (async function renderCode() {
-    const host = 'https://esm.sh'
+    const host = 'https://esm.sh';
 
     const importBlob = async (url) => {
       const source = await fetch(url).then((res) => res.text());
       const fileName = url.split('/').pop();
-      const patched = source.replace(/import[^;]+;/, '') + `\n//# sourceURL=${fileName}`;
-      const blob = new Blob([patched], { type: 'text/javascript' });
+      const variant = source.replace(/import[^;]+;/, '') + `\n//# sourceURL=${fileName}`;
+      const blob = new Blob([variant], { type: 'text/javascript' });
 
       return import(URL.createObjectURL(blob));
     };
@@ -116,63 +116,51 @@ async function renderContent() {
       engine: await engine.createOnigurumaEngine(wasm.default)
     });
 
-    const codeBlocks = [...document.querySelectorAll('pre code')];
+    const codeBlocks = document.querySelectorAll('pre code:not([highlighted])');
 
-    const languages = new Set();
+    const codeData = [...codeBlocks].map((codeBlock) => ({
+      codeBlock,
+      lang: codeBlock.className.replace(/^language-/, '') || 'text'
+    }));
 
-    codeBlocks.forEach((codeBlock) => {
-
-      if (codeBlock.hasAttribute('highlighted')) return;
-      const lang = codeBlock.className.replace(/^language-/, '') || 'text';
-
-      if (lang !== 'text') languages.add(lang);
-    });
+    const languages = new Set(codeData.map(({ lang }) => lang));
+    languages.delete('text');
 
     await Promise.all([...languages].map((lang) =>
       highlighter.loadLanguage(import(`${host}/@shikijs/langs@4.4.2/es2022/${lang}.mjs`))
     ));
 
-    // pre code 조합을 한 번에 순회
-    for (const codeBlock of codeBlocks) {
-      if (codeBlock.hasAttribute('highlighted')) continue;
+    for (const { codeBlock, lang } of codeData) {
+      const copyBtn = document.createElement('button');
+      copyBtn.classList.add('copy-button');
+      codeBlock.parentElement.prepend(copyBtn);
 
-      let lang = codeBlock.className.replace(/^language-/, '') || 'text';
+      const codeText = codeBlock.textContent.trimEnd();
+      const originalLines = codeText.split('\n');
 
-      const cleanText = codeBlock.textContent.trimEnd();
-      const originalLines = cleanText.split('\n');
-
-      const highlighted = highlighter.codeToHtml(cleanText, {
+      const highlighted = highlighter.codeToHtml(codeText, {
         lang,
         theme: 'github-light'
       });
 
       const doc = new DOMParser().parseFromString(highlighted, 'text/html');
-      const renderedCode = doc.querySelector('code');
 
       const fragment = document.createDocumentFragment();
 
-      renderedCode.querySelectorAll('.line').forEach((line, lineIdx) => {
+      doc.querySelectorAll('.line').forEach((line, lineIdx) => {
         const currentLine = document.createElement('data');
         currentLine.className = 'code-line';
         currentLine.value = lineIdx + 1;
 
-        const rawLineText = originalLines[lineIdx];
-        if (rawLineText) {
-          const indent = rawLineText.search(/\S/);
-          if (indent > 0) currentLine.style.setProperty('--indent', `${indent}ch`);
-        }
+        const indent = originalLines[lineIdx].search(/\S/);
+        if (indent > 0) currentLine.style.setProperty('--indent', `${indent}ch`);
 
-        currentLine.append(...line.childNodes);
-        currentLine.appendChild(document.createTextNode('\n'));
+        currentLine.append(...line.childNodes, '\n');
         fragment.appendChild(currentLine);
       });
 
       codeBlock.replaceChildren(fragment);
       codeBlock.setAttribute('highlighted', '');
-
-      const copyBtn = document.createElement('button');
-      copyBtn.classList.add('copy-button');
-      codeBlock.parentElement.prepend(copyBtn);
     }
 
     document.querySelectorAll('code:not(pre code)').forEach((code) => {

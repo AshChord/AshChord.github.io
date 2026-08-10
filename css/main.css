@@ -135,6 +135,10 @@ main {
   align-items: center;
   margin: -32px auto 0;
 
+  &:not(:has(.page-number)) {
+    visibility: hidden;
+  }
+
   @media (min-width: 768px) {
     margin: -60px auto 0;
   }
