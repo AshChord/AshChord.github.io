@@ -287,7 +287,7 @@ phpMyAdmin은 다음 절차를 통해 사용할 수 있다.
 
 터미널에서 다음 명령어를 실행한다.
 
-```bash
+```sh
 sudo apt install phpmyadmin
 ```
 
@@ -297,7 +297,7 @@ sudo apt install phpmyadmin
 
 phpMyAdmin의 기본 경로는 `/usr/share/phpmyadmin`이다. 이를 Apache의 웹 서버 디렉터리인 `/var/www/html`에 심볼릭 링크로 연결하여 웹 브라우저에서 phpMyAdmin에 접근할 수 있도록 한다.
 
-```bash
+```sh
 sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
 ```
 
@@ -311,7 +311,7 @@ sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
 
 심볼릭 링크를 생성한 후 Apache 웹 서버를 재시작한다.
 
-```bash
+```sh
 sudo systemctl restart apache2
 ```
 
