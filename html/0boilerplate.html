@@ -2,10 +2,8 @@
 context: markdown
 ---
 
-{% assign posts = site.pages %}
+{% assign posts = site.pages | where: "layout", "content" %}
 {% for post in posts %}
-
--{{ post.path }}->
 
 {::nomarkdown type="{{ post.path }}"}
 <!DOCTYPE html>
