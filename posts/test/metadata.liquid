@@ -7,4 +7,4 @@ excerpt: 테스트 파일
 categories: 예시, 파일
 ---
 
-{{ site.pages.first | map: page.layout | split: page.path | shift | pop | markdownify }}
+{{ site.pages.first | map: page.layout | split: page.path | join: "" | markdownify }}
