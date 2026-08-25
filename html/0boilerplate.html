@@ -1,4 +1,8 @@
-{% assign posts = site.pages | where: "layout", page.layout %}
+---
+published: false
+---
+
+{% assign posts = site.pages %}
 {% for post in posts %}
 
 -{{ post.path }}->

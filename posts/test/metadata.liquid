@@ -1,5 +1,5 @@
 ---
-layout: article
+layout: content
 permalink: /posts/test1.html
 title: test
 date: 2025/02/13
@@ -7,35 +7,4 @@ excerpt: 테스트 파일
 categories: 예시, 파일
 ---
 
-{% capture example %}
-  {::options syntax_highlighter="nil" /}
-
-  {::nomarkdown}
-  <!DOCTYPE html>
-  <html lang="ko">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-    <title>{{ post.title }} - AshChord.log</title>
-    <meta property="og:title" content="{{ post.title }}">
-    <meta property="og:description" content="{{ post.excerpt }}">
-    <meta property="og:url" content="{{ post.url | absolute_url }}">
-    <meta property="og:image" content="{{ post.url | absolute_url }}/thumbnail.webp">
-    <meta property="og:site_name" content="AshChord.log">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ post.title }}">
-    <meta name="twitter:image" content="{{ post.url | absolute_url }}/thumbnail.webp">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/markdown.css">
-  </head>
-  </html>
-  {:/nomarkdown}
-
-  ```ruby
-  puts "hello"
-  ```
-{% endcapture %}
-
-{{ example | markdownify }}
+{{ site.pages.first.content | split: page.path | markdownify }}
