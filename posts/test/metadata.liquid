@@ -7,5 +7,8 @@ excerpt: 테스트 파일
 categories: 예시, 파일
 ---
 
-{% capture r %}{% include_relative test.md %}{% endcapture %}
-{{ site.pages | map: page.layout | first | remove: page | append: r | markdownify }}
+{% capture body %}
+{{ site.pages | map: page.layout | first | remove: page }}
+{% include_relative test.md %}
+{% endcapture %}
+{{ body | markdownify }}
