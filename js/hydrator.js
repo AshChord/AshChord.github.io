@@ -1,5 +1,4 @@
 async function hydrate() {
-  document.firstChild.remove();
   const hydrator = document.currentScript;
 
   const skeletonSource = await fetch('/').then(res => res.text());
