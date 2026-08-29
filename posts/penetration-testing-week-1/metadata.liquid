@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: penetration-testing-week-1
+permalink: /posts/penetration-testing-week-1.html
+
+# Summary #
+title: Penetration Testing | Week 1
+date: 2025/04/05
+excerpt: 웹 서버의 기본 개념과 동적 페이지 처리
+categories: 모의 해킹
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page | markdownify }}
