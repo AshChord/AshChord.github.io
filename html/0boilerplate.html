@@ -3,34 +3,36 @@ context: markdown
 ---
 
 {% assign posts = site.pages | where: "layout", "content" %}
-{% assign base = site.url %}
-{% assign ext = ".html" %}
-{% assign image = "/thumbnail.webp" %}
 {% for post in posts %}
+  {% assign title = post.title %}
+  {% assign description = post.excerpt %}
+  {% assign url = site.url | append: post.dir | append: post.slug %}
+  {% assign image = url | append: "/thumbnail.webp" %}
 
-{::nomarkdown type="{{ post }}"}
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <title>{{ post.title }} - AshChord.log</title>
-  <meta property="og:title" content="{{ post.title }}">
-  <meta property="og:description" content="{{ post.excerpt }}">
-  <meta property="og:url" content="{{ base }}{{ post.url }}">
-  <meta property="og:image" content="{{ base }}{{ post.url | replace: ext, image }}">
-  <meta property="og:site_name" content="AshChord.log">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ post.title }}">
-  <meta name="twitter:image" content="{{ base }}{{ post.url | replace: ext, image }}">
-  <link rel="stylesheet" href="/css/header.css">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/markdown.css">
-  <script src="/js/hydrator.js" defer></script>
-</head>
-</html>
-{:/nomarkdown}
+  {::nomarkdown type="{{ post }}"}
+  <!DOCTYPE html>
+  <html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <title>{{ title }} - AshChord.log</title>
+    <meta name="description" content="{{ description }}">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:url" content="{{ url }}">
+    <meta property="og:image" content="{{ image }}">
+    <meta property="og:site_name" content="AshChord.log">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:image" content="{{ image }}">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <script src="/js/hydrator.js" defer></script>
+  </head>
+  </html>
+  {:/nomarkdown}
 
 {% endfor %}
 
