@@ -3,6 +3,9 @@ context: markdown
 ---
 
 {% assign posts = site.pages | where: "layout", "content" %}
+{% assign base = site.url %}
+{% assign ext = ".html" %}
+{% assign image = "/thumbnail.webp" %}
 {% for post in posts %}
 
 {::nomarkdown type="{{ post }}"}
@@ -15,12 +18,12 @@ context: markdown
   <title>{{ post.title }} - AshChord.log</title>
   <meta property="og:title" content="{{ post.title }}">
   <meta property="og:description" content="{{ post.excerpt }}">
-  <meta property="og:url" content="{{ site.url }}{{ post.url }}">
-  <meta property="og:image" content="{{ post.url | absolute_url }}/thumbnail.webp">
+  <meta property="og:url" content="{{ base }}{{ post.url }}">
+  <meta property="og:image" content="{{ base }}{{ post.url | replace: ext, image }}">
   <meta property="og:site_name" content="AshChord.log">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ post.title }}">
-  <meta name="twitter:image" content="{{ post.url | absolute_url }}/thumbnail.webp">
+  <meta name="twitter:image" content="{{ base }}{{ post.url | replace: ext, image }}">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/markdown.css">
