@@ -85,8 +85,8 @@ async function renderContent() {
   date.textContent = post.date;
 
   const thumbnail = contentHeader.querySelector('.thumbnail');
-  thumbnail.alt = `${encodeURIComponent(post.title)}`;
-  thumbnail.src = `/posts/${encodeURIComponent(post.title)}/thumbnail.webp`;
+  thumbnail.alt = `${post.slug}`;
+  thumbnail.src = `/posts/${post.slug}/thumbnail.webp`;
 
   // 바디 렌더링
   const contentNodes = await window.contentNodes;
