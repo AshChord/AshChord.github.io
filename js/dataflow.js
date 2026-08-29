@@ -39,10 +39,11 @@ const posts = dataflow.node(async () => {
     const listItems = container.querySelectorAll('li');
 
     finalPosts.push({
-      title: decodeURIComponent(listItems[0].innerText),
-      date: listItems[1].innerText,
-      excerpt: listItems[2].innerText,
-      categories: listItems[3].innerText.split(',').map(cat => cat.trim())
+      slug: listItems[0].innerText,
+      title: decodeURIComponent(listItems[1].innerText),
+      date: listItems[2].innerText,
+      excerpt: listItems[3].innerText,
+      categories: listItems[4].innerText.split(',').map(cat => cat.trim())
     });
   });
 
@@ -111,7 +112,7 @@ const postsForCurrPage = dataflow.node(async () => {
 // 6. currentPost
 const currentPost = dataflow.node(async () => {
   const path = window.location.pathname;
-  const postTitle = decodeURIComponent(path.replace('/posts/', ''));
+  const postSlug = decodeURIComponent(path.replace('/posts/', ''));
 
-  return (await posts).find(post => post.title === postTitle);
+  return (await posts).find(post => post.slug === postSlug);
 });
