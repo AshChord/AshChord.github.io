@@ -17,4 +17,4 @@ categories: 모의 해킹
 {{ site.pages | map: page.layout | first }}
 {% include_relative content.md %}
 {% endcapture %}
-{{ document | remove: page | markdownify }}
+{{ document | remove: page.path | markdownify }}

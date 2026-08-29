@@ -9,7 +9,7 @@ context: markdown
   {% assign url = site.url | append: post.dir | append: post.slug %}
   {% assign image = url | append: "/thumbnail.webp" %}
 
-  {::nomarkdown type="{{ post }}"}
+  {::nomarkdown type="{{ post.path }}"}
   <!DOCTYPE html>
   <html lang="ko">
   <head>
