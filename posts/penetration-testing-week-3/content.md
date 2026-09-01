@@ -20,64 +20,56 @@
 
 로그인 로직은 크게 **식별·인증 동시 처리 방식**과 **식별·인증 분리 처리 방식**이 있다. 각 로직을 예시 코드와 함께 살펴보자.
 
-<style>
-  .hljs-subst {
-    color: #e36209;
-  }
-</style>
-
-```php
-// 식별·인증 동시 처리
-
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'root');
-define('DB_NAME', 'dev');
-
-$db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-$username = $_POST['username'];
-$password = $_POST['password'];
-
-$sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-$res = mysqli_query($db_conn, $sql);
-
-if (mysqli_num_rows($res) == 1) {
-  // Login Successful
-} else {
-  // Login Failed
-}
-```
+<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// 식별·인증 동시 처리</span>
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span style="color:#005CC5">define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_SERVER'</span><span style="color:#24292E">, </span><span style="color:#032F62">'localhost'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="4"><span style="color:#005CC5">define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_USERNAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="5"><span style="color:#005CC5">define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_PASSWORD'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="6"><span style="color:#005CC5">define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_NAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'dev'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="7">
+</data><data class="code-line" value="8"><span style="color:#24292E">$db_conn </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_connect</span><span style="color:#24292E">(</span><span style="color:#005CC5">DB_SERVER</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_USERNAME</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_PASSWORD</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_NAME</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="9">
+</data><data class="code-line" value="10"><span style="color:#24292E">$username </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'username'</span><span style="color:#24292E">];</span>
+</data><data class="code-line" value="11"><span style="color:#24292E">$password </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'password'</span><span style="color:#24292E">];</span>
+</data><data class="code-line" value="12">
+</data><data class="code-line" value="13"><span style="color:#24292E">$sql </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#D73A49">SELECT</span><span style="color:#D73A49"> *</span><span style="color:#D73A49"> FROM</span><span style="color:#24292E"> users </span><span style="color:#D73A49">WHERE</span><span style="color:#24292E"> username </span><span style="color:#D73A49">=</span><span style="color:#032F62"> '</span><span style="color:#24292E">$username</span><span style="color:#032F62">' </span><span style="color:#D73A49">AND</span><span style="color:#24292E"> password</span><span style="color:#D73A49"> =</span><span style="color:#032F62"> '</span><span style="color:#24292E">$password</span><span style="color:#032F62">'"</span><span style="color:#24292E">;</span>
+</data><data class="code-line" value="14"><span style="color:#24292E">$res </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_query</span><span style="color:#24292E">($db_conn, $sql);</span>
+</data><data class="code-line" value="15">
+</data><data class="code-line" value="16"><span style="color:#D73A49">if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">mysqli_num_rows</span><span style="color:#24292E">($res) </span><span style="color:#D73A49">==</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) {</span>
+</data><data class="code-line" value="17" style="--indent: 2ch;"><span style="color:#6A737D">  // Login Successful</span>
+</data><data class="code-line" value="18"><span style="color:#24292E">} </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
+</data><data class="code-line" value="19" style="--indent: 2ch;"><span style="color:#6A737D">  // Login Failed</span>
+</data><data class="code-line" value="20"><span style="color:#24292E">}</span>
+</data></code></pre>
 
 식별·인증 동시 처리 방식에서는 하나의 SQL 쿼리 내에서 `username`과 `password`의 일치 여부를 동시에 확인한다.
 
-```php
-// 식별·인증 분리 처리 방식
-
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'root');
-define('DB_NAME', 'dev');
-
-$db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-$username = $_POST['username'];
-$password = $_POST['password'];
-
-$sql = "SELECT * FROM users WHERE username = '$username'";
-$res = mysqli_query($db_conn, $sql);
-
-if (mysqli_num_rows($res) == 1) {
-  $user = mysqli_fetch_array($res);
-  if ($user['password'] == $password) {
-    // Login Successful
-  } else {
-    // Login Failed
-  }
-} else {
-  // Login Failed
-}
-```
+<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// 식별·인증 분리 처리 방식</span>
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span style="color:#005CC5">define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_SERVER'</span><span style="color:#24292E">, </span><span style="color:#032F62">'localhost'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="4"><span style="color:#005CC5">define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_USERNAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="5"><span style="color:#005CC5">define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_PASSWORD'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="6"><span style="color:#005CC5">define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_NAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'dev'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="7">
+</data><data class="code-line" value="8"><span style="color:#24292E">$db_conn </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_connect</span><span style="color:#24292E">(</span><span style="color:#005CC5">DB_SERVER</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_USERNAME</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_PASSWORD</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_NAME</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="9">
+</data><data class="code-line" value="10"><span style="color:#24292E">$username </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'username'</span><span style="color:#24292E">];</span>
+</data><data class="code-line" value="11"><span style="color:#24292E">$password </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'password'</span><span style="color:#24292E">];</span>
+</data><data class="code-line" value="12">
+</data><data class="code-line" value="13"><span style="color:#24292E">$sql </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#D73A49">SELECT</span><span style="color:#D73A49"> *</span><span style="color:#D73A49"> FROM</span><span style="color:#24292E"> users </span><span style="color:#D73A49">WHERE</span><span style="color:#24292E"> username </span><span style="color:#D73A49">=</span><span style="color:#032F62"> '</span><span style="color:#24292E">$username</span><span style="color:#032F62">'"</span><span style="color:#24292E">;</span>
+</data><data class="code-line" value="14"><span style="color:#24292E">$res </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_query</span><span style="color:#24292E">($db_conn, $sql);</span>
+</data><data class="code-line" value="15">
+</data><data class="code-line" value="16"><span style="color:#D73A49">if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">mysqli_num_rows</span><span style="color:#24292E">($res) </span><span style="color:#D73A49">==</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) {</span>
+</data><data class="code-line" value="17" style="--indent: 2ch;"><span style="color:#24292E">  $user </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_fetch_array</span><span style="color:#24292E">($res);</span>
+</data><data class="code-line" value="18" style="--indent: 2ch;"><span style="color:#D73A49">  if</span><span style="color:#24292E"> ($user[</span><span style="color:#032F62">'password'</span><span style="color:#24292E">] </span><span style="color:#D73A49">==</span><span style="color:#24292E"> $password) {</span>
+</data><data class="code-line" value="19" style="--indent: 4ch;"><span style="color:#6A737D">    // Login Successful</span>
+</data><data class="code-line" value="20" style="--indent: 2ch;"><span style="color:#24292E">  } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
+</data><data class="code-line" value="21" style="--indent: 4ch;"><span style="color:#6A737D">    // Login Failed</span>
+</data><data class="code-line" value="22" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
+</data><data class="code-line" value="23"><span style="color:#24292E">} </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
+</data><data class="code-line" value="24" style="--indent: 2ch;"><span style="color:#6A737D">  // Login Failed</span>
+</data><data class="code-line" value="25"><span style="color:#24292E">}</span>
+</data></code></pre>
 
 식별·인증 분리 처리 방식에서는 `username`을 먼저 확인한 후, 그에 해당하는 `password`가 데이터베이스에 저장된 값과 일치하는지를 확인한다.
 
@@ -179,155 +171,141 @@ Login successful!
 
 #### 1\. 식별·인증 동시 처리 방식
 
-```php
-// login_proc_1.php
-
-<?php
-  define('DB_SERVER', 'localhost');
-  define('DB_USERNAME', 'root');
-  define('DB_PASSWORD', 'root');
-  define('DB_NAME', 'dev');
-  $db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-  $message = "";
-
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-
-  // Check the username and password in a single SQL query
-  $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-  $res = mysqli_query($db_conn, $sql);
-
-  if (mysqli_num_rows($res) == 1) {
-    $message = "<p style='color: green;'>Login Successful!</p>";
-  } else {
-    $message = "<p style='color: red;'>Login Failed. Incorrect Username or Password.</p>";
-  }
-?>
-
-...
-```
+<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// login_proc_1.php</span>
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span style="color:#D73A49">&lt;?</span><span style="color:#005CC5">php</span>
+</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_SERVER'</span><span style="color:#24292E">, </span><span style="color:#032F62">'localhost'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_USERNAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="6" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_PASSWORD'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="7" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_NAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'dev'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="8" style="--indent: 2ch;"><span style="color:#24292E">  $db_conn </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_connect</span><span style="color:#24292E">(</span><span style="color:#005CC5">DB_SERVER</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_USERNAME</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_PASSWORD</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_NAME</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="9">
+</data><data class="code-line" value="10" style="--indent: 2ch;"><span style="color:#24292E">  $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> ""</span><span style="color:#24292E">;</span>
+</data><data class="code-line" value="11">
+</data><data class="code-line" value="12" style="--indent: 2ch;"><span style="color:#24292E">  $username </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'username'</span><span style="color:#24292E">];</span>
+</data><data class="code-line" value="13" style="--indent: 2ch;"><span style="color:#24292E">  $password </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'password'</span><span style="color:#24292E">];</span>
+</data><data class="code-line" value="14">
+</data><data class="code-line" value="15" style="--indent: 2ch;"><span style="color:#6A737D">  // Check the username and password in a single SQL query</span>
+</data><data class="code-line" value="16" style="--indent: 2ch;"><span style="color:#24292E">  $sql </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#D73A49">SELECT</span><span style="color:#D73A49"> *</span><span style="color:#D73A49"> FROM</span><span style="color:#24292E"> users </span><span style="color:#D73A49">WHERE</span><span style="color:#24292E"> username </span><span style="color:#D73A49">=</span><span style="color:#032F62"> '</span><span style="color:#24292E">$username</span><span style="color:#032F62">' </span><span style="color:#D73A49">AND</span><span style="color:#24292E"> password</span><span style="color:#D73A49"> =</span><span style="color:#032F62"> '</span><span style="color:#24292E">$password</span><span style="color:#032F62">'"</span><span style="color:#24292E">;</span>
+</data><data class="code-line" value="17" style="--indent: 2ch;"><span style="color:#24292E">  $res </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_query</span><span style="color:#24292E">($db_conn, $sql);</span>
+</data><data class="code-line" value="18">
+</data><data class="code-line" value="19" style="--indent: 2ch;"><span style="color:#D73A49">  if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">mysqli_num_rows</span><span style="color:#24292E">($res) </span><span style="color:#D73A49">==</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) {</span>
+</data><data class="code-line" value="20" style="--indent: 4ch;"><span style="color:#24292E">    $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: green;'</span><span style="color:#24292E">&gt;Login Successful!&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="21" style="--indent: 2ch;"><span style="color:#24292E">  } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
+</data><data class="code-line" value="22" style="--indent: 4ch;"><span style="color:#24292E">    $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: red;'</span><span style="color:#24292E">&gt;Login Failed. Incorrect Username of Password.&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="23" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
+</data><data class="code-line" value="24"><span style="color:#D73A49">?&gt;</span>
+</data><data class="code-line" value="25">
+</data><data class="code-line" value="26"><span style="color:#D73A49">...</span>
+</data></code></pre>
 
 <br>
 
 #### 2\. 식별·인증 분리 처리 방식
 
-```php
-// login_proc_2.php
-
-<?php
-  define('DB_SERVER', 'localhost');
-  define('DB_USERNAME', 'root');
-  define('DB_PASSWORD', 'root');
-  define('DB_NAME', 'dev');
-  $db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-  $message = "";
-
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-
-  // Verify the username first
-  $sql = "SELECT * FROM users WHERE username = '$username'";
-  $res = mysqli_query($db_conn, $sql);
-
-  // Check if the password matches
-  if (mysqli_num_rows($res) == 1) {
-    $user = mysqli_fetch_array($res);
-
-    if ($user['password'] === $password) {
-      $message = "<p style='color: green;'>Login Successful!</p>";
-    } else {
-      $message = "<p style='color: red;'>Login Failed. Incorrect password.</p>";
-    }
-  } else {
-    $message = "<p style='color: red;'>Login Failed. Username not found.</p>";
-  }
-?>
-
-...
-```
+<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// login_proc_2.php</span>
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span style="color:#D73A49">&lt;?</span><span style="color:#005CC5">php</span>
+</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_SERVER'</span><span style="color:#24292E">, </span><span style="color:#032F62">'localhost'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_USERNAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="6" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_PASSWORD'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="7" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_NAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'dev'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="8" style="--indent: 2ch;"><span style="color:#24292E">  $db_conn </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_connect</span><span style="color:#24292E">(</span><span style="color:#005CC5">DB_SERVER</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_USERNAME</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_PASSWORD</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_NAME</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="9">
+</data><data class="code-line" value="10" style="--indent: 2ch;"><span style="color:#24292E">  $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> ""</span><span style="color:#24292E">;</span>
+</data><data class="code-line" value="11">
+</data><data class="code-line" value="12" style="--indent: 2ch;"><span style="color:#24292E">  $username </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'username'</span><span style="color:#24292E">];</span>
+</data><data class="code-line" value="13" style="--indent: 2ch;"><span style="color:#24292E">  $password </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'password'</span><span style="color:#24292E">];</span>
+</data><data class="code-line" value="14">
+</data><data class="code-line" value="15" style="--indent: 2ch;"><span style="color:#6A737D">  // Verify the username first</span>
+</data><data class="code-line" value="16" style="--indent: 2ch;"><span style="color:#24292E">  $sql </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#D73A49">SELECT</span><span style="color:#D73A49"> *</span><span style="color:#D73A49"> FROM</span><span style="color:#24292E"> users </span><span style="color:#D73A49">WHERE</span><span style="color:#24292E"> username </span><span style="color:#D73A49">=</span><span style="color:#032F62"> '</span><span style="color:#24292E">$username</span><span style="color:#032F62">'"</span><span style="color:#24292E">;</span>
+</data><data class="code-line" value="17" style="--indent: 2ch;"><span style="color:#24292E">  $res </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_query</span><span style="color:#24292E">($db_conn, $sql);</span>
+</data><data class="code-line" value="18">
+</data><data class="code-line" value="19" style="--indent: 2ch;"><span style="color:#6A737D">  // Check if the password matches</span>
+</data><data class="code-line" value="20" style="--indent: 2ch;"><span style="color:#D73A49">  if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">mysqli_num_rows</span><span style="color:#24292E">($res) </span><span style="color:#D73A49">==</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) {</span>
+</data><data class="code-line" value="21" style="--indent: 4ch;"><span style="color:#24292E">    $user </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_fetch_array</span><span style="color:#24292E">($res);</span>
+</data><data class="code-line" value="22">
+</data><data class="code-line" value="23" style="--indent: 4ch;"><span style="color:#D73A49">    if</span><span style="color:#24292E"> ($user[</span><span style="color:#032F62">'password'</span><span style="color:#24292E">] </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $password) {</span>
+</data><data class="code-line" value="24" style="--indent: 6ch;"><span style="color:#24292E">      $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: green;'</span><span style="color:#24292E">&gt;Login Successful!&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="25" style="--indent: 4ch;"><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
+</data><data class="code-line" value="26" style="--indent: 6ch;"><span style="color:#24292E">      $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: red;'</span><span style="color:#24292E">&gt;Login Failed. Incorrect Password.&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="27" style="--indent: 4ch;"><span style="color:#24292E">    }</span>
+</data><data class="code-line" value="28" style="--indent: 2ch;"><span style="color:#24292E">  } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
+</data><data class="code-line" value="29" style="--indent: 4ch;"><span style="color:#24292E">    $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: red;'</span><span style="color:#24292E">&gt;Login Failed. Username not Found.&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="30" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
+</data><data class="code-line" value="31"><span style="color:#D73A49">?&gt;</span>
+</data><data class="code-line" value="32">
+</data><data class="code-line" value="33"><span style="color:#D73A49">...</span>
+</data></code></pre>
 
 <br>
 
 #### 3\. 식별·인증 동시 처리 방식(with Hash)
 
-해시 함수를 활용한 로그인 로직을 구현하려면, 데이터베이스에는 사용자의 실제 비밀번호가 아닌 해당 비밀번호의 해시 값이 저장되어 있어야 한다. 따라서 기존에 저장된 원본 비밀번호 `test`를 해시 값으로 변환한다. 이 작업은 회원 가입 페이지(<code>sign_<wbr>up<wbr>.php</code>)에서 사용자 정보를 저장할 때 비밀번호를 해시 처리한 후 삽입하도록 구현할 수 있다.  
+해시 함수를 활용한 로그인 로직을 구현하려면, 데이터베이스에는 사용자의 실제 비밀번호가 아닌 해당 비밀번호의 해시 값이 저장되어 있어야 한다. 따라서 기존에 저장된 원본 비밀번호 `test`를 해시 값으로 변환한다. 이 작업은 회원 가입 페이지(`sign_up.php`)에서 사용자 정보를 저장할 때 비밀번호를 해시 처리한 후 삽입하도록 구현할 수 있다.  
 이후 `users` 테이블은 다음과 같은 형태가 된다.
 
 ![users 테이블](/posts/penetration-testing-week-3/assets/3.webp){: style="padding: 0 8%; background-color: white"}
 
 해시 함수로는 대표적인 해시 알고리즘 중 하나인 SHA-256을 사용하였다.
 
-```php
-// login_proc_3.php
-
-<?php
-  define('DB_SERVER', 'localhost');
-  define('DB_USERNAME', 'root');
-  define('DB_PASSWORD', 'root');
-  define('DB_NAME', 'dev');
-  $db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-  $message = "";
-
-  $username = $_POST['username'];
-  
-  // Apply SHA-256 hashing to the password input for basic security
-  $password = hash('sha256', $_POST['password']);
-
-  // Check the username and password in a single SQL query
-  $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-  $res = mysqli_query($db_conn, $sql);
-
-  if (mysqli_num_rows($res) == 1) {
-    $message = "<p style='color: green;'>Login Successful!</p>";
-  } else {
-    $message = "<p style='color: red;'>Login Failed. Incorrect Username or Password.</p>";
-  }
-?>
-
-...
-```
+<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// login_proc_3.php</span>
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span style="color:#D73A49">&lt;?</span><span style="color:#005CC5">php</span>
+</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_SERVER'</span><span style="color:#24292E">, </span><span style="color:#032F62">'localhost'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_USERNAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="6" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_PASSWORD'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="7" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_NAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'dev'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="8" style="--indent: 2ch;"><span style="color:#24292E">  $db_conn </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_connect</span><span style="color:#24292E">(</span><span style="color:#005CC5">DB_SERVER</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_USERNAME</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_PASSWORD</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_NAME</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="9">
+</data><data class="code-line" value="10" style="--indent: 2ch;"><span style="color:#24292E">  $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> ""</span><span style="color:#24292E">;</span>
+</data><data class="code-line" value="11">
+</data><data class="code-line" value="12" style="--indent: 2ch;"><span style="color:#24292E">  $username </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'username'</span><span style="color:#24292E">];</span>
+</data><data class="code-line" value="13"><span style="color:#24292E">  </span>
+</data><data class="code-line" value="14" style="--indent: 2ch;"><span style="color:#6A737D">  // Apply SHA-256 hashing to the password input for basic security</span>
+</data><data class="code-line" value="15" style="--indent: 2ch;"><span style="color:#24292E">  $password </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> hash</span><span style="color:#24292E">(</span><span style="color:#032F62">'sha256'</span><span style="color:#24292E">, $_POST[</span><span style="color:#032F62">'password'</span><span style="color:#24292E">]);</span>
+</data><data class="code-line" value="16">
+</data><data class="code-line" value="17" style="--indent: 2ch;"><span style="color:#6A737D">  // Check the username and password in a single SQL query</span>
+</data><data class="code-line" value="18" style="--indent: 2ch;"><span style="color:#24292E">  $sql </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#D73A49">SELECT</span><span style="color:#D73A49"> *</span><span style="color:#D73A49"> FROM</span><span style="color:#24292E"> users </span><span style="color:#D73A49">WHERE</span><span style="color:#24292E"> username </span><span style="color:#D73A49">=</span><span style="color:#032F62"> '</span><span style="color:#24292E">$username</span><span style="color:#032F62">' </span><span style="color:#D73A49">AND</span><span style="color:#24292E"> password</span><span style="color:#D73A49"> =</span><span style="color:#032F62"> '</span><span style="color:#24292E">$password</span><span style="color:#032F62">'"</span><span style="color:#24292E">;</span>
+</data><data class="code-line" value="19" style="--indent: 2ch;"><span style="color:#24292E">  $res </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_query</span><span style="color:#24292E">($db_conn, $sql);</span>
+</data><data class="code-line" value="20">
+</data><data class="code-line" value="21" style="--indent: 2ch;"><span style="color:#D73A49">  if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">mysqli_num_rows</span><span style="color:#24292E">($res) </span><span style="color:#D73A49">==</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) {</span>
+</data><data class="code-line" value="22" style="--indent: 4ch;"><span style="color:#24292E">    $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: green;'</span><span style="color:#24292E">&gt;Login Successful!&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="23" style="--indent: 2ch;"><span style="color:#24292E">  } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
+</data><data class="code-line" value="24" style="--indent: 4ch;"><span style="color:#24292E">    $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: red;'</span><span style="color:#24292E">&gt;Login Failed. Incorrect Username of Password.&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="25" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
+</data><data class="code-line" value="26"><span style="color:#D73A49">?&gt;</span>
+</data><data class="code-line" value="27">
+</data><data class="code-line" value="28"><span style="color:#D73A49">...</span>
+</data></code></pre>
 
 <br>
 
 #### 4\. 식별·인증 분리 처리 방식(with Hash)
 
-```php
-// login_proc_4.php
-
-<?php
-  define('DB_SERVER', 'localhost');
-  define('DB_USERNAME', 'root');
-  define('DB_PASSWORD', 'root');
-  define('DB_NAME', 'dev');
-  $db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-  $message = "";
-
-  $username = $_POST['username'];
-
-  // Apply SHA-256 hashing to the password input for basic security
-  $password = hash('sha256', $_POST['password']);
-
-  // Verify the username first
-  $sql = "SELECT * FROM users WHERE username = '$username'";
-  $res = mysqli_query($db_conn, $sql);
-
-  // Check if the password matches
-  if (mysqli_num_rows($res) == 1) {
-    $user = mysqli_fetch_array($res);
-
-    if ($user['password'] === $password) {
-      $message = "<p style='color: green;'>Login Successful!</p>";
-    } else {
-      $message = "<p style='color: red;'>Login Failed. Incorrect password.</p>";
-    }
-  } else {
-    $message = "<p style='color: red;'>Login Failed. Username not found.</p>";
-  }
-?>
-
-...
-```
+<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// login_proc_4.php</span>
+</data><data class="code-line" value="2">
+</data><data class="code-line" value="3"><span style="color:#D73A49">&lt;?</span><span style="color:#005CC5">php</span>
+</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_SERVER'</span><span style="color:#24292E">, </span><span style="color:#032F62">'localhost'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_USERNAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="6" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_PASSWORD'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="7" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_NAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'dev'</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="8" style="--indent: 2ch;"><span style="color:#24292E">  $db_conn </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_connect</span><span style="color:#24292E">(</span><span style="color:#005CC5">DB_SERVER</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_USERNAME</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_PASSWORD</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_NAME</span><span style="color:#24292E">);</span>
+</data><data class="code-line" value="9">
+</data><data class="code-line" value="10" style="--indent: 2ch;"><span style="color:#24292E">  $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> ""</span><span style="color:#24292E">;</span>
+</data><data class="code-line" value="11">
+</data><data class="code-line" value="12" style="--indent: 2ch;"><span style="color:#24292E">  $username </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'username'</span><span style="color:#24292E">];</span>
+</data><data class="code-line" value="13">
+</data><data class="code-line" value="14" style="--indent: 2ch;"><span style="color:#6A737D">  // Apply SHA-256 hashing to the password input for basic security</span>
+</data><data class="code-line" value="15" style="--indent: 2ch;"><span style="color:#24292E">  $password </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> hash</span><span style="color:#24292E">(</span><span style="color:#032F62">'sha256'</span><span style="color:#24292E">, $_POST[</span><span style="color:#032F62">'password'</span><span style="color:#24292E">]);</span>
+</data><data class="code-line" value="16">
+</data><data class="code-line" value="17" style="--indent: 2ch;"><span style="color:#6A737D">  // Verify the username first</span>
+</data><data class="code-line" value="18" style="--indent: 2ch;"><span style="color:#24292E">  $sql </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#D73A49">SELECT</span><span style="color:#D73A49"> *</span><span style="color:#D73A49"> FROM</span><span style="color:#24292E"> users </span><span style="color:#D73A49">WHERE</span><span style="color:#24292E"> username </span><span style="color:#D73A49">=</span><span style="color:#032F62"> '</span><span style="color:#24292E">$username</span><span style="color:#032F62">'"</span><span style="color:#24292E">;</span>
+</data><data class="code-line" value="19" style="--indent: 2ch;"><span style="color:#24292E">  $res </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_query</span><span style="color:#24292E">($db_conn, $sql);</span>
+</data><data class="code-line" value="20">
+</data><data class="code-line" value="21" style="--indent: 2ch;"><span style="color:#6A737D">  // Check if the password matches</span>
+</data><data class="code-line" value="22" style="--indent: 2ch;"><span style="color:#D73A49">  if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">mysqli_num_rows</span><span style="color:#24292E">($res) </span><span style="color:#D73A49">==</span><span style="color:#005CC5"> 1</span><span style="color:#24292E">) {</span>
+</data><data class="code-line" value="23" style="--indent: 4ch;"><span style="color:#24292E">    $user </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_fetch_array</span><span style="color:#24292E">($res);</span>
+</data><data class="code-line" value="24">
+</data><data class="code-line" value="25" style="--indent: 4ch;"><span style="color:#D73A49">    if</span><span style="color:#24292E"> ($user[</span><span style="color:#032F62">'password'</span><span style="color:#24292E">] </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $password) {</span>
+</data><data class="code-line" value="26" style="--indent: 6ch;"><span style="color:#24292E">      $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: green;'</span><span style="color:#24292E">&gt;Login Successful!&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="27" style="--indent: 4ch;"><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
+</data><data class="code-line" value="28" style="--indent: 6ch;"><span style="color:#24292E">      $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: red;'</span><span style="color:#24292E">&gt;Login Failed. Incorrect Password.&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="29" style="--indent: 4ch;"><span style="color:#24292E">    }</span>
+</data><data class="code-line" value="30" style="--indent: 2ch;"><span style="color:#24292E">  } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
+</data><data class="code-line" value="31" style="--indent: 4ch;"><span style="color:#24292E">    $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: red;'</span><span style="color:#24292E">&gt;Login Failed. Username not Found.&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="32" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
+</data><data class="code-line" value="33"><span style="color:#D73A49">?&gt;</span>
+</data><data class="code-line" value="34">
+</data><data class="code-line" value="35"><span style="color:#D73A49">...</span>
+</data></code></pre>
