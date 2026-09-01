@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: penetration-testing-week-2
+permalink: /posts/penetration-testing-week-2.html
+
+# Summary #
+title: Penetration Testing | Week 2
+date: 2025/04/14
+excerpt: 데이터베이스 연동 및 기본 SQL 쿼리 구조
+categories: 모의 해킹
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page.path | markdownify }}
