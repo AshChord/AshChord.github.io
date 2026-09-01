@@ -63,13 +63,22 @@ if (isset($_POST['Submit'])) {
 
 **데이터베이스**란 웹 애플리케이션에서 필요한 데이터를 저장 및 관리하는 시스템을 말한다. 흔히 사용하는 엑셀 프로그램과 구조적으로 유사한 점이 있는데, 데이터베이스의 주요 개념은 엑셀의 구성 요소와 다음과 같이 비교할 수 있다.
 
-| 데이터베이스 주요 개념 {: style="width: 25%"} | 엑셀 구성 요소 {: style="width: 30%"} | 설명 {: style="width: 45%"} |
+| 데이터베이스 주요 개념 | 엑셀 구성 요소 | 설명 |
 | --- | --- | --- |
 | 데이터베이스(Broadly) | 엑셀 프로그램 전체 | 데이터를 저장·관리하는 전체 시스템 혹은 기술 영역 |
 | 데이터베이스(Narrowly) | 엑셀 파일 | 데이터가 저장되는 구조적 공간 |
 | 테이블 | 엑셀 시트 | 행과 열로 이루어진 데이터 집합 |
 | 레코드 | 엑셀 시트의 한 행(Row) | 하나의 데이터 항목(한 사람, 한 거래 등) |
 | 필드 | 엑셀 시트의 한 열(Column) | 데이터의 속성(이름, 나이, 이메일 등) |
+{:.database-table}
+
+<style>
+.database-table th {
+  &:nth-child(1) { width: 25%; }
+  &:nth-child(2) { width: 30%; }
+  &:nth-child(3) { width: 45%; }
+}
+</style>
 
 ---
 
@@ -197,7 +206,7 @@ PHP 코드에서 위 테이블의 데이터를 사용하려면 어떻게 해야 
   }
 
   // Execute a SQL Query to Retrieve Data
-  $sql = "select * from score"; 
+  $sql = "SELECT * FROM score"; 
   $result = mysqli_query($db_conn, $sql);
   $row = mysqli_fetch_array($result);
   var_dump($row);
