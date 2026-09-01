@@ -614,8 +614,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 
 이때 `users` 테이블을 확인해 보면 다음과 같이 레코드가 추가되었음을 알 수 있다.
 
-![users 테이블](/posts/penetration-testing-week-2/assets/8.webp)
-{: style="padding: 0 12.5%; background-color: white"}
+![users 테이블](/posts/penetration-testing-week-2/assets/8.webp){: style="padding: 0 12.5%; background-color: white"}
 
 `test` 사용자가 데이터베이스에 등록된 이후 다시 `test`라는 `username`으로 중복 회원 가입 시도를 하면 다음과 같은 알림 창이 표시된다.
 

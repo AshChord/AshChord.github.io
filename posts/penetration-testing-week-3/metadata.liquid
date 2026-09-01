@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: penetration-testing-week-3
+permalink: /posts/penetration-testing-week-3.html
+
+# Summary #
+title: Penetration Testing | Week 3
+date: 2025/04/22
+excerpt: 로그인 처리 및 상태 관리 방식
+categories: 모의 해킹
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page.path | markdownify }}
