@@ -1,13 +1,4 @@
----
-layout: article
-permalink: /posts/Penetration Testing | Week 4
-title: Penetration Testing | Week 4
-date: 2025/04/26
-excerpt: 웹 프록시와 Burp Suite
-categories: 모의 해킹
----
-
-{{ site.pages.first.content | split: page.path }}
+# Penetration Testing | Week 4
 
 ## 강의 노트
 
@@ -17,7 +8,7 @@ categories: 모의 해킹
 
 사용자가 특정 웹 페이지를 요청하면, 해당 요청은 먼저 프록시 서버로 전달된다. 프록시 서버는 이 요청을 대신 처리하여 웹 서버와 통신하며, 응답을 받으면 이를 사용자에게 반환한다.
 
-![웹 프록시](/posts/Penetration%20Testing%20%7C%20Week%204/1.webp)
+![웹 프록시](/posts/penetration-testing-week-4/assets/1.webp)
 
 ---
 
@@ -29,17 +20,17 @@ categories: 모의 해킹
 
 [https://portswigger.net/burp/communitydownload](https://portswigger.net/burp/communitydownload)
 
-![Burp Suite](/posts/Penetration%20Testing%20%7C%20Week%204/2.webp)
+![Burp Suite](/posts/penetration-testing-week-4/assets/2.webp)
 
 Burp Suite에서 프록시 기능을 사용하려면 <strong>프록시 리스너(Proxy Listener)</strong>가 설정되어 있어야 한다. **프록시 리스너**란 클라이언트의 트래픽을 수신하기 위하여 열어두는 입구와 같은 개념이다. 설정에서 Proxy Listener 탭을 보면 기본적으로 다음과 같이 지정되어 있다.
 
-![프록시 리스너](/posts/Penetration%20Testing%20%7C%20Week%204/3.webp)
+![프록시 리스너](/posts/penetration-testing-week-4/assets/3.webp)
 
 `127.0.0.1`(로컬)의 8080 포트에 리스너가 설정되어 있으므로, 클라이언트의 트래픽이 `127.0.0.1:8080`으로 도착하면 프록시 툴이 이를 관리할 수 있다.
 
 프록시 리스너를 추가할 경우 다음과 같은 바인딩 옵션에 유의해야 한다.
 
-![프록시 리스너 바인딩 옵션](/posts/Penetration%20Testing%20%7C%20Week%204/4.webp)
+![프록시 리스너 바인딩 옵션](/posts/penetration-testing-week-4/assets/4.webp)
 
 - **Loopback Only**  
 : 리스너를 `127.0.0.1`(로컬)에 바인딩한다. 같은 컴퓨터 내부의 트래픽만 받을 수 있다.
@@ -51,15 +42,15 @@ Burp Suite에서 프록시 기능을 사용하려면 <strong>프록시 리스너
 프록시 리스너를 설정했다면, 웹 브라우저에서 프록시 설정을 통해 프록시 서버를 지정해 주어야 한다.  
 Chrome에서 [설정] - [시스템] - [컴퓨터 프록시 설정 열기]를 선택하여 다음과 같이 설정한다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%204/5.webp" alt="프록시 설정" style="padding: 0 20%; background-color: white">
+![프록시 설정](/posts/penetration-testing-week-4/assets/5.webp){:style="padding: 0 20%; background-color: white"}
 
 이후 브라우저에서 웹 사이트에 접속하면, 다음과 같이 Burp Suite에서 트래픽을 확인할 수 있다.
 
-![프록시 설정 확인](/posts/Penetration%20Testing%20%7C%20Week%204/6.webp)
+![프록시 설정 확인](/posts/penetration-testing-week-4/assets/6.webp)
 
 만약 Burp Suite를 켜지 않은 채로 웹 페이지를 요청하면, `ERR_PROXY_CONNECTION_FAILED` 오류가 발생한다.
 
-![프록시 연결 오류](/posts/Penetration%20Testing%20%7C%20Week%204/7.webp)
+![프록시 연결 오류](/posts/penetration-testing-week-4/assets/7.webp)
 
 <br>
 <br>
@@ -69,7 +60,7 @@ Chrome에서 [설정] - [시스템] - [컴퓨터 프록시 설정 열기]를 선
 
 ### Burp CTF
 
-![Burp CTF](/posts/Penetration%20Testing%20%7C%20Week%204/8.webp)
+![Burp CTF](/posts/penetration-testing-week-4/assets/8.webp)
 
 Burp Suite 사용에 익숙해지기 위해 SegFault 실습 사이트의 Burp CTF를 해결해 보자.
 
@@ -77,54 +68,60 @@ Burp Suite 사용에 익숙해지기 위해 SegFault 실습 사이트의 Burp CT
 
 #### Burp Suite Prac 1
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%204/9.webp" alt="Burp Suite Prac 1" style="padding: 0 25%; background-color: white">
+![Burp Suite Prac 1](/posts/penetration-testing-week-4/assets/9.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
 
-![Burp Suite Prac 1](/posts/Penetration%20Testing%20%7C%20Week%204/10.webp)
+![Burp Suite Prac 1](/posts/penetration-testing-week-4/assets/10.webp)
 
 표면상으로는 아무런 데이터가 없는 듯 보였지만 확인 차 소스 코드를 살펴본 결과 다음과 같았다.
 
-![Burp Suite Prac 1](/posts/Penetration%20Testing%20%7C%20Week%204/11.webp)
+![Burp Suite Prac 1](/posts/penetration-testing-week-4/assets/11.webp)
 
 HTTP 요청의 헤더를 조작해야 하므로 Burp Suite의 Intercept 기능을 활용해 데이터 패킷을 가로채고 내용을 확인하였다.
 
-![Burp Suite Prac 1](/posts/Penetration%20Testing%20%7C%20Week%204/12.webp)
+![Burp Suite Prac 1](/posts/penetration-testing-week-4/assets/12.webp)
 
 `User-Agent` 필드의 값을 `segfaultDevice`로 수정 후 요청을 서버로 전달(Forward)하였다.
 
-![Burp Suite Prac 1](/posts/Penetration%20Testing%20%7C%20Week%204/13.webp)
+![Burp Suite Prac 1](/posts/penetration-testing-week-4/assets/13.webp)
 
 이후 다음과 같은 메시지가 표시되며, 소스 코드를 확인하여 플래그를 획득하였다.
 
-![Burp Suite Prac 1](/posts/Penetration%20Testing%20%7C%20Week%204/14.webp)
-![Burp Suite Prac 1](/posts/Penetration%20Testing%20%7C%20Week%204/15.webp)
+![Burp Suite Prac 1](/posts/penetration-testing-week-4/assets/14.webp)
+![Burp Suite Prac 1](/posts/penetration-testing-week-4/assets/15.webp)
 
 <p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">ModRequest</span>}</span></p>
+
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">ModRequest</span>}</span>
+{:style="text-align: center;"}
+
+Flag: **segfault{_ModRequest_{:style="color: green; font-style: normal; filter: blur(5px); overflow-wrap: anywhere;"}\}**{:style="color: green; font-weight: normal;"}
+{:style="text-align: center;"}
 
 <br>
 
 #### Burp Suite Prac 2
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%204/16.webp" alt="Burp Suite Prac 2" style="padding: 0 25%; background-color: white">
+<img src="/posts/penetration-testing-week-4/assets/16.webp" alt="Burp Suite Prac 2" style="padding: 0 25%; background-color: white">
 
 링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
 
-![Burp Suite Prac 2](/posts/Penetration%20Testing%20%7C%20Week%204/17.webp)
-![Burp Suite Prac 2](/posts/Penetration%20Testing%20%7C%20Week%204/18.webp)
+![Burp Suite Prac 2](/posts/penetration-testing-week-4/assets/17.webp)
+![Burp Suite Prac 2](/posts/penetration-testing-week-4/assets/18.webp)
 
 소스 코드에는 일부 내용이 작성되어 있었으나, 인코딩 오류인지 한글이 정상적으로 표시되지 않았다. LOOK INSIDE 메시지를 바탕으로 Burp Suite 내부에서 서버의 응답 내용을 확인해 보았다.
 
-![Burp Suite Prac 2](/posts/Penetration%20Testing%20%7C%20Week%204/19.webp)
+![Burp Suite Prac 2](/posts/penetration-testing-week-4/assets/19.webp)
 
 그 결과, `a.html`과 `b.html` 파일의 데이터를 확인해 보라는 메시지가 소스 코드에 숨겨져 있음을 확인할 수 있었다. 현재 웹 페이지의 경로가 `ctf.segfaulthub.com:1019/2_burp/` 형태였으므로, 해당 경로 뒤에 각각 `a.html`과 `b.html`을 추가하여 접근하였다.
 
-![Burp Suite Prac 2](/posts/Penetration%20Testing%20%7C%20Week%204/20.webp)
-![Burp Suite Prac 2](/posts/Penetration%20Testing%20%7C%20Week%204/21.webp)
+![Burp Suite Prac 2](/posts/penetration-testing-week-4/assets/20.webp)
+![Burp Suite Prac 2](/posts/penetration-testing-week-4/assets/21.webp)
 
 각 링크에 접속한 결과, 동일해 보이는 매우 긴 텍스트가 출력되었다. 두 파일 간의 차이를 보다 명확히 확인하기 위해 Burp Suite의 Comparer 기능을 활용하여 비교를 수행하였다.
 
-![Burp Suite Prac 2](/posts/Penetration%20Testing%20%7C%20Week%204/22.webp)
+![Burp Suite Prac 2](/posts/penetration-testing-week-4/assets/22.webp)
 
 비교 결과, `b.html` 파일에만 segfault와 {<span style="filter: blur(5px); overflow-wrap:anywhere;">lookEasy</span>}라는 텍스트가 추가되어 있음을 확인할 수 있었다.
 
@@ -134,27 +131,27 @@ HTTP 요청의 헤더를 조작해야 하므로 Burp Suite의 Intercept 기능�
 
 #### Burp Suite Prac 3
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%204/23.webp" alt="Burp Suite Prac 3" style="padding: 0 25%; background-color: white">
+<img src="/posts/penetration-testing-week-4/assets/23.webp" alt="Burp Suite Prac 3" style="padding: 0 25%; background-color: white">
 
 링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
 
-![Burp Suite Prac 3](/posts/Penetration%20Testing%20%7C%20Week%204/24.webp)
+![Burp Suite Prac 3](/posts/penetration-testing-week-4/assets/24.webp)
 
 소스 코드에도 별다른 내용은 없었으므로, 바로 Burp Suite에서 패킷을 분석해 보았다.
 
-![Burp Suite Prac 3](/posts/Penetration%20Testing%20%7C%20Week%204/25.webp)
+![Burp Suite Prac 3](/posts/penetration-testing-week-4/assets/25.webp)
 
 응답의 `Set-Cookie` 헤더에 `answer=1` 값이 설정되어 있다는 점이 눈에 띄었다. 그 외에 별다른 특이사항은 발견할 수 없어 우선 Press F5 메시지를 바탕으로 페이지를 새로고침한 후 다시 패킷을 확인하였다.
 
-![Burp Suite Prac 3](/posts/Penetration%20Testing%20%7C%20Week%204/26.webp)
+![Burp Suite Prac 3](/posts/penetration-testing-week-4/assets/26.webp)
 
 새로고침 이후 요청에 `Cookie` 헤더가 생성되었으며 마찬가지로 `answer=1` 값이 설정되어 있음을 확인할 수 있었다. 1 ~ 20이라는 힌트로 미루어 보아 `answer`에 `1`부터 `20`까지의 값을 넣어서 전송하면 플래그를 얻을 수 있을 것으로 예측되었고, 해당 패킷을 Repeater로 전달하였다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%204/27.webp" alt="Burp Suite Prac 3" style="padding: 0 25%; background-color: #262627">
+<img src="/posts/penetration-testing-week-4/assets/27.webp" alt="Burp Suite Prac 3" style="padding: 0 25%; background-color: #262627">
 
 Repeater에서 `answer` 값을 변경하면서 반복적으로 요청을 전송하였더니, `answer=13`일 때 플래그가 출력되는 것을 확인할 수 있었다.
 
-![Burp Suite Prac 3](/posts/Penetration%20Testing%20%7C%20Week%204/28.webp)
+![Burp Suite Prac 3](/posts/penetration-testing-week-4/assets/28.webp)
 
 <p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">RePeatAgain</span>}</span></p>
 
@@ -162,30 +159,30 @@ Repeater에서 `answer` 값을 변경하면서 반복적으로 요청을 전송�
 
 #### Burp Suite Prac 4
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%204/29.webp" alt="Burp Suite Prac 4" style="padding: 0 25%; background-color: white">
+<img src="/posts/penetration-testing-week-4/assets/29.webp" alt="Burp Suite Prac 4" style="padding: 0 25%; background-color: white">
 
 링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
 
-![Burp Suite Prac 4](/posts/Penetration%20Testing%20%7C%20Week%204/30.webp)
+![Burp Suite Prac 4](/posts/penetration-testing-week-4/assets/30.webp)
 
 마찬가지로 소스 코드에는 별다른 내용이 없어 바로 패킷 분석을 진행하였다.
 
-![Burp Suite Prac 4](/posts/Penetration%20Testing%20%7C%20Week%204/31.webp)
+![Burp Suite Prac 4](/posts/penetration-testing-week-4/assets/31.webp)
 
 요청을 자세히 살펴보니 `Cookie` 헤더에 `level=dXNlcg%3D%3D`이라는 값이 존재함을 알 수 있었다.  
 인코딩된 텍스트라고 생각되어 Decoder 탭에서 디코딩을 진행하였다.
 
-![Burp Suite Prac 4](/posts/Penetration%20Testing%20%7C%20Week%204/32.webp)
+![Burp Suite Prac 4](/posts/penetration-testing-week-4/assets/32.webp)
 
 몇 차례 시도한 끝에 URL - base64 디코딩을 통해 `user`라는 텍스트임을 확인하였다. You are Not Admin 메시지를 고려하여 `user`를 `admin`으로 수정하고, base64 - URL 순서로 인코딩한 뒤 요청을 전송해 보았다.
 
-![Burp Suite Prac 4](/posts/Penetration%20Testing%20%7C%20Week%204/33.webp)
-![Burp Suite Prac 4](/posts/Penetration%20Testing%20%7C%20Week%204/34.webp)
+![Burp Suite Prac 4](/posts/penetration-testing-week-4/assets/33.webp)
+![Burp Suite Prac 4](/posts/penetration-testing-week-4/assets/34.webp)
 
 `WXpKV2JscHRSakZpU0ZJM1VrZFdhbUl5VW14VmJWWjNXbGRHTUdaUlBUMD0=`라는 텍스트가 출력되었다.  
 마찬가지로 디코딩을 진행해 보았다.
 
-![Burp Suite Prac 4](/posts/Penetration%20Testing%20%7C%20Week%204/35.webp)
+![Burp Suite Prac 4](/posts/penetration-testing-week-4/assets/35.webp)
 
 base64 디코딩을 3번 반복하여 플래그를 획득할 수 있었다.
 
@@ -215,4 +212,4 @@ board/
 3주 차까지 학습한 내용을 바탕으로 각 기능을 구현하였다.  
 각 파일의 소스 코드를 모두 본문에 포함할 경우 문서의 길이가 지나치게 길어지므로, 이를 압축하여 zip 파일 형태로 첨부한다.
 
-<a href="/posts/Penetration%20Testing%20%7C%20Week%204/board.zip" download>board.zip</a>
+[board.zip](/posts/penetration-testing-week-4/assets/board.zip){:download}

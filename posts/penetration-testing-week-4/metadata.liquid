@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: penetration-testing-week-4
+permalink: /posts/penetration-testing-week-4.html
+
+# Summary #
+title: Penetration Testing | Week 4
+date: 2025/04/26
+excerpt: 웹 프록시와 Burp Suite
+categories: 모의 해킹
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page.path | markdownify }}
