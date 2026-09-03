@@ -93,10 +93,7 @@ HTTP 요청의 헤더를 조작해야 하므로 Burp Suite의 Intercept 기능�
 
 <p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">ModRequest</span>}</span></p>
 
-Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">ModRequest</span>}</span>
-{:style="text-align: center;"}
-
-Flag: **segfault{_ModRequest_{:style="color: green; font-style: normal; filter: blur(5px); overflow-wrap: anywhere;"}\}**{:style="color: green; font-weight: normal;"}
+Flag: <span>segfault{<span>ModRequest</span>{:style="filter: blur(5px); overflow-wrap:anywhere;"}}</span>{:style="color: green"}
 {:style="text-align: center;"}
 
 <br>
