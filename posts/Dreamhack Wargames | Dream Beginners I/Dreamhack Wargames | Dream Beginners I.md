@@ -24,7 +24,8 @@ categories: Dreamhack, 워게임
 
 ![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/2.webp)
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">21008c3ae798aac87cc4939917b855b54b5a5799</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">21008c3ae798aac87cc4939917b855b54b5a5799</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -61,7 +62,8 @@ print(flag)
 
 ![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/5.webp)
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">be046b7522aa2e28f276e0c910521f23a0587005a8377370a11e5e4dc15fb2ab</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">be046b7522aa2e28f276e0c910521f23a0587005a8377370a11e5e4dc15fb2ab</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -140,4 +142,5 @@ Flask를 사용할 때는 먼저 `Flask` 모듈을 임포트하고, `Flask` 객�
 
 성공적으로 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">671ce26c70829e716fae26c7c71a33823feb479f2562891f64605bf68f60ae54</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">671ce26c70829e716fae26c7c71a33823feb479f2562891f64605bf68f60ae54</span>}</span>
+{:style="text-align: center;"}

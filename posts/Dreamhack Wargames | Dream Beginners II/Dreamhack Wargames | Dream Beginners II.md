@@ -37,7 +37,8 @@ categories: Dreamhack, 워게임
 
 ![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/4.webp)
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">d6398f06b35117877a855ade8d2015fc3b142c3ca6686ce3198e372b9ef8a644</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">d6398f06b35117877a855ade8d2015fc3b142c3ca6686ce3198e372b9ef8a644</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -71,7 +72,8 @@ SSH를 통해 서버에 접속해야 하므로, 터미널에 `ssh chall@[host] -
 
 성공적으로 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">h3110_6e9inn3rs!</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">h3110_6e9inn3rs!</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -115,7 +117,8 @@ Docker를 사용하기 위해, 첨부 파일을 다운로드한 뒤 폴더 전�
 
 성공적으로 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">docker_exercise</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">docker_exercise</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -198,7 +201,8 @@ dive가 실행되면 다음과 같은 화면이 나타난다.
 
 화면에 플래그가 모두 표시되지 않을 경우, `Ctrl + B` 단축키를 사용하여 파일 속성을 숨기면 플래그의 전체 내용을 확인할 수 있다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">b06cb27a502a831822f927562258c6f69b5996a9916206cdb8755cc90ebf3b9f</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">b06cb27a502a831822f927562258c6f69b5996a9916206cdb8755cc90ebf3b9f</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -246,7 +250,8 @@ dive가 실행되면 다음과 같은 화면이 나타난다.
 
 성공적으로 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">e64a267ab73ae3cea7ff1255b5f08f3e5761defbfa6b99f71cbda74b7a717db3</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">e64a267ab73ae3cea7ff1255b5f08f3e5761defbfa6b99f71cbda74b7a717db3</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -367,7 +372,8 @@ else if (preg_match("/flag/i", $cmd)) {
 
 성공적으로 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">ad866c64dabaf30136e22d3de2980d24c4da617b9d706f81d10a1bc97d0ab6f6</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">ad866c64dabaf30136e22d3de2980d24c4da617b9d706f81d10a1bc97d0ab6f6</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -396,4 +402,5 @@ Dreamhack Tools의 Cyberchef를 활용하면 여러 종류의 인코딩/디코�
 
 올바른 순서로 복호화 및 디코딩을 진행하여 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">cyberchef-tools-encoderwwowowowo!!!</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">cyberchef-tools-encoderwwowowowo!!!</span>}</span>
+{:style="text-align: center;"}

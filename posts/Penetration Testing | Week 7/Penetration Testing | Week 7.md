@@ -195,7 +195,8 @@ CTF를 해결하며 Error-Based SQL Injection과 Blind SQL Injection을 복습�
 
 플래그를 획득하였다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">Basic_Basic_ErrorSQLi</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">Basic_Basic_ErrorSQLi</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -233,7 +234,8 @@ CTF를 해결하며 Error-Based SQL Injection과 Blind SQL Injection을 복습�
 
 총 8개의 문자열이 출력되었고, 각 문자열을 이어 붙여 플래그를 획득하였다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">1you_must_concat_this_string_goodjob</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">1you_must_concat_this_string_goodjob</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -256,7 +258,8 @@ CTF를 해결하며 Error-Based SQL Injection과 Blind SQL Injection을 복습�
 
 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">manyData_youFind</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">manyData_youFind</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -329,4 +332,5 @@ Blind SQL Injection 기법의 핵심은 페이로드에 삽입한 조건의 참/
 
 데이터 추출 과정을 거쳐 최종적으로 플래그를 획득하였다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">Blind_SQLi_EASY</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">Blind_SQLi_EASY</span>}</span>
+{:style="text-align: center;"}

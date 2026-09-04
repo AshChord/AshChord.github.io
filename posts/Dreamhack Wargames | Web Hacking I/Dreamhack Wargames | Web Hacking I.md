@@ -37,7 +37,8 @@ categories: Dreamhack, 워게임
 
 해당 커맨드를 입력한 뒤 검색 패널에서 `DH` 문자열을 검색하면, `main.scss` 파일에 포함된 플래그가 출력된다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">2ed07940b6fd9b0731ef698a5f0c065be9398f7fa00f03ed9da586c3ed1d54d5</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">2ed07940b6fd9b0731ef698a5f0c065be9398f7fa00f03ed9da586c3ed1d54d5</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -83,7 +84,8 @@ if (counter <= 10000 && counter % 100 == 0) {
 
 그 결과 화면에 플래그가 정상적으로 렌더링되는 것을 확인할 수 있었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">I_lik3_pumpk1n_pi3</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">I_lik3_pumpk1n_pi3</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -170,7 +172,8 @@ for (var i = 0; i < 36; i++) {
 
 성공적으로 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">cfd4a77a013ea616d3d5cc0ddf87c1ea</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">cfd4a77a013ea616d3d5cc0ddf87c1ea</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -254,7 +257,8 @@ for (var i = 0; i < 100; i++) {
 
 스크립트를 실행한 결과 정답 생년월일은 `960229`임을 확인할 수 있었으며, `_0x9a220()` 함수가 `true`를 반환함과 동시에 플래그 값이 포함된 이미지가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">BruteF0rce_th3_secur3_mail</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">BruteF0rce_th3_secur3_mail</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -299,7 +303,8 @@ for (var i = 0; i < 100; i++) {
 
 쿠키 값을 수정한 뒤 페이지를 새로고침하면 플래그가 출력된다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">7952074b69ee388ab45432737f9b0c56</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">7952074b69ee388ab45432737f9b0c56</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -350,7 +355,8 @@ admin 계정으로 로그인하기 위한 단서를 찾기 위해 첨부 파일�
 
 이후 메인 페이지에 접속하면 플래그가 출력된다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">8f3d86d1134c26fedf7c4c3ecd563aae3da98d5c</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">8f3d86d1134c26fedf7c4c3ecd563aae3da98d5c</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -405,7 +411,8 @@ XSS 공격을 통해 쿠키를 탈취하기 위해 `param` 파라미터에 다�
 
 해당 스크립트를 입력한 후 `/memo` 엔드포인트에서 플래그가 출력되는 것을 확인하였다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">2c01577e9542ec24d68ba0ffb846508e</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">2c01577e9542ec24d68ba0ffb846508e</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -459,4 +466,5 @@ xss-2에서는 `/vuln` 엔드포인트가 단순히 `vuln.html`을 렌더링한�
 
 `/memo`로 이동하면 플래그가 출력된다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">3c01577e9542ec24d68ba0ffb846508f</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">3c01577e9542ec24d68ba0ffb846508f</span>}</span>
+{:style="text-align: center;"}

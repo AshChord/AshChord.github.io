@@ -110,7 +110,8 @@ SQL Injection뿐만 아니라 지금까지 배운 내용을 종합적으로 활�
 
 Burp Suite의 Intercept 기능을 활용해 변조한 요청을 전송한 결과, 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">Cookie_Honey</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">Cookie_Honey</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -140,7 +141,8 @@ Burp Suite의 Intercept 기능을 활용해 변조한 요청을 전송한 결과
 
 Fire 버튼을 클릭하면 플래그가 출력된다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">JumpBypass</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">JumpBypass</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -188,7 +190,8 @@ Fire 버튼을 클릭하면 플래그가 출력된다.
 
 변조한 응답을 브라우저로 전송하자 `login.js`에 의해 `index.php`로 리다이렉트되며 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">responseMod</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">responseMod</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -251,7 +254,8 @@ for i in range(10000):
     break
 ```
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">BruteForceGOGOGO</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">BruteForceGOGOGO</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -321,7 +325,8 @@ $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$passwor
 
 ![Login Bypass 1](/posts/Penetration%20Testing%20%7C%20Week%205/44.webp)
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">byPassWithSQLi</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">byPassWithSQLi</span>}</span>
+{:style="text-align: center;"}
 
 
 <br>
@@ -408,4 +413,5 @@ if (mysqli_num_rows($res) == 1) {
 
 ![Login Bypass 2](/posts/Penetration%20Testing%20%7C%20Week%205/54.webp)
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">FilterWhat?!</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">FilterWhat?!</span>}</span>
+{:style="text-align: center;"}

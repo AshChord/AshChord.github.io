@@ -165,7 +165,8 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 <img src="/posts/Penetration%20Testing%20%7C%20Week%2010/11.webp" alt="XSS 1" style="padding: 0 20%; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">StoredSavedXSS</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">StoredSavedXSS</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -202,7 +203,8 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 <img src="/posts/Penetration%20Testing%20%7C%20Week%2010/17.webp" alt="XSS 2" style="padding: 0 20%; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">refrefrefXSS</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">refrefrefXSS</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -241,7 +243,8 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 <img src="/posts/Penetration%20Testing%20%7C%20Week%2010/23.webp" alt="XSS 3" style="padding: 0 20%; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">myPageReflected</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">myPageReflected</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -267,7 +270,8 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 <img src="/posts/Penetration%20Testing%20%7C%20Week%2010/28.webp" alt="XSS 4" style="padding: 0 20%; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">blAckFiltering</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">blAckFiltering</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -291,7 +295,8 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 <img src="/posts/Penetration%20Testing%20%7C%20Week%2010/33.webp" alt="XSS 5" style="padding: 0 20%; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">ClientCheckNone</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">ClientCheckNone</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -344,4 +349,5 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 <img src="/posts/Penetration%20Testing%20%7C%20Week%2010/40.webp" alt="XSS 6" style="padding: 0 20%; background-color: white">
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">keyLogger</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">keyLogger</span>}</span>
+{:style="text-align: center;"}

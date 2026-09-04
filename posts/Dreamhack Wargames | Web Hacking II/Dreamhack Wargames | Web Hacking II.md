@@ -63,7 +63,8 @@ CSRF 공격을 통해 위조된 요청을 전송하기 위해, `param` 파라미
 
 해당 스크립트를 입력한 후 `/memo` 엔드포인트에서 플래그가 출력되는 것을 확인하였다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">11a230801ad0b80d52b996cbe203e83d</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">11a230801ad0b80d52b996cbe203e83d</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -115,7 +116,8 @@ CSRF 공격을 통해 위조된 요청을 전송하기 위해, `param` 파라미
 
 admin 계정으로 로그인에 성공하여 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">c57d0dc12bb9ff023faf9a0e2b49e470a77271ef</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">c57d0dc12bb9ff023faf9a0e2b49e470a77271ef</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -156,7 +158,8 @@ select * from users where userid="admin" -- " and userpassword="any"
 
 admin 계정으로 로그인에 성공하여 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">c1126c8d35d8deaa39c5dd6fc8855ed0</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">c1126c8d35d8deaa39c5dd6fc8855ed0</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -242,7 +245,8 @@ db.collection('user').findOne({
 
 해당 스크립트를 실행하면 플래그가 출력된다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">89e50fa6fafe2604e33c0ba05843d3df</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">89e50fa6fafe2604e33c0ba05843d3df</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -296,7 +300,8 @@ Command Injection을 통해 플래그를 획득하는 문제이므로, 우선 �
 
 Command Injection을 통해 `cat "flag.py"` 명령이 수행되어 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">pingpingppppppppping!!</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">pingpingppppppppping!!</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -343,7 +348,8 @@ PHP 파일이 정상적으로 업로드되는 것을 확인하였다. 이후 웹
 
 성공적으로 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">c29f44ea17b29d8b76001f32e8997bab</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">c29f44ea17b29d8b76001f32e8997bab</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -391,7 +397,8 @@ File Download 취약점이 존재한다고 하였으므로 이를 검증하기 �
 
 `flag.py`의 내용이 출력되어 플래그를 획득하였다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">uploading_webshell_in_python_program_is_my_dream</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">uploading_webshell_in_python_program_is_my_dream</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -472,4 +479,5 @@ for port in range(1500, 1800):
 
 성공적으로 플래그를 획득하였다.
 
-<p style="text-align: center;">Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">43dd2189056475a7f3bd11456a17ad71</span>}</span></p>
+Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">43dd2189056475a7f3bd11456a17ad71</span>}</span>
+{:style="text-align: center;"}

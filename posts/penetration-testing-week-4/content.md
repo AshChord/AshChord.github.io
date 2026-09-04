@@ -91,16 +91,14 @@ HTTP 요청의 헤더를 조작해야 하므로 Burp Suite의 Intercept 기능�
 ![Burp Suite Prac 1](/posts/penetration-testing-week-4/assets/14.webp)
 ![Burp Suite Prac 1](/posts/penetration-testing-week-4/assets/15.webp)
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">ModRequest</span>}</span></p>
-
-Flag: <span>segfault{<span>ModRequest</span>{:style="filter: blur(5px); overflow-wrap:anywhere;"}}</span>{:style="color: green"}
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">ModRequest</span>}</span>
 {:style="text-align: center;"}
 
 <br>
 
 #### Burp Suite Prac 2
 
-<img src="/posts/penetration-testing-week-4/assets/16.webp" alt="Burp Suite Prac 2" style="padding: 0 25%; background-color: white">
+![Burp Suite Prac 2](/posts/penetration-testing-week-4/assets/16.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
 
@@ -122,13 +120,14 @@ Flag: <span>segfault{<span>ModRequest</span>{:style="filter: blur(5px); overflow
 
 비교 결과, `b.html` 파일에만 segfault와 {<span style="filter: blur(5px); overflow-wrap:anywhere;">lookEasy</span>}라는 텍스트가 추가되어 있음을 확인할 수 있었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">lookEasy</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">lookEasy</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
 #### Burp Suite Prac 3
 
-<img src="/posts/penetration-testing-week-4/assets/23.webp" alt="Burp Suite Prac 3" style="padding: 0 25%; background-color: white">
+![Burp Suite Prac 3](/posts/penetration-testing-week-4/assets/23.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
 
@@ -144,19 +143,20 @@ Flag: <span>segfault{<span>ModRequest</span>{:style="filter: blur(5px); overflow
 
 새로고침 이후 요청에 `Cookie` 헤더가 생성되었으며 마찬가지로 `answer=1` 값이 설정되어 있음을 확인할 수 있었다. 1 ~ 20이라는 힌트로 미루어 보아 `answer`에 `1`부터 `20`까지의 값을 넣어서 전송하면 플래그를 얻을 수 있을 것으로 예측되었고, 해당 패킷을 Repeater로 전달하였다.
 
-<img src="/posts/penetration-testing-week-4/assets/27.webp" alt="Burp Suite Prac 3" style="padding: 0 25%; background-color: #262627">
+![Burp Suite Prac 3](/posts/penetration-testing-week-4/assets/27.webp){:style="padding: 0 25%; background-color: #262627"}
 
 Repeater에서 `answer` 값을 변경하면서 반복적으로 요청을 전송하였더니, `answer=13`일 때 플래그가 출력되는 것을 확인할 수 있었다.
 
 ![Burp Suite Prac 3](/posts/penetration-testing-week-4/assets/28.webp)
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">RePeatAgain</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">RePeatAgain</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
 #### Burp Suite Prac 4
 
-<img src="/posts/penetration-testing-week-4/assets/29.webp" alt="Burp Suite Prac 4" style="padding: 0 25%; background-color: white">
+![Burp Suite Prac 4](/posts/penetration-testing-week-4/assets/29.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
 
@@ -183,7 +183,8 @@ Repeater에서 `answer` 값을 변경하면서 반복적으로 요청을 전송�
 
 base64 디코딩을 3번 반복하여 플래그를 획득할 수 있었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">DecodeRepeat</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">DecodeRepeat</span>}</span>
+{:style="text-align: center;"}
 
 ---
 

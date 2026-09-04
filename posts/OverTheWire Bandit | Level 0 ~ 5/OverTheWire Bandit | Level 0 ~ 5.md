@@ -74,7 +74,8 @@ password: bandit0
 
 해당 비밀번호를 사용해 SSH 접속을 시도하면 성공적으로 `bandit1` 계정으로 로그인된다.
 
-<p style="text-align: center;">Password for Level 1: <span style="color: green; overflow-wrap: anywhere;">ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If</span></p>
+Password for Level 1: <span style="color: green; overflow-wrap: anywhere;">ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -143,7 +144,8 @@ password: bandit0
 
 해당 비밀번호를 사용해 `bandit2` 계정으로 로그인에 성공하였다.
 
-<p style="text-align: center;">Password for Level 2: <span style="color: green; overflow-wrap: anywhere;">263JGJPfgU6LtdEvgfWU1XP5yac29mFx</span></p>
+Password for Level 2: <span style="color: green; overflow-wrap: anywhere;">263JGJPfgU6LtdEvgfWU1XP5yac29mFx</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -189,7 +191,8 @@ password: bandit0
 
 해당 비밀번호를 사용해 `bandit3` 계정으로 로그인에 성공하였다.
 
-<p style="text-align: center;">Password for Level 3: <span style="color: green; overflow-wrap: anywhere;">MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx</span></p>
+Password for Level 3: <span style="color: green; overflow-wrap: anywhere;">MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -229,7 +232,8 @@ password: bandit0
 
 해당 비밀번호를 사용해 `bandit4` 계정으로 로그인에 성공하였다.
 
-<p style="text-align: center;">Password for Level 4: <span style="color: green; overflow-wrap: anywhere;">2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ</span></p>
+Password for Level 4: <span style="color: green; overflow-wrap: anywhere;">2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ</span>
+{:style="text-align: center;"}
 
 <br>
 <br>
@@ -273,4 +277,5 @@ password: bandit0
 
 해당 비밀번호를 사용해 `bandit5` 계정으로 로그인에 성공하였다.
 
-<p style="text-align: center;">Password for Level 5: <span style="color: green; overflow-wrap: anywhere;">4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw</span></p>
+Password for Level 5: <span style="color: green; overflow-wrap: anywhere;">4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw</span>
+{:style="text-align: center;"}

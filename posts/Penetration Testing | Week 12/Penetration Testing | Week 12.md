@@ -161,7 +161,8 @@ CTF를 해결하며 CSRF 공격을 실습해 보자.
 
 로그인에 성공하여 알림 창에 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">csrfEEASY?</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">csrfEEASY?</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -218,7 +219,8 @@ HTML 공식 문서를 통해 해결책을 찾을 수 있었다. `<iframe>` 태�
 
 로그인에 성공하여 알림 창에 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">postCSRFkkk</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">postCSRFkkk</span>}</span>
+{:style="text-align: center;"}
 
 <br>
 
@@ -279,4 +281,5 @@ GET Admin 1, 2와 마찬가지로 게시물 작성 페이지에서 XSS 취약점
 
 로그인에 성공하여 알림 창에 플래그가 출력되었다.
 
-<p style="text-align: center;">Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">csrfTokenByp4ss</span>}</span></p>
+Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">csrfTokenByp4ss</span>}</span>
+{:style="text-align: center;"}
