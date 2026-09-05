@@ -107,7 +107,7 @@ CTF를 해결하며 실제 웹 페이지와 유사한 환경에서 SQL Injection
 
 #### SQL Injection Point 1
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%208/2.webp" alt="SQL Injection Point 1" style="padding: 0 25%; background-color: white">
+![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/2.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
 
@@ -166,7 +166,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection Point 2
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%208/12.webp" alt="SQL Injection Point 2" style="padding: 0 25%; background-color: white">
+![SQL Injection Point 2](/posts/Penetration%20Testing%20%7C%20Week%208/12.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 SQL Injection Point 1과 동일한 회원제 게시판 애플리케이션으로 이동한다.
 
@@ -212,7 +212,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection Point 3
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%208/22.webp" alt="SQL Injection Point 3" style="padding: 0 25%; background-color: white">
+![SQL Injection Point 3](/posts/Penetration%20Testing%20%7C%20Week%208/22.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 마찬가지로 회원제 게시판 애플리케이션으로 이동한다.
 
@@ -298,7 +298,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection Point 4
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%208/27.webp" alt="SQL Injection Point 4" style="padding: 0 25%; background-color: white">
+![SQL Injection Point 4](/posts/Penetration%20Testing%20%7C%20Week%208/27.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 마찬가지로 회원제 게시판 애플리케이션으로 이동한다.
 

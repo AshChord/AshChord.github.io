@@ -56,7 +56,7 @@ XSS 공격이 성공적으로 수행되기 위해서는, 공격자가 삽입한 
 
 #### XSS 1
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%209/2.webp" alt="XSS 1" style="padding: 0 25%; background-color: white">
+![XSS 1](/posts/Penetration%20Testing%20%7C%20Week%209/2.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 SQL Injection Advanced CTF에서와 같은 회원제 게시판 애플리케이션으로 이동한다.
 
@@ -95,7 +95,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 
 #### XSS 2
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%209/11.webp" alt="XSS 2" style="padding: 0 25%; background-color: white">
+![XSS 2](/posts/Penetration%20Testing%20%7C%20Week%209/11.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속한 후, 우선 제목과 내용이 `<'">`인 게시물을 생성해 보았다.
 
@@ -165,7 +165,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 
 #### XSS 3
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%209/21.webp" alt="XSS 3" style="padding: 0 25%; background-color: white">
+![XSS 3](/posts/Penetration%20Testing%20%7C%20Week%209/21.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속한 후 제목과 내용이 `<'">`인 게시물을 생성하고 XSS 취약점을 탐색하였지만, 예상한 대로 XSS 1과 XSS 2에 존재했던 취약점은 찾을 수 없었다.
 
@@ -204,7 +204,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 
 #### XSS 4
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%209/26.webp" alt="XSS 4" style="padding: 0 25%; background-color: white">
+![XSS 4](/posts/Penetration%20Testing%20%7C%20Week%209/26.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하여 제목과 내용이 `<'">`인 게시물을 생성해 보았다.
 
@@ -237,7 +237,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 
 #### XSS 5
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%209/34.webp" alt="XSS 5" style="padding: 0 25%; background-color: white">
+![XSS 5](/posts/Penetration%20Testing%20%7C%20Week%209/34.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하여 제목과 내용이 `<'">`인 게시물을 생성해 보았지만 게시물과 관련된 내용이 출력되는 모든 위치에서 HTML 인코딩이 적용되어 있음을 확인하였다.
 
@@ -264,7 +264,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 
 #### XSS 6
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%209/40.webp" alt="XSS 6" style="padding: 0 25%; background-color: white">
+![XSS 6](/posts/Penetration%20Testing%20%7C%20Week%209/40.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하여 게시판 및 마이페이지를 면밀히 조사해 보았지만 XSS 취약점을 발견할 수 없었다.
 

@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: penetration-testing-week-5
+permalink: /posts/penetration-testing-week-5.html
+
+# Summary #
+title: Penetration Testing | Week 5
+date: 2025/05/06
+excerpt: SQL Injection의 개념과 인증 우회
+categories: 모의 해킹
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page.path | markdownify }}

@@ -189,7 +189,7 @@ CTF를 해결하며 XSS 취약점을 활용한 다양한 공격 기법들을 실
 
 #### Basic Script Prac
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2011/3.webp" alt="Basic Script Prac" style="padding: 0 25%; background-color: white;">
+![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/3.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크의 주소로 접속하면 회원제 게시판 애플리케이션으로 이동한다.
 
@@ -265,7 +265,7 @@ Burp Suite를 활용하여 해당 위치가 정확히 어떤 요소인지 확인
 
 ![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/10.webp)
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2011/11.webp" alt="Basic Script Prac" style="padding: 0 25%; background-color: white">
+![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/11.webp){:style="padding: 0 25%; background-color: white"}
 
 이벤트 핸들러에 악성 스크립트가 정상적으로 등록되며, RequestBin에서도 요청이 수신되는 것을 확인할 수 있다. 해당 요청의 URL을 복사하여 관리자 방문 Bot 페이지에 붙여 넣은 후 관리자가 해당 URL로 접근하도록 하였다.
 
@@ -273,7 +273,7 @@ Burp Suite를 활용하여 해당 위치가 정확히 어떤 요소인지 확인
 
 이후 RequestBin에서 관리자 정보가 포함된 요청을 수신하여 플래그를 획득하였다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2011/13.webp" alt="Basic Script Prac" style="padding: 0 20%; background-color: white">
+![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/13.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">BasicScriptSOEaasy</span>}</span>
 {:style="text-align: center;"}
@@ -282,7 +282,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### Steal Info
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2011/14.webp" alt="Steal Info" style="padding: 0 25%; background-color: white;">
+![Steal Info](/posts/Penetration%20Testing%20%7C%20Week%2011/14.webp){:style="padding: 0 25%; background-color: white;"}
 
 먼저 중요 정보가 존재한다는 `mypage.html`과 `secret.php`로 각각 접속해 보았다.
 
@@ -321,7 +321,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 이후 RequestBin에서 관리자 정보가 포함된 요청을 수신하여 플래그를 획득하였다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2011/20.webp" alt="Steal Info" style="padding: 0 20%; background-color: white;">
+![Steal Info](/posts/Penetration%20Testing%20%7C%20Week%2011/20.webp){:style="padding: 0 20%; background-color: white;"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">steaLInfo</span>}</span>
 {:style="text-align: center;"}
@@ -330,7 +330,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### Steal Info 2
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2011/21.webp" alt="Steal Info 2" style="padding: 0 25%; background-color: white;">
+![Steal Info 2](/posts/Penetration%20Testing%20%7C%20Week%2011/21.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크의 주소로 접속하여 Steal Info와 동일한 위치에 XSS 취약점이 존재한다는 사실을 파악하였다. 플래그의 위치는 마이페이지이기 때문에 마찬가지로 `<iframe>`을 활용해 페이로드를 작성하였다.
 
@@ -376,7 +376,7 @@ Steal Info와 달리 `Uncaught TypeError: Cannot read properties of undefined`�
 
 이후 RequestBin에서 관리자 정보가 포함된 요청을 수신하여 플래그를 획득하였다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2011/25.webp" alt="Steal Info 2" style="padding: 0 20%; background-color: white;">
+![Steal Info 2](/posts/Penetration%20Testing%20%7C%20Week%2011/25.webp){:style="padding: 0 20%; background-color: white;"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">GETITGETIT!</span>}</span>
 {:style="text-align: center;"}

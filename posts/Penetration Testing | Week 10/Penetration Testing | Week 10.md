@@ -126,7 +126,7 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 #### XSS 1
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2010/6.webp" alt="XSS 1" style="padding: 0 25%; background-color: white">
+![XSS 1](/posts/Penetration%20Testing%20%7C%20Week%2010/6.webp){:style="padding: 0 25%; background-color: white"}
 
 취약점 탐색 과정에서 게시판의 글쓰기 페이지(글 제목)에 XSS 취약점이 존재한다는 것을 확인하였다. 따라서 글쓰기 페이지로 이동 후 다음과 같이 악성 스크립트가 포함된 페이로드를 작성하였다.
 
@@ -163,7 +163,7 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 이후 RequestBin에서 요청이 정상적으로 수신되었고, 쿠키 정보에 플래그가 포함되어 출력되었다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2010/11.webp" alt="XSS 1" style="padding: 0 20%; background-color: white">
+![XSS 1](/posts/Penetration%20Testing%20%7C%20Week%2010/11.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">StoredSavedXSS</span>}</span>
 {:style="text-align: center;"}
@@ -172,7 +172,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### XSS 2
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2010/12.webp" alt="XSS 2" style="padding: 0 25%; background-color: white">
+![XSS 2](/posts/Penetration%20Testing%20%7C%20Week%2010/12.webp){:style="padding: 0 25%; background-color: white"}
 
 취약점 탐색 과정에서 게시판의 검색 창에 XSS 취약점이 존재한다는 것을 확인하였다. 따라서 검색 창에서 다음과 같이 악성 스크립트가 포함된 페이로드를 검색하였다.
 
@@ -201,7 +201,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 이후 RequestBin에서 요청이 정상적으로 수신되었고, 쿠키 정보에 플래그가 포함되어 출력되었다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2010/17.webp" alt="XSS 2" style="padding: 0 20%; background-color: white">
+![XSS 2](/posts/Penetration%20Testing%20%7C%20Week%2010/17.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">refrefrefXSS</span>}</span>
 {:style="text-align: center;"}
@@ -210,7 +210,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### XSS 3
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2010/18.webp" alt="XSS 3" style="padding: 0 25%; background-color: white">
+![XSS 3](/posts/Penetration%20Testing%20%7C%20Week%2010/18.webp){:style="padding: 0 25%; background-color: white"}
 
 취약점 탐색 과정에서 마이페이지에 XSS 취약점이 존재한다는 것을 확인하였다. 따라서 마이페이지로 이동하여 `user` 파라미터를 다음과 같이 악성 스크립트가 포함된 값으로 변경하였다.
 
@@ -241,7 +241,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 이후 RequestBin에서 요청이 정상적으로 수신되었고, 쿠키 정보에 플래그가 포함되어 출력되었다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2010/23.webp" alt="XSS 3" style="padding: 0 20%; background-color: white">
+![XSS 3](/posts/Penetration%20Testing%20%7C%20Week%2010/23.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">myPageReflected</span>}</span>
 {:style="text-align: center;"}
@@ -250,7 +250,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### XSS 4
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2010/24.webp" alt="XSS 4" style="padding: 0 25%; background-color: white">
+![XSS 4](/posts/Penetration%20Testing%20%7C%20Week%2010/24.webp){:style="padding: 0 25%; background-color: white"}
 
 취약점 탐색 과정에서 게시판의 글쓰기 페이지에 XSS 취약점이 존재한다는 것을 확인하였다. 따라서 글쓰기 페이지로 이동 후 다음과 같이 악성 스크립트가 포함된 페이로드를 작성하였다.
 
@@ -268,7 +268,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 이후 RequestBin에서 요청이 정상적으로 수신되었고, 쿠키 정보에 플래그가 포함되어 출력되었다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2010/28.webp" alt="XSS 4" style="padding: 0 20%; background-color: white">
+![XSS 4](/posts/Penetration%20Testing%20%7C%20Week%2010/28.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">blAckFiltering</span>}</span>
 {:style="text-align: center;"}
@@ -277,7 +277,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### XSS 5
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2010/29.webp" alt="XSS 5" style="padding: 0 25%; background-color: white">
+![XSS 5](/posts/Penetration%20Testing%20%7C%20Week%2010/29.webp){:style="padding: 0 25%; background-color: white"}
 
 취약점 탐색 과정에서 게시판의 글쓰기 페이지에 XSS 취약점이 존재한다는 것을 확인하였다. 다만 해당 페이지에 HTML 인코딩을 수행하는 JavaScript 코드가 있었으므로, 서버 응답을 변조함으로써 이를 제거한 후 다음과 같이 악성 스크립트가 포함된 페이로드를 작성하였다.
 
@@ -293,7 +293,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 이후 RequestBin에서 요청이 정상적으로 수신되었고, 쿠키 정보에 플래그가 포함되어 출력되었다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2010/33.webp" alt="XSS 5" style="padding: 0 20%; background-color: white">
+![XSS 5](/posts/Penetration%20Testing%20%7C%20Week%2010/33.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">ClientCheckNone</span>}</span>
 {:style="text-align: center;"}
@@ -302,7 +302,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### XSS 6
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2010/34.webp" alt="XSS 6" style="padding: 0 25%; background-color: white">
+![XSS 6](/posts/Penetration%20Testing%20%7C%20Week%2010/34.webp){:style="padding: 0 25%; background-color: white"}
 
 취약점 탐색 과정에서 로그인 페이지에 XSS 취약점이 존재한다는 것을 확인하였다. 따라서 로그인 페이지로 이동 후 다음과 같이 악성 스크립트가 포함된 페이로드를 입력하였다.
 
@@ -347,7 +347,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 이후 RequestBin에서 요청이 정상적으로 수신되었고, 쿠키 정보에 플래그가 포함되어 출력되었다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2010/40.webp" alt="XSS 6" style="padding: 0 20%; background-color: white">
+![XSS 6](/posts/Penetration%20Testing%20%7C%20Week%2010/40.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">keyLogger</span>}</span>
 {:style="text-align: center;"}

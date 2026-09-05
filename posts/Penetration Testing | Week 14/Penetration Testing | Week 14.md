@@ -102,7 +102,7 @@ categories: 모의 해킹
 
 `multipart/form-data`는 다양한 유형의 데이터를 여러 파트로 분리하여 동시에 전송할 수 있도록 설계된 인코딩 방식이다. 다음은 이러한 방식으로 데이터를 전송하는 실제 요청의 예시이다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2014/5.webp" alt="multipart/form-data" style="padding: 0 15%; background-color: #2b2b2b;">
+![multipart/form-data](/posts/Penetration%20Testing%20%7C%20Week%2014/5.webp){:style="padding: 0 15%; background-color: #2b2b2b;"}
 
 요청의 `Content-Type` 헤더에 `multipart/form-data`가 명시되며, 각 데이터 전송 파트를 구분하기 위한 고유의 바운더리 문자열이 함께 지정된다. 요청의 본문은 해당 바운더리를 기준으로 여러 파트로 구분되며, `Content-Disposition` 헤더를 포함하여 해당 데이터가 어떤 파라미터에 대응되는지를 나타낸다.
 
@@ -170,7 +170,7 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
 #### Web Shell 1
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2014/7.webp" alt="Web Shell 1" style="padding: 0 25%; background-color: white;">
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/7.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크의 주소로 접속하면 다음과 같은 회원제 게시판 애플리케이션으로 이동한다.
 
@@ -220,7 +220,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### Web Shell 2
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2014/14.webp" alt="Web Shell 2" style="padding: 0 25%; background-color: white;">
+![Web Shell 2](/posts/Penetration%20Testing%20%7C%20Week%2014/14.webp){:style="padding: 0 25%; background-color: white;"}
 
 ![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/15.webp)
 ![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2014/16.webp)

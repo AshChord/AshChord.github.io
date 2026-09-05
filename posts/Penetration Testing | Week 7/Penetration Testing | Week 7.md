@@ -165,7 +165,7 @@ CTF를 해결하며 Error-Based SQL Injection과 Blind SQL Injection을 복습�
 
 #### SQL Injection 3
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%207/14.webp" alt="SQL Injection 3" style="padding: 0 25%; background-color: white">
+![SQL Injection 3](/posts/Penetration%20Testing%20%7C%20Week%207/14.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 다음과 같은 로그인 페이지로 이동한다.
 
@@ -202,7 +202,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection 4
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%207/21.webp" alt="SQL Injection 4" style="padding: 0 25%; background-color: white">
+![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/21.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 마찬가지로 로그인 페이지로 이동한다.
 
@@ -241,7 +241,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection 5
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%207/33.webp" alt="SQL Injection 5" style="padding: 0 25%; background-color: white">
+![SQL Injection 5](/posts/Penetration%20Testing%20%7C%20Week%207/33.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하여 로그인을 시도한 결과, 앞선 문제와 마찬가지로 Error-Based SQL Injection이 유효함을 확인하였다. 따라서 위와 같은 방법으로 데이터베이스명 `sqli_2_2`와 테이블명 `flagTable_this`, 컬럼명 `flag`까지 추출하는 데 성공하였다.
 
@@ -265,7 +265,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection 6
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%207/39.webp" alt="SQL Injection 6" style="padding: 0 25%; background-color: white">
+![SQL Injection 6](/posts/Penetration%20Testing%20%7C%20Week%207/39.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하여 로그인을 시도한 결과, 아이디 입력란에서 SQL Injection 공격이 가능하나 오류 메시지가 출력되지 않아 Error-Based SQL Injection은 불가함을 확인하였다. 따라서 Blind SQL Injection을 시도해 보기로 결정하였다.
 

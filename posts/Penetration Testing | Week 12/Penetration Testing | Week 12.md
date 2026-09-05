@@ -111,7 +111,7 @@ CTF를 해결하며 CSRF 공격을 실습해 보자.
 
 #### GET Admin 1
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2012/2.webp" alt="GET Admin 1" style="padding: 0 25%; background-color: white;">
+![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/2.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크의 주소로 접속하면 회원제 게시판 애플리케이션으로 이동한다.
 
@@ -132,7 +132,7 @@ CTF를 해결하며 CSRF 공격을 실습해 보자.
 
 그 결과 관리자가 알아차렸다는 메시지가 출력되었다. 이에 대해 고민해 본 결과, 서버 측 응답에서 그 이유를 파악할 수 있었다.
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2012/7.webp" alt="GET Admin 1" style="padding: 0 12%; background-color: #2b2b2b;">
+![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/7.webp){:style="padding: 0 12%; background-color: #2b2b2b;"}
 
 비밀번호를 변경한 후 사용자의 브라우저에는 회원 정보 수정에 성공했다는 내용의 알림 창이 표시된다. 관리자 visit Bot이 전달받은 URL로 접속하면 동일하게 알림 창이 표시될 것이고, 따라서 비정상적인 동작이 이루어졌다는 것을 짐작할 수 있는 것이다.
 
@@ -168,7 +168,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### GET Admin 2
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2012/12.webp" alt="GET Admin 2" style="padding: 0 25%; background-color: white;">
+![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/12.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크의 주소로 접속하여 `any`/`any` 계정을 생성해 로그인한 후, 마이페이지에서 비밀번호를 변경해 보았다.
 
@@ -226,7 +226,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### GET Admin 3
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2012/22.webp" alt="GET Admin 3" style="padding: 0 25%; background-color: white;">
+![GET Admin 3](/posts/Penetration%20Testing%20%7C%20Week%2012/22.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크의 주소로 접속하여 `any`/`any` 계정을 생성해 로그인한 후, 마이페이지에서 비밀번호를 변경해 보았다.
 

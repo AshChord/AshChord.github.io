@@ -178,7 +178,7 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
 #### Web Shell 3
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%2015/1.webp" alt="Web Shell 1" style="padding: 0 25%; background-color: white;">
+![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/1.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크의 주소로 접속하면 다음과 같은 회원제 게시판 애플리케이션으로 이동한다.
 

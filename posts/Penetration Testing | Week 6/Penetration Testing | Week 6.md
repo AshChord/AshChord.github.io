@@ -434,7 +434,7 @@ CTF를 해결하며 지금까지 학습한 내용을 바탕으로 인증 우회 
 
 #### Login Bypass 3
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%206/16.webp" alt="Login Bypass 3" style="padding: 0 25%; background-color: white">
+![Login Bypass 3](/posts/Penetration%20Testing%20%7C%20Week%206/16.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하여 로그인을 시도해 보았다.
 
@@ -476,7 +476,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### Login Bypass 4
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%206/24.webp" alt="Login Bypass 4" style="padding: 0 25%; background-color: white">
+![Login Bypass 4](/posts/Penetration%20Testing%20%7C%20Week%206/24.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하여 로그인을 시도해 보았다.
 
@@ -544,7 +544,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### Login Bypass 5
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%206/31.webp" alt="Login Bypass 5" style="padding: 0 25%; background-color: white">
+![Login Bypass 5](/posts/Penetration%20Testing%20%7C%20Week%206/31.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하여 로그인을 시도해 보았다.
 
@@ -567,7 +567,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection 1
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%206/35.webp" alt="SQL Injection 1" style="padding: 0 25%; background-color: white">
+![SQL Injection 1](/posts/Penetration%20Testing%20%7C%20Week%206/35.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
 
@@ -665,7 +665,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection 2
 
-<img src="/posts/Penetration%20Testing%20%7C%20Week%206/48.webp" alt="SQL Injection 2" style="padding: 0 25%; background-color: white">
+![SQL Injection 2](/posts/Penetration%20Testing%20%7C%20Week%206/48.webp){:style="padding: 0 25%; background-color: white"}
 
 링크의 주소로 접속하면 SQL Injection 1과 유사한 형태의 웹 페이지로 이동한다.
 
