@@ -12,6 +12,7 @@ async function hydrate() {
   for (const inertScript of document.body.querySelectorAll('script')) {
     const activeScript = document.createElement('script');
     activeScript.setAttribute("src", inertScript.getAttribute("src"));
+    activeScript.textContent = inertScript.textContent;
     activeScript.async = false;
     inertScript.replaceWith(activeScript);
   }
