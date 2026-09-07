@@ -16,7 +16,6 @@
 | 4          | JPM          | JPMorgan Chase | NYSE   |
 | 5          | NVDA         | NVIDIA         | NASDAQ |
 
-
 | rank | ticker | company          | market_cap |
 |------|--------|------------------|------------|
 | 1    | AAPL   | Apple            | $2.9T      |
@@ -104,12 +103,6 @@ SELECT 0, 'OTHER', 'Unknown', 'N/A';
 
 `UNION`의 활용 예시를 보면 해당 연산자가 SQL Injection 공격에 유용하게 사용될 수 있다는 점을 추론할 수 있다. 이를테면 다음과 같은 로그인 처리 코드를 생각해 보자.
 
-<style>
-  .hljs-subst {
-    color: #e36209;
-  }
-</style>
-
 ```php
 $username = $_POST['UserId'];
 $password = $_POST['Password'];
@@ -136,8 +129,9 @@ if ($user && $user['password'] == $password) {
 
 로그인 양식의 `username` 입력란에 `' UNION SELECT 'Alice', '0000`을 입력한다고 가정하면, `$sql` 변수에 저장되는 SQL 쿼리는 다음과 같다.
 
-<pre><button class="copy-button"></button><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> user <span class="hljs-keyword">WHERE</span> username <span class="hljs-operator">=</span> <span class="hljs-string">''</span> <span class="hljs-keyword">UNION</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-string">'Alice'</span>, <span class="hljs-string">'0000'</span>
-</data></code></pre>
+```sql
+SELECT * FROM user WHERE username = '' UNION SELECT 'Alice', '0000'
+```
 
 첫 번째 `SELECT` 문은 `username`이 빈 문자열인 행을 반환하므로, 결과로 반환되는 행이 존재하지 않는다. 두 번째 SELECT 문은 지정한 상숫값으로 구성된 행을 반환한다. 따라서 `$res`에 저장되는 결과는 다음과 같다.
 
@@ -234,15 +228,18 @@ Unknown Column, 즉 해당 컬럼을 찾을 수 없다는 오류가 발생한다
 >
 > <strong>`LIKE`</strong>는 WHERE 절에서 문자열 비교 시 특정 패턴을 식별하기 위해 사용하는 연산자이다.  
 > 주로 와일드카드 문자인 `%`와 함께 사용되며, 기본적인 사용 방식은 다음과 같다.
+> <style id="code-1">
+>   #code-1 + pre data:is([value="5"], [value="7"]) span:nth-of-type(6) {color: #24292E !important;}
+> </style>
+> ```sql
+> /* Syntax */
+> SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;
 >
-> <pre><button class="copy-button"></button><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-comment">/* Syntax */</span>
-> </data><data class="code-line" value="2"><span class="hljs-keyword">SELECT</span> column_name(s) <span class="hljs-keyword">FROM</span> table_name <span class="hljs-keyword">WHERE</span> column_name <span class="hljs-keyword">LIKE</span> pattern;
-> </data><data class="code-line" value="3">
-> </data><data class="code-line" value="4"><span class="hljs-comment">/* Example */</span>
-> </data><data class="code-line" value="5"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> users <span class="hljs-keyword">WHERE</span> name <span class="hljs-keyword">LIKE</span> <span class="hljs-string">'Kim%'</span>; <span class="hljs-comment">-- Kim으로 시작하는 문자열 검색</span>
-> </data><data class="code-line" value="6"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> users <span class="hljs-keyword">WHERE</span> email <span class="hljs-keyword">LIKE</span> <span class="hljs-string">'%.com'</span>; <span class="hljs-comment">-- .com으로 끝나는 문자열 검색</span>
-> </data><data class="code-line" value="7"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> products <span class="hljs-keyword">WHERE</span> name <span class="hljs-keyword">LIKE</span> <span class="hljs-string">'%phone%'</span>; <span class="hljs-comment">-- phone이 포함된 문자열 검색</span>
-> </data></code></pre>
+> /* Example */
+> SELECT * FROM users WHERE name LIKE 'Kim%'; -- Kim으로 시작하는 문자열 검색
+> SELECT * FROM users WHERE email LIKE '%.com'; -- .com으로 끝나는 문자열 검색
+> SELECT * FROM products WHERE name LIKE '%phone%'; -- phone이 포함된 문자열 검색
+> ```
 
 ![SQL Injection 지점 식별](/posts/penetration-testing-week-6/assets/5.webp)
 
@@ -655,13 +652,14 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 > <strong>`LIMIT`</strong>는 SQL 쿼리 결과에서 반환할 레코드의 개수 혹은 범위를 제한할 때 사용되는 MySQL 키워드이다.  
 > 주로 대량의 데이터 중 필요한 만큼만 조회하기 위해 사용되며, 기본적인 사용 방식은 다음과 같다.
 >
-> <pre><button class="copy-button"></button><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-comment">/* Syntax */</span>
-> </data><data class="code-line" value="2"><span class="hljs-keyword">SELECT</span> column_name(s) <span class="hljs-keyword">FROM</span> table_name <span class="hljs-keyword">LIMIT</span> [offset], row_count;
-> </data><data class="code-line" value="3">
-> </data><data class="code-line" value="4"><span class="hljs-comment">/* Example */</span>
-> </data><data class="code-line" value="5"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> users <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">10</span>; <span class="hljs-comment">-- 상위 10개 행 반환</span>
-> </data><data class="code-line" value="6"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> users <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">5</span>, <span class="hljs-number">5</span>; <span class="hljs-comment">-- 6번째 행부터 5개 행 반환(offset 5, row_count 5)</span>
-> </data></code></pre>
+> ```sql
+> /* Syntax */
+> SELECT column_name(s) FROM table_name LIMIT [offset], row_count;
+>
+> /* Example */
+> SELECT * FROM users LIMIT 10; -- 상위 10개 행 반환
+> SELECT * FROM users LIMIT 5, 5; -- 6번째 행부터 5개 행 반환(offset 5, row_count 5)
+> ```
 
 ![SQL Injection 2](/posts/penetration-testing-week-6/assets/54.webp)
 
