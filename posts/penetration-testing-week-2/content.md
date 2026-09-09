@@ -13,6 +13,9 @@
 
 이러한 흐름을 구현하기 위해서, 다음과 같은 `index.php` 코드를 생각해 볼 수 있다.
 
+<style id="code-1">
+  #code-1 + pre data[value="10"] span {color: #24292E !important;}
+</style>
 ```php
 // index.php
 
@@ -32,6 +35,9 @@
 
 `login.php`는 다음과 같이 작성할 수 있다.
 
+<style id="code-2">
+  #code-2 + pre data[value="20"] span {color: #24292E !important;}
+</style>
 ```php
 // login.php
 
@@ -185,34 +191,86 @@ MySQL을 통해 `dev` 데이터베이스를 생성한 후, 다음과 같은 `sco
 PHP 코드에서 위 테이블의 데이터를 사용하려면 어떻게 해야 할까?  
 아래의 `db_check.php` 코드를 보자.
 
-<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// db_check.php</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#D73A49">&lt;?</span><span style="color:#005CC5">php</span>
-</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#6A737D">  // Database Connection Settings</span>
-</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_SERVER'</span><span style="color:#24292E">, </span><span style="color:#032F62">'localhost'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="6" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_USERNAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="7" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_PASSWORD'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="8" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_NAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'dev'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="9">
-</data><data class="code-line" value="10" style="--indent: 2ch;"><span style="color:#6A737D">  // Attempt to Connect to the Database</span>
-</data><data class="code-line" value="11" style="--indent: 2ch;"><span style="color:#24292E">  $db_conn </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_connect</span><span style="color:#24292E">(</span><span style="color:#005CC5">DB_SERVER</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_USERNAME</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_PASSWORD</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_NAME</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="12"><span style="color:#24292E">  </span>
-</data><data class="code-line" value="13" style="--indent: 2ch;"><span style="color:#6A737D">  // Check Connection Result and Print the Status</span>
-</data><data class="code-line" value="14" style="--indent: 2ch;"><span style="color:#D73A49">  if</span><span style="color:#24292E"> ($db_conn) {</span>
-</data><data class="code-line" value="15" style="--indent: 4ch;"><span style="color:#005CC5">    echo</span><span style="color:#032F62"> "DB Connection Success"</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="16" style="--indent: 2ch;"><span style="color:#24292E">  } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="17" style="--indent: 4ch;"><span style="color:#005CC5">    echo</span><span style="color:#032F62"> "DB Connection Fail"</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="18" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
-</data><data class="code-line" value="19">
-</data><data class="code-line" value="20" style="--indent: 2ch;"><span style="color:#6A737D">  // Execute a SQL Query to Retrieve Data</span>
-</data><data class="code-line" value="21" style="--indent: 2ch;"><span style="color:#24292E">  $sql </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#D73A49">SELECT</span><span style="color:#D73A49"> *</span><span style="color:#D73A49"> FROM</span><span style="color:#24292E"> score</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="22" style="--indent: 2ch;"><span style="color:#24292E">  $result </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_query</span><span style="color:#24292E">($db_conn, $sql);</span>
-</data><data class="code-line" value="23" style="--indent: 2ch;"><span style="color:#24292E">  $row </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_fetch_array</span><span style="color:#24292E">($result);</span>
-</data><data class="code-line" value="24" style="--indent: 2ch;"><span style="color:#005CC5">  var_dump</span><span style="color:#24292E">($row);</span>
-</data><data class="code-line" value="25" style="--indent: 2ch;"><span style="color:#005CC5">  echo "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">br</span><span style="color:#24292E">&gt;Name:</span><span style="color:#032F62"> "</span><span style="color:#D73A49"> .</span><span style="color:#24292E"> $row[</span><span style="color:#032F62">'name'</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="26" style="--indent: 2ch;"><span style="color:#005CC5">  echo "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">br</span><span style="color:#24292E">&gt;Score:</span><span style="color:#032F62"> "</span><span style="color:#D73A49"> .</span><span style="color:#24292E"> $row[</span><span style="color:#032F62">'score'</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="27"><span style="color:#D73A49">?&gt;</span>
-</data></code></pre>
+```php
+// db_check.php
+
+<?php
+  // Database Connection Settings
+  define('DB_SERVER', 'localhost');
+  define('DB_USERNAME', 'root');
+  define('DB_PASSWORD', 'root');
+  define('DB_NAME', 'dev');
+
+  // Attempt to Connect to the Database
+  $db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+  
+  // Check Connection Result and Print the Status
+  if ($db_conn) {
+    echo "DB Connection Success";
+  } else {
+    echo "DB Connection Fail";
+  }
+
+  // Execute a SQL Query to Retrieve Data
+  $sql = "SELECT * FROM score";
+  $result = mysqli_query($db_conn, $sql);
+  $row = mysqli_fetch_array($result);
+  var_dump($row);
+  echo "<br>Name: " . $row['name'];
+  echo "<br>Score: " . $row['score'];
+?>
+```
+<script>
+  (() => {
+    window.patchCodeLine = (lineNumber, override) => {
+      const code = document.currentScript.previousElementSibling.querySelector('code');
+
+      const patch = () => {
+        if (code.classList.contains('language-html')) {
+          code.classList.replace('language-html', 'language-php');
+        }
+
+        const line = code.querySelector(`.code-line[value="${lineNumber}"]`);
+        const lineContent = new DOMParser().parseFromString(override, 'text/html');
+
+        line.replaceChildren(...lineContent.body.childNodes);
+        line.appendChild(document.createTextNode('\n'));
+
+        observer.disconnect();
+      };
+
+      const observer = new MutationObserver(patch);
+
+      observer.observe(code, { attributes: true, attributeFilter: ['highlighted'] });
+
+      if (code.hasAttribute('highlighted')) patch();
+    };
+
+    patchCodeLine(25, [
+      '<span style="color:#005CC5">  echo "</span>',
+      '<span style="color:#24292E">&lt;</span>',
+      '<span style="color:#22863A">br</span>',
+      '<span style="color:#24292E">&gt;Name:</span>',
+      '<span style="color:#032F62"> "</span>',
+      '<span style="color:#D73A49"> .</span>',
+      '<span style="color:#24292E"> $row[</span>',
+      '<span style="color:#032F62">\'name\'</span>',
+      '<span style="color:#24292E">];</span>',
+    ].join(''));
+
+    patchCodeLine(26, [
+      '<span style="color:#005CC5">  echo "</span>',
+      '<span style="color:#24292E">&lt;</span>',
+      '<span style="color:#22863A">br</span>',
+      '<span style="color:#24292E">&gt;Score:</span>',
+      '<span style="color:#032F62"> "</span>',
+      '<span style="color:#D73A49"> .</span>',
+      '<span style="color:#24292E"> $row[</span>',
+      '<span style="color:#032F62">\'score\'</span>',
+      '<span style="color:#24292E">];</span>',
+    ].join(''));
+  })();
+</script>
 
 위 코드에서 수행되는 작업은 다음과 같다.
 
@@ -296,32 +354,86 @@ sudo systemctl restart apache2
 위의 `score` 테이블을 사용하여, GET 방식으로 이름을 전달받아 점수를 출력하는 코드를 만들어 보자.  
 `db_test.php`를 약간 수정하여 해당 기능을 구현할 수 있다.
 
-<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// get_score.php</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#24292E">&lt;</span><span style="color:#22863A">form</span><span style="color:#6F42C1"> method</span><span style="color:#24292E">=</span><span style="color:#032F62">"GET"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">label</span><span style="color:#6F42C1"> for</span><span style="color:#24292E">=</span><span style="color:#032F62">"name"</span><span style="color:#24292E">&gt;Name:&lt;/</span><span style="color:#22863A">label</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">input</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"text"</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"name"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="6" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">button</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"submit"</span><span style="color:#24292E">&gt;Submit&lt;/</span><span style="color:#22863A">button</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="7"><span style="color:#24292E">&lt;/</span><span style="color:#22863A">form</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="8">
-</data><data class="code-line" value="9"><span style="color:#D73A49">&lt;?</span><span style="color:#005CC5">php</span>
-</data><data class="code-line" value="10" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_SERVER'</span><span style="color:#24292E">, </span><span style="color:#032F62">'localhost'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="11" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_USERNAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="12" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_PASSWORD'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="13" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_NAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'dev'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="14">
-</data><data class="code-line" value="15" style="--indent: 2ch;"><span style="color:#24292E">  $db_conn </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_connect</span><span style="color:#24292E">(</span><span style="color:#005CC5">DB_SERVER</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_USERNAME</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_PASSWORD</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_NAME</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="16">
-</data><data class="code-line" value="17" style="--indent: 2ch;"><span style="color:#D73A49">  if</span><span style="color:#24292E"> (</span><span style="color:#005CC5">isset</span><span style="color:#24292E">($_GET[</span><span style="color:#032F62">'name'</span><span style="color:#24292E">])) {</span>
-</data><data class="code-line" value="18" style="--indent: 4ch;"><span style="color:#24292E">    $name </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_GET[</span><span style="color:#032F62">'name'</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="19" style="--indent: 4ch;"><span style="color:#24292E">    $sql </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#D73A49">SELECT</span><span style="color:#D73A49"> *</span><span style="color:#D73A49"> FROM</span><span style="color:#24292E"> score </span><span style="color:#D73A49">WHERE</span><span style="color:#24292E"> name</span><span style="color:#D73A49"> =</span><span style="color:#032F62"> '</span><span style="color:#24292E">$name</span><span style="color:#032F62">'"</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="20" style="--indent: 4ch;"><span style="color:#24292E">    $result </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_query</span><span style="color:#24292E">($db_conn, $sql);</span>
-</data><data class="code-line" value="21" style="--indent: 4ch;"><span style="color:#24292E">    $row </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_fetch_array</span><span style="color:#24292E">($result);</span>
-</data><data class="code-line" value="22">
-</data><data class="code-line" value="23" style="--indent: 4ch;"><span style="color:#005CC5">    echo</span><span style="color:#24292E"> $row[</span><span style="color:#032F62">'name'</span><span style="color:#24292E">] </span><span style="color:#D73A49">.</span><span style="color:#032F62"> "'s score is "</span><span style="color:#D73A49"> .</span><span style="color:#24292E"> $row[</span><span style="color:#032F62">'score'</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="24" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
-</data><data class="code-line" value="25"><span style="color:#D73A49">?&gt;</span>
-</data></code></pre>
+<style id="code-3">
+  #code-3 + pre data[value="19"] span:nth-of-type(9) {color: #032F62 !important;}
+</style>
+```php
+// get_score.php
+
+<form method="GET">
+  <label for="name">Name:</label>
+  <input type="text" name="name">
+  <button type="submit">Submit</button>
+</form>
+
+<?php
+  define('DB_SERVER', 'localhost');
+  define('DB_USERNAME', 'root');
+  define('DB_PASSWORD', 'root');
+  define('DB_NAME', 'dev');
+
+  $db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+  if (isset($_GET['name'])) {
+    $name = $_GET['name'];
+    $sql = "SELECT * FROM score WHERE name = '$name'";
+    $result = mysqli_query($db_conn, $sql);
+    $row = mysqli_fetch_array($result);
+
+    echo $row['name'] . "'s score is " . $row['score'];
+  }
+?>
+```
+<script>
+  patchCodeLine(3, [
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">form</span>',
+    '<span style="color:#6F42C1"> method</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"GET"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(4, [
+    '<span style="color:#24292E">  &lt;</span>',
+    '<span style="color:#22863A">label</span>',
+    '<span style="color:#6F42C1"> for</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"name"</span>',
+    '<span style="color:#24292E">&gt;Name:&lt;/</span>',
+    '<span style="color:#22863A">label</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(5, [
+    '<span style="color:#24292E">  &lt;</span>',
+    '<span style="color:#22863A">input</span>',
+    '<span style="color:#6F42C1"> type</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"text"</span>',
+    '<span style="color:#6F42C1"> name</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"name"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(6, [
+    '<span style="color:#24292E">  &lt;</span>',
+    '<span style="color:#22863A">button</span>',
+    '<span style="color:#6F42C1"> type</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"submit"</span>',
+    '<span style="color:#24292E">&gt;Submit&lt;/</span>',
+    '<span style="color:#22863A">button</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(7, [
+    '<span style="color:#24292E">&lt;/</span>',
+    '<span style="color:#22863A">form</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+</script>
 
 사용자가 이름을 입력하고 제출하면, 해당 이름과 일치하는 데이터를 데이터베이스에서 찾아 점수를 출력한다.
 `get_score.php`의 실행 결과는 아래와 같다.
@@ -356,78 +468,328 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 회원 가입 시 `username`이 중복될 경우 경고 메시지를 출력한다.  
 회원 가입이 완료되면 `login.php?sign_up=success`로 이동한다.
 
-<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// sign_up.php</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#D73A49">&lt;?</span><span style="color:#005CC5">php</span>
-</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#6A737D">  // Database connection settings</span>
-</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_SERVER'</span><span style="color:#24292E">, </span><span style="color:#032F62">'localhost'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="6" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_USERNAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="7" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_PASSWORD'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="8" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_NAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'dev'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="9">
-</data><data class="code-line" value="10" style="--indent: 2ch;"><span style="color:#24292E">  $db_conn </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_connect</span><span style="color:#24292E">(</span><span style="color:#005CC5">DB_SERVER</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_USERNAME</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_PASSWORD</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_NAME</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="11">
-</data><data class="code-line" value="12" style="--indent: 2ch;"><span style="color:#6A737D">  // Get form data</span>
-</data><data class="code-line" value="13" style="--indent: 2ch;"><span style="color:#24292E">  $name </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'name'</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="14" style="--indent: 2ch;"><span style="color:#24292E">  $email </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'email'</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="15" style="--indent: 2ch;"><span style="color:#24292E">  $username </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'username'</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="16" style="--indent: 2ch;"><span style="color:#24292E">  $password </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'password'</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="17">
-</data><data class="code-line" value="18" style="--indent: 2ch;"><span style="color:#6A737D">  // Check if the username already exists in the database</span>
-</data><data class="code-line" value="19" style="--indent: 2ch;"><span style="color:#D73A49">  if</span><span style="color:#24292E"> ($username) {</span>
-</data><data class="code-line" value="20" style="--indent: 4ch;"><span style="color:#24292E">    $sql_check_username </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#D73A49">SELECT</span><span style="color:#D73A49"> *</span><span style="color:#D73A49"> FROM</span><span style="color:#24292E"> users </span><span style="color:#D73A49">WHERE</span><span style="color:#24292E"> username </span><span style="color:#D73A49">=</span><span style="color:#032F62"> '</span><span style="color:#24292E">$username</span><span style="color:#032F62">'"</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="21" style="--indent: 4ch;"><span style="color:#24292E">    $result_check </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_query</span><span style="color:#24292E">($db_conn, $sql_check_username);</span>
-</data><data class="code-line" value="22">
-</data><data class="code-line" value="23" style="--indent: 4ch;"><span style="color:#6A737D">    // If username already exists</span>
-</data><data class="code-line" value="24" style="--indent: 4ch;"><span style="color:#D73A49">    if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">mysqli_num_rows</span><span style="color:#24292E">($result_check) </span><span style="color:#D73A49">&gt;</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span>
-</data><data class="code-line" value="25" style="--indent: 6ch;"><span style="color:#005CC5">      echo</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">script</span><span style="color:#24292E">&gt;</span><span style="color:#6F42C1">alert</span><span style="color:#24292E">(</span><span style="color:#032F62">'Username already exists. Please choose a different username.'</span><span style="color:#24292E">);&lt;/</span><span style="color:#22863A">script</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="26" style="--indent: 4ch;"><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="27" style="--indent: 6ch;"><span style="color:#6A737D">      // Insert user information into the database if username is available</span>
-</data><data class="code-line" value="28" style="--indent: 6ch;"><span style="color:#D73A49">      if</span><span style="color:#24292E"> ($name </span><span style="color:#D73A49">&amp;&amp;</span><span style="color:#24292E"> $email </span><span style="color:#D73A49">&amp;&amp;</span><span style="color:#24292E"> $username </span><span style="color:#D73A49">&amp;&amp;</span><span style="color:#24292E"> $password) {</span>
-</data><data class="code-line" value="29" style="--indent: 8ch;"><span style="color:#24292E">        $sql_insert </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#D73A49">INSERT INTO</span><span style="color:#24292E"> users </span><span style="color:#24292E">(name, email, username, password)</span><span style="color:#D73A49"> VALUES</span><span style="color:#24292E"> (</span><span style="color:#032F62">'</span><span style="color:#24292E">$name</span><span style="color:#032F62">'</span><span style="color:#24292E">,</span><span style="color:#032F62"> '</span><span style="color:#24292E">$email</span><span style="color:#032F62">'</span><span style="color:#24292E">,</span><span style="color:#032F62"> '</span><span style="color:#24292E">$username</span><span style="color:#032F62">'</span><span style="color:#24292E">,</span><span style="color:#032F62"> '</span><span style="color:#24292E">$password</span><span style="color:#032F62">'</span><span style="color:#24292E">)</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="30" style="--indent: 8ch;"><span style="color:#24292E">        $result_insert </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_query</span><span style="color:#24292E">($db_conn, $sql_insert);</span>
-</data><data class="code-line" value="31">
-</data><data class="code-line" value="32" style="--indent: 8ch;"><span style="color:#6A737D">        // Check if the sign up process was successful</span>
-</data><data class="code-line" value="33" style="--indent: 8ch;"><span style="color:#D73A49">        if</span><span style="color:#24292E"> ($result_insert) {</span>
-</data><data class="code-line" value="34" style="--indent: 10ch;"><span style="color:#6A737D">          // Redirect to login.php with success message in query string</span>
-</data><data class="code-line" value="35" style="--indent: 10ch;"><span style="color:#005CC5">          header</span><span style="color:#24292E">(</span><span style="color:#032F62">"Location: login.php?sign_up=success"</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="36" style="--indent: 10ch;"><span style="color:#D73A49">          exit</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="37" style="--indent: 8ch;"><span style="color:#24292E">        } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="38" style="--indent: 10ch;"><span style="color:#6A737D">          // Display error alert if there was an issue</span>
-</data><data class="code-line" value="39" style="--indent: 10ch;"><span style="color:#005CC5">          echo</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">script</span><span style="color:#24292E">&gt;</span><span style="color:#6F42C1">alert</span><span style="color:#24292E">(</span><span style="color:#032F62">'An error occurred while signing up.'</span><span style="color:#24292E">);&lt;/</span><span style="color:#22863A">script</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="40" style="--indent: 8ch;"><span style="color:#24292E">        }</span>
-</data><data class="code-line" value="41" style="--indent: 6ch;"><span style="color:#24292E">      }</span>
-</data><data class="code-line" value="42" style="--indent: 4ch;"><span style="color:#24292E">    }</span>
-</data><data class="code-line" value="43" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
-</data><data class="code-line" value="44"><span style="color:#D73A49">?&gt;</span>
-</data><data class="code-line" value="45">
-</data><data class="code-line" value="46"><span style="color:#24292E">&lt;!</span><span style="color:#22863A">DOCTYPE</span><span style="color:#6F42C1"> html</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="47"><span style="color:#24292E">&lt;</span><span style="color:#22863A">html</span><span style="color:#6F42C1"> lang</span><span style="color:#24292E">=</span><span style="color:#032F62">"ko"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="48" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">head</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="49" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">meta</span><span style="color:#6F42C1"> charset</span><span style="color:#24292E">=</span><span style="color:#032F62">"UTF-8"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="50" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">meta</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"viewport"</span><span style="color:#6F42C1"> content</span><span style="color:#24292E">=</span><span style="color:#032F62">"width=device-width, initial-scale=1.0"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="51" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">title</span><span style="color:#24292E">&gt;Sign Up&lt;/</span><span style="color:#22863A">title</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="52" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">link</span><span style="color:#6F42C1"> rel</span><span style="color:#24292E">=</span><span style="color:#032F62">"stylesheet"</span><span style="color:#6F42C1"> href</span><span style="color:#24292E">=</span><span style="color:#032F62">"style.css"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="53" style="--indent: 2ch;"><span style="color:#24292E">  &lt;/</span><span style="color:#22863A">head</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="54" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">body</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="55" style="--indent: 4ch;"><span style="color:#6A737D">    // Container that holds the sign up form</span>
-</data><data class="code-line" value="56" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">div</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">"signup-container"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="57" style="--indent: 6ch;"><span style="color:#24292E">      &lt;</span><span style="color:#22863A">h1</span><span style="color:#24292E">&gt;Sign Up&lt;/</span><span style="color:#22863A">h1</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="58">
-</data><data class="code-line" value="59" style="--indent: 6ch;"><span style="color:#6A737D">      // Sign up form</span>
-</data><data class="code-line" value="60" style="--indent: 6ch;"><span style="color:#24292E">      &lt;</span><span style="color:#22863A">form</span><span style="color:#6F42C1"> method</span><span style="color:#24292E">=</span><span style="color:#032F62">"POST"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="61" style="--indent: 8ch;"><span style="color:#24292E">        &lt;</span><span style="color:#22863A">input</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"text"</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"name"</span><span style="color:#6F42C1"> placeholder</span><span style="color:#24292E">=</span><span style="color:#032F62">"Name"</span><span style="color:#6F42C1"> required</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="62" style="--indent: 8ch;"><span style="color:#24292E">        &lt;</span><span style="color:#22863A">input</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"email"</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"email"</span><span style="color:#6F42C1"> placeholder</span><span style="color:#24292E">=</span><span style="color:#032F62">"Email"</span><span style="color:#6F42C1"> required</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="63" style="--indent: 8ch;"><span style="color:#24292E">        &lt;</span><span style="color:#22863A">input</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"text"</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"username"</span><span style="color:#6F42C1"> placeholder</span><span style="color:#24292E">=</span><span style="color:#032F62">"Username"</span><span style="color:#6F42C1"> required</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="64" style="--indent: 8ch;"><span style="color:#24292E">        &lt;</span><span style="color:#22863A">input</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"password"</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"password"</span><span style="color:#6F42C1"> placeholder</span><span style="color:#24292E">=</span><span style="color:#032F62">"Password"</span><span style="color:#6F42C1"> required</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="65">
-</data><data class="code-line" value="66" style="--indent: 8ch;"><span style="color:#24292E">        &lt;</span><span style="color:#22863A">button</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"submit"</span><span style="color:#24292E">&gt;Sign Up&lt;/</span><span style="color:#22863A">button</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="67" style="--indent: 6ch;"><span style="color:#24292E">      &lt;/</span><span style="color:#22863A">form</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="68">
-</data><data class="code-line" value="69" style="--indent: 6ch;"><span style="color:#6A737D">      // Link to login page for users who already have an account</span>
-</data><data class="code-line" value="70" style="--indent: 6ch;"><span style="color:#24292E">      &lt;</span><span style="color:#22863A">a</span><span style="color:#6F42C1"> href</span><span style="color:#24292E">=</span><span style="color:#032F62">"login.php"</span><span style="color:#24292E">&gt;Already have an account? Login here&lt;/</span><span style="color:#22863A">a</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="71" style="--indent: 4ch;"><span style="color:#24292E">    &lt;/</span><span style="color:#22863A">div</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="72" style="--indent: 2ch;"><span style="color:#24292E">  &lt;/</span><span style="color:#22863A">body</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="73"><span style="color:#24292E">&lt;/</span><span style="color:#22863A">html</span><span style="color:#24292E">&gt;</span>
-</data></code></pre>
+<style id="code-4">
+  #code-4 + pre data[value="29"] span:is(:nth-of-type(6), :nth-of-type(8)) {color: #032F62 !important;}
+</style>
+```php
+// sign_up.php
+
+<?php
+  // Database connection settings
+  define('DB_SERVER', 'localhost');
+  define('DB_USERNAME', 'root');
+  define('DB_PASSWORD', 'root');
+  define('DB_NAME', 'dev');
+
+  $db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+  // Get form data
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+
+  // Check if the username already exists in the database
+  if ($username) {
+    $sql_check_username = "SELECT * FROM users WHERE username = '$username'";
+    $result_check = mysqli_query($db_conn, $sql_check_username);
+
+    // If username already exists
+    if (mysqli_num_rows($result_check) > 0) {
+      echo "<script>alert('Username already exists. Please choose a different username.');</script>";
+    } else {
+      // Insert user information into the database if username is available
+      if ($name && $email && $username && $password) {
+        $sql_insert = "INSERT INTO users (name, email, username, password) VALUES ('$name', '$email', '$username', '$password')";
+        $result_insert = mysqli_query($db_conn, $sql_insert);
+
+        // Check if the sign up process was successful
+        if ($result_insert) {
+          // Redirect to login.php with success message in query string
+          header("Location: login.php?sign_up=success");
+          exit;
+        } else {
+          // Display error alert if there was an issue
+          echo "<script>alert('An error occurred while signing up.');</script>";
+        }
+      }
+    }
+  }
+?>
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    // Container that holds the sign up form
+    <div class="signup-container">
+      <h1>Sign Up</h1>
+
+      // Sign up form
+      <form method="POST">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button type="submit">Sign Up</button>
+      </form>
+
+      // Link to login page for users who already have an account
+      <a href="login.php">Already have an account? Login here</a>
+    </div>
+  </body>
+</html>
+```
+<script>
+  patchCodeLine(25, [
+    '<span style="color:#005CC5">      echo</span>',
+    '<span style="color:#032F62"> "</span>',
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">script</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#6F42C1">alert</span>',
+    '<span style="color:#24292E">(</span>',
+    '<span style="color:#032F62">\'Username already exists. Please choose a different username.\'</span>',
+    '<span style="color:#24292E">);&lt;/</span>',
+    '<span style="color:#22863A">script</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#032F62">"</span>',
+    '<span style="color:#24292E">;</span>',
+  ].join(''));
+
+  patchCodeLine(39, [
+    '<span style="color:#005CC5">          echo</span>',
+    '<span style="color:#032F62"> "</span>',
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">script</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#6F42C1">alert</span>',
+    '<span style="color:#24292E">(</span>',
+    '<span style="color:#032F62">\'An error occurred while signing up.\'</span>',
+    '<span style="color:#24292E">);&lt;/</span>',
+    '<span style="color:#22863A">script</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#032F62">"</span>',
+    '<span style="color:#24292E">;</span>',
+  ].join(''));
+
+  patchCodeLine(46, [
+    '<span style="color:#24292E">&lt;!</span>',
+    '<span style="color:#22863A">DOCTYPE</span>',
+    '<span style="color:#6F42C1"> html</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(47, [
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">html</span>',
+    '<span style="color:#6F42C1"> lang</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"ko"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(48, [
+    '<span style="color:#24292E">  &lt;</span>',
+    '<span style="color:#22863A">head</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(49, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">meta</span>',
+    '<span style="color:#6F42C1"> charset</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"UTF-8"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(50, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">meta</span>',
+    '<span style="color:#6F42C1"> name</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"viewport"</span>',
+    '<span style="color:#6F42C1"> content</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"width=device-width, initial-scale=1.0"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(51, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">title</span>',
+    '<span style="color:#24292E">&gt;Sign Up&lt;/</span>',
+    '<span style="color:#22863A">title</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(52, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">link</span>',
+    '<span style="color:#6F42C1"> rel</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"stylesheet"</span>',
+    '<span style="color:#6F42C1"> href</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"style.css"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(53, [
+    '<span style="color:#24292E">  &lt;/</span>',
+    '<span style="color:#22863A">head</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(54, [
+    '<span style="color:#24292E">  &lt;</span>',
+    '<span style="color:#22863A">body</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(56, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#6F42C1"> class</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"signup-container"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(57, [
+    '<span style="color:#24292E">      &lt;</span>',
+    '<span style="color:#22863A">h1</span>',
+    '<span style="color:#24292E">&gt;Sign Up&lt;/</span>',
+    '<span style="color:#22863A">h1</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(60, [
+    '<span style="color:#24292E">      &lt;</span>',
+    '<span style="color:#22863A">form</span>',
+    '<span style="color:#6F42C1"> method</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"POST"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(61, [
+    '<span style="color:#24292E">        &lt;</span>',
+    '<span style="color:#22863A">input</span>',
+    '<span style="color:#6F42C1"> type</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"text"</span>',
+    '<span style="color:#6F42C1"> name</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"name"</span>',
+    '<span style="color:#6F42C1"> placeholder</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"Name"</span>',
+    '<span style="color:#6F42C1"> required</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(62, [
+    '<span style="color:#24292E">        &lt;</span>',
+    '<span style="color:#22863A">input</span>',
+    '<span style="color:#6F42C1"> type</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"email"</span>',
+    '<span style="color:#6F42C1"> name</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"email"</span>',
+    '<span style="color:#6F42C1"> placeholder</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"Email"</span>',
+    '<span style="color:#6F42C1"> required</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(63, [
+    '<span style="color:#24292E">        &lt;</span>',
+    '<span style="color:#22863A">input</span>',
+    '<span style="color:#6F42C1"> type</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"text"</span>',
+    '<span style="color:#6F42C1"> name</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"username"</span>',
+    '<span style="color:#6F42C1"> placeholder</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"Username"</span>',
+    '<span style="color:#6F42C1"> required</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(64, [
+    '<span style="color:#24292E">        &lt;</span>',
+    '<span style="color:#22863A">input</span>',
+    '<span style="color:#6F42C1"> type</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"password"</span>',
+    '<span style="color:#6F42C1"> name</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"password"</span>',
+    '<span style="color:#6F42C1"> placeholder</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"Password"</span>',
+    '<span style="color:#6F42C1"> required</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(66, [
+    '<span style="color:#24292E">        &lt;</span>',
+    '<span style="color:#22863A">button</span>',
+    '<span style="color:#6F42C1"> type</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"submit"</span>',
+    '<span style="color:#24292E">&gt;Sign Up&lt;/</span>',
+    '<span style="color:#22863A">button</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(67, [
+    '<span style="color:#24292E">      &lt;/</span>',
+    '<span style="color:#22863A">form</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(70, [
+    '<span style="color:#24292E">      &lt;</span>',
+    '<span style="color:#22863A">a</span>',
+    '<span style="color:#6F42C1"> href</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"login.php"</span>',
+    '<span style="color:#24292E">&gt;Already have an account? Login here&lt;/</span>',
+    '<span style="color:#22863A">a</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(71, [
+    '<span style="color:#24292E">    &lt;/</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(72, [
+    '<span style="color:#24292E">  &lt;/</span>',
+    '<span style="color:#22863A">body</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(73, [
+    '<span style="color:#24292E">&lt;/</span>',
+    '<span style="color:#22863A">html</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+</script>
 
 <br>
 
@@ -436,41 +798,45 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 회원 가입 완료 후 URL에 `sign_up=success` 쿼리 스트링이 포함된 경우, 알림 창을 통해 회원 가입 성공 메시지를 표시한다.  
 계정이 없는 사용자를 위해 회원 가입 페이지로 이동할 수 있는 링크가 포함되어 있다.
 
-<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// login.php</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#24292E">&lt;!</span><span style="color:#22863A">DOCTYPE</span><span style="color:#6F42C1"> html</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="4"><span style="color:#24292E">&lt;</span><span style="color:#22863A">html</span><span style="color:#6F42C1"> lang</span><span style="color:#24292E">=</span><span style="color:#032F62">"ko"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">head</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="6" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">meta</span><span style="color:#6F42C1"> charset</span><span style="color:#24292E">=</span><span style="color:#032F62">"UTF-8"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="7" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">meta</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"viewport"</span><span style="color:#6F42C1"> content</span><span style="color:#24292E">=</span><span style="color:#032F62">"width=device-width, initial-scale=1.0"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="8" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">title</span><span style="color:#24292E">&gt;Login Page&lt;/</span><span style="color:#22863A">title</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="9" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">link</span><span style="color:#6F42C1"> rel</span><span style="color:#24292E">=</span><span style="color:#032F62">"stylesheet"</span><span style="color:#6F42C1"> href</span><span style="color:#24292E">=</span><span style="color:#032F62">"style.css"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="10" style="--indent: 2ch;"><span style="color:#24292E">  &lt;/</span><span style="color:#22863A">head</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="11">
-</data><data class="code-line" value="12" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">body</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="13" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">div</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">"login-container"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="14" style="--indent: 6ch;"><span style="color:#24292E">      &lt;</span><span style="color:#22863A">h2</span><span style="color:#24292E">&gt;Login&lt;/</span><span style="color:#22863A">h2</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="15" style="--indent: 6ch;"><span style="color:#24292E">      &lt;</span><span style="color:#22863A">form</span><span style="color:#6F42C1"> action</span><span style="color:#24292E">=</span><span style="color:#032F62">"login_proc.php"</span><span style="color:#6F42C1"> method</span><span style="color:#24292E">=</span><span style="color:#032F62">"POST"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="16" style="--indent: 8ch;"><span style="color:#24292E">        &lt;</span><span style="color:#22863A">input</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"text"</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"username"</span><span style="color:#6F42C1"> placeholder</span><span style="color:#24292E">=</span><span style="color:#032F62">"ID"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="17" style="--indent: 8ch;"><span style="color:#24292E">        &lt;</span><span style="color:#22863A">input</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"password"</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"password"</span><span style="color:#6F42C1"> placeholder</span><span style="color:#24292E">=</span><span style="color:#032F62">"PW"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="18" style="--indent: 8ch;"><span style="color:#24292E">        &lt;</span><span style="color:#22863A">button</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"submit"</span><span style="color:#24292E">&gt;Login&lt;/</span><span style="color:#22863A">button</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="19">
-</data><data class="code-line" value="20" style="--indent: 8ch;"><span style="color:#6A737D">        // Link to sign up page for new users</span>
-</data><data class="code-line" value="21" style="--indent: 8ch;"><span style="color:#24292E">        &lt;</span><span style="color:#22863A">a</span><span style="color:#6F42C1"> href</span><span style="color:#24292E">=</span><span style="color:#032F62">"sign_up.php"</span><span style="color:#24292E">&gt;Don't have an account? Sign up here&lt;/</span><span style="color:#22863A">a</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="22"><span style="color:#24292E">        </span>
-</data><data class="code-line" value="23" style="--indent: 6ch;"><span style="color:#24292E">      &lt;/</span><span style="color:#22863A">form</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="24" style="--indent: 4ch;"><span style="color:#24292E">    &lt;/</span><span style="color:#22863A">div</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="25">
-</data><data class="code-line" value="26" style="--indent: 4ch;"><span style="color:#6A737D">    // JavaScipt to show alert if sign up completed</span>
-</data><data class="code-line" value="27" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">script</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="28" style="--indent: 6ch;"><span style="color:#D73A49">      const</span><span style="color:#005CC5"> urlParams</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> new</span><span style="color:#6F42C1"> URLSearchParams</span><span style="color:#24292E">(window.location.search);</span>
-</data><data class="code-line" value="29" style="--indent: 6ch;"><span style="color:#D73A49">      if</span><span style="color:#24292E"> (urlParams.</span><span style="color:#6F42C1">get</span><span style="color:#24292E">(</span><span style="color:#032F62">'sign_up'</span><span style="color:#24292E">) </span><span style="color:#D73A49">===</span><span style="color:#032F62"> 'success'</span><span style="color:#24292E">) {</span>
-</data><data class="code-line" value="30" style="--indent: 8ch;"><span style="color:#6F42C1">        alert</span><span style="color:#24292E">(</span><span style="color:#032F62">'Sign up completed successfully!'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="31" style="--indent: 6ch;"><span style="color:#24292E">      }</span>
-</data><data class="code-line" value="32" style="--indent: 4ch;"><span style="color:#24292E">    &lt;/</span><span style="color:#22863A">script</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="33" style="--indent: 2ch;"><span style="color:#24292E">  &lt;/</span><span style="color:#22863A">body</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="34"><span style="color:#24292E">&lt;/</span><span style="color:#22863A">html</span><span style="color:#24292E">&gt;</span>
-</data></code></pre>
+<style id="code-5">
+  #code-5 + pre data:is([value="1"], [value="20"], [value="26"]) span {color: #6A737D !important;}
+</style>
+```html
+// login.php
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="login-container">
+      <h2>Login</h2>
+      <form action="login_proc.php" method="POST">
+        <input type="text" name="username" placeholder="ID">
+        <input type="password" name="password" placeholder="PW">
+        <button type="submit">Login</button>
+
+        // Link to sign up page for new users
+        <a href="sign_up.php">Don't have an account? Sign up here</a>
+        
+      </form>
+    </div>
+
+    // JavaScipt to show alert if sign up completed
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('sign_up') === 'success') {
+        alert('Sign up completed successfully!');
+      }
+    </script>
+  </body>
+</html>
+```
 
 <br>
 
@@ -479,61 +845,239 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 `login.php`로부터 전달받은 아이디와 비밀번호를 데이터베이스에 저장된 정보와 비교하여 로그인 여부를 판별한다.  
 로그인 성공 시 성공 메시지를, 실패 시 실패 원인에 따라 다른 메시지를 출력한다.
 
-<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// login_proc.php</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#D73A49">&lt;?</span><span style="color:#005CC5">php</span>
-</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#6A737D">  // Database connection settings</span>
-</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_SERVER'</span><span style="color:#24292E">, </span><span style="color:#032F62">'localhost'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="6" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_USERNAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="7" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_PASSWORD'</span><span style="color:#24292E">, </span><span style="color:#032F62">'root'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="8" style="--indent: 2ch;"><span style="color:#005CC5">  define</span><span style="color:#24292E">(</span><span style="color:#032F62">'DB_NAME'</span><span style="color:#24292E">, </span><span style="color:#032F62">'dev'</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="9" style="--indent: 2ch;"><span style="color:#24292E">  $db_conn </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_connect</span><span style="color:#24292E">(</span><span style="color:#005CC5">DB_SERVER</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_USERNAME</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_PASSWORD</span><span style="color:#24292E">, </span><span style="color:#005CC5">DB_NAME</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="10">
-</data><data class="code-line" value="11" style="--indent: 2ch;"><span style="color:#6A737D">  // Initialize message variable</span>
-</data><data class="code-line" value="12" style="--indent: 2ch;"><span style="color:#24292E">  $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> ""</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="13">
-</data><data class="code-line" value="14" style="--indent: 2ch;"><span style="color:#6A737D">  // Get form data(username and password)</span>
-</data><data class="code-line" value="15" style="--indent: 2ch;"><span style="color:#24292E">  $username </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'username'</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="16" style="--indent: 2ch;"><span style="color:#24292E">  $password </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'password'</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="17">
-</data><data class="code-line" value="18" style="--indent: 2ch;"><span style="color:#6A737D">  // Query the database for the username</span>
-</data><data class="code-line" value="19" style="--indent: 2ch;"><span style="color:#24292E">  $sql </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#D73A49">SELECT</span><span style="color:#D73A49"> *</span><span style="color:#D73A49"> FROM</span><span style="color:#24292E"> users </span><span style="color:#D73A49">WHERE</span><span style="color:#24292E"> username </span><span style="color:#D73A49">=</span><span style="color:#032F62"> '</span><span style="color:#24292E">$username</span><span style="color:#032F62">'"</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="20" style="--indent: 2ch;"><span style="color:#24292E">  $result </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_query</span><span style="color:#24292E">($db_conn, $sql);</span>
-</data><data class="code-line" value="21">
-</data><data class="code-line" value="22" style="--indent: 2ch;"><span style="color:#6A737D">  // Check if the user exists</span>
-</data><data class="code-line" value="23" style="--indent: 2ch;"><span style="color:#D73A49">  if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">mysqli_num_rows</span><span style="color:#24292E">($result) </span><span style="color:#D73A49">&gt;</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">) {</span>
-</data><data class="code-line" value="24" style="--indent: 4ch;"><span style="color:#24292E">    $user </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> mysqli_fetch_array</span><span style="color:#24292E">($result);</span>
-</data><data class="code-line" value="25">
-</data><data class="code-line" value="26" style="--indent: 4ch;"><span style="color:#6A737D">    // Check if the password matches</span>
-</data><data class="code-line" value="27" style="--indent: 4ch;"><span style="color:#D73A49">    if</span><span style="color:#24292E"> ($user[</span><span style="color:#032F62">'password'</span><span style="color:#24292E">] </span><span style="color:#D73A49">===</span><span style="color:#24292E"> $password) {</span>
-</data><data class="code-line" value="28" style="--indent: 6ch;"><span style="color:#6A737D">      // Login success message</span>
-</data><data class="code-line" value="29" style="--indent: 6ch;"><span style="color:#24292E">      $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: green;'</span><span style="color:#24292E">&gt;Login Successful!&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="30" style="--indent: 4ch;"><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="31" style="--indent: 6ch;"><span style="color:#6A737D">      // Login failure due to incorrect password</span>
-</data><data class="code-line" value="32" style="--indent: 6ch;"><span style="color:#24292E">      $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: red;'</span><span style="color:#24292E">&gt;Login Failed. Incorrect password.&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="33" style="--indent: 4ch;"><span style="color:#24292E">    }</span>
-</data><data class="code-line" value="34" style="--indent: 2ch;"><span style="color:#24292E">  } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="35" style="--indent: 4ch;"><span style="color:#6A737D">    // Login failure due to username not found</span>
-</data><data class="code-line" value="36" style="--indent: 4ch;"><span style="color:#24292E">    $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: red;'</span><span style="color:#24292E">&gt;Login Failed. Username not Found.&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="37" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
-</data><data class="code-line" value="38"><span style="color:#D73A49">?&gt;</span>
-</data><data class="code-line" value="39">
-</data><data class="code-line" value="40"><span style="color:#24292E">&lt;!</span><span style="color:#22863A">DOCTYPE</span><span style="color:#6F42C1"> html</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="41"><span style="color:#24292E">&lt;</span><span style="color:#22863A">html</span><span style="color:#6F42C1"> lang</span><span style="color:#24292E">=</span><span style="color:#032F62">"ko"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="42" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">head</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="43" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">meta</span><span style="color:#6F42C1"> charset</span><span style="color:#24292E">=</span><span style="color:#032F62">"UTF-8"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="44" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">meta</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"viewport"</span><span style="color:#6F42C1"> content</span><span style="color:#24292E">=</span><span style="color:#032F62">"width=device-width, initial-scale=1.0"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="45" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">title</span><span style="color:#24292E">&gt;Login Result&lt;/</span><span style="color:#22863A">title</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="46" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">link</span><span style="color:#6F42C1"> rel</span><span style="color:#24292E">=</span><span style="color:#032F62">"stylesheet"</span><span style="color:#6F42C1"> href</span><span style="color:#24292E">=</span><span style="color:#032F62">"style.css"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="47" style="--indent: 2ch;"><span style="color:#24292E">  &lt;/</span><span style="color:#22863A">head</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="48">
-</data><data class="code-line" value="49" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">body</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="50" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">div</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">"login-container"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="51" style="--indent: 6ch;"><span style="color:#D73A49">      &lt;?</span><span style="color:#005CC5">php</span><span style="color:#005CC5"> echo</span><span style="color:#24292E"> $message; </span><span style="color:#D73A49">?&gt;</span>
-</data><data class="code-line" value="52" style="--indent: 6ch;"><span style="color:#24292E">      &lt;</span><span style="color:#22863A">button</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="53" style="--indent: 6ch;"><span style="color:#24292E">      &lt;</span><span style="color:#22863A">a</span><span style="color:#6F42C1"> href</span><span style="color:#24292E">=</span><span style="color:#032F62">"login.php"</span><span style="color:#24292E">&gt;Back to Login Page&lt;/</span><span style="color:#22863A">a</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="54" style="--indent: 6ch;"><span style="color:#24292E">      &lt;/</span><span style="color:#22863A">button</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="55" style="--indent: 4ch;"><span style="color:#24292E">    &lt;/</span><span style="color:#22863A">div</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="56" style="--indent: 2ch;"><span style="color:#24292E">  &lt;/</span><span style="color:#22863A">body</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="57"><span style="color:#24292E">&lt;/</span><span style="color:#22863A">html</span><span style="color:#24292E">&gt;</span>
-</data></code></pre>
+```php
+// login_proc.php
+
+<?php
+  // Database connection settings
+  define('DB_SERVER', 'localhost');
+  define('DB_USERNAME', 'root');
+  define('DB_PASSWORD', 'root');
+  define('DB_NAME', 'dev');
+  $db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+  // Initialize message variable
+  $message = "";
+
+  // Get form data(username and password)
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+
+  // Query the database for the username
+  $sql = "SELECT * FROM users WHERE username = '$username'";
+  $result = mysqli_query($db_conn, $sql);
+
+  // Check if the user exists
+  if (mysqli_num_rows($result) > 0) {
+    $user = mysqli_fetch_array($result);
+
+    // Check if the password matches
+    if ($user['password'] === $password) {
+      // Login success message
+      $message = "<p style='color: green;'>Login Successful!</p>";
+    } else {
+      // Login failure due to incorrect password
+      $message = "<p style='color: red;'>Login Failed. Incorrect password.</p>";
+    }
+  } else {
+    // Login failure due to username not found
+    $message = "<p style='color: red;'>Login Failed. Username not Found.</p>";
+  }
+?>
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Result</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="login-container">
+      <?php echo $message; ?>
+      <button>
+      <a href="login.php">Back to Login Page</a>
+      </button>
+    </div>
+  </body>
+</html>
+```
+<script>
+  patchCodeLine(29, [
+    '<span style="color:#24292E">      $message </span>',
+    '<span style="color:#D73A49">=</span>',
+    '<span style="color:#032F62"> "</span>',
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">p</span>',
+    '<span style="color:#6F42C1"> style</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">\'color: green;\'</span>',
+    '<span style="color:#24292E">&gt;Login Successful!&lt;/</span>',
+    '<span style="color:#22863A">p</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#032F62">"</span>',
+    '<span style="color:#24292E">;</span>',
+  ].join(''));
+
+  patchCodeLine(32, [
+    '<span style="color:#24292E">      $message </span>',
+    '<span style="color:#D73A49">=</span>',
+    '<span style="color:#032F62"> "</span>',
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">p</span>',
+    '<span style="color:#6F42C1"> style</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">\'color: red;\'</span>',
+    '<span style="color:#24292E">&gt;Login Failed. Incorrect password.&lt;/</span>',
+    '<span style="color:#22863A">p</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#032F62">"</span>',
+    '<span style="color:#24292E">;</span>',
+  ].join(''));
+
+  patchCodeLine(36, [
+    '<span style="color:#24292E">    $message </span>',
+    '<span style="color:#D73A49">=</span>',
+    '<span style="color:#032F62"> "</span>',
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">p</span>',
+    '<span style="color:#6F42C1"> style</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">\'color: red;\'</span>',
+    '<span style="color:#24292E">&gt;Login Failed. Username not Found.&lt;/</span>',
+    '<span style="color:#22863A">p</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#032F62">"</span>',
+    '<span style="color:#24292E">;</span>',
+  ].join(''));
+
+  patchCodeLine(40, [
+    '<span style="color:#24292E">&lt;!</span>',
+    '<span style="color:#22863A">DOCTYPE</span>',
+    '<span style="color:#6F42C1"> html</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(41, [
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">html</span>',
+    '<span style="color:#6F42C1"> lang</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"ko"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(42, [
+    '<span style="color:#24292E">  &lt;</span>',
+    '<span style="color:#22863A">head</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(43, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">meta</span>',
+    '<span style="color:#6F42C1"> charset</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"UTF-8"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(44, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">meta</span>',
+    '<span style="color:#6F42C1"> name</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"viewport"</span>',
+    '<span style="color:#6F42C1"> content</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"width=device-width, initial-scale=1.0"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(45, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">title</span>',
+    '<span style="color:#24292E">&gt;Login Result&lt;/</span>',
+    '<span style="color:#22863A">title</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(46, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">link</span>',
+    '<span style="color:#6F42C1"> rel</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"stylesheet"</span>',
+    '<span style="color:#6F42C1"> href</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"style.css"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(47, [
+    '<span style="color:#24292E">  &lt;/</span>',
+    '<span style="color:#22863A">head</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(49, [
+    '<span style="color:#24292E">  &lt;</span>',
+    '<span style="color:#22863A">body</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(50, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#6F42C1"> class</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"login-container"</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(52, [
+    '<span style="color:#24292E">      &lt;</span>',
+    '<span style="color:#22863A">button</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(53, [
+    '<span style="color:#24292E">      &lt;</span>',
+    '<span style="color:#22863A">a</span>',
+    '<span style="color:#6F42C1"> href</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"login.php"</span>',
+    '<span style="color:#24292E">&gt;Back to Login Page&lt;/</span>',
+    '<span style="color:#22863A">a</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(54, [
+    '<span style="color:#24292E">      &lt;/</span>',
+    '<span style="color:#22863A">button</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(55, [
+    '<span style="color:#24292E">    &lt;/</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(56, [
+    '<span style="color:#24292E">  &lt;/</span>',
+    '<span style="color:#22863A">body</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+
+  patchCodeLine(57, [
+    '<span style="color:#24292E">&lt;/</span>',
+    '<span style="color:#22863A">html</span>',
+    '<span style="color:#24292E">&gt;</span>',
+  ].join(''));
+</script>
 
 <br>
 
@@ -541,64 +1085,84 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 
 로그인 페이지와 회원 가입 페이지에 공통으로 적용되는 일관된 스타일을 정의한다.
 
-<pre><button class="copy-button"></button><code class="language-css" highlighted><data class="code-line" value="1"><span style="color:#6A737D">/* style.css */</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#22863A">body</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#005CC5">  display</span><span style="color:#24292E">: </span><span style="color:#005CC5">flex</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#005CC5">  height</span><span style="color:#24292E">: </span><span style="color:#005CC5">100</span><span style="color:#D73A49">vh</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="6" style="--indent: 2ch;"><span style="color:#005CC5">  margin</span><span style="color:#24292E">: </span><span style="color:#005CC5">0</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="7" style="--indent: 2ch;"><span style="color:#005CC5">  background-color</span><span style="color:#24292E">: </span><span style="color:#005CC5">gray</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="8" style="--indent: 2ch;"><span style="color:#005CC5">  font-family</span><span style="color:#24292E">: </span><span style="color:#005CC5">Arial</span><span style="color:#24292E">, </span><span style="color:#005CC5">sans-serif</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="9" style="--indent: 2ch;"><span style="color:#005CC5">  justify-content</span><span style="color:#24292E">: </span><span style="color:#005CC5">center</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="10" style="--indent: 2ch;"><span style="color:#005CC5">  align-items</span><span style="color:#24292E">: </span><span style="color:#005CC5">center</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="11"><span style="color:#24292E">}</span>
-</data><data class="code-line" value="12">
-</data><data class="code-line" value="13"><span style="color:#6F42C1">.signup-container</span><span style="color:#24292E">,</span>
-</data><data class="code-line" value="14"><span style="color:#6F42C1">.login-container</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="15" style="--indent: 2ch;"><span style="color:#005CC5">  width</span><span style="color:#24292E">: </span><span style="color:#005CC5">300</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="16" style="--indent: 2ch;"><span style="color:#005CC5">  padding</span><span style="color:#24292E">: </span><span style="color:#005CC5">30</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="17" style="--indent: 2ch;"><span style="color:#005CC5">  border-radius</span><span style="color:#24292E">: </span><span style="color:#005CC5">8</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="18" style="--indent: 2ch;"><span style="color:#005CC5">  background-color</span><span style="color:#24292E">: </span><span style="color:#005CC5">white</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="19" style="--indent: 2ch;"><span style="color:#005CC5">  box-shadow</span><span style="color:#24292E">: </span><span style="color:#005CC5">0</span><span style="color:#005CC5"> 4</span><span style="color:#D73A49">px</span><span style="color:#005CC5"> 8</span><span style="color:#D73A49">px</span><span style="color:#005CC5"> rgba</span><span style="color:#24292E">(</span><span style="color:#005CC5">0</span><span style="color:#24292E">, </span><span style="color:#005CC5">0</span><span style="color:#24292E">, </span><span style="color:#005CC5">0</span><span style="color:#24292E">, </span><span style="color:#005CC5">0.1</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="20" style="--indent: 2ch;"><span style="color:#005CC5">  text-align</span><span style="color:#24292E">: </span><span style="color:#005CC5">center</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="21"><span style="color:#24292E">}</span>
-</data><data class="code-line" value="22">
-</data><data class="code-line" value="23"><span style="color:#22863A">input</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="24" style="--indent: 2ch;"><span style="color:#005CC5">  width</span><span style="color:#24292E">: </span><span style="color:#005CC5">100</span><span style="color:#D73A49">%</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="25" style="--indent: 2ch;"><span style="color:#005CC5">  margin</span><span style="color:#24292E">: </span><span style="color:#005CC5">10</span><span style="color:#D73A49">px</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="26" style="--indent: 2ch;"><span style="color:#005CC5">  padding</span><span style="color:#24292E">: </span><span style="color:#005CC5">10</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="27" style="--indent: 2ch;"><span style="color:#005CC5">  border</span><span style="color:#24292E">: </span><span style="color:#005CC5">1</span><span style="color:#D73A49">px</span><span style="color:#005CC5"> solid</span><span style="color:#005CC5"> gray</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="28" style="--indent: 2ch;"><span style="color:#005CC5">  border-radius</span><span style="color:#24292E">: </span><span style="color:#005CC5">4</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="29" style="--indent: 2ch;"><span style="color:#005CC5">  font-size</span><span style="color:#24292E">: </span><span style="color:#005CC5">14</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="30" style="--indent: 2ch;"><span style="color:#005CC5">  box-sizing</span><span style="color:#24292E">: </span><span style="color:#005CC5">border-box</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="31"><span style="color:#24292E">}</span>
-</data><data class="code-line" value="32">
-</data><data class="code-line" value="33"><span style="color:#22863A">button</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="34" style="--indent: 2ch;"><span style="color:#005CC5">  width</span><span style="color:#24292E">: </span><span style="color:#005CC5">100</span><span style="color:#D73A49">%</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="35" style="--indent: 2ch;"><span style="color:#005CC5">  margin</span><span style="color:#24292E">: </span><span style="color:#005CC5">20</span><span style="color:#D73A49">px</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="36" style="--indent: 2ch;"><span style="color:#005CC5">  padding</span><span style="color:#24292E">: </span><span style="color:#005CC5">10</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="37" style="--indent: 2ch;"><span style="color:#005CC5">  border</span><span style="color:#24292E">: </span><span style="color:#005CC5">none</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="38" style="--indent: 2ch;"><span style="color:#005CC5">  border-radius</span><span style="color:#24292E">: </span><span style="color:#005CC5">4</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="39" style="--indent: 2ch;"><span style="color:#005CC5">  background-color</span><span style="color:#24292E">: </span><span style="color:#005CC5">#a78bfa</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="40" style="--indent: 2ch;"><span style="color:#005CC5">  color</span><span style="color:#24292E">: </span><span style="color:#005CC5">white</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="41" style="--indent: 2ch;"><span style="color:#005CC5">  font-size</span><span style="color:#24292E">: </span><span style="color:#005CC5">16</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="42" style="--indent: 2ch;"><span style="color:#005CC5">  cursor</span><span style="color:#24292E">: </span><span style="color:#005CC5">pointer</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="43">
-</data><data class="code-line" value="44" style="--indent: 2ch;"><span style="color:#22863A">  &amp;</span><span style="color:#6F42C1">:hover</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="45" style="--indent: 4ch;"><span style="color:#005CC5">  background-color</span><span style="color:#24292E">: </span><span style="color:#005CC5">#8b5cf6</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="46" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
-</data><data class="code-line" value="47"><span style="color:#24292E">}</span>
-</data><data class="code-line" value="48">
-</data><data class="code-line" value="49"><span style="color:#22863A">a</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="50" style="--indent: 2ch;"><span style="color:#005CC5">  display</span><span style="color:#24292E">: </span><span style="color:#005CC5">block</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="51" style="--indent: 2ch;"><span style="color:#005CC5">  color</span><span style="color:#24292E">: </span><span style="color:#005CC5">#a78bfa</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="52">
-</data><data class="code-line" value="53" style="--indent: 2ch;"><span style="color:#22863A">  button &amp;</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="54" style="--indent: 4ch;"><span style="color:#005CC5">    color</span><span style="color:#24292E">: </span><span style="color:#005CC5">white</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="55" style="--indent: 4ch;"><span style="color:#005CC5">    text-decoration</span><span style="color:#24292E">: </span><span style="color:#005CC5">none</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="56" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
-</data><data class="code-line" value="57"><span style="color:#24292E">}</span>
-</data></code></pre>
+```css
+/* style.css */
+
+body {
+  display: flex;
+  height: 100vh;
+  margin: 0;
+  background-color: gray;
+  font-family: Arial, sans-serif;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-container,
+.login-container {
+  width: 300px;
+  padding: 30px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  margin: 20px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #a78bfa;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #8b5cf6;
+  }
+}
+
+a {
+  display: block;
+  color: #a78bfa;
+
+  button & {
+    color: white;
+    text-decoration: none;
+  }
+}
+```
+<script>
+  patchCodeLine(44, [
+    '<span style="color:#22863A">  &amp;</span>',
+    '<span style="color:#6F42C1">:hover</span>',
+    '<span style="color:#24292E"> {</span>'
+  ].join(''));
+
+  patchCodeLine(45, [
+    '<span style="color:#005CC5">    background-color</span>',
+    '<span style="color:#24292E">: </span>',
+    '<span style="color:#005CC5">#8b5cf6</span>',
+    '<span style="color:#24292E">;</span>'
+  ].join(''));
+
+  patchCodeLine(53, [
+    '<span style="color:#22863A">  button &amp;</span>',
+    '<span style="color:#24292E"> {</span>'
+  ].join(''));
+</script>
 
 <br>
 
