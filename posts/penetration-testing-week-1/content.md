@@ -104,14 +104,6 @@ URL의 파일 경로는 <strong>웹 루트(Web Root)</strong>라 불리는 특�
   })();
 </script>
 
-<pre><button class="copy-button"></button><code class="language-html" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// score.php</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#24292E">&lt;</span><span style="color:#22863A">html</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">h1</span><span style="color:#24292E">&gt;Score&lt;/</span><span style="color:#22863A">h1</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">h2</span><span style="color:#24292E">&gt;Name: </span><span style="color:#D73A49">&lt;?</span><span style="color:#005CC5">php</span><span style="color:#005CC5"> echo</span><span style="color:#24292E"> $_GET[</span><span style="color:#032F62">'name'</span><span style="color:#24292E">]; </span><span style="color:#D73A49">?&gt;</span><span style="color:#24292E">&lt;/</span><span style="color:#22863A">h2</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="6"><span style="color:#24292E">&lt;/</span><span style="color:#22863A">html</span><span style="color:#24292E">&gt;</span>
-</data></code></pre>
-
 위 코드에서 ```<?php ... ?>``` 태그 안의 PHP 코드는 **GET 방식**으로 `name`이라는 파라미터에 전달된 값을 출력하라는 의미이다.  
 이 파일에 접근하려면 `http://x.x.x.x/score.php?name=testee`와 같은 URL을 이용한다.
 URL의 형태에서 알 수 있듯이, **GET 방식**은 클라이언트가 서버에 데이터를 전송할 때, URL에 데이터를 포함하는 방식을 말한다. `?` 뒤의 문자열을 쿼리 스트링이라고 하며, `[Parameter Name]=[Data]`의 형태로 구성된다.
@@ -131,14 +123,6 @@ URL의 형태에서 알 수 있듯이, **GET 방식**은 클라이언트가 서�
 <script>
   patchCodeLine(1, '<span style="color:#6A737D">// score.php</span>');
 </script>
-
-<pre><button class="copy-button"></button><code class="language-html" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// score.php</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#24292E">&lt;</span><span style="color:#22863A">html</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">h1</span><span style="color:#24292E">&gt;Score&lt;/</span><span style="color:#22863A">h1</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">h2</span><span style="color:#24292E">&gt;Name: testee&lt;/</span><span style="color:#22863A">h2</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="6"><span style="color:#24292E">&lt;/</span><span style="color:#22863A">html</span><span style="color:#24292E">&gt;</span>
-</data></code></pre>
 
 웹 서버는 최종적으로 정적인 결과물을 웹 브라우저로 전송하게 된다.
 
@@ -173,17 +157,6 @@ GET 방식으로 데이터를 전달할 때 반드시 URL에 직접 쿼리 스�
     '<span style="color:#D73A49">?&gt;</span>'
   ].join(''));
 </script>
-
-<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// name.php</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#24292E">&lt;</span><span style="color:#22863A">form</span><span style="color:#6F42C1"> method</span><span style="color:#24292E">=</span><span style="color:#032F62">"GET"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">input</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"text"</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"id"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="5"><span style="color:#24292E">&lt;/</span><span style="color:#22863A">form</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="6">
-</data><data class="code-line" value="7"><span style="color:#D73A49">&lt;?</span><span style="color:#005CC5">php</span>
-</data><data class="code-line" value="8" style="--indent: 2ch;"><span style="color:#005CC5">  echo</span><span style="color:#24292E"> $_GET[</span><span style="color:#032F62">'id'</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="9"><span style="color:#D73A49">?&gt;</span>
-</data></code></pre>
 
 위 코드는 입력란을 통해 데이터(`id` 파라미터)를 GET 방식으로 전달받고 출력하는 기능을 한다.  
 `http://x.x.x.x/name.php`과 같은 URL로 접속하면 입력란이 표시된다.
@@ -221,18 +194,6 @@ GET 방식으로 데이터를 전달할 때 반드시 URL에 직접 쿼리 스�
     '<span style="color:#D73A49">?&gt;</span>'
   ].join(''));
 </script>
-
-
-<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// name.php</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#24292E">&lt;</span><span style="color:#22863A">form</span><span style="color:#6F42C1"> method</span><span style="color:#24292E">=</span><span style="color:#032F62">"POST"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">input</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"text"</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"id"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="5"><span style="color:#24292E">&lt;/</span><span style="color:#22863A">form</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="6">
-</data><data class="code-line" value="7"><span style="color:#D73A49">&lt;?</span><span style="color:#005CC5">php</span>
-</data><data class="code-line" value="8" style="--indent: 2ch;"><span style="color:#005CC5">  echo</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">'id'</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="9"><span style="color:#D73A49">?&gt;</span>
-</data></code></pre>
 
 `http://x.x.x.x/name.php`에 접속하여 입력란에 `test`를 입력하고 전송하면 다음과 같은 결과를 확인할 수 있다.
 
@@ -294,7 +255,6 @@ Ubuntu 설치 및 초기 세팅은 아래 영상의 가이드를 참고한다.
     }
   }
 </style>
-
 <p class="video">
   <iframe
     src="https://www.youtube.com/embed/JrNS3brSnmA?si=X5BHQNvEJULEvTPM"
@@ -402,39 +362,6 @@ Apache의 웹 루트에 해당하는 `/var/www/html` 경로에 로그인 기능�
   patchCodeLine(19, '<span style="color:#6A737D">      // Form Submission Directed to \'login_proc.php\' with POST Method</span>');
   patchCodeLine(22, '<span style="color:#6A737D">        // Input Fields for Username and Password, and the Submit Button</span>');
 </script>
-
-
-<pre><button class="copy-button"></button><code class="language-html" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// login.php</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#24292E">&lt;!</span><span style="color:#22863A">DOCTYPE</span><span style="color:#6F42C1"> html</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="4"><span style="color:#24292E">&lt;</span><span style="color:#22863A">html</span><span style="color:#6F42C1"> lang</span><span style="color:#24292E">=</span><span style="color:#032F62">"ko"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">head</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="6" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">meta</span><span style="color:#6F42C1"> charset</span><span style="color:#24292E">=</span><span style="color:#032F62">"UTF-8"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="7" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">meta</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"viewport"</span><span style="color:#6F42C1"> content</span><span style="color:#24292E">=</span><span style="color:#032F62">"width=device-width, initial-scale=1.0"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="8" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">title</span><span style="color:#24292E">&gt;Login Page&lt;/</span><span style="color:#22863A">title</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="9">
-</data><data class="code-line" value="10" style="--indent: 4ch;"><span style="color:#6A737D">    // External CSS File for Styling</span>
-</data><data class="code-line" value="11" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">link</span><span style="color:#6F42C1"> rel</span><span style="color:#24292E">=</span><span style="color:#032F62">"stylesheet"</span><span style="color:#6F42C1"> href</span><span style="color:#24292E">=</span><span style="color:#032F62">"style.css"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="12" style="--indent: 2ch;"><span style="color:#24292E">  &lt;/</span><span style="color:#22863A">head</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="13">
-</data><data class="code-line" value="14" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">body</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="15" style="--indent: 4ch;"><span style="color:#6A737D">    // Container that Holds the Login Form</span>
-</data><data class="code-line" value="16" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">div</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">"login-container"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="17" style="--indent: 6ch;"><span style="color:#24292E">      &lt;</span><span style="color:#22863A">h2</span><span style="color:#24292E">&gt;Login&lt;/</span><span style="color:#22863A">h2</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="18">
-</data><data class="code-line" value="19" style="--indent: 6ch;"><span style="color:#6A737D">      // Form Submission Directed to 'login_proc.php' with POST Method</span>
-</data><data class="code-line" value="20" style="--indent: 6ch;"><span style="color:#24292E">      &lt;</span><span style="color:#22863A">form</span><span style="color:#6F42C1"> action</span><span style="color:#24292E">=</span><span style="color:#032F62">"login_proc.php"</span><span style="color:#6F42C1"> method</span><span style="color:#24292E">=</span><span style="color:#032F62">"POST"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="21">
-</data><data class="code-line" value="22" style="--indent: 8ch;"><span style="color:#6A737D">        // Input Fields for Username and Password, and the Submit Button</span>
-</data><data class="code-line" value="23" style="--indent: 8ch;"><span style="color:#24292E">        &lt;</span><span style="color:#22863A">input</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"text"</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"username"</span><span style="color:#6F42C1"> placeholder</span><span style="color:#24292E">=</span><span style="color:#032F62">"ID"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="24" style="--indent: 8ch;"><span style="color:#24292E">        &lt;</span><span style="color:#22863A">input</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"password"</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"password"</span><span style="color:#6F42C1"> placeholder</span><span style="color:#24292E">=</span><span style="color:#032F62">"PW"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="25" style="--indent: 8ch;"><span style="color:#24292E">        &lt;</span><span style="color:#22863A">button</span><span style="color:#6F42C1"> type</span><span style="color:#24292E">=</span><span style="color:#032F62">"submit"</span><span style="color:#24292E">&gt;Login&lt;/</span><span style="color:#22863A">button</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="26"><span style="color:#24292E">        </span>
-</data><data class="code-line" value="27" style="--indent: 6ch;"><span style="color:#24292E">      &lt;/</span><span style="color:#22863A">form</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="28" style="--indent: 4ch;"><span style="color:#24292E">    &lt;/</span><span style="color:#22863A">div</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="29" style="--indent: 2ch;"><span style="color:#24292E">  &lt;/</span><span style="color:#22863A">body</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="30"><span style="color:#24292E">&lt;/</span><span style="color:#22863A">html</span><span style="color:#24292E">&gt;</span>
-</data></code></pre>
 
 <br>
 
@@ -607,49 +534,6 @@ Apache의 웹 루트에 해당하는 `/var/www/html` 경로에 로그인 기능�
   patchCodeLine(39, '<span style="color:#6A737D">      // Link to Return to the Login Page</span>');
 </script>
 
-<pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// login_proc.php</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#D73A49">&lt;?</span><span style="color:#005CC5">php</span>
-</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#6A737D">  // Initialize Message Variable</span>
-</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#24292E">  $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> ""</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="6">
-</data><data class="code-line" value="7" style="--indent: 2ch;"><span style="color:#6A737D">  // Get Username and Password from POST Request</span>
-</data><data class="code-line" value="8" style="--indent: 2ch;"><span style="color:#24292E">  $username </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">"username"</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="9" style="--indent: 2ch;"><span style="color:#24292E">  $password </span><span style="color:#D73A49">=</span><span style="color:#24292E"> $_POST[</span><span style="color:#032F62">"password"</span><span style="color:#24292E">];</span>
-</data><data class="code-line" value="10">
-</data><data class="code-line" value="11" style="--indent: 2ch;"><span style="color:#6A737D">  // Check if Credentials Match</span>
-</data><data class="code-line" value="12" style="--indent: 2ch;"><span style="color:#D73A49">  if</span><span style="color:#24292E"> ($username </span><span style="color:#D73A49">==</span><span style="color:#032F62"> "test"</span><span style="color:#D73A49"> &amp;&amp;</span><span style="color:#24292E"> $password </span><span style="color:#D73A49">==</span><span style="color:#032F62"> "test"</span><span style="color:#24292E">) {</span>
-</data><data class="code-line" value="13" style="--indent: 4ch;"><span style="color:#6A737D">    // Successful Login Message</span>
-</data><data class="code-line" value="14" style="--indent: 4ch;"><span style="color:#24292E">    $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: green;'</span><span style="color:#24292E">&gt;Login Successful!&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="15" style="--indent: 2ch;"><span style="color:#24292E">  } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="16" style="--indent: 4ch;"><span style="color:#6A737D">    // Failed Login Message</span>
-</data><data class="code-line" value="17" style="--indent: 4ch;"><span style="color:#24292E">    $message </span><span style="color:#D73A49">=</span><span style="color:#032F62"> "</span><span style="color:#24292E">&lt;</span><span style="color:#22863A">p</span><span style="color:#6F42C1"> style</span><span style="color:#24292E">=</span><span style="color:#032F62">'color: red;'</span><span style="color:#24292E">&gt;Login Failed. Please Try Again.&lt;/</span><span style="color:#22863A">p</span><span style="color:#24292E">&gt;</span><span style="color:#032F62">"</span><span style="color:#24292E">;</span></data><data class="code-line" value="18" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
-</data><data class="code-line" value="19"><span style="color:#D73A49">?&gt;</span>
-</data><data class="code-line" value="20">
-</data><data class="code-line" value="21"><span style="color:#24292E">&lt;!</span><span style="color:#22863A">DOCTYPE</span><span style="color:#6F42C1"> html</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="22"><span style="color:#24292E">&lt;</span><span style="color:#22863A">html</span><span style="color:#6F42C1"> lang</span><span style="color:#24292E">=</span><span style="color:#032F62">"ko"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="23" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">head</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="24" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">meta</span><span style="color:#6F42C1"> charset</span><span style="color:#24292E">=</span><span style="color:#032F62">"UTF-8"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="25" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">meta</span><span style="color:#6F42C1"> name</span><span style="color:#24292E">=</span><span style="color:#032F62">"viewport"</span><span style="color:#6F42C1"> content</span><span style="color:#24292E">=</span><span style="color:#032F62">"width=device-width, initial-scale=1.0"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="26" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">title</span><span style="color:#24292E">&gt;Login Result&lt;/</span><span style="color:#22863A">title</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="27">
-</data><data class="code-line" value="28" style="--indent: 4ch;"><span style="color:#6A737D">    // External CSS File for Styling</span>
-</data><data class="code-line" value="29" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">link</span><span style="color:#6F42C1"> rel</span><span style="color:#24292E">=</span><span style="color:#032F62">"stylesheet"</span><span style="color:#6F42C1"> href</span><span style="color:#24292E">=</span><span style="color:#032F62">"style.css"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="30" style="--indent: 2ch;"><span style="color:#24292E">  &lt;/</span><span style="color:#22863A">head</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="31">
-</data><data class="code-line" value="32" style="--indent: 2ch;"><span style="color:#24292E">  &lt;</span><span style="color:#22863A">body</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="33" style="--indent: 4ch;"><span style="color:#6A737D">    // Container that Displays the Login Result</span>
-</data><data class="code-line" value="34" style="--indent: 4ch;"><span style="color:#24292E">    &lt;</span><span style="color:#22863A">div</span><span style="color:#6F42C1"> class</span><span style="color:#24292E">=</span><span style="color:#032F62">"login-container"</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="35"><span style="color:#24292E">      </span>
-</data><data class="code-line" value="36" style="--indent: 6ch;"><span style="color:#6A737D">      // Display Login Message(Success or Failure)</span>
-</data><data class="code-line" value="37" style="--indent: 6ch;"><span style="color:#D73A49">      &lt;?</span><span style="color:#005CC5">php</span><span style="color:#005CC5"> echo</span><span style="color:#24292E"> $message; </span><span style="color:#D73A49">?&gt;</span>
-</data><data class="code-line" value="38">
-</data><data class="code-line" value="39" style="--indent: 6ch;"><span style="color:#6A737D">      // Link to Return to the Login Page</span>
-</data><data class="code-line" value="40" style="--indent: 6ch;"><span style="color:#24292E">      &lt;</span><span style="color:#22863A">a</span><span style="color:#6F42C1"> href</span><span style="color:#24292E">=</span><span style="color:#032F62">"login.php"</span><span style="color:#24292E">&gt;Back to Login Page&lt;/</span><span style="color:#22863A">a</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="41" style="--indent: 4ch;"><span style="color:#24292E">    &lt;/</span><span style="color:#22863A">div</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="42" style="--indent: 2ch;"><span style="color:#24292E">  &lt;/</span><span style="color:#22863A">body</span><span style="color:#24292E">&gt;</span>
-</data><data class="code-line" value="43"><span style="color:#24292E">&lt;/</span><span style="color:#22863A">html</span><span style="color:#24292E">&gt;</span>
-</data></code></pre>
-
 <br>
 
 #### 3. 스타일 정의(style.css)
@@ -744,67 +628,6 @@ a {
     '<span style="color:#24292E">;</span>',
   ].join(''));
 </script>
-
-<pre><button class="copy-button"></button><code class="language-css" highlighted><data class="code-line" value="1"><span style="color:#6A737D">/* style.css */</span>
-</data><data class="code-line" value="2">
-</data><data class="code-line" value="3"><span style="color:#22863A">body</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="4" style="--indent: 2ch;"><span style="color:#005CC5">  display</span><span style="color:#24292E">: </span><span style="color:#005CC5">flex</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="5" style="--indent: 2ch;"><span style="color:#005CC5">  height</span><span style="color:#24292E">: </span><span style="color:#005CC5">100</span><span style="color:#D73A49">%</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="6" style="--indent: 2ch;"><span style="color:#005CC5">  margin</span><span style="color:#24292E">: </span><span style="color:#005CC5">0</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="7" style="--indent: 2ch;"><span style="color:#005CC5">  background-color</span><span style="color:#24292E">: </span><span style="color:#005CC5">gray</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="8" style="--indent: 2ch;"><span style="color:#005CC5">  font-family</span><span style="color:#24292E">: </span><span style="color:#005CC5">Arial</span><span style="color:#24292E">, </span><span style="color:#005CC5">sans-serif</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="9" style="--indent: 2ch;"><span style="color:#005CC5">  justify-content</span><span style="color:#24292E">: </span><span style="color:#005CC5">center</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="10" style="--indent: 2ch;"><span style="color:#005CC5">  align-items</span><span style="color:#24292E">: </span><span style="color:#005CC5">center</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="11"><span style="color:#24292E">}</span>
-</data><data class="code-line" value="12">
-</data><data class="code-line" value="13"><span style="color:#6F42C1">.login-container</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="14" style="--indent: 2ch;"><span style="color:#005CC5">  width</span><span style="color:#24292E">: </span><span style="color:#005CC5">300</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="15" style="--indent: 2ch;"><span style="color:#005CC5">  padding</span><span style="color:#24292E">: </span><span style="color:#005CC5">30</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="16" style="--indent: 2ch;"><span style="color:#005CC5">  border-radius</span><span style="color:#24292E">: </span><span style="color:#005CC5">8</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="17" style="--indent: 2ch;"><span style="color:#005CC5">  background-color</span><span style="color:#24292E">: </span><span style="color:#005CC5">white</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="18" style="--indent: 2ch;"><span style="color:#005CC5">  box-shadow</span><span style="color:#24292E">: </span><span style="color:#005CC5">0</span><span style="color:#005CC5"> 4</span><span style="color:#D73A49">px</span><span style="color:#005CC5"> 8</span><span style="color:#D73A49">px</span><span style="color:#005CC5"> rgba</span><span style="color:#24292E">(</span><span style="color:#005CC5">0</span><span style="color:#24292E">, </span><span style="color:#005CC5">0</span><span style="color:#24292E">, </span><span style="color:#005CC5">0</span><span style="color:#24292E">, </span><span style="color:#005CC5">0.1</span><span style="color:#24292E">);</span>
-</data><data class="code-line" value="19" style="--indent: 2ch;"><span style="color:#005CC5">  text-align</span><span style="color:#24292E">: </span><span style="color:#005CC5">center</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="20"><span style="color:#24292E">}</span>
-</data><data class="code-line" value="21">
-</data><data class="code-line" value="22"><span style="color:#22863A">input</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="23" style="--indent: 2ch;"><span style="color:#005CC5">  width</span><span style="color:#24292E">: </span><span style="color:#005CC5">100</span><span style="color:#D73A49">%</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="24" style="--indent: 2ch;"><span style="color:#005CC5">  margin</span><span style="color:#24292E">: </span><span style="color:#005CC5">10</span><span style="color:#D73A49">px</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="25" style="--indent: 2ch;"><span style="color:#005CC5">  padding</span><span style="color:#24292E">: </span><span style="color:#005CC5">10</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="26" style="--indent: 2ch;"><span style="color:#005CC5">  border</span><span style="color:#24292E">: </span><span style="color:#005CC5">1</span><span style="color:#D73A49">px</span><span style="color:#005CC5"> solid</span><span style="color:#005CC5"> gray</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="27" style="--indent: 2ch;"><span style="color:#005CC5">  border-radius</span><span style="color:#24292E">: </span><span style="color:#005CC5">4</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="28" style="--indent: 2ch;"><span style="color:#005CC5">  box-sizing</span><span style="color:#24292E">: </span><span style="color:#005CC5">border-box</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="29"><span style="color:#24292E">}</span>
-</data><data class="code-line" value="30">
-</data><data class="code-line" value="31"><span style="color:#22863A">button</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="32" style="--indent: 2ch;"><span style="color:#005CC5">  width</span><span style="color:#24292E">: </span><span style="color:#005CC5">100</span><span style="color:#D73A49">%</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="33" style="--indent: 2ch;"><span style="color:#005CC5">  margin</span><span style="color:#24292E">: </span><span style="color:#005CC5">10</span><span style="color:#D73A49">px</span><span style="color:#005CC5"> 0</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="34" style="--indent: 2ch;"><span style="color:#005CC5">  padding</span><span style="color:#24292E">: </span><span style="color:#005CC5">10</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="35" style="--indent: 2ch;"><span style="color:#005CC5">  border</span><span style="color:#24292E">: </span><span style="color:#005CC5">none</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="36" style="--indent: 2ch;"><span style="color:#005CC5">  border-radius</span><span style="color:#24292E">: </span><span style="color:#005CC5">4</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="37" style="--indent: 2ch;"><span style="color:#005CC5">  background-color</span><span style="color:#24292E">: </span><span style="color:#005CC5">#a78bfa</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="38" style="--indent: 2ch;"><span style="color:#005CC5">  color</span><span style="color:#24292E">: </span><span style="color:#005CC5">white</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="39" style="--indent: 2ch;"><span style="color:#005CC5">  font-size</span><span style="color:#24292E">: </span><span style="color:#005CC5">16</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="40" style="--indent: 2ch;"><span style="color:#005CC5">  cursor</span><span style="color:#24292E">: </span><span style="color:#005CC5">pointer</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="41">
-</data><data class="code-line" value="42" style="--indent: 2ch;"><span style="color:#22863A">  &amp;</span><span style="color:#6F42C1">:hover</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="43" style="--indent: 4ch;"><span style="color:#005CC5">    background-color</span><span style="color:#24292E">: </span><span style="color:#005CC5">#8b5cf6</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="44" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
-</data><data class="code-line" value="45"><span style="color:#24292E">}</span>
-</data><data class="code-line" value="46">
-</data><data class="code-line" value="47"><span style="color:#22863A">a</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="48" style="--indent: 2ch;"><span style="color:#005CC5">  display</span><span style="color:#24292E">: </span><span style="color:#005CC5">inline-block</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="49" style="--indent: 2ch;"><span style="color:#005CC5">  margin-top</span><span style="color:#24292E">: </span><span style="color:#005CC5">20</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="50" style="--indent: 2ch;"><span style="color:#005CC5">  padding</span><span style="color:#24292E">: </span><span style="color:#005CC5">10</span><span style="color:#D73A49">px</span><span style="color:#005CC5"> 20</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="51" style="--indent: 2ch;"><span style="color:#005CC5">  border-radius</span><span style="color:#24292E">: </span><span style="color:#005CC5">4</span><span style="color:#D73A49">px</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="52" style="--indent: 2ch;"><span style="color:#005CC5">  background-color</span><span style="color:#24292E">: </span><span style="color:#005CC5">#a78bfa</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="53" style="--indent: 2ch;"><span style="color:#005CC5">  color</span><span style="color:#24292E">: </span><span style="color:#005CC5">white</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="54" style="--indent: 2ch;"><span style="color:#005CC5">  text-decoration</span><span style="color:#24292E">: </span><span style="color:#005CC5">none</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="55">
-</data><data class="code-line" value="56" style="--indent: 2ch;"><span style="color:#22863A">  &amp;</span><span style="color:#6F42C1">:hover</span><span style="color:#24292E"> {</span>
-</data><data class="code-line" value="57" style="--indent: 4ch;"><span style="color:#005CC5">    background-color</span><span style="color:#24292E">: </span><span style="color:#005CC5">#8b5cf6</span><span style="color:#24292E">;</span>
-</data><data class="code-line" value="58" style="--indent: 2ch;"><span style="color:#24292E">  }</span>
-</data><data class="code-line" value="59"><span style="color:#24292E">}</span>
-</data></code></pre>
 
 <br>
 
