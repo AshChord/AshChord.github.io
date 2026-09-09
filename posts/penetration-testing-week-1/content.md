@@ -49,6 +49,61 @@ URL의 파일 경로는 <strong>웹 루트(Web Root)</strong>라 불리는 특�
 
 다음과 같은 `score.php` 파일을 생각해 보자.
 
+<style id="code-1">
+  #code-1 + pre data[value="1"] span {color: #6A737D !important;}
+</style>
+```html
+// score.php
+
+<html>
+  <h1>Score</h1>
+  <h2>Name: <?php echo $_GET['name']; ?></h2>
+</html>
+```
+<script>
+  (() => {
+    window.patchCodeLine = (lineNumber, override) => {
+      const code = document.currentScript.previousElementSibling.querySelector('code');
+
+      const patch = () => {
+        if (code.classList.contains('language-html')) {
+          code.classList.replace('language-html', 'language-php');
+        }
+
+        const line = code.querySelector(`.code-line[value="${lineNumber}"]`);
+        const lineContent = new DOMParser().parseFromString(override, 'text/html');
+
+        line.replaceChildren(...lineContent.body.childNodes);
+        line.appendChild(document.createTextNode('\n'));
+
+        observer.disconnect();
+      };
+
+      const observer = new MutationObserver(patch);
+
+      observer.observe(code, { attributes: true, attributeFilter: ['highlighted'] });
+
+      if (code.hasAttribute('highlighted')) patch();
+    };
+
+    patchCodeLine(5, [
+      '<span style="color:#24292E">  &lt;</span>',
+      '<span style="color:#22863A">h2</span>',
+      '<span style="color:#24292E">&gt;Name: </span>',
+      '<span style="color:#D73A49">&lt;?</span>',
+      '<span style="color:#005CC5">php</span>',
+      '<span style="color:#005CC5"> echo</span>',
+      '<span style="color:#24292E"> $_GET[</span>',
+      '<span style="color:#032F62">\'name\'</span>',
+      '<span style="color:#24292E">]; </span>',
+      '<span style="color:#D73A49">?&gt;</span>',
+      '<span style="color:#24292E">&lt;/</span>',
+      '<span style="color:#22863A">h2</span>',
+      '<span style="color:#24292E">&gt;</span>'
+    ].join(''));
+  })();
+</script>
+
 <pre><button class="copy-button"></button><code class="language-html" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// score.php</span>
 </data><data class="code-line" value="2">
 </data><data class="code-line" value="3"><span style="color:#24292E">&lt;</span><span style="color:#22863A">html</span><span style="color:#24292E">&gt;</span>
@@ -64,6 +119,18 @@ URL의 형태에서 알 수 있듯이, **GET 방식**은 클라이언트가 서�
 > 쿼리 스트링의 파라미터가 여러 개인 경우, `name=testee&score=100`과 같이 `&`로 구분한다.
 
 웹 서버가 `score.php`를 요청받으면, 파일 내의 PHP 구문(동적 웹 페이지 생성 코드)를 확인하고 해당 처리를 WAS에 위임한다. WAS는 PHP 코드를 실행한 결과를 웹 서버에 반환하며, 이때의 `score.php`는 다음과 같은 정적인 HTML 형식으로 변환된다.
+
+```html
+// score.php
+
+<html>
+  <h1>Score</h1>
+  <h2>Name: testee</h2>
+</html>
+```
+<script>
+  patchCodeLine(1, '<span style="color:#6A737D">// score.php</span>');
+</script>
 
 <pre><button class="copy-button"></button><code class="language-html" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// score.php</span>
 </data><data class="code-line" value="2">
@@ -82,6 +149,30 @@ URL의 형태에서 알 수 있듯이, **GET 방식**은 클라이언트가 서�
 
 GET 방식으로 데이터를 전달할 때 반드시 URL에 직접 쿼리 스트링을 작성할 필요는 없다.  
 아래의 `name.php` 파일을 보자.
+
+<style id="code-2">
+  #code-2 + pre data[value="1"] span {color: #6A737D !important;}
+</style>
+```html
+// name.php
+
+<form method="GET">
+  <input type="text" name="id">
+</form>
+
+<?php echo $_GET['id']; ?>
+```
+<script>
+  patchCodeLine(7, [
+    '<span style="color:#D73A49">&lt;?</span>',
+    '<span style="color:#005CC5">php</span>',
+    '<span style="color:#005CC5"> echo</span>',
+    '<span style="color:#24292E"> $_GET[</span>',
+    '<span style="color:#032F62">\'id\'</span>',
+    '<span style="color:#24292E">]; </span>',
+    '<span style="color:#D73A49">?&gt;</span>'
+  ].join(''));
+</script>
 
 <pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// name.php</span>
 </data><data class="code-line" value="2">
@@ -106,6 +197,31 @@ GET 방식으로 데이터를 전달할 때 반드시 URL에 직접 쿼리 스�
 이와 같이, `<form>` 태그를 이용해 GET 방식으로 데이터를 전달할 수 있다.
 
 그렇다면 **POST 방식**은 무엇일까? `name.php`를 다음과 같이 수정해 보자.
+
+<style id="code-3">
+  #code-3 + pre data[value="1"] span {color: #6A737D !important;}
+</style>
+```html
+// name.php
+
+<form method="POST">
+  <input type="text" name="id">
+</form>
+
+<?php echo $_POST['id']; ?>
+```
+<script>
+  patchCodeLine(7, [
+    '<span style="color:#D73A49">&lt;?</span>',
+    '<span style="color:#005CC5">php</span>',
+    '<span style="color:#005CC5"> echo</span>',
+    '<span style="color:#24292E"> $_POST[</span>',
+    '<span style="color:#032F62">\'id\'</span>',
+    '<span style="color:#24292E">]; </span>',
+    '<span style="color:#D73A49">?&gt;</span>'
+  ].join(''));
+</script>
+
 
 <pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// name.php</span>
 </data><data class="code-line" value="2">
@@ -247,6 +363,47 @@ Apache의 웹 루트에 해당하는 `/var/www/html` 경로에 로그인 기능�
 `login.php` 파일은 사용자로부터 아이디와 비밀번호를 입력받는 간단한 HTML 입력 양식으로 구성되어 있다.  
 데이터를 입력하면 POST 방식을 통해 `login_proc.php`로 전송된다.
 
+```html
+// login.php
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    // External CSS File for Styling
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    // Container that Holds the Login Form
+    <div class="login-container">
+      <h2>Login</h2>
+
+      // Form Submission Directed to 'login_proc.php' with POST Method
+      <form action="login_proc.php" method="POST">
+
+        // Input Fields for Username and Password, and the Submit Button
+        <input type="text" name="username" placeholder="ID">
+        <input type="password" name="password" placeholder="PW">
+        <button type="submit">Login</button>
+        
+      </form>
+    </div>
+  </body>
+</html>
+```
+<script>
+  patchCodeLine(1, '<span style="color:#6A737D">// login.php</span>');
+  patchCodeLine(10, '<span style="color:#6A737D">    // External CSS File for Styling</span>');
+  patchCodeLine(15, '<span style="color:#6A737D">    // Container that Holds the Login Form</span>');
+  patchCodeLine(19, '<span style="color:#6A737D">      // Form Submission Directed to \'login_proc.php\' with POST Method</span>');
+  patchCodeLine(22, '<span style="color:#6A737D">        // Input Fields for Username and Password, and the Submit Button</span>');
+</script>
+
+
 <pre><button class="copy-button"></button><code class="language-html" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// login.php</span>
 </data><data class="code-line" value="2">
 </data><data class="code-line" value="3"><span style="color:#24292E">&lt;!</span><span style="color:#22863A">DOCTYPE</span><span style="color:#6F42C1"> html</span><span style="color:#24292E">&gt;</span>
@@ -285,6 +442,170 @@ Apache의 웹 루트에 해당하는 `/var/www/html` 경로에 로그인 기능�
 
 `login_proc.php`에서는 전달받은 아이디와 비밀번호를 확인하여 로그인 성공 여부를 판단한다.  
 예시에서는 간단한 하드코딩 방식으로 처리하였다.
+
+```html
+// login_proc.php
+
+<?php
+  // Initialize Message Variable
+  $message = "";
+
+  // Get Username and Password from POST Request
+  $username = $_POST["username"];
+  $password = $_POST["password"];
+
+  // Check if Credentials Match
+  if ($username == "test" && $password == "test") {
+    // Successful Login Message
+    $message = "<p style='color: green;'>Login Successful!</p>";
+  } else {
+    // Failed Login Message
+    $message = "<p style='color: red;'>Login Failed. Please Try Again.</p>";
+  }
+?>
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Result</title>
+
+    // External CSS File for Styling
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    // Container that Displays the Login Result
+    <div class="login-container">
+      
+      // Display Login Message(Success or Failure)
+      <?php echo $message; ?>
+
+      // Link to Return to the Login Page
+      <a href="login.php">Back to Login Page</a>
+    </div>
+  </body>
+</html>
+```
+<script>
+  patchCodeLine(1, '<span style="color:#6A737D">// login_proc.php</span>');
+
+  patchCodeLine(3, [
+    '<span style="color:#D73A49">&lt;?</span>',
+    '<span style="color:#005CC5">php</span>'
+  ].join(''));
+
+  patchCodeLine(4, '<span style="color:#6A737D">  // Initialize Message Variable</span>');
+
+  patchCodeLine(5, [
+    '<span style="color:#24292E">  $message </span>',
+    '<span style="color:#D73A49">=</span>',
+    '<span style="color:#032F62"> ""</span>',
+    '<span style="color:#24292E">;</span>'
+  ].join(''));
+
+  patchCodeLine(7, '<span style="color:#6A737D">  // Get Username and Password from POST Request</span>');
+
+  patchCodeLine(8, [
+    '<span style="color:#24292E">  $username </span>',
+    '<span style="color:#D73A49">=</span>',
+    '<span style="color:#24292E"> $_POST[</span>',
+    '<span style="color:#032F62">"username"</span>',
+    '<span style="color:#24292E">];</span>'
+  ].join(''));
+
+  patchCodeLine(9, [
+    '<span style="color:#24292E">  $password </span>',
+    '<span style="color:#D73A49">=</span>',
+    '<span style="color:#24292E"> $_POST[</span>',
+    '<span style="color:#032F62">"password"</span>',
+    '<span style="color:#24292E">];</span>'
+  ].join(''));
+
+  patchCodeLine(11, '<span style="color:#6A737D">  // Check if Credentials Match</span>');
+
+  patchCodeLine(12, [
+    '<span style="color:#D73A49">  if</span>',
+    '<span style="color:#24292E"> ($username </span>',
+    '<span style="color:#D73A49">==</span>',
+    '<span style="color:#032F62"> "test"</span>',
+    '<span style="color:#D73A49"> &amp;&amp;</span>',
+    '<span style="color:#24292E"> $password </span>',
+    '<span style="color:#D73A49">==</span>',
+    '<span style="color:#032F62"> "test"</span>',
+    '<span style="color:#24292E">) {</span>'
+  ].join(''));
+
+  patchCodeLine(13, '<span style="color:#6A737D">    // Successful Login Message</span>');
+
+  patchCodeLine(14, [
+    '<span style="color:#24292E">    $message </span>',
+    '<span style="color:#D73A49">=</span>',
+    '<span style="color:#032F62"> "</span>',
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">p</span>',
+    '<span style="color:#6F42C1"> style</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">\'color: green;\'</span>',
+    '<span style="color:#24292E">&gt;Login Successful!&lt;/</span>',
+    '<span style="color:#22863A">p</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#032F62">"</span>',
+    '<span style="color:#24292E">;</span>'
+  ].join(''));
+
+  patchCodeLine(15, [
+    '<span style="color:#24292E">  } </span>',
+    '<span style="color:#D73A49">else</span>',
+    '<span style="color:#24292E"> {</span>'
+  ].join(''));
+
+  patchCodeLine(16, '<span style="color:#6A737D">    // Failed Login Message</span>');
+
+  patchCodeLine(17, [
+    '<span style="color:#24292E">    $message </span>',
+    '<span style="color:#D73A49">=</span>',
+    '<span style="color:#032F62"> "</span>',
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">p</span>',
+    '<span style="color:#6F42C1"> style</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">\'color: red;\'</span>',
+    '<span style="color:#24292E">&gt;Login Failed. Please Try Again.&lt;/</span>',
+    '<span style="color:#22863A">p</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#032F62">"</span>',
+    '<span style="color:#24292E">;</span>'
+  ].join(''));
+
+  patchCodeLine(19, '<span style="color:#D73A49">?&gt;</span>');
+
+  patchCodeLine(28, '<span style="color:#6A737D">    // External CSS File for Styling</span>');
+
+  patchCodeLine(33, '<span style="color:#6A737D">    // Container that Displays the Login Result</span>');
+
+  patchCodeLine(34, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#6F42C1"> class</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"login-container"</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(36, '<span style="color:#6A737D">      // Display Login Message(Success or Failure)</span>');
+
+  patchCodeLine(37, [
+    '<span style="color:#D73A49">      &lt;?</span>',
+    '<span style="color:#005CC5">php</span>',
+    '<span style="color:#005CC5"> echo</span>',
+    '<span style="color:#24292E"> $message; </span>',
+    '<span style="color:#D73A49">?&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(39, '<span style="color:#6A737D">      // Link to Return to the Login Page</span>');
+</script>
 
 <pre><button class="copy-button"></button><code class="language-php" highlighted><data class="code-line" value="1"><span style="color:#6A737D">// login_proc.php</span>
 </data><data class="code-line" value="2">
@@ -334,6 +655,95 @@ Apache의 웹 루트에 해당하는 `/var/www/html` 경로에 로그인 기능�
 #### 3. 스타일 정의(style.css)
 
 로그인 양식의 레이아웃과 색상, 버튼 스타일 등은 `style.css`를 통해 지정하였다.
+
+```css
+/* style.css */
+
+body {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  background-color: gray;
+  font-family: Arial, sans-serif;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  width: 300px;
+  padding: 30px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #a78bfa;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #8b5cf6;
+  }
+}
+
+a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  background-color: #a78bfa;
+  color: white;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #8b5cf6;
+  }
+}
+```
+<script>
+  patchCodeLine(42, [
+    '<span style="color:#22863A">  &amp;</span>',
+    '<span style="color:#6F42C1">:hover</span>',
+    '<span style="color:#24292E"> {</span>',
+  ].join(''));
+
+  patchCodeLine(43, [
+    '<span style="color:#005CC5">    background-color</span>',
+    '<span style="color:#24292E">: </span>',
+    '<span style="color:#005CC5">#8b5cf6</span>',
+    '<span style="color:#24292E">;</span>',
+  ].join(''));
+
+  patchCodeLine(56, [
+    '<span style="color:#22863A">  &amp;</span>',
+    '<span style="color:#6F42C1">:hover</span>',
+    '<span style="color:#24292E"> {</span>',
+  ].join(''));
+
+  patchCodeLine(57, [
+    '<span style="color:#005CC5">    background-color</span>',
+    '<span style="color:#24292E">: </span>',
+    '<span style="color:#005CC5">#8b5cf6</span>',
+    '<span style="color:#24292E">;</span>',
+  ].join(''));
+</script>
 
 <pre><button class="copy-button"></button><code class="language-css" highlighted><data class="code-line" value="1"><span style="color:#6A737D">/* style.css */</span>
 </data><data class="code-line" value="2">
