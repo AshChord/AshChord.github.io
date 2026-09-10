@@ -113,7 +113,7 @@ CTF를 해결하며 CSRF 공격을 실습해 보자.
 
 ![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/2.webp){:style="padding: 0 25%; background-color: white;"}
 
-링크의 주소로 접속하면 회원제 게시판 애플리케이션으로 이동한다.
+링크를 통해 접속하면 회원제 게시판 애플리케이션으로 이동한다.
 
 회원 가입을 진행하여 `any`/`any` 계정을 생성하고, 로그인 후 계정 정보가 포함된 마이페이지로 이동하였다.
 
@@ -170,7 +170,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/12.webp){:style="padding: 0 25%; background-color: white;"}
 
-링크의 주소로 접속하여 `any`/`any` 계정을 생성해 로그인한 후, 마이페이지에서 비밀번호를 변경해 보았다.
+링크를 통해 접속하여 `any`/`any` 계정을 생성해 로그인한 후, 마이페이지에서 비밀번호를 변경해 보았다.
 
 ![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/13.webp)
 ![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/14.webp)
@@ -228,7 +228,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![GET Admin 3](/posts/Penetration%20Testing%20%7C%20Week%2012/22.webp){:style="padding: 0 25%; background-color: white;"}
 
-링크의 주소로 접속하여 `any`/`any` 계정을 생성해 로그인한 후, 마이페이지에서 비밀번호를 변경해 보았다.
+링크를 통해 접속하여 `any`/`any` 계정을 생성해 로그인한 후, 마이페이지에서 비밀번호를 변경해 보았다.
 
 ![GET Admin 3](/posts/Penetration%20Testing%20%7C%20Week%2012/23.webp)
 ![GET Admin 3](/posts/Penetration%20Testing%20%7C%20Week%2012/24.webp)

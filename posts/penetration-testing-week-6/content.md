@@ -23,7 +23,6 @@
 | 3    | GOOGL  | Alphabet(Google) | $1.9T      |
 | 4    | AMZN   | Amazon           | $1.7T      |
 | 5    | NVDA   | NVIDIA           | $1.5T      |
-
 <script>
   (() => {
     const script = document.currentScript;
@@ -43,8 +42,6 @@
     }
   })();
 </script>
-
-
 
 `UNION`의 문법은 다음과 같이 정리할 수 있다.
 
@@ -316,8 +313,7 @@ SELECT DATABASE();
 현재 사용 중인 `segfault_sql` 데이터베이스에 존재하는 테이블명을 조회하는 쿼리는 다음과 같다.
 
 ```sql
-SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES
-WHERE TABLE_SCHEMA = 'segfault_sql';
+SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'segfault_sql';
 ```
 
 그렇다면, 앞선 방식과 유사하게 `Over%' union select 1, 2, 3, table_name from information_schema.tables where table_schema = 'segfault_sql'#`을 입력해 보자.
@@ -337,8 +333,7 @@ WHERE TABLE_SCHEMA = 'segfault_sql';
 `member` 테이블의 컬럼명을 조회하는 쿼리는 다음과 같다.
 
 ```sql
-SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_NAME = 'member';
+SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'member';
 ```
 
 마찬가지 방식으로 `Over%' union select 1, 2, 3, column_name from information_schema.columns where table_name = 'member'#`를 입력해 보자.
@@ -375,7 +370,7 @@ CTF를 해결하며 지금까지 학습한 내용을 바탕으로 인증 우회 
 
 ![Login Bypass 3](/posts/penetration-testing-week-6/assets/16.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하여 로그인을 시도해 보았다.
+링크를 통해 접속하여 로그인을 시도해 보았다.
 
 ![Login Bypass 3](/posts/penetration-testing-week-6/assets/17.webp)
 ![Login Bypass 3](/posts/penetration-testing-week-6/assets/18.webp)
@@ -417,7 +412,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![Login Bypass 4](/posts/penetration-testing-week-6/assets/24.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하여 로그인을 시도해 보았다.
+링크를 통해 접속하여 로그인을 시도해 보았다.
 
 | `UserId`                       | `Password` | 결과      |
 |--------------------------------|------------|----------|
@@ -485,7 +480,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![Login Bypass 5](/posts/penetration-testing-week-6/assets/31.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하여 로그인을 시도해 보았다.
+링크를 통해 접속하여 로그인을 시도해 보았다.
 
 ![Login Bypass 5](/posts/penetration-testing-week-6/assets/32.webp)
 
@@ -508,7 +503,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![SQL Injection 1](/posts/penetration-testing-week-6/assets/35.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
+링크를 통해 접속하면 다음과 같은 웹 페이지로 이동한다.
 
 ![SQL Injection 1](/posts/penetration-testing-week-6/assets/36.webp)
 
@@ -606,7 +601,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![SQL Injection 2](/posts/penetration-testing-week-6/assets/48.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 SQL Injection 1과 유사한 형태의 웹 페이지로 이동한다.
+링크를 통해 접속하면 SQL Injection 1과 유사한 형태의 웹 페이지로 이동한다.
 
 ![SQL Injection 2](/posts/penetration-testing-week-6/assets/49.webp)
 

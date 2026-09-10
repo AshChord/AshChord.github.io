@@ -29,7 +29,7 @@
 ...
 ```
 
-위 코드에서는 `login_id` 파라미터의 존재 여부를 확인한다. 해당 값이 비어 있다면 로그인되지 않은 상태로 판단하고, `login.php`로 리다이렉트한다.
+위 코드에서는 `login_id` 파라미터의 값이 할당되어 있는지 확인한다. 해당 값이 비어 있다면 로그인되지 않은 상태로 판단하고, `login.php`로 리다이렉트한다.
 - `header()` 함수는 HTTP 응답 헤더에 `Location: login.php`를 추가하여 사용자가 `login.php` 페이지로 이동하도록 하는 역할을 수행한다.
 - `exit`은 스크립트 실행을 종료하는 명령어로, 리다이렉션 후 `header()` 뒤의 코드가 불필요하게 노출되거나 실행되는 것을 방지하기 위해 사용된다.
 
@@ -67,7 +67,7 @@ if (isset($_POST['Submit'])) {
 
 ### 데이터베이스
 
-**데이터베이스**란 웹 애플리케이션에서 필요한 데이터를 저장 및 관리하는 시스템을 말한다. 흔히 사용하는 엑셀 프로그램과 구조적으로 유사한 점이 있는데, 데이터베이스의 주요 개념은 엑셀의 구성 요소와 다음과 같이 비교할 수 있다.
+**데이터베이스**란 웹 애플리케이션에서 필요한 데이터를 저장 및 관리하는 시스템을 말한다. 흔히 사용하는 엑셀과 구조적으로 유사한 점이 있는데, 데이터베이스의 주요 개념은 엑셀의 구성 요소와 다음과 같이 비교할 수 있다.
 
 | 데이터베이스 주요 개념 | 엑셀 구성 요소 | 설명 |
 | --- | --- | --- |
@@ -91,7 +91,7 @@ if (isset($_POST['Submit'])) {
 ### SQL
 
 <strong>SQL(Structured Query Language)</strong>은 데이터베이스를 관리하고 조작하기 위해 사용하는 언어이다.  
-SQL의 간단한 명령어들을 실행 예시와 함께 알아보자.
+SQL의 간단한 명령어들을 예제와 함께 알아보자.
 
 사용 예시는 다음과 같은 `stock_list` 테이블을 기준으로 한다.
 
@@ -279,7 +279,7 @@ PHP 코드에서 위 테이블의 데이터를 사용하려면 어떻게 해야 
 
 **2\. 데이터베이스 연결:**  
 위에서 정의한 상수들을 `mysqli_connect()` 함수에 인자로 넘겨 데이터베이스 서버에 연결을 시도한다.  
-연결 성공 시 `$db_conn` 변수에 연결 객체(데이터베이스와의 연결을 다루는 리소스)가 저장되며, 실패 시 `false`가 저장된다.
+연결 성공 시 `$db_conn` 변수에 데이터베이스 연결 정보가 저장되며, 실패 시 `false`가 저장된다.
 
 **3\. 연결 결과 출력:**  
 `$db_conn`이 유효한지 확인해 연결 성공/실패 메시지를 출력한다.
@@ -352,7 +352,7 @@ sudo systemctl restart apache2
 ### 점수 조회 페이지
 
 위의 `score` 테이블을 사용하여, GET 방식으로 이름을 전달받아 점수를 출력하는 코드를 만들어 보자.  
-`db_test.php`를 약간 수정하여 해당 기능을 구현할 수 있다.
+`db_check.php`를 약간 수정하여 해당 기능을 구현할 수 있다.
 
 <style id="code-3">
   #code-3 + pre data[value="19"] span:nth-of-type(9) {color: #032F62 !important;}
@@ -464,8 +464,8 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 #### 1. 회원 가입 폼(sign_up.php)
 
 사용자 이름, 이메일, 아이디, 비밀번호를 입력받아 `dev` 데이터베이스의 `users` 테이블에 저장하는 폼으로 구성되어 있다.  
-이미 계정이 존재하는 사용자를 위해 로그인 페이지로 이동할 수 있는 링크가 포함되어 있다.    
-회원 가입 시 `username`이 중복될 경우 경고 메시지를 출력한다.  
+이미 계정이 있는 사용자를 위해 로그인 페이지로 이동할 수 있는 링크가 포함되어 있다.    
+회원 가입 시 `username`이 중복되는 경우 경고 메시지를 출력한다.  
 회원 가입이 완료되면 `login.php?sign_up=success`로 이동한다.
 
 <style id="code-4">
@@ -827,7 +827,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
       </form>
     </div>
 
-    // JavaScipt to show alert if sign up completed
+    // JavaScript to show alert if sign up completed
     <script>
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('sign_up') === 'success') {
@@ -877,7 +877,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
       $message = "<p style='color: green;'>Login Successful!</p>";
     } else {
       // Login failure due to incorrect password
-      $message = "<p style='color: red;'>Login Failed. Incorrect password.</p>";
+      $message = "<p style='color: red;'>Login Failed. Incorrect Password.</p>";
     }
   } else {
     // Login failure due to username not found
@@ -930,7 +930,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
     '<span style="color:#6F42C1"> style</span>',
     '<span style="color:#24292E">=</span>',
     '<span style="color:#032F62">\'color: red;\'</span>',
-    '<span style="color:#24292E">&gt;Login Failed. Incorrect password.&lt;/</span>',
+    '<span style="color:#24292E">&gt;Login Failed. Incorrect Password.&lt;/</span>',
     '<span style="color:#22863A">p</span>',
     '<span style="color:#24292E">&gt;</span>',
     '<span style="color:#032F62">"</span>',
@@ -1180,7 +1180,7 @@ a {
 
 ![users 테이블](/posts/penetration-testing-week-2/assets/8.webp){: style="padding: 0 12.5%; background-color: white"}
 
-`test` 사용자가 데이터베이스에 등록된 이후 다시 `test`라는 `username`으로 중복 회원 가입 시도를 하면 다음과 같은 알림 창이 표시된다.
+`test` 사용자가 데이터베이스에 등록된 이후, 다시 `test`라는 `username`으로 회원 가입 시도를 하면 다음과 같은 알림 창이 표시된다.
 
 ![중복 회원 가입 시도](/posts/penetration-testing-week-2/assets/9.webp)
 

@@ -191,7 +191,7 @@ CTF를 해결하며 XSS 취약점을 활용한 다양한 공격 기법들을 실
 
 ![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/3.webp){:style="padding: 0 25%; background-color: white;"}
 
-링크의 주소로 접속하면 회원제 게시판 애플리케이션으로 이동한다.
+링크를 통해 접속하면 회원제 게시판 애플리케이션으로 이동한다.
 
 회원 가입 및 로그인을 진행한 후, 마이페이지에서 플래그의 위치를 파악할 수 있었다.
 
@@ -332,7 +332,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![Steal Info 2](/posts/Penetration%20Testing%20%7C%20Week%2011/21.webp){:style="padding: 0 25%; background-color: white;"}
 
-링크의 주소로 접속하여 Steal Info와 동일한 위치에 XSS 취약점이 존재한다는 사실을 파악하였다. 플래그의 위치는 마이페이지이기 때문에 마찬가지로 `<iframe>`을 활용해 페이로드를 작성하였다.
+링크를 통해 접속하여 Steal Info와 동일한 위치에 XSS 취약점이 존재한다는 사실을 파악하였다. 플래그의 위치는 마이페이지이기 때문에 마찬가지로 `<iframe>`을 활용해 페이로드를 작성하였다.
 
 <pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://ctf.segfaulthub.com:4343/scriptPrac2/mypage.php"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span>
 </data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>

@@ -202,7 +202,7 @@ Login successful!
   if (mysqli_num_rows($res) == 1) {
     $message = "<p style='color: green;'>Login Successful!</p>";
   } else {
-    $message = "<p style='color: red;'>Login Failed. Incorrect Username of Password.</p>";
+    $message = "<p style='color: red;'>Login Failed. Incorrect Username or Password.</p>";
   }
 ?>
 
@@ -255,7 +255,7 @@ Login successful!
       '<span style="color:#6F42C1"> style</span>',
       '<span style="color:#24292E">=</span>',
       '<span style="color:#032F62">\'color: red;\'</span>',
-      '<span style="color:#24292E">&gt;Login Failed. Incorrect Username of Password.&lt;/</span>',
+      '<span style="color:#24292E">&gt;Login Failed. Incorrect Username or Password.&lt;/</span>',
       '<span style="color:#22863A">p</span>',
       '<span style="color:#24292E">&gt;</span>',
       '<span style="color:#032F62">"</span>',
@@ -358,7 +358,7 @@ Login successful!
 
 <br>
 
-#### 3\. 식별·인증 동시 처리 방식(with Hash)
+#### 3\. 식별·인증 동시 처리 방식(with Hashing)
 
 해시 함수를 활용한 로그인 로직을 구현하려면, 데이터베이스에는 사용자의 실제 비밀번호가 아닌 해당 비밀번호의 해시 값이 저장되어 있어야 한다. 따라서 기존에 저장된 원본 비밀번호 `test`를 해시 값으로 변환한다. 이 작업은 회원 가입 페이지(`sign_up.php`)에서 사용자 정보를 저장할 때 비밀번호를 해시 처리한 후 삽입하도록 구현할 수 있다.  
 이후 `users` 테이블은 다음과 같은 형태가 된다.
@@ -395,7 +395,7 @@ Login successful!
   if (mysqli_num_rows($res) == 1) {
     $message = "<p style='color: green;'>Login Successful!</p>";
   } else {
-    $message = "<p style='color: red;'>Login Failed. Incorrect Username of Password.</p>";
+    $message = "<p style='color: red;'>Login Failed. Incorrect Username or Password.</p>";
   }
 ?>
 
@@ -427,7 +427,7 @@ Login successful!
     '<span style="color:#6F42C1"> style</span>',
     '<span style="color:#24292E">=</span>',
     '<span style="color:#032F62">\'color: red;\'</span>',
-    '<span style="color:#24292E">&gt;Login Failed. Incorrect Username of Password.&lt;/</span>',
+    '<span style="color:#24292E">&gt;Login Failed. Incorrect Username or Password.&lt;/</span>',
     '<span style="color:#22863A">p</span>',
     '<span style="color:#24292E">&gt;</span>',
     '<span style="color:#032F62">"</span>',
@@ -437,7 +437,7 @@ Login successful!
 
 <br>
 
-#### 4\. 식별·인증 분리 처리 방식(with Hash)
+#### 4\. 식별·인증 분리 처리 방식(with Hashing)
 
 <style id="code-5">
   #code-5 + pre data[value="35"] span {color: #24292E !important;}

@@ -23,7 +23,7 @@ ex) http://192.168.50.177:80/index.html
 >
 > ex) `https://www.naver.com`과 `https://www.naver.com:443/index.html`은 같은 주소이다.
 
-URL의 파일 경로는 <strong>웹 루트(Web Root)</strong>라 불리는 특정 디렉터리를 기준으로 하며, 일반적으로는 `/var/www/html`를 사용한다. 즉, 위 예시 경로에서 `index.html`의 실제 위치는 `/var/www/html/index.html`이다.
+URL의 파일 경로는 <strong>웹 루트(Web Root)</strong>라 불리는 특정 디렉터리를 기준으로 하며, 일반적으로는 `/var/www/html`을 사용한다. 즉, 위 예시 경로에서 `index.html`의 실제 위치는 `/var/www/html/index.html`이다.
 
 웹 루트보다 상위 디렉터리에 위치한 파일을 요청하면 어떻게 될까?  
 예를 들어 브라우저에 `http://x.x.x.x/../index.html`과 같은 URL을 입력하면 웹 서버는 해당 파일을 찾을 수 없다는 오류를 반환한다. 이는 클라이언트가 웹 루트의 하위에 있는 파일에만 접근할 수 있도록 설계되어 있기 때문이다. 만약 웹 루트보다 상위 디렉터리에 접근이 가능하다면, 웹 서버가 설치된 시스템의 모든 파일이 외부에 노출될 수 있어 보안상 매우 위험해진다. 웹 루트로 `/`가 아닌 `/var/www/html`과 같은 제한된 경로를 사용하는 이유도 이 때문이다.
@@ -159,7 +159,7 @@ GET 방식으로 데이터를 전달할 때 반드시 URL에 직접 쿼리 스�
 </script>
 
 위 코드는 입력란을 통해 데이터(`id` 파라미터)를 GET 방식으로 전달받고 출력하는 기능을 한다.  
-`http://x.x.x.x/name.php`과 같은 URL로 접속하면 입력란이 표시된다.
+`http://x.x.x.x/name.php`와 같은 URL로 접속하면 입력란이 표시된다.
 
 ![GET 방식](/posts/penetration-testing-week-1/assets/2.webp)
 

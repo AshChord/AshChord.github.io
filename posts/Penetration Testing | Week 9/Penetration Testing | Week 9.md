@@ -58,7 +58,7 @@ XSS 공격이 성공적으로 수행되기 위해서는, 공격자가 삽입한 
 
 ![XSS 1](/posts/Penetration%20Testing%20%7C%20Week%209/2.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 SQL Injection Advanced CTF에서와 같은 회원제 게시판 애플리케이션으로 이동한다.
+링크를 통해 접속하면 SQL Injection Advanced CTF에서와 같은 회원제 게시판 애플리케이션으로 이동한다.
 
 ![XSS 1](/posts/Penetration%20Testing%20%7C%20Week%209/3.webp)
 
@@ -97,7 +97,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 
 ![XSS 2](/posts/Penetration%20Testing%20%7C%20Week%209/11.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속한 후, 우선 제목과 내용이 `<'">`인 게시물을 생성해 보았다.
+링크를 통해 접속한 후, 우선 제목과 내용이 `<'">`인 게시물을 생성해 보았다.
 
 ![XSS 2](/posts/Penetration%20Testing%20%7C%20Week%209/12.webp)
 ![XSS 2](/posts/Penetration%20Testing%20%7C%20Week%209/13.webp)
@@ -167,7 +167,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 
 ![XSS 3](/posts/Penetration%20Testing%20%7C%20Week%209/21.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속한 후 제목과 내용이 `<'">`인 게시물을 생성하고 XSS 취약점을 탐색하였지만, 예상한 대로 XSS 1과 XSS 2에 존재했던 취약점은 찾을 수 없었다.
+링크를 통해 접속한 후 제목과 내용이 `<'">`인 게시물을 생성하고 XSS 취약점을 탐색하였지만, 예상한 대로 XSS 1과 XSS 2에 존재했던 취약점은 찾을 수 없었다.
 
 다른 접근 방식을 모색하던 중, 애플리케이션 내에 게시판 이외에 마이페이지가 존재한다는 점을 상기하게 되었고 이에 가능성을 확인하고자 마이페이지로 이동해 보았다.
 
@@ -206,7 +206,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 
 ![XSS 4](/posts/Penetration%20Testing%20%7C%20Week%209/26.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하여 제목과 내용이 `<'">`인 게시물을 생성해 보았다.
+링크를 통해 접속하여 제목과 내용이 `<'">`인 게시물을 생성해 보았다.
 
 ![XSS 4](/posts/Penetration%20Testing%20%7C%20Week%209/27.webp)
 ![XSS 4](/posts/Penetration%20Testing%20%7C%20Week%209/28.webp)
@@ -239,7 +239,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 
 ![XSS 5](/posts/Penetration%20Testing%20%7C%20Week%209/34.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하여 제목과 내용이 `<'">`인 게시물을 생성해 보았지만 게시물과 관련된 내용이 출력되는 모든 위치에서 HTML 인코딩이 적용되어 있음을 확인하였다.
+링크를 통해 접속하여 제목과 내용이 `<'">`인 게시물을 생성해 보았지만 게시물과 관련된 내용이 출력되는 모든 위치에서 HTML 인코딩이 적용되어 있음을 확인하였다.
 
 여러 페이지를 이동해 가며 HTTP 기록을 확인하던 중, 모든 페이지에서 HTML 인코딩이 적용된 원인을 발견할 수 있었다.
 
@@ -266,7 +266,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 
 ![XSS 6](/posts/Penetration%20Testing%20%7C%20Week%209/40.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하여 게시판 및 마이페이지를 면밀히 조사해 보았지만 XSS 취약점을 발견할 수 없었다.
+링크를 통해 접속하여 게시판 및 마이페이지를 면밀히 조사해 보았지만 XSS 취약점을 발견할 수 없었다.
 
 마지막으로 XSS 공격의 가능성을 확인한 곳은 다름 아닌 `index.php` 페이지였다.
 

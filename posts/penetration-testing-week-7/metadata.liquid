@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: penetration-testing-week-7
+permalink: /posts/penetration-testing-week-7.html
+
+# Summary #
+title: Penetration Testing | Week 7
+date: 2025/05/25
+excerpt: Error-Based SQL Injection과 Blind SQL Injection
+categories: 모의 해킹
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page.path | markdownify }}

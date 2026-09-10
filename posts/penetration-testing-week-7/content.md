@@ -1,13 +1,4 @@
----
-layout: article
-permalink: /posts/Penetration Testing | Week 7
-title: Penetration Testing | Week 7
-date: 2025/05/25
-excerpt: Error-Based SQL Injection과 Blind SQL Injection
-categories: 모의 해킹
----
-
-{{ site.pages.first.content | split: page.path }}
+# Penetration Testing | Week 7
 
 ## 강의 노트
 
@@ -17,26 +8,72 @@ categories: 모의 해킹
 
 실제 웹 사이트에서의 예시를 통해 Error-Based SQL Injection의 동작 방식을 자세히 살펴보자.
 
-![Error-Based SQL Injection](/posts/Penetration%20Testing%20%7C%20Week%207/1.webp)
+![Error-Based SQL Injection](/posts/penetration-testing-week-7/assets/1.webp)
 
 아이디의 중복 검사 기능을 지원하는 간이 웹 사이트이다. 예시 검색어 `normaltic`을 입력해 보자.
 
-![Error-Based SQL Injection](/posts/Penetration%20Testing%20%7C%20Week%207/2.webp)
+![Error-Based SQL Injection](/posts/penetration-testing-week-7/assets/2.webp)
 
 존재하는 아이디라는 내용의 메시지가 출력되며, 서버 측에서 사용되는 SQL 쿼리는 `select * from member where id = 'normaltic'`임을 알 수 있다. 이때 검색어로 `normaltic'`을 입력하면 어떻게 될까?
 
-![Error-Based SQL Injection](/posts/Penetration%20Testing%20%7C%20Week%207/3.webp)
+![Error-Based SQL Injection](/posts/penetration-testing-week-7/assets/3.webp)
 
 SQL Syntax Error, 즉 구문 오류가 발생한다. 이는 쿼리가 올바른 문법적 요건을 갖추지 못했기 때문이며, 이러한 문법적 오류는 입력한 검색어에 문제가 있다는 내용의 메시지만을 출력하므로 SQL Injection 공격에 활용할 수 없다.
 
 Error-Based SQL Injection에서 활용할 수 있는 논리적 오류의 예시는 다음과 같다.
 
-![Error-Based SQL Injection](/posts/Penetration%20Testing%20%7C%20Week%207/4.webp)
+![Error-Based SQL Injection](/posts/penetration-testing-week-7/assets/4.webp)
 
 입력한 페이로드는 다음과 같다.
 
-<pre><button class="copy-button"></button><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-string">normaltic'</span> <span class="hljs-keyword">and</span> extractvalue(<span class="hljs-string">'&lt;x/&gt;'</span>, <span class="hljs-string">':path'</span>) <span class="hljs-keyword">and</span> <span class="hljs-string">'1'</span> <span class="hljs-operator">=</span> <span class="hljs-string">'1</span>
-</data></code></pre>
+```text
+normaltic' and extractvalue('<x/>', ':path') and '1' = '1
+```
+<script>
+  (() => {
+    window.patchCodeLine = (lineNumber, override) => {
+      const code = document.currentScript.previousElementSibling.querySelector('pre code');
+
+      const patch = () => {
+        if (code.classList.contains('language-text')) {
+          code.classList.replace('language-text', 'language-sql');
+        }
+
+        const line = code.querySelector(`.code-line[value="${lineNumber}"]`);
+        const lineContent = new DOMParser().parseFromString(override, 'text/html');
+
+        line.replaceChildren(...lineContent.body.childNodes);
+        line.appendChild(document.createTextNode('\n'));
+
+        observer.disconnect();
+      };
+
+      const observer = new MutationObserver(patch);
+
+      observer.observe(code, { attributes: true, attributeFilter: ['highlighted'] });
+
+      if (code.hasAttribute('highlighted')) patch();
+    };
+
+    patchCodeLine(1, [
+      '<span style="color:#032F62">normaltic\'</span>',
+      '<span style="color:#D73A49"> and</span>',
+      '<span style="color:#24292E"> extractvalue(</span>',
+      '<span style="color:#032F62">\'</span>',
+      '<span style="color:#24292E">&lt;</span>',
+      '<span style="color:#22863A">x</span>',
+      '<span style="color:#24292E">/&gt;</span>',
+      '<span style="color:#032F62">\'</span>',
+      '<span style="color:#24292E">, </span>',
+      '<span style="color:#032F62">\':path\'</span>',
+      '<span style="color:#24292E">) </span>',
+      '<span style="color:#D73A49">and</span>',
+      '<span style="color:#032F62"> \'1\'</span>',
+      '<span style="color:#D73A49"> =</span>',
+      '<span style="color:#032F62"> \'1</span>'
+    ].join(''));
+  })();
+</script>
 
 `and '1' = '1` 조건은 쿼리의 마지막에 위치한 작은따옴표를 올바르게 대응시켜 문법적 오류가 발생하지 않도록 삽입한 구문이며, `extractvalue('<x/>', ':path')`는 의도적으로 오류가 발생하도록 설계된 구문이다.
 
@@ -56,23 +93,85 @@ Error-Based SQL Injection에서 활용할 수 있는 논리적 오류의 예시�
 > EXTRACTVALUE('<item>test<value>null</value></item>', '/item') -- 반환값: test
 > EXTRACTVALUE('<item>test<value>null</value></item>', '/item/value') -- 반환값: null
 > ```
+<script>
+  patchCodeLine(5, [
+    '<span style="color:#24292E">EXTRACTVALUE(</span>',
+    '<span style="color:#032F62">\'</span>',
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">item</span>',
+    '<span style="color:#24292E">&gt;test&lt;</span>',
+    '<span style="color:#22863A">value</span>',
+    '<span style="color:#24292E">&gt;null&lt;/</span>',
+    '<span style="color:#22863A">value</span>',
+    '<span style="color:#24292E">&gt;&lt;/</span>',
+    '<span style="color:#22863A">item</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#032F62">\'</span>',
+    '<span style="color:#24292E">, </span>',
+    '<span style="color:#032F62">\'/item\'</span>',
+    '<span style="color:#24292E">) </span>',
+    '<span style="color:#6A737D">-- 반환값: test</span>'
+  ].join(''));
 
-`:path`과 같이 `:`으로 시작되는 문자열은 적절한 XPath 표현식이 아니기 때문에, 문법적으로 올바른 쿼리가 실행되었음에도 위와 같이 논리적 오류(XPath 구문 오류)가 발생한다. SQL 구문 오류와 유사하게, XPath 구문 오류 역시 어느 위치에서 오류가 발생하였는지 오류 메시지에 명시되어 있음을 알 수 있다.
+  patchCodeLine(6, [
+    '<span style="color:#24292E">EXTRACTVALUE(</span>',
+    '<span style="color:#032F62">\'</span>',
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">item</span>',
+    '<span style="color:#24292E">&gt;test&lt;</span>',
+    '<span style="color:#22863A">value</span>',
+    '<span style="color:#24292E">&gt;null&lt;/</span>',
+    '<span style="color:#22863A">value</span>',
+    '<span style="color:#24292E">&gt;&lt;/</span>',
+    '<span style="color:#22863A">item</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#032F62">\'</span>',
+    '<span style="color:#24292E">, </span>',
+    '<span style="color:#032F62">\'/item/value\'</span>',
+    '<span style="color:#24292E">) </span>',
+    '<span style="color:#6A737D">-- 반환값: null</span>'
+  ].join(''));
+</script>
+
+`:path`와 같이 `:`으로 시작되는 문자열은 적절한 XPath 표현식이 아니기 때문에, 문법적으로 올바른 쿼리가 실행되었음에도 위와 같이 논리적 오류(XPath 구문 오류)가 발생한다. SQL 구문 오류와 유사하게, XPath 구문 오류 역시 어느 위치에서 오류가 발생하였는지 오류 메시지에 명시되어 있음을 알 수 있다.
 
 이러한 논리적 오류를 이용해 어떻게 SQL Injection을 수행할 수 있을까? 다음 예시를 보자.
 
-![Error-Based SQL Injection](/posts/Penetration%20Testing%20%7C%20Week%207/5.webp)
+![Error-Based SQL Injection](/posts/penetration-testing-week-7/assets/5.webp)
 
 입력한 페이로드는 다음과 같다.
 
-<pre><button class="copy-button"></button><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-string">normaltic'</span> <span class="hljs-keyword">and</span> extractvalue(<span class="hljs-string">'&lt;x/&gt;'</span>, concat(<span class="hljs-number">0x3a</span>, (<span class="hljs-keyword">select</span> <span class="hljs-string">'test'</span>))) <span class="hljs-keyword">and</span> <span class="hljs-string">'1'</span> <span class="hljs-operator">=</span> <span class="hljs-string">'1</span>
-</data></code></pre>
+```text
+normaltic' and extractvalue('<x/>', concat(0x3a, (select 'test'))) and '1' = '1
+```
+<script>
+  patchCodeLine(1, [
+    '<span style="color:#032F62">normaltic\'</span>',
+    '<span style="color:#D73A49"> and</span>',
+    '<span style="color:#24292E"> extractvalue(</span>',
+    '<span style="color:#032F62">\'</span>',
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">x</span>',
+    '<span style="color:#24292E">/&gt;</span>',
+    '<span style="color:#032F62">\'</span>',
+    '<span style="color:#24292E">, </span>',
+    '<span style="color:#005CC5">concat</span>',
+    '<span style="color:#24292E">(0x3a, (</span>',
+    '<span style="color:#D73A49">select</span>',
+    '<span style="color:#032F62"> \'test\'</span>',
+    '<span style="color:#24292E">))) </span>',
+    '<span style="color:#D73A49">and</span>',
+    '<span style="color:#032F62"> \'1\'</span>',
+    '<span style="color:#D73A49"> =</span>',
+    '<span style="color:#032F62"> \'1</span>'
+  ].join(''));
+</script>
 
 `CONCAT()` 함수는 SQL에서 문자열을 결합하는 데 사용되는 함수이며, 예시 페이로드에서는 `CONCAT()` 함수에 두 개의 인자 `0x3a`와 `(select 'test')`가 사용된 것을 알 수 있다. `0x3a`는 ASCII 코드상 `:` 문자에 해당하는 16진수 표현으로, 특수 문자의 경우 예기치 않은 인코딩 변환 등의 문제를 방지하기 위하여 이와 같이 바이너리 값으로 명시하는 방식이 자주 활용된다. `(select 'test')`는 괄호로 감싸진 서브쿼리(메인 쿼리 안에 포함된 또 다른 SQL 쿼리)로, 메인 쿼리 내부에서 실행되어 그 결과를 반환한다. 해당 서브쿼리의 실행 결과는 `test`이므로, `CONCAT()` 함수는 `:`과 `test`를 결합하여 `:test` 문자열을 생성한다. 이후 `EXTRACTVALUE()` 함수의 인자로 올바르지 않은 XPath 표현식이 포함되고, 최종적으로 `XPATH syntax error: ':test'`와 같은 오류 메시지가 출력되는 것이다.
 
 오류 메시지에서 주목할 만한 부분은 사용자가 삽입한 서브쿼리의 반환 결과가 메시지 내용에 포함되어 출력되었다는 사실이다. 이는 공격자가 임의의 SQL 쿼리를 페이로드에 포함시켜 데이터베이스 정보를 노출시킬 수 있다는 의미이다. 예를 들어, `select 'test'` 대신 UNION SQL Injection에서 활용했던 `select database()`를 삽입해 보자.
 
-![Error-Based SQL Injection](/posts/Penetration%20Testing%20%7C%20Week%207/6.webp)
+![Error-Based SQL Injection](/posts/penetration-testing-week-7/assets/6.webp)
 
 현재 사용 중인 데이터베이스의 이름인 `segfault_sql`이 출력되는 것을 확인할 수 있다. 이후 UNION SQL Injection과 동일한 절차를 거쳐 데이터를 추출할 수 있다.
 
@@ -84,34 +183,68 @@ Error-Based SQL Injection에서 활용할 수 있는 논리적 오류의 예시�
 
 Blind SQL Injection의 동작 방식을 이해하기 위해 아래의 예시 웹 사이트를 살펴보자.
 
-![Blind SQL Injection](/posts/Penetration%20Testing%20%7C%20Week%207/7.webp)
+![Blind SQL Injection](/posts/penetration-testing-week-7/assets/7.webp)
 
 마찬가지로 아이디 중복 검사를 수행하는 웹 사이트이다. SQL Injection이 가능한지 파악하기 위해 `AND` 연산을 활용한 페이로드를 삽입해 보자.
 
-![Blind SQL Injection](/posts/Penetration%20Testing%20%7C%20Week%207/8.webp)
-![Blind SQL Injection](/posts/Penetration%20Testing%20%7C%20Week%207/9.webp)
+![Blind SQL Injection](/posts/penetration-testing-week-7/assets/8.webp)
+![Blind SQL Injection](/posts/penetration-testing-week-7/assets/9.webp)
 
 서버 측에서 실행되는 SQL 쿼리의 반환 결과 유무에 따라 아이디의 존재 여부를 알리는 메시지가 출력된다.
 
-![Blind SQL Injection](/posts/Penetration%20Testing%20%7C%20Week%207/10.webp)
+![Blind SQL Injection](/posts/penetration-testing-week-7/assets/10.webp)
 
 쿼리를 실행하는 과정에서 오류가 발생한 경우에는 오류 메시지를 출력하지 않는다.
 
 이처럼 SQL 쿼리의 조건절의 참/거짓 여부에 따른 차이를 식별할 수 있고 오류 메시지가 출력되지 않을 때 Blind SQL Injection을 사용한다. 이때 삽입하는 페이로드는 다음과 같은 형태이다.
 
-<pre><button class="copy-button"></button><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-string">normaltic'</span> <span class="hljs-keyword">and</span> [condition] <span class="hljs-keyword">and</span> <span class="hljs-string">'1'</span> <span class="hljs-operator">=</span> <span class="hljs-string">'1</span>
-</data></code></pre>
+```text
+normaltic' and [condition] and '1' = '1
+```
+<script>
+  patchCodeLine(1, [
+    '<span style="color:#032F62">normaltic\'</span>',
+    '<span style="color:#D73A49"> and</span>',
+    '<span style="color:#24292E"> [condition] </span>',
+    '<span style="color:#D73A49">and</span>',
+    '<span style="color:#032F62"> \'1\'</span>',
+    '<span style="color:#D73A49"> =</span>',
+    '<span style="color:#032F62"> \'1</span>'
+  ].join(''));
+</script>
 
 `[condition]` 위치에 참/거짓으로 판단될 수 있는 임의의 비교 연산식을 삽입하여 사용한다. `and '1' = '1` 조건은 Error-Based SQL Injection에서와 마찬가지로 쿼리의 마지막에 위치한 작은따옴표를 올바르게 대응시키 위한 구문이다. 이때 쿼리의 각 조건식은 `AND` 연산으로 연결되어 있고 그 중 `'1' = '1'` 조건은 항상 참이므로, 조건절 전체의 진릿값은 `[condition]` 위치에 삽입되는 조건의 참/거짓 여부에 의해 결정된다.
 
-Blind SQL Injection의 궁극적인 목적은 데이터베이스 내 정보를 임의로 추측한 문자열과 비교하는 연산식을 `[condition]` 위치에 삽입하고, 조건절이 참으로 평가될 때까지 반복적인 작업을 수행함으로써 올바른 데이터를 유추해 내는 것이다. 다음의 예시를 보자.
+Blind SQL Injection의 주요 활용 목적은 데이터베이스 내 정보를 임의로 추측한 문자열과 비교하는 연산식을 `[condition]` 위치에 삽입하고, 조건절이 참으로 평가될 때까지 반복적인 작업을 수행함으로써 올바른 데이터를 유추해 내는 것이다. 다음의 예시를 보자.
 
-![Blind SQL Injection](/posts/Penetration%20Testing%20%7C%20Week%207/11.webp)
+![Blind SQL Injection](/posts/penetration-testing-week-7/assets/11.webp)
 
 입력한 페이로드는 다음과 같다.
 
-<pre><button class="copy-button"></button><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-string">normaltic'</span> <span class="hljs-keyword">and</span> (substr((<span class="hljs-keyword">select</span> <span class="hljs-string">'test'</span>), <span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-operator">=</span> <span class="hljs-string">'t'</span>) <span class="hljs-keyword">and</span> <span class="hljs-string">'1'</span> <span class="hljs-operator">=</span> <span class="hljs-string">'1</span>
-</data></code></pre>
+```text
+normaltic' and (substr((select 'test'), 1, 1) = 't') and '1' = '1
+```
+<script>
+  patchCodeLine(1, [
+    '<span style="color:#032F62">normaltic\'</span>',
+    '<span style="color:#D73A49"> and</span>',
+    '<span style="color:#24292E"> (substr((</span>',
+    '<span style="color:#D73A49">select</span>',
+    '<span style="color:#032F62"> \'test\'</span>',
+    '<span style="color:#24292E">), </span>',
+    '<span style="color:#005CC5">1</span>',
+    '<span style="color:#24292E">, </span>',
+    '<span style="color:#005CC5">1</span>',
+    '<span style="color:#24292E">) </span>',
+    '<span style="color:#D73A49">=</span>',
+    '<span style="color:#032F62"> \'t\'</span>',
+    '<span style="color:#24292E">) </span>',
+    '<span style="color:#D73A49">and</span>',
+    '<span style="color:#032F62"> \'1\'</span>',
+    '<span style="color:#D73A49"> =</span>',
+    '<span style="color:#032F62"> \'1</span>'
+  ].join(''));
+</script>
 
 `[condition]` 위치에 삽입된 `substr((select 'test'), 1, 1) = 't'`는 데이터베이스에서 실행되는 서브쿼리를 포함한 비교 연산식이다.
 
@@ -121,6 +254,9 @@ Blind SQL Injection의 궁극적인 목적은 데이터베이스 내 정보를 �
 >
 > 사용 예시는 아래와 같다.
 >
+> <style id="code-1">
+>   #code-1 + pre data[value="2"] span:nth-of-type(2) {color: #24292E !important;}
+> </style>
 > ```sql
 > /* Syntax */
 > SUBSTR(string, start_position, length)
@@ -132,20 +268,88 @@ Blind SQL Injection의 궁극적인 목적은 데이터베이스 내 정보를 �
 
 `substr((select 'test'), 1, 1)`는 곧 서브쿼리의 반환 결과 `test`의 첫 글자를 의미한다. 이는 조건식 내에서 `t`와 비교되고, 조건절의 진릿값이 참으로 평가됨으로써 존재하는 아이디라는 메시지가 출력된다. 이러한 `SUBSTR()` 함수의 특성을 이용하면 임의 쿼리의 반환 결과가 어떤 문자로 이루어졌는지 유추할 수 있다. `select 'test'` 대신 `select database()`를 삽입해 보자.
 
-![Blind SQL Injection](/posts/Penetration%20Testing%20%7C%20Week%207/12.webp)
+![Blind SQL Injection](/posts/penetration-testing-week-7/assets/12.webp)
 
 `normaltic' and (substr((select database()), 1, 1) = 't') and '1' = '1`을 입력한 경우 조건절의 진릿값이 거짓임을 파악하였고, 따라서 사용 중인 데이터베이스명의 첫 글자가 `t`가 아니라는 사실을 추론할 수 있었다. 공격자는 이와 같은 비교 과정을 반복적으로 수행함으로써 데이터를 추출할 수 있다.
 
 그러나 데이터를 한 글자씩 반복적으로 추출하여 값을 확인하는 방식은 매우 많은 시간이 소요된다는 단점이 있다. 이때 `ASCII()` 함수를 사용하면 비교 횟수를 대폭 줄일 수 있다. `ASCII()` 함수는 특정 문자를 ASCII 코드(10진수)로 변환하여 반환하는 함수로, 문자를 숫자 값으로 다룰 수 있다는 장점이 있다. 이를테면 다음 예시를 보자.
 
-<pre><button class="copy-button"></button><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-string">normaltic'</span> <span class="hljs-keyword">and</span> (substr((<span class="hljs-keyword">select</span> database()), <span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-operator">=</span> <span class="hljs-string">'t'</span>) <span class="hljs-keyword">and</span> <span class="hljs-string">'1'</span> <span class="hljs-operator">=</span> <span class="hljs-string">'1</span>
-</data><data class="code-line" value="2"><span class="hljs-string">normaltic'</span> <span class="hljs-keyword">and</span> (ascii(substr((<span class="hljs-keyword">select</span> database()), <span class="hljs-number">1</span>, <span class="hljs-number">1</span>)) <span class="hljs-operator">=</span> <span class="hljs-number">116</span>) <span class="hljs-keyword">and</span> <span class="hljs-string">'1'</span> <span class="hljs-operator">=</span> <span class="hljs-string">'1</span>
-</data></code></pre>
+```text
+normaltic' and (substr((select database()), 1, 1) = 't') and '1' = '1
+normaltic' and (ascii(substr((select database()), 1, 1)) = 116) and '1' = '1
+```
+<script>
+  patchCodeLine(1, [
+    '<span style="color:#032F62">normaltic\'</span>',
+    '<span style="color:#D73A49"> and</span>',
+    '<span style="color:#24292E"> (substr((</span>',
+    '<span style="color:#D73A49">select</span>',
+    '<span style="color:#D73A49"> database</span>',
+    '<span style="color:#24292E">()), </span>',
+    '<span style="color:#005CC5">1</span>',
+    '<span style="color:#24292E">, </span>',
+    '<span style="color:#005CC5">1</span>',
+    '<span style="color:#24292E">) </span>',
+    '<span style="color:#D73A49">=</span>',
+    '<span style="color:#032F62"> \'t\'</span>',
+    '<span style="color:#24292E">) </span>',
+    '<span style="color:#D73A49">and</span>',
+    '<span style="color:#032F62"> \'1\'</span>',
+    '<span style="color:#D73A49"> =</span>',
+    '<span style="color:#032F62"> \'1</span>'
+  ].join(''));
+
+  patchCodeLine(2, [
+    '<span style="color:#032F62">normaltic\'</span>',
+    '<span style="color:#D73A49"> and</span>',
+    '<span style="color:#24292E"> (</span>',
+    '<span style="color:#005CC5">ascii</span>',
+    '<span style="color:#24292E">(substr((</span>',
+    '<span style="color:#D73A49">select</span>',
+    '<span style="color:#D73A49"> database</span>',
+    '<span style="color:#24292E">()), </span>',
+    '<span style="color:#005CC5">1</span>',
+    '<span style="color:#24292E">, </span>',
+    '<span style="color:#005CC5">1</span>',
+    '<span style="color:#24292E">)) </span>',
+    '<span style="color:#D73A49">=</span>',
+    '<span style="color:#005CC5"> 116</span>',
+    '<span style="color:#24292E">) </span>',
+    '<span style="color:#D73A49">and</span>',
+    '<span style="color:#032F62"> \'1\'</span>',
+    '<span style="color:#D73A49"> =</span>',
+    '<span style="color:#032F62"> \'1</span>'
+  ].join(''));
+</script>
 
 위의 두 페이로드는 논리적으로 동일한 의미이다. 하지만 두 번째 페이로드를 사용하는 경우, 숫자 간의 비교를 수행하기 때문에 등호뿐만 아니라 부등호 역시 사용할 수 있다.
 
-<pre><button class="copy-button"></button><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-string">normaltic'</span> <span class="hljs-keyword">and</span> (ascii(substr((<span class="hljs-keyword">select</span> database()), <span class="hljs-number">1</span>, <span class="hljs-number">1</span>)) <span class="hljs-operator">&lt;</span> <span class="hljs-number">116</span>) <span class="hljs-keyword">and</span> <span class="hljs-string">'1'</span> <span class="hljs-operator">=</span> <span class="hljs-string">'1</span>
-</data></code></pre>
+```text
+normaltic' and (ascii(substr((select database()), 1, 1)) < 116) and '1' = '1
+```
+<script>
+  patchCodeLine(1, [
+    '<span style="color:#032F62">normaltic\'</span>',
+    '<span style="color:#D73A49"> and</span>',
+    '<span style="color:#24292E"> (</span>',
+    '<span style="color:#005CC5">ascii</span>',
+    '<span style="color:#24292E">(substr((</span>',
+    '<span style="color:#D73A49">select</span>',
+    '<span style="color:#D73A49"> database</span>',
+    '<span style="color:#24292E">()), </span>',
+    '<span style="color:#005CC5">1</span>',
+    '<span style="color:#24292E">, </span>',
+    '<span style="color:#005CC5">1</span>',
+    '<span style="color:#24292E">)) </span>',
+    '<span style="color:#D73A49">&lt;</span>',
+    '<span style="color:#005CC5"> 116</span>',
+    '<span style="color:#24292E">) </span>',
+    '<span style="color:#D73A49">and</span>',
+    '<span style="color:#032F62"> \'1\'</span>',
+    '<span style="color:#D73A49"> =</span>',
+    '<span style="color:#032F62"> \'1</span>'
+  ].join(''));
+</script>
 
 위와 같이, 비교 연산을 범위 기반으로 수행할 수 있게 되므로 올바른 문자를 더 신속하게 찾아낼 수 있다. 이러한 방식으로 Blind SQL Injection 기법을 활용하면 데이터나 오류 메시지가 출력되지 않는 환경에서도 효과적으로 데이터를 추출할 수 있게 된다.
 
@@ -157,7 +361,7 @@ Blind SQL Injection의 궁극적인 목적은 데이터베이스 내 정보를 �
 
 ### SQL Injection CTF
 
-![SQL Injection CTF](/posts/Penetration%20Testing%20%7C%20Week%207/13.webp)
+![SQL Injection CTF](/posts/penetration-testing-week-7/assets/13.webp)
 
 CTF를 해결하며 Error-Based SQL Injection과 Blind SQL Injection을 복습해 보자.
 
@@ -165,33 +369,33 @@ CTF를 해결하며 Error-Based SQL Injection과 Blind SQL Injection을 복습�
 
 #### SQL Injection 3
 
-![SQL Injection 3](/posts/Penetration%20Testing%20%7C%20Week%207/14.webp){:style="padding: 0 25%; background-color: white"}
+![SQL Injection 3](/posts/penetration-testing-week-7/assets/14.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 다음과 같은 로그인 페이지로 이동한다.
+링크를 통해 접속하면 다음과 같은 로그인 페이지로 이동한다.
 
-![SQL Injection 3](/posts/Penetration%20Testing%20%7C%20Week%207/15.webp)
+![SQL Injection 3](/posts/penetration-testing-week-7/assets/15.webp)
 
 주어진 계정은 `normaltic` / `1234`이므로, SQL Injection이 가능한지 확인하기 위해 `normaltic' and '1' = '1` / `1234`를 입력하였고 성공적으로 로그인이 수행되는 것을 확인하였다.
 
 아이디 입력란에서 SQL Injection이 유효하다는 사실을 파악했으므로 `normaltic'`을 입력하여 구문 오류를 유도한 다음, 오류 메시지가 화면에 출력되는지 확인해 보았다.
 
-![SQL Injection 3](/posts/Penetration%20Testing%20%7C%20Week%207/16.webp)
+![SQL Injection 3](/posts/penetration-testing-week-7/assets/16.webp)
 
 오류 내용이 출력되는 것을 확인하였으며 데이터베이스 소프트웨어로 MySQL이 사용된다는 사실 또한 확인할 수 있었다. 이러한 환경에서는 `EXTRACTVALUE()` 함수를 활용해 Error-Based SQL Injection 공격을 수행할 수 있으므로, `normaltic' and extractvalue('<x/>', concat(0x3a, ([SQL]))) and '1' = '1`의 형태로 페이로드 포맷을 작성하였다. 다음으로 `[SQL]` 위치에 `select database()`를 삽입하고 아이디 입력란에 페이로드를 입력하여 데이터베이스명을 추출해 보았다.
 
-![SQL Injection 3](/posts/Penetration%20Testing%20%7C%20Week%207/17.webp)
+![SQL Injection 3](/posts/penetration-testing-week-7/assets/17.webp)
 
 예상대로 XPATH 구문 오류가 발생하였으며 `sqli_2`라는 데이터베이스명이 출력되었다. 이후 페이로드의 `[SQL]` 위치에 `select table_name from information_schema.tables where table_schema = 'sqli_2' limit 0, 1`을 삽입한 후 아이디 입력란에 입력하여 테이블명을 추출해 보았다.
 
-![SQL Injection 3](/posts/Penetration%20Testing%20%7C%20Week%207/18.webp)
+![SQL Injection 3](/posts/penetration-testing-week-7/assets/18.webp)
 
 그 결과 `flag_table`이라는 테이블명이 추출되었다. 이어서 컬럼명 추출을 위해 `[SQL]` 위치에 `select column_name from information_schema.columns where table_name = 'flag_table' limit 0, 1`을 삽입한 뒤 페이로드를 입력하였다.
 
-![SQL Injection 3](/posts/Penetration%20Testing%20%7C%20Week%207/19.webp)
+![SQL Injection 3](/posts/penetration-testing-week-7/assets/19.webp)
 
 `flag`라는 컬럼명이 추출되었다. 마지막으로 페이로드에 `select flag from flag_table limit 0, 1`을 삽입하여 플래그 추출을 시도하였다.
 
-![SQL Injection 3](/posts/Penetration%20Testing%20%7C%20Week%207/20.webp)
+![SQL Injection 3](/posts/penetration-testing-week-7/assets/20.webp)
 
 플래그를 획득하였다.
 
@@ -202,9 +406,9 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection 4
 
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/21.webp){:style="padding: 0 25%; background-color: white"}
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/21.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 마찬가지로 로그인 페이지로 이동한다.
+링크를 통해 접속하면 마찬가지로 로그인 페이지로 이동한다.
 
 아이디 입력란에서 SQL Injection 공격이 가능하며, 오류가 발생할 경우 오류 메시지가 출력된다는 사실을 파악하였다. 따라서 Error-Based SQL Injection을 시도하기로 결정하였고, 위와 동일하게 `normaltic' and extractvalue('<x/>', concat(0x3a, ([SQL]))) and '1' = '1`의 형태로 페이로드 포맷을 작성하였다.
 
@@ -212,25 +416,25 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 다음으로 컬럼명을 추출하기 위해 `[SQL]` 위치에 `select column_name from information_schema.columns where table_name = 'flag_table' limit 0, 1`을 삽입하여 입력해 보았다.
 
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/22.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/22.webp)
 
-`flag1`이라는 컬럼명이 출력되었으며, 컬럼명으로 미루어 보아 `flag2`, `flag3` 등의 컬럼이 존재할 것으로 판단되었다. 따라서 실제 필드 값을 확인해 보기 전에, 삽입하는 서브쿼리의 `LIMIT` 절의 `offset` 값을 늘려 가며 다른 컬럼이 존재하는지 확인해 보기로 결정하였다.
+`flag1`이라는 컬럼명이 출력되었으며, 컬럼명으로 미루어 보아 `flag2`, `flag3` 등의 컬럼이 존재할 것으로 추측되었다. 따라서 실제 필드 값을 확인해 보기 전에, 삽입하는 서브쿼리의 `LIMIT` 절의 `offset` 값을 늘려 가며 다른 컬럼이 존재하는지 확인해 보기로 결정하였다.
 
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/23.webp)
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/24.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/23.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/24.webp)
 
 확인 결과 `offset` 값에 0 ~ 7을 삽입하면 `flag1`에서 `flag8`까지의 컬럼명이 출력되며, `offset` 값에 8이 삽입되는 순간 오류가 발생하지 않은 채로 로그인에 실패하는 것을 확인하였다. 따라서 `flag_table`의 컬럼 수는 총 8개라는 사실을 확인하였다.
 
 이후 `[SQL]` 위치에 `select flag1 from flag_table limit 0, 1`을 시작으로 컬럼명을 바꿔 가며 총 8개의 서브쿼리를 삽입하여 각 컬럼의 필드 값을 확인해 보았다.
 
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/25.webp)
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/26.webp)
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/27.webp)
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/28.webp)
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/29.webp)
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/30.webp)
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/31.webp)
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/32.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/25.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/26.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/27.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/28.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/29.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/30.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/31.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/32.webp)
 
 총 8개의 문자열이 출력되었고, 각 문자열을 이어 붙여 플래그를 획득하였다.
 
@@ -241,20 +445,20 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection 5
 
-![SQL Injection 5](/posts/Penetration%20Testing%20%7C%20Week%207/33.webp){:style="padding: 0 25%; background-color: white"}
+![SQL Injection 5](/posts/penetration-testing-week-7/assets/33.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하여 로그인을 시도한 결과, 앞선 문제와 마찬가지로 Error-Based SQL Injection이 유효함을 확인하였다. 따라서 위와 같은 방법으로 데이터베이스명 `sqli_2_2`와 테이블명 `flagTable_this`, 컬럼명 `flag`까지 추출하는 데 성공하였다.
+링크를 통해 접속하여 로그인을 시도한 결과, 앞선 문제와 마찬가지로 Error-Based SQL Injection이 유효함을 확인하였다. 따라서 위와 같은 방법으로 데이터베이스명 `sqli_2_2`와 테이블명 `flagTable_this`, 컬럼명 `flag`까지 추출하는 데 성공하였다.
 
 이후 `select flag from flagTable_this limit 0, 1`부터 `offset` 값을 늘려 가며 데이터를 추출해 보았다.
 
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/34.webp)
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/35.webp)
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/36.webp)
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/37.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/34.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/35.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/36.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/37.webp)
 
 `flagTable_this` 안에 꽤나 많은 수의 레코드가 존재하는 듯했다. 따라서 플래그가 `segfault{...}` 형태라는 것을 활용해 `LIKE` 연산자를 포함한 쿼리를 작성하는 것이 효율적이라고 판단하였다. 서브쿼리로 `select flag from flagTable_this where flag like 'segfault%'`를 입력해 보았다.
 
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/38.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/38.webp)
 
 플래그가 출력되었다.
 
@@ -265,9 +469,9 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection 6
 
-![SQL Injection 6](/posts/Penetration%20Testing%20%7C%20Week%207/39.webp){:style="padding: 0 25%; background-color: white"}
+![SQL Injection 6](/posts/penetration-testing-week-7/assets/39.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하여 로그인을 시도한 결과, 아이디 입력란에서 SQL Injection 공격이 가능하나 오류 메시지가 출력되지 않아 Error-Based SQL Injection은 불가함을 확인하였다. 따라서 Blind SQL Injection을 시도해 보기로 결정하였다.
+링크를 통해 접속하여 로그인을 시도한 결과, 아이디 입력란에서 SQL Injection 공격이 가능하나 오류 메시지가 출력되지 않아 Error-Based SQL Injection은 불가함을 확인하였다. 따라서 Blind SQL Injection을 시도해 보기로 결정하였다.
 
 Blind SQL Injection 기법의 특성상, 데이터 추출을 위해 각 문자의 값을 개별적으로 확인하는 방식이 요구되어 시간적 소모가 상당하므로, 자동화 스크립트를 작성하여 공격을 수행하였다.
 
@@ -321,14 +525,14 @@ while True:
   sql = input("Enter the SQL query to extract data.(Press 'q' to quit.)\nSQL > ")
   if sql == "q":
     break
-  print(f"[+] Data extracted: {", ".join(extract_data())}\n")
+  print(f"[+] Data extracted: {', '.join(extract_data())}\n")
 ```
 
-Blind SQL Injection 기법의 핵심은 페이로드에 삽입한 조건의 참/거짓 여부를 판단하는 데 있으며, 위의 경우에는 로그인 성공 여부를 통해 판별한다. 따라서 응답 결과에 `Logged In` 텍스트가 포함되면 참, 그렇지 않으면 거짓을 반환하는 함수를 사용하였다. `SELECT DATABASE()` 문은 테이블이 아닌 상수를 반환하기 때문에 뒤의 `LIMIT` 절이 무시되는 특징이 있었으므로, 무한 루프 방지를 위해 예외 조건을 삽입하였다.
+Blind SQL Injection 기법의 핵심은 페이로드에 삽입한 조건의 참/거짓 여부를 판단하는 데 있으며, 위의 경우에는 로그인 성공 여부를 통해 판별한다. 따라서 응답 결과에 `Logged In` 텍스트가 포함되면 참, 그렇지 않으면 거짓을 반환하는 함수를 사용하였다. `SELECT DATABASE()` 문은 현재 데이터베이스명을 단일 값으로 반환하므로 `LIMIT` 절의 `offset`을 변경하는 것이 의미가 없어, `row > 0`인 경우를 예외 처리하였다.
 
 스크립트를 실행하면 사용자가 SQL 쿼리를 입력할 수 있는 인터페이스를 제공하며, 입력한 쿼리를 기반으로 데이터를 추출하여 화면에 출력하는 구조로 설계되어 있다. 실행 결과는 다음과 같다.
 
-![SQL Injection 4](/posts/Penetration%20Testing%20%7C%20Week%207/40.webp)
+![SQL Injection 4](/posts/penetration-testing-week-7/assets/40.webp)
 
 데이터 추출 과정을 거쳐 최종적으로 플래그를 획득하였다.
 

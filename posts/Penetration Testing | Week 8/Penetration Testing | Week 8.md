@@ -109,7 +109,7 @@ CTF를 해결하며 실제 웹 페이지와 유사한 환경에서 SQL Injection
 
 ![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/2.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
+링크를 통해 접속하면 다음과 같은 웹 페이지로 이동한다.
 
 ![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/3.webp)
 
@@ -168,7 +168,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![SQL Injection Point 2](/posts/Penetration%20Testing%20%7C%20Week%208/12.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 SQL Injection Point 1과 동일한 회원제 게시판 애플리케이션으로 이동한다.
+링크를 통해 접속하면 SQL Injection Point 1과 동일한 회원제 게시판 애플리케이션으로 이동한다.
 
 로그인 페이지 및 마이페이지에서 SQL Injection을 시도해 보았지만 실패하였고, 이번에는 게시판 페이지를 조사해 보기로 결정하였다.
 
@@ -214,7 +214,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![SQL Injection Point 3](/posts/Penetration%20Testing%20%7C%20Week%208/22.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 마찬가지로 회원제 게시판 애플리케이션으로 이동한다.
+링크를 통해 접속하면 마찬가지로 회원제 게시판 애플리케이션으로 이동한다.
 
 전체적인 구조를 살펴보던 중 앞선 문제들과는 다른 점을 발견하였다.
 
@@ -300,7 +300,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![SQL Injection Point 4](/posts/Penetration%20Testing%20%7C%20Week%208/27.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 마찬가지로 회원제 게시판 애플리케이션으로 이동한다.
+링크를 통해 접속하면 마찬가지로 회원제 게시판 애플리케이션으로 이동한다.
 
 SQL Injection 취약점을 탐색하던 도중 SQL Injection Point 2에서 발견했던 위치에서 동일하게 취약점이 존재한다는 것을 확인하였다.
 

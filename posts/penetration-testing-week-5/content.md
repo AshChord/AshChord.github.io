@@ -26,7 +26,7 @@ $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$passwor
 SELECT * FROM user WHERE username = 'user' AND password = '1234'
 ```
 
-정상적인 경우 이 쿼리는 데이터베이스에서 해당 ID와 비밀번호를 가진 사용자 정보를 조회하는 역할을 한다.  
+정상적인 경우 이 쿼리는 데이터베이스에서 해당 아이디와 비밀번호를 가진 사용자 정보를 조회하는 역할을 한다.  
 그런데 만약 `username`에 `user'`를 입력하면 어떻게 될까?
 
 ![SQL Injection Practice](/posts/penetration-testing-week-5/assets/1.webp)
@@ -85,7 +85,7 @@ SQL Injection뿐만 아니라 지금까지 배운 내용을 종합적으로 활�
 
 ![Get Admin](/posts/penetration-testing-week-5/assets/5.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
+링크를 통해 접속하면 다음과 같은 웹 페이지로 이동한다.
 
 ![Get Admin](/posts/penetration-testing-week-5/assets/6.webp)
 
@@ -116,7 +116,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![PIN CODE Bypass](/posts/penetration-testing-week-5/assets/12.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
+링크를 통해 접속하면 다음과 같은 웹 페이지로 이동한다.
 
 ![PIN CODE Bypass](/posts/penetration-testing-week-5/assets/13.webp)
 
@@ -147,8 +147,8 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![Admin is Mine](/posts/penetration-testing-week-5/assets/18.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 Get Admin에서와 같은 로그인 페이지로 이동한다.  
-주어진 계정으로 로그인을 시도하기 전에 한 가지 특이점을 발견했는데, 바로 `login.php`에 접속하면 실행되는 JavaScript 코드들이 존재한다는 사실이었다.
+링크를 통해 접속하면 Get Admin에서와 같은 로그인 페이지로 이동한다.  
+주어진 계정으로 로그인을 시도하기 전에 한 가지 특이점을 발견했는데, 바로 `login.php`에 접속하면 실행되는 JavaScript 코드가 존재한다는 사실이었다.
 
 ![Admin is Mine](/posts/penetration-testing-week-5/assets/19.webp){:style="padding: 0 25%; background-color: #2b2b2b"}
 
@@ -180,7 +180,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 ![Admin is Mine](/posts/penetration-testing-week-5/assets/25.webp)
 ![Admin is Mine](/posts/penetration-testing-week-5/assets/26.webp)
 
-정상적으로 응답을 가로챌 수 있었고, 이를 변조하여 `fail`을 `ok`로 수정하면 로그인에 성공할 것으로 추측하였다.
+정상적으로 응답을 가로챌 수 있었고, 이를 변조하여 `fail`을 `ok`로 변경하면 로그인에 성공할 것으로 추측하였다.
 
 ![Admin is Mine](/posts/penetration-testing-week-5/assets/27.webp)
 ![Admin is Mine](/posts/penetration-testing-week-5/assets/28.webp)
@@ -196,7 +196,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![PIN CODE Crack](/posts/penetration-testing-week-5/assets/29.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 다음과 같은 웹 페이지로 이동한다.
+링크를 통해 접속하면 다음과 같은 웹 페이지로 이동한다.
 
 ![PIN CODE Crack](/posts/penetration-testing-week-5/assets/30.webp)
 
@@ -208,9 +208,9 @@ LOGIN 버튼을 누르면 다음과 같이 4자리 PIN Code를 입력하라는 �
 
 ![PIN CODE Crack](/posts/penetration-testing-week-5/assets/32.webp)
 
-GET 방식으로 코드가 전송된다는 사실 외에는 특기할 만한 점을 찾지 못했다. 그러나 Admin is Mine 문제를 해결하는 과정에서 PortSwigger의 Documentation 페이지를 대강 살펴봤기 때문에 로그인을 우회할 수 있는 전략을 빠르게 구상할 수 있었다.
+GET 방식으로 코드가 전송된다는 사실 외에는 특기할 만한 점을 찾지 못했다. 그러나 Admin is Mine 문제를 해결하는 과정에서 PortSwigger의 Documentation 페이지를 대략 살펴봤기 때문에 로그인을 우회할 수 있는 전략을 빠르게 구상할 수 있었다.
 
-바로 Burp Suite의 Intruder 기능을 활용하는 것으로, Intruder의 사용법에 대해서는 아래 링크에 상세히 설명되어 있다.  
+바로 Burp Suite의 Intruder 기능을 활용하는 것으로, Intruder의 사용법은 아래 링크에 상세히 설명되어 있다.  
 [https://portswigger.net/burp/documentation/desktop/tools/intruder](https://portswigger.net/burp/documentation/desktop/tools/intruder)
 
 ![PIN CODE Crack](/posts/penetration-testing-week-5/assets/33.webp)
@@ -231,9 +231,9 @@ GET 방식으로 코드가 전송된다는 사실 외에는 특기할 만한 점
 
 > **Brute Force**
 >
-> 가능한 모든 경우의 수를 시도하여 정답을 찾아내는 공격 방법을 **Brute Force**라고 한다. 시간과 자원의 소모가 상당하여 표면적으로 비효율적인 방법으로 인식될 수 있으나 100%의 정확도를 보장하기 때문에 공격 방식 중 가장 확실하고 치명적이다.
+> 가능한 모든 경우의 수를 시도하여 정답을 찾아내는 공격 방법을 **Brute Force**라고 한다. 시간과 자원의 소모가 상당하여 표면적으로 비효율적인 방법으로 인식될 수 있으나 100%의 정확도를 보장하므로 공격 방식 중 가장 확실하고 치명적이다.
 
-참고로, Burp Suite Community Edition은 Intruder의 속도가 매우 느리다. 총 10000번의 요청을 전송해야 하는 상황에서 시간이 지나치게 소요되어 1000개씩 나누어 전송하며 확인하였다. 다행히 1000번대 번호에서 정답을 발견하여 아주 오랜 시간이 걸리지는 않았으나, 동일한 작업을 수행할 수 있는 스크립트를 작성하여 공격을 수행하는 것이 훨씬 더 적합하다고 판단된다. 예시 스크립트를 아래에 첨부한다.
+참고로, Burp Suite Community Edition은 Intruder의 속도가 매우 느리다. 총 10000번의 요청을 전송해야 하는 상황에서 시간이 지나치게 소요되어 1000개씩 나누어 전송하여 확인하였다. 다행히 1000번대 번호에서 정답을 발견하여 아주 오랜 시간이 걸리지는 않았으나, 동일한 작업을 수행할 수 있는 스크립트를 작성하여 공격을 수행하는 것이 훨씬 더 적합하다고 판단된다. 예시 스크립트를 아래에 첨부한다.
 
 ```python
 # brute_force.py
@@ -260,7 +260,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![Login Bypass 1](/posts/penetration-testing-week-5/assets/37.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하면 예상대로 로그인 페이지로 이동한다.  
+링크를 통해 접속하면 예상대로 로그인 페이지로 이동한다.  
 
 우선 주어진 계정으로 로그인을 시도해 보았다.
 
@@ -296,7 +296,7 @@ SELECT * FROM user WHERE username = 'user' and '1' = '1' AND password = '1234'
 /* SQL 키워드는 가독성을 위해 대문자로 작성하는 것이 관례이나, 문법적으로 대소문자를 구분하지 않음 */
 ```
 
-두 번째 SQL 쿼리는 `username = 'user'` 조건 뒤에 `and '1' = '1'` 조건이 추가된 형태이다. 여기서 `'1' = '1'`은 항상 참인 조건이며, `AND` 연산에서 항등원은 참이므로, 해당 조건의 추가는 전체 쿼리의 의미에 영향을 미치지 않는다. 따라서 두 쿼리는 그 논리적 효과에 있어 실질적으로 동일하다. 따라서 `' and '1' = '1'`을 추가한 데이터를 전송해도 동일한 결과가 도출된다면 이는 입력한 텍스트가 그대로 SQL 쿼리로 처리되고 있다는 것을 의미하며, SQL Injection 공격이 효과가 있을 가능성이 높다는 것을 시사한다.
+두 번째 SQL 쿼리는 `username = 'user'` 조건 뒤에 `and '1' = '1'` 조건이 추가된 형태이다. 여기서 `'1' = '1'`은 항상 참인 조건이며, `AND` 연산에서 항등원은 참이므로, 해당 조건의 추가는 전체 쿼리의 의미에 영향을 미치지 않는다. 따라서 두 쿼리는 그 논리적 효과에 있어 실질적으로 동일하다. 그러므로 `' and '1' = '1'`을 추가한 데이터를 전송해도 동일한 결과가 도출된다면, 이는 입력한 텍스트가 그대로 SQL 쿼리로 처리되고 있다는 것을 의미하며 SQL Injection 공격이 효과가 있을 가능성이 높다는 것을 시사한다.
 
 `doldol' and '1' = '1`과 `dol1234`를 입력하여 로그인을 시도해 보자.
 
@@ -325,7 +325,7 @@ SELECT * FROM user WHERE username = 'user' or '1' = '1' AND password = '1234'
 ![Login Bypass 1](/posts/penetration-testing-week-5/assets/42.webp)
 
 정확한 로그인 절차와 사용되는 SQL 쿼리는 확인할 수 없으나, 상기한 방식과 유사한 처리가 이루어지고 있음을 추측할 수 있다.
-이제 ID만 `normaltic1`으로 바꾸면 `normaltic1` 계정으로 로그인할 수 있다.
+이제 아이디만 `normaltic1`으로 바꾸면 `normaltic1` 계정으로 로그인할 수 있다.
 
 ![Login Bypass 1](/posts/penetration-testing-week-5/assets/43.webp)
 
@@ -343,7 +343,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![Login Bypass 2](/posts/penetration-testing-week-5/assets/45.webp){:style="padding: 0 25%; background-color: white"}
 
-링크의 주소로 접속하여 로그인을 시도해 보았다.
+링크를 통해 접속하여 로그인을 시도해 보았다.
 
 ![Login Bypass 2](/posts/penetration-testing-week-5/assets/46.webp)
 ![Login Bypass 2](/posts/penetration-testing-week-5/assets/47.webp)
@@ -378,13 +378,13 @@ if ($user && $user['password'] == $password) {
 
 ![Login Bypass 2](/posts/penetration-testing-week-5/assets/50.webp)
 
-올바른 비밀번호를 입력하였음에도 불구하고 로그인이 정상적으로 이루어지지 않았다. 이에 대해 잠시 고민해 본 결과, 그 원인을 빠르게 파악할 수 있었다. 앞서 추측한 대로 로그인 절차가 식별과 인증을 분리하여 처리하는 구조라면, ID 입력란에 `' or '1' = '1`을 추가하는 행위는 `WHERE` 절을 항상 참으로 만들어 버리는 결과를 초래한다. 이 경우 사용자 테이블 내의 특정 사용자(`doldol`)만 조회되는 것이 아니라 전체 레코드가 반환되며, 그 결과 `$user` 변수에 의도하지 않은 다른 사용자의 정보가 저장될 우려가 발생한다.
+올바른 비밀번호를 입력하였음에도 불구하고 로그인이 정상적으로 이루어지지 않았다. 이에 대해 잠시 고민한 결과, 그 원인을 빠르게 파악할 수 있었다. 앞서 추측한 대로 로그인 절차가 식별과 인증을 분리하여 처리하는 구조라면, 아이디 입력란에 `' or '1' = '1`을 추가하는 행위는 `WHERE` 절을 항상 참으로 만들어 버리는 결과를 초래한다. 이 경우 사용자 테이블 내의 특정 사용자(`doldol`)만 조회되는 것이 아니라 전체 레코드가 반환되며, 그 결과 `$user` 변수에 의도하지 않은 다른 사용자의 정보가 저장될 우려가 발생한다.
 
 이러한 상황을 방지하고자 이번에는 `OR` 연산의 항등원이 거짓이라는 점을 이용하여 `UserId`에 `' or '1' = '2`를 추가한 뒤, 올바른 비밀번호를 입력하여 다시 로그인을 시도하였다.
 
 ![Login Bypass 2](/posts/penetration-testing-week-5/assets/51.webp)
 
-이 방법 역시 로그인에 실패하였다. 따라서 이는 위의 추측과는 다른 방식으로 로그인이 처리되고 있음을 시사한다. `' and '1' = '1`을 추가하는 경우와 `' or '1' = '2`를 추가하는 경우는 논리적 의미상 실질적인 차이가 존재하지 않기 때문에, 이론적으로는 다른 결과가 도출될 수 없다.
+이 방법 역시 로그인에 실패하였다. 따라서 이는 위의 추측과는 다른 방식으로 로그인이 이루어지고 있음을 시사한다. `' and '1' = '1`을 추가하는 경우와 `' or '1' = '2`를 추가하는 경우는 논리적 의미상 실질적인 차이가 존재하지 않기 때문에, 이론적으로는 다른 결과가 도출될 수 없다.
 
 이러한 점을 고려하여 도출된 두 번째 가설은, 서버 측 코드에서 SQL 쿼리에 `OR` 연산이 포함되지 못하도록 제한하는 구문이 존재한다는 것이다. 이를테면 다음과 같은 방식이다.
 
@@ -414,7 +414,7 @@ if (mysqli_num_rows($res) == 1) {
 
 ![Login Bypass 2](/posts/penetration-testing-week-5/assets/52.webp)
 
-주석 처리를 이용한 방법은 로그인에 성공하였다. 이 말은 곧 식별과 인증이 하나의 SQL 쿼리 내에서 동시에 이루어진다는 뜻이며, 예상한 대로 서버 측에서 `OR` 연산자가 필터링되는 형태일 가능성이 높다는 점을 시사한다.
+주석 처리를 이용한 방법은 로그인에 성공하였다. 이 말은 곧 식별과 인증이 하나의 SQL 쿼리 내에서 동시에 이루어진다는 뜻이며, 예상한 대로 서버 측에서 `OR` 연산자가 필터링되는 방식일 가능성이 높다는 점을 시사한다.
 
 이제 `UserId`를 `normaltic2'#`으로 수정하면 `normaltic2` 계정으로 로그인할 수 있다.
 
