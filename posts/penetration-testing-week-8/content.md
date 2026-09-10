@@ -1,13 +1,4 @@
----
-layout: article
-permalink: /posts/Penetration Testing | Week 8
-title: Penetration Testing | Week 8
-date: 2025/06/01
-excerpt: SQL Injection 취약점 탐색
-categories: 모의 해킹
----
-
-{{ site.pages.first.content | split: page.path }}
+# Penetration Testing | Week 8
 
 ## 강의 노트
 
@@ -56,8 +47,8 @@ Prepared Statement를 사용하는 기본적인 PHP 코드이다. 위 코드는 
 
 ```php
 function isValidUsername($username) {
-    // preg_match(): 정규표현식과 비교하여 패턴에 맞으면 1, 아니면 0을 반환하는 함수
-    return preg_match('/^[a-zA-Z0-9]+$/', $username); // 영문 대소문자 및 숫자만 존재하는지 검사
+  // preg_match(): 정규표현식과 비교하여 패턴에 맞으면 1, 아니면 0을 반환하는 함수
+  return preg_match('/^[a-zA-Z0-9]+$/', $username); // 영문 대소문자 및 숫자만 존재하는지 검사
 }
 
 $user_input = $_GET['username'];
@@ -99,7 +90,7 @@ SQL Injection 취약점이 식별되었더라도, 이로 인해 데이터베이�
 
 ### SQL Injection Advanced CTF
 
-![SQL Injection Advanced CTF](/posts/Penetration%20Testing%20%7C%20Week%208/1.webp)
+![SQL Injection Advanced CTF](/posts/penetration-testing-week-8/assets/1.webp)
 
 CTF를 해결하며 실제 웹 페이지와 유사한 환경에서 SQL Injection 취약점을 탐색해 보자.
 
@@ -107,11 +98,11 @@ CTF를 해결하며 실제 웹 페이지와 유사한 환경에서 SQL Injection
 
 #### SQL Injection Point 1
 
-![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/2.webp){:style="padding: 0 25%; background-color: white"}
+![SQL Injection Point 1](/posts/penetration-testing-week-8/assets/2.webp){:style="padding: 0 25%; background-color: white"}
 
 링크를 통해 접속하면 다음과 같은 웹 페이지로 이동한다.
 
-![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/3.webp)
+![SQL Injection Point 1](/posts/penetration-testing-week-8/assets/3.webp)
 
 해당 웹 애플리케이션은 간단한 회원제 게시판 애플리케이션으로, 다음과 같은 페이지들로 구성되어 있었다.
 
@@ -126,36 +117,36 @@ CTF를 해결하며 실제 웹 페이지와 유사한 환경에서 SQL Injection
 
 우선 로그인 페이지에서 제공된 여러 CTF 문제를 해결한 경험을 바탕으로, 회원가입을 진행하여 `any`/`any` 계정을 생성한 뒤 `login.php`에서 SQL Injection을 시도해 보기로 결정하였다.
 
-![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/4.webp)
+![SQL Injection Point 1](/posts/penetration-testing-week-8/assets/4.webp)
 
 몇 차례 시도한 결과 로그인 페이지에서의 SQL Injection은 실패하였으며, 로그인 시 `user=any`라는 쿠키 값이 설정된다는 사실만을 파악할 수 있었다.
 
 다음으로 `mypage.php`로 이동하여 SQL Injection을 시도해 보았다.
 
-![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/5.webp)
+![SQL Injection Point 1](/posts/penetration-testing-week-8/assets/5.webp)
 
 마이페이지에서는 사용자 정보(아이디, 기타 정보, 비밀번호)를 확인 및 수정할 수 있는 기능을 제공하고 있었고, 사용자 정보가 데이터베이스로부터 SQL 쿼리를 통해 조회된 후 화면에 출력되고 있다고 판단하였다. 로그인 이후 설정된 `user=any` 쿠키를 고려하면, `select column_name from table_name where user = '$user'`와 같은 쿼리가 사용될 가능성이 존재한다. 따라서 쿠키의 `user` 값을 `any' and '1' = '1`로 수정하여 요청을 전송해 보았다.
 
-![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/6.webp)
+![SQL Injection Point 1](/posts/penetration-testing-week-8/assets/6.webp)
 
 쿼리의 조건절이 `where user = 'any' and '1' = '1`과 같은 형태로 변경되면 논리적으로 의미 차이가 존재하지 않으므로, 동일한 결과가 반환될 것으로 예상되었다. 그러나 아이디 필드의 플레이스홀더는 전송한 페이로드가 가공되지 않은 상태로 그대로 출력되었고, 이에 따라 해당 데이터는 데이터베이스로부터 조회된 아이디 값이 아니라 쿠키의 `user` 값이 직접적으로 전달된 것임을 추정할 수 있었다. 하지만 기타 정보 필드의 플레이스홀더는 여전히 데이터베이스에서 조회된 데이터일 가능성이 있었으므로, 보다 정밀한 검증을 위해 쿠키의 `user` 값을 `any' and '1' = '2`로 수정하여 다시 요청을 전송해 보았다.
 
-![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/7.webp)
+![SQL Injection Point 1](/posts/penetration-testing-week-8/assets/7.webp)
 
 그 결과 기타 정보 필드의 플레이스홀더가 출력되지 않았다. 이는 해당 데이터가 실제로 데이터베이스로부터 조회되어 출력되고 있었음을 의미하며, 쿼리의 조건절이 거짓으로 평가됨에 따라 데이터가 반환되지 않았다는 점을 시사한다.
 
 삽입한 페이로드의 조건식의 진릿값을 기반으로 애플리케이션의 동작이 달라짐을 확인하였으므로 Blind SQL Injection을 사용해 데이터를 추출할 수 있다. 하지만 이 경우 기타 정보 필드에 출력되는 데이터가 있으므로 UNION SQL Injection을 사용할 수 있는 여지가 존재한다. 따라서 페이로드에 `ORDER BY` 절을 결합하여 사용되는 테이블의 컬럼 수를 파악해 보았다.
 
-![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/8.webp)
-![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/9.webp)
+![SQL Injection Point 1](/posts/penetration-testing-week-8/assets/8.webp)
+![SQL Injection Point 1](/posts/penetration-testing-week-8/assets/9.webp)
 
 컬럼 수가 오직 1개임을 파악하였다. 그렇다면 해당 컬럼의 값이 곧 기타 정보 필드에 출력되는 것임을 의미한다. 따라서 쿠키의 user 값을 `any' union select database()`로 수정해 보았다.
 
-![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/10.webp)
+![SQL Injection Point 1](/posts/penetration-testing-week-8/assets/10.webp)
 
 성공적으로 현재 데이터베이스명이 출력되었다. 이후 데이터 추출을 위한 UNION SQL Injection 절차를 순서대로 수행하였다.
 
-![SQL Injection Point 1](/posts/Penetration%20Testing%20%7C%20Week%208/11.webp)
+![SQL Injection Point 1](/posts/penetration-testing-week-8/assets/11.webp)
 
 모든 절차를 수행한 뒤 플래그를 획득할 수 있었다.
 
@@ -166,44 +157,44 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection Point 2
 
-![SQL Injection Point 2](/posts/Penetration%20Testing%20%7C%20Week%208/12.webp){:style="padding: 0 25%; background-color: white"}
+![SQL Injection Point 2](/posts/penetration-testing-week-8/assets/12.webp){:style="padding: 0 25%; background-color: white"}
 
 링크를 통해 접속하면 SQL Injection Point 1과 동일한 회원제 게시판 애플리케이션으로 이동한다.
 
 로그인 페이지 및 마이페이지에서 SQL Injection을 시도해 보았지만 실패하였고, 이번에는 게시판 페이지를 조사해 보기로 결정하였다.
 
-![SQL Injection Point 2](/posts/Penetration%20Testing%20%7C%20Week%208/13.webp)
+![SQL Injection Point 2](/posts/penetration-testing-week-8/assets/13.webp)
 
 우선 예시로 `test` 게시물을 생성한 후, 게시물 검색 기능을 사용해 보았다.
 
-![SQL Injection Point 2](/posts/Penetration%20Testing%20%7C%20Week%208/14.webp)
+![SQL Injection Point 2](/posts/penetration-testing-week-8/assets/14.webp)
 
 검색 기준을 작성자로 설정하고 `an`을 검색하면, 서버에는 `option_val=username&board_result=an`과 같은 데이터가 전달된다. 따라서 `option_val` 파라미터에 검색 기준이 되는 컬럼명이 전달되며, `board_result`에는 실제 데이터와 대응되는 검색어가 전달되는 것을 알 수 있다. `an`을 입력했을 때 작성자가 `any`인 게시물이 검색되었으므로, `select column_name(s) from table_name where $option_val like '%$board_result%'`와 같은 형태의 쿼리가 사용될 것으로 예측되었다. 따라서 `board_result` 파라미터에 `an%' and '1%' = '1`를 입력하여 요청을 전송해 보았다.
 
-![SQL Injection Point 2](/posts/Penetration%20Testing%20%7C%20Week%208/15.webp)
+![SQL Injection Point 2](/posts/penetration-testing-week-8/assets/15.webp)
 
 검색 결과가 존재하지 않았다. 필터링 등의 조치가 취해져 있을 가능성도 있겠으나, 이를 우회하는 방식은 차후에 고려하고 `option_val` 파라미터를 이용한 SQL Injection을 먼저 시도해 보기로 결정하였다. `option_val` 파라미터의 값을 `1 = 1 and username`으로 수정하면, `WHERE` 절이 `where 1 = 1 and username like '%an%'`의 형태가 되어 논리적으로 동일한 의미를 가진다. 이와 같이 수정한 요청을 전송해 보았다.
 
-![SQL Injection Point 2](/posts/Penetration%20Testing%20%7C%20Week%208/16.webp)
+![SQL Injection Point 2](/posts/penetration-testing-week-8/assets/16.webp)
 
 정상적으로 검색 결과가 출력되었다.
 
-![SQL Injection Point 2](/posts/Penetration%20Testing%20%7C%20Week%208/17.webp)
+![SQL Injection Point 2](/posts/penetration-testing-week-8/assets/17.webp)
 
 `option_val` 파라미터를 `1 = 2 and username`으로 수정하면 검색 결과가 존재하지 않는다는 사실 역시 확인할 수 있었고, 조건식의 진릿값에 따른 애플리케이션 동작 차이가 확인되었으므로 Blind SQL Injection을 수행할 수 있게 되었다. 하지만 이번에도 화면에 출력되는 데이터가 존재하므로 UNION SQL Injection이 사용 가능한지 확인해 보기로 결정하였다. `option_val` 파라미터를 `1 = 1 order by 1#`과 같은 형태로 수정하여 요청을 전송해 보았다.
 
-![SQL Injection Point 2](/posts/Penetration%20Testing%20%7C%20Week%208/18.webp)
-![SQL Injection Point 2](/posts/Penetration%20Testing%20%7C%20Week%208/19.webp)
+![SQL Injection Point 2](/posts/penetration-testing-week-8/assets/18.webp)
+![SQL Injection Point 2](/posts/penetration-testing-week-8/assets/19.webp)
 
 `order by 10`까지는 검색 결과가 출력되고, `order by 11`을 입력하면 출력되지 않는다는 사실을 확인하였다. 따라서 사용되는 테이블의 컬럼 수는 10개임을 알 수 있었다. 또한 기본적으로 보이지 않던 다른 게시물들 역시 검색되었는데, `WHERE` 절의 조건식이 `1 = 1`이 됨에 따라 테이블에 존재하는 모든 레코드가 출력되면서 모종의 이유로 숨겨져 있던 게시물들 또한 검색된 것으로 보인다.
 
 다음으로 `option_val` 값을 `1 = 1 union select 1, 2, 3, 4, 5, 6, 7, 8, 9, 10#`으로 수정하여 출력되는 컬럼의 위치를 확인하였다.
 
-![SQL Injection Point 2](/posts/Penetration%20Testing%20%7C%20Week%208/20.webp)
+![SQL Injection Point 2](/posts/penetration-testing-week-8/assets/20.webp)
 
 1, 2, 3, 4번째 컬럼이 출력되는 것을 확인하였다. 이후 데이터베이스명, 테이블명, 컬럼명을 순차적으로 추출하고 플래그 획득에 성공하였다.
 
-![SQL Injection Point 2](/posts/Penetration%20Testing%20%7C%20Week%208/21.webp)
+![SQL Injection Point 2](/posts/penetration-testing-week-8/assets/21.webp)
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">columnCanBeDangerous</span>}</span>
 {:style="text-align: center;"}
@@ -212,13 +203,13 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection Point 3
 
-![SQL Injection Point 3](/posts/Penetration%20Testing%20%7C%20Week%208/22.webp){:style="padding: 0 25%; background-color: white"}
+![SQL Injection Point 3](/posts/penetration-testing-week-8/assets/22.webp){:style="padding: 0 25%; background-color: white"}
 
 링크를 통해 접속하면 마찬가지로 회원제 게시판 애플리케이션으로 이동한다.
 
 전체적인 구조를 살펴보던 중 앞선 문제들과는 다른 점을 발견하였다.
 
-![SQL Injection Point 3](/posts/Penetration%20Testing%20%7C%20Week%208/23.webp)
+![SQL Injection Point 3](/posts/penetration-testing-week-8/assets/23.webp)
 
 게시판 페이지에서 검색을 수행했을 때, `sort`라는 파라미터가 같이 전달된다는 사실을 파악할 수 있었다. 따라서 게시물 검색에 사용되는 쿼리를 `select column_name(s) from table_name where $option_val like '%$board_result%' order by $sort`와 같은 형태로 예측하였다. `ORDER BY` 절은 특히 Prepared Statement를 사용할 수 없다는 특징이 있어 더욱 취약한 지점 중 하나이기 때문에, `sort` 파라미터를 사용해 SQL Injection을 시도해 보기로 결정하였다.
 
@@ -230,18 +221,19 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 >
 > 사용 예시는 아래와 같다.
 >
-> <pre><button class="copy-button"></button><code class="language-sql" highlighted><data class="code-line" value="1"><span class="hljs-comment">/* Syntax */</span>
-> </data><data class="code-line" value="2"><span class="hljs-keyword">CASE</span> <span class="hljs-keyword">WHEN</span> condition <span class="hljs-keyword">THEN</span> result1 <span class="hljs-keyword">ELSE</span> result2 <span class="hljs-keyword">END</span>
-> </data><data class="code-line" value="3">
-> </data><data class="code-line" value="4"><span class="hljs-comment">/* Example */</span>
-> </data><data class="code-line" value="5"><span class="hljs-keyword">CASE</span> <span class="hljs-keyword">WHEN</span> x <span class="hljs-operator">&gt;</span> <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> <span class="hljs-string">'pos'</span> <span class="hljs-keyword">ELSE</span> <span class="hljs-string">'neg'</span> <span class="hljs-keyword">END</span> <span class="hljs-comment">-- 반환값: 조건이 참이면 'pos', 거짓이면 'neg'</span>
-> </data></code></pre>
+> ```sql
+> /* Syntax */
+> CASE WHEN condition THEN result1 ELSE result2 END
+>
+> /* Example */
+> CASE WHEN x > 0 THEN 'pos' ELSE 'neg' END -- 반환값: 조건이 참이면 'pos', 거짓이면 'neg'
+> ```
 
-![SQL Injection Point 3](/posts/Penetration%20Testing%20%7C%20Week%208/24.webp)
+![SQL Injection Point 3](/posts/penetration-testing-week-8/assets/24.webp)
 
 `sort` 파라미터에 삽입한 페이로드는 조건이 참이므로 `1`의 값으로 변환되며, 게시물 검색 결과를 테이블의 첫 번째 컬럼을 기준으로 정렬시킨다. 조건식을 `1 = 2`로 변경하면 어떻게 될까?
 
-![SQL Injection Point 3](/posts/Penetration%20Testing%20%7C%20Week%208/25.webp)
+![SQL Injection Point 3](/posts/penetration-testing-week-8/assets/25.webp)
 
 이번에는 검색 결과가 반환되지 않는다. 그 이유는 페이로드의 조건식이 거짓이기 때문에 `select 1 union select 2`의 값으로 변환되기 때문이다. 이는 하나의 값이 아닌 2개 행으로 이루어진 테이블 형태이므로, `ORDER BY` 절 뒤에 결합되면 오류가 발생한다. 따라서 정상적으로 쿼리 결과가 반환될 수 없다.
 
@@ -256,6 +248,9 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 이로써 조건식의 진릿값에 따른 애플리케이션의 동작 차이를 확인하였다. 이번에는 데이터가 출력되는 위치를 확인할 수 없으므로, 바로 Blind SQL Injection을 사용하기로 결정하였다. 7주 차에 사용했던 자동화 스크립트를 소폭 수정하여 실행해 보았다.
 
+<style id="code-1">
+  #code-1 + pre data:is([value="17"], [value="20"]) span {color: #24292E !important;}
+</style>
 ```python
 # blind_sqli.py
 
@@ -287,7 +282,7 @@ while True:
 
 스크립트 실행 결과는 다음과 같다.
 
-![SQL Injection Point 3](/posts/Penetration%20Testing%20%7C%20Week%208/26.webp)
+![SQL Injection Point 3](/posts/penetration-testing-week-8/assets/26.webp)
 
 데이터 추출 과정을 거쳐 최종적으로 플래그를 획득하였다.
 
@@ -298,42 +293,42 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### SQL Injection Point 4
 
-![SQL Injection Point 4](/posts/Penetration%20Testing%20%7C%20Week%208/27.webp){:style="padding: 0 25%; background-color: white"}
+![SQL Injection Point 4](/posts/penetration-testing-week-8/assets/27.webp){:style="padding: 0 25%; background-color: white"}
 
 링크를 통해 접속하면 마찬가지로 회원제 게시판 애플리케이션으로 이동한다.
 
 SQL Injection 취약점을 탐색하던 도중 SQL Injection Point 2에서 발견했던 위치에서 동일하게 취약점이 존재한다는 것을 확인하였다.
 
-![SQL Injection Point 4](/posts/Penetration%20Testing%20%7C%20Week%208/28.webp)
-![SQL Injection Point 4](/posts/Penetration%20Testing%20%7C%20Week%208/29.webp)
+![SQL Injection Point 4](/posts/penetration-testing-week-8/assets/28.webp)
+![SQL Injection Point 4](/posts/penetration-testing-week-8/assets/29.webp)
 
 `ORDER BY` 절을 사용하여 테이블의 컬럼 수가 10개인 것을 확인하였고, 마찬가지로 UNION SQL Injection을 시도해 보았다.
 
-![SQL Injection Point 4](/posts/Penetration%20Testing%20%7C%20Week%208/30.webp)
+![SQL Injection Point 4](/posts/penetration-testing-week-8/assets/30.webp)
 
 데이터베이스명 `sqli_9`가 정상적으로 출력되는 것을 확인하였다. 이후 테이블명을 추출하기 위해 `option_val` 파라미터에 `1 = 1 union select 1, table_name, 3, 4, 5, 6, 7, 8, 9, 10 from information_schema.tables where table_schema = 'sqli_9'#`를 입력했을 때 문제가 발생하였다.
 
-![SQL Injection Point 4](/posts/Penetration%20Testing%20%7C%20Week%208/31.webp)
+![SQL Injection Point 4](/posts/penetration-testing-week-8/assets/31.webp)
 
 검색 결과가 반환되지 않았다. 데이터베이스명은 정상적으로 출력되었음을 감안하면, 입력한 페이로드에서 특정 문자가 필터링되고 있을 가능성이 높다고 생각하였다. 다양한 가능성을 모색하며 페이로드를 수 차례 수정하던 중, 예상치 못한 방식으로 단서를 발견할 수 있었다.
 
-![SQL Injection Point 4](/posts/Penetration%20Testing%20%7C%20Week%208/32.webp)
+![SQL Injection Point 4](/posts/penetration-testing-week-8/assets/32.webp)
 
 페이로드에서 `WHERE` 절을 제거하고 `1 = 1 union select 1, table_name, 3, 4, 5, 6, 7, 8, 9, 10 from information_schema.tables#`까지만 입력한 경우 SQL Injection 공격이 성공적으로 이루어지는 것을 확인하였다. 이후 `UNION SELECT` 문을 통해 반환된 결과를 확인하기 위해 기존에 테이블에 존재하던 게시물 목록을 지나쳐 가던 도중, 중간에서 제목이 `' 필터`인 게시물을 발견하였다.
 
 입력한 페이로드와 대조하며 검토한 결과, 페이로드 내의 작은따옴표(`'`) 문자가 필터링되고 있었음을 명확히 알 수 있었다. 검색 결과가 반환된 것은 페이로드에서 `where table_schema = 'sqli_9'` 구문이 제거되어 작은따옴표가 포함되지 않음으로써 SQL 쿼리가 정상적으로 수행된 결과였던 것이다.
 
-![SQL Injection Point 5](/posts/Penetration%20Testing%20%7C%20Week%208/33.webp)
+![SQL Injection Point 5](/posts/penetration-testing-week-8/assets/33.webp)
 
 또한, 기대한 바와 같이 플래그가 존재하는 테이블명 역시 출력되었음을 확인할 수 있었다.
 
 이제 컬럼명을 추출하기 위해 `option_val` 파라미터에 `1 = 1 union select 1, column_name, 3, 4, 5, 6, 7, 8, 9, 10 from information_schema.columns where table_name = 'flagHere'#`를 입력할 차례이다. 필터링을 우회하기 위해 마찬가지로 `where table_name = 'flagHere'` 구문을 삭제하고 그 중 테이블명이 `flagHere`인 컬럼을 직접 찾는 방법도 있겠지만, 어떤 문자가 필터링되는지 명확하게 확인하였기 때문에 문자열을 바이너리 데이터로 바꾸는 방법을 사용하였다. `flagHere` 문자열을 16진수 바이너리 값으로 변환하면 `0x666c616748657265`이므로, `'flagHere'` 위치에 해당 값을 대신 삽입한 뒤 요청을 전송해 보았다.
 
-![SQL Injection Point 5](/posts/Penetration%20Testing%20%7C%20Week%208/34.webp)
+![SQL Injection Point 5](/posts/penetration-testing-week-8/assets/34.webp)
 
 컬럼명 `flag`가 추출되었고, `option_val` 파라미터에 최종적으로 `1 = 1 union select 1, flag, 3, 4, 5, 6, 7, 8, 9, 10 from flagHere#`를 입력하여 플래그를 획득하였다.
 
-![SQL Injection Point 5](/posts/Penetration%20Testing%20%7C%20Week%208/35.webp)
+![SQL Injection Point 5](/posts/penetration-testing-week-8/assets/35.webp)
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">isHard?Nope!</span>}</span>
 {:style="text-align: center;"}

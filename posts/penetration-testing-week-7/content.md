@@ -93,6 +93,7 @@ normaltic' and extractvalue('<x/>', ':path') and '1' = '1
 > EXTRACTVALUE('<item>test<value>null</value></item>', '/item') -- 반환값: test
 > EXTRACTVALUE('<item>test<value>null</value></item>', '/item/value') -- 반환값: null
 > ```
+
 <script>
   patchCodeLine(5, [
     '<span style="color:#24292E">EXTRACTVALUE(</span>',
