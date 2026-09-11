@@ -344,4 +344,4 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 ### XSS 취약점 점검 보고서
 
 CTF 환경에서 XSS 취약점을 탐색하는 과정을 보고서 형태로 작성하였다.  
-[XSS 취약점 점검 결과 보고서](/posts/penetration-testing-week-4/assets/XSS 취약점 점검 결과 보고서.pdf){:download}
+[XSS 취약점 점검 결과 보고서](/posts/penetration-testing-week-4/assets/XSS 취약점 점검 결과 보고서.pdf){:download=""}

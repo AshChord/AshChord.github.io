@@ -210,4 +210,4 @@ board/
 3주 차까지 학습한 내용을 바탕으로 각 기능을 구현하였다.  
 각 파일의 소스 코드를 모두 본문에 포함할 경우 문서의 길이가 지나치게 길어지므로, 이를 압축하여 zip 파일 형태로 첨부한다.
 
-[board.zip](/posts/penetration-testing-week-4/assets/board.zip){:download}
+[board.zip](/posts/penetration-testing-week-4/assets/board.zip){:download=""}
