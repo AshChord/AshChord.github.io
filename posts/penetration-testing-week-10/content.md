@@ -1,13 +1,4 @@
----
-layout: article
-permalink: /posts/Penetration Testing | Week 10
-title: Penetration Testing | Week 10
-date: 2025/06/18
-excerpt: 쿠키 탈취 기법과 DOM-Based XSS
-categories: 모의 해킹
----
-
-{{ site.pages.first.content | split: page.path }}
+# Penetration Testing | Week 10
 
 ## 강의 노트
 
@@ -68,6 +59,32 @@ XSS 취약점에 `alert(1);` 대신 위와 같은 스크립트를 삽입하면 �
 > </data><data class="code-line" value="9" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 > </data><data class="code-line" value="10"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;
 > </data></code></pre>
+> ```html
+> <!DOCTYPE html>
+> <html>
+>   <head>
+>     <title>DOM</title>
+>   </head>
+>   <body>
+>     <h1>header</h1>
+>     <p>paragraph</p>
+>   </body>
+> </html>
+> ```
+> {: .dom-html}
+> ```text
+> document
+> └── html
+>     ├── head
+>     │   └── title
+>     │       └── "DOM"
+>     └── body
+>         ├── h1
+>         │   └── "header"
+>         └── p
+>             └── "paragraph"
+> ```
+> {: .dom-tree}
 > <pre class="dom-tree"><button class="copy-button"></button><code class="language-text" highlighted><data class="code-line" value="1">document
 > </data><data class="code-line" value="2">└── html
 > </data><data class="code-line" value="3" style="--indent: 4ch;">    ├── head
@@ -82,19 +99,19 @@ XSS 취약점에 `alert(1);` 대신 위와 같은 스크립트를 삽입하면 �
 
 실제 웹 사이트에서의 예시를 통해 DOM-Based XSS의 동작 방식을 자세히 살펴보자.
 
-![DOM-Based XSS](/posts/Penetration%20Testing%20%7C%20Week%2010/1.webp)
+![DOM-Based XSS](/posts/penetration-testing-week-10/assets/1.webp)
 
 XSS CTF에서와 같은 회원제 게시판 애플리케이션이다. 이때 검색 창에 `test`를 입력하고 검색을 수행하면 다음과 같이 화면에 `test` 텍스트가 출력된다.
 
-![DOM-Based XSS](/posts/Penetration%20Testing%20%7C%20Week%2010/2.webp)
+![DOM-Based XSS](/posts/penetration-testing-week-10/assets/2.webp)
 
 따라서 서버 응답에 입력한 검색어가 포함되어 전송되며, XSS 취약점이 존재할 가능성이 있다는 것을 유추할 수 있다.
 
-![DOM-Based XSS](/posts/Penetration%20Testing%20%7C%20Week%2010/3.webp)
+![DOM-Based XSS](/posts/penetration-testing-week-10/assets/3.webp)
 
 하지만 Burp Suite를 사용하여 패킷을 확인해 보면 서버 응답에 `test`라는 텍스트는 존재하지 않는다는 것을 알 수 있다. 그렇다면 어떻게 해당 메시지가 화면에 출력된 것일까?
 
-![DOM-Based XSS](/posts/Penetration%20Testing%20%7C%20Week%2010/4.webp)
+![DOM-Based XSS](/posts/penetration-testing-week-10/assets/4.webp)
 
 그 원인은 이 페이지에서 실행되는 JavaScript 코드에 있다. script 태그 내에 작성된 코드는 현재 URL의 쿼리 스트링에서 `board_result` 값을 추출한 뒤, 해당 값을 검색란에 자동으로 채워 넣음과 동시에 해당 검색어에 대한 검색 결과 부재 메시지를 화면에 출력한다. 이렇듯 JavaScript를 활용해 DOM을 직접 조작할 수 있으며, 해당 코드를 바탕으로 브라우저가 HTML 문서의 내용을 동적으로 구성하는 과정에서 공격자가 삽입한 악성 스크립트가 실행될 수 있다.
 
@@ -118,7 +135,7 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 ### XSS CTF
 
-![XSS CTF](/posts/Penetration%20Testing%20%7C%20Week%2010/5.webp)
+![XSS CTF](/posts/penetration-testing-week-10/assets/5.webp)
 
 9주 차에 XSS 취약점을 탐색했던 CTF 환경에서 쿠키 탈취 기법을 실습해 보자.
 
@@ -126,11 +143,11 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 #### XSS 1
 
-![XSS 1](/posts/Penetration%20Testing%20%7C%20Week%2010/6.webp){:style="padding: 0 25%; background-color: white"}
+![XSS 1](/posts/penetration-testing-week-10/assets/6.webp){:style="padding: 0 25%; background-color: white"}
 
 취약점 탐색 과정에서 게시판의 글쓰기 페이지(글 제목)에 XSS 취약점이 존재한다는 것을 확인하였다. 따라서 글쓰기 페이지로 이동 후 다음과 같이 악성 스크립트가 포함된 페이로드를 작성하였다.
 
-![XSS 1](/posts/Penetration%20Testing%20%7C%20Week%2010/7.webp)
+![XSS 1](/posts/penetration-testing-week-10/assets/7.webp)
 
 글 제목에 입력한 페이로드는 다음과 같다.
 
@@ -151,19 +168,19 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 글을 생성하고 나면 다음과 같이 게시물 목록 페이지에서 제목에 악성 스크립트가 포함된 게시물이 등록된 것을 확인할 수 있다.
 
-![XSS 1](/posts/Penetration%20Testing%20%7C%20Week%2010/8.webp)
+![XSS 1](/posts/penetration-testing-week-10/assets/8.webp)
 
 관리자를 해당 게시물에 접근시키면 관리자의 쿠키 정보를 RequestBin에서 조회할 수 있다. 따라서 우선 해당 게시물을 클릭하여 URL을 확인하였다.
 
-![XSS 1](/posts/Penetration%20Testing%20%7C%20Week%2010/9.webp)
+![XSS 1](/posts/penetration-testing-week-10/assets/9.webp)
 
 게시물 열람 페이지의 URL을 확인한 후, 관리자 방문 Bot 페이지에서 관리자가 해당 URL로 접근하도록 하였다.
 
-![XSS 1](/posts/Penetration%20Testing%20%7C%20Week%2010/10.webp)
+![XSS 1](/posts/penetration-testing-week-10/assets/10.webp)
 
 이후 RequestBin에서 요청이 정상적으로 수신되었고, 쿠키 정보에 플래그가 포함되어 출력되었다.
 
-![XSS 1](/posts/Penetration%20Testing%20%7C%20Week%2010/11.webp){:style="padding: 0 20%; background-color: white"}
+![XSS 1](/posts/penetration-testing-week-10/assets/11.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">StoredSavedXSS</span>}</span>
 {:style="text-align: center;"}
@@ -172,11 +189,11 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### XSS 2
 
-![XSS 2](/posts/Penetration%20Testing%20%7C%20Week%2010/12.webp){:style="padding: 0 25%; background-color: white"}
+![XSS 2](/posts/penetration-testing-week-10/assets/12.webp){:style="padding: 0 25%; background-color: white"}
 
 취약점 탐색 과정에서 게시판의 검색 창에 XSS 취약점이 존재한다는 것을 확인하였다. 따라서 검색 창에서 다음과 같이 악성 스크립트가 포함된 페이로드를 검색하였다.
 
-![XSS 2](/posts/Penetration%20Testing%20%7C%20Week%2010/13.webp)
+![XSS 2](/posts/penetration-testing-week-10/assets/13.webp)
 
 입력한 페이로드는 다음과 같다.
 
@@ -189,19 +206,19 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 검색을 수행한 후 `<script>` 태그 내에 정상적으로 악성 스크립트가 포함된 것을 확인하였다.
 
-![XSS 2](/posts/Penetration%20Testing%20%7C%20Week%2010/14.webp)
+![XSS 2](/posts/penetration-testing-week-10/assets/14.webp)
 
 검색 요청 URL을 관리자 Bot에게 접속시키면 관리자의 쿠키 정보를 획득할 수 있다. 검색 데이터가 POST 방식으로 전송되고 있었으므로, 요청 방식을 변경한 뒤 URL을 복사하였다.
 
-![XSS 2](/posts/Penetration%20Testing%20%7C%20Week%2010/15.webp)
+![XSS 2](/posts/penetration-testing-week-10/assets/15.webp)
 
 복사한 URL을 관리자 방문 Bot 페이지에 붙여 넣은 후 관리자가 해당 URL로 접근하도록 하였다.
 
-![XSS 2](/posts/Penetration%20Testing%20%7C%20Week%2010/16.webp)
+![XSS 2](/posts/penetration-testing-week-10/assets/16.webp)
 
 이후 RequestBin에서 요청이 정상적으로 수신되었고, 쿠키 정보에 플래그가 포함되어 출력되었다.
 
-![XSS 2](/posts/Penetration%20Testing%20%7C%20Week%2010/17.webp){:style="padding: 0 20%; background-color: white"}
+![XSS 2](/posts/penetration-testing-week-10/assets/17.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">refrefrefXSS</span>}</span>
 {:style="text-align: center;"}
@@ -210,11 +227,11 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### XSS 3
 
-![XSS 3](/posts/Penetration%20Testing%20%7C%20Week%2010/18.webp){:style="padding: 0 25%; background-color: white"}
+![XSS 3](/posts/penetration-testing-week-10/assets/18.webp){:style="padding: 0 25%; background-color: white"}
 
 취약점 탐색 과정에서 마이페이지에 XSS 취약점이 존재한다는 것을 확인하였다. 따라서 마이페이지로 이동하여 `user` 파라미터를 다음과 같이 악성 스크립트가 포함된 값으로 변경하였다.
 
-![XSS 3](/posts/Penetration%20Testing%20%7C%20Week%2010/19.webp)
+![XSS 3](/posts/penetration-testing-week-10/assets/19.webp)
 
 입력한 페이로드는 다음과 같다.
 
@@ -229,19 +246,19 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 `user` 파라미터를 변경한 후 `<script>` 태그의 내용을 확인해 보았다.
 
-![XSS 3](/posts/Penetration%20Testing%20%7C%20Week%2010/20.webp)
+![XSS 3](/posts/penetration-testing-week-10/assets/20.webp)
 
 서버 응답을 살펴보니 `+`가 URL 인코딩된 공백 문자로 처리되어, `<script>` 태그 내에서 공백 문자로 디코딩되어 출력된 것을 확인할 수 있었다. 따라서 `+`를 올바르게 인식시키기 위해 `+`의 URL 인코딩 결과인 `%2B`를 대신 사용하여 요청을 다시 전송하였다.
 
-![XSS 3](/posts/Penetration%20Testing%20%7C%20Week%2010/21.webp)
+![XSS 3](/posts/penetration-testing-week-10/assets/21.webp)
 
 수정 이후 `<script>` 태그의 내용에 정상적으로 악성 스크립트가 포함된 것을 확인하였다. 이어서 관리자 방문 Bot 페이지에 해당 URL을 입력한 후 관리자가 접근하도록 하였다.
 
-![XSS 3](/posts/Penetration%20Testing%20%7C%20Week%2010/22.webp)
+![XSS 3](/posts/penetration-testing-week-10/assets/22.webp)
 
 이후 RequestBin에서 요청이 정상적으로 수신되었고, 쿠키 정보에 플래그가 포함되어 출력되었다.
 
-![XSS 3](/posts/Penetration%20Testing%20%7C%20Week%2010/23.webp){:style="padding: 0 20%; background-color: white"}
+![XSS 3](/posts/penetration-testing-week-10/assets/23.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">myPageReflected</span>}</span>
 {:style="text-align: center;"}
@@ -250,25 +267,25 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### XSS 4
 
-![XSS 4](/posts/Penetration%20Testing%20%7C%20Week%2010/24.webp){:style="padding: 0 25%; background-color: white"}
+![XSS 4](/posts/penetration-testing-week-10/assets/24.webp){:style="padding: 0 25%; background-color: white"}
 
 취약점 탐색 과정에서 게시판의 글쓰기 페이지에 XSS 취약점이 존재한다는 것을 확인하였다. 따라서 글쓰기 페이지로 이동 후 다음과 같이 악성 스크립트가 포함된 페이로드를 작성하였다.
 
-![XSS 4](/posts/Penetration%20Testing%20%7C%20Week%2010/25.webp)
+![XSS 4](/posts/penetration-testing-week-10/assets/25.webp)
 
 `script` 문자열이 빈 문자열로 치환되고 있었으므로, `scrscriptipt`를 대신 사용하여 중앙의 `script`가 제거되고 정상적인 `<script>` 태그로 복원되도록 유도하였다.
 
 글을 생성한 후, 게시물을 열람하면 서버 응답에 정상적으로 악성 스크립트가 포함됨을 확인하였다.
 
-![XSS 4](/posts/Penetration%20Testing%20%7C%20Week%2010/26.webp)
+![XSS 4](/posts/penetration-testing-week-10/assets/26.webp)
 
 게시물 열람 페이지의 URL을 확인한 후, 관리자 방문 Bot 페이지에서 관리자가 해당 URL로 접근하도록 하였다.
 
-![XSS 4](/posts/Penetration%20Testing%20%7C%20Week%2010/27.webp)
+![XSS 4](/posts/penetration-testing-week-10/assets/27.webp)
 
 이후 RequestBin에서 요청이 정상적으로 수신되었고, 쿠키 정보에 플래그가 포함되어 출력되었다.
 
-![XSS 4](/posts/Penetration%20Testing%20%7C%20Week%2010/28.webp){:style="padding: 0 20%; background-color: white"}
+![XSS 4](/posts/penetration-testing-week-10/assets/28.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">blAckFiltering</span>}</span>
 {:style="text-align: center;"}
@@ -277,23 +294,23 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### XSS 5
 
-![XSS 5](/posts/Penetration%20Testing%20%7C%20Week%2010/29.webp){:style="padding: 0 25%; background-color: white"}
+![XSS 5](/posts/penetration-testing-week-10/assets/29.webp){:style="padding: 0 25%; background-color: white"}
 
 취약점 탐색 과정에서 게시판의 글쓰기 페이지에 XSS 취약점이 존재한다는 것을 확인하였다. 다만 해당 페이지에 HTML 인코딩을 수행하는 JavaScript 코드가 있었으므로, 서버 응답을 변조함으로써 이를 제거한 후 다음과 같이 악성 스크립트가 포함된 페이로드를 작성하였다.
 
-![XSS 5](/posts/Penetration%20Testing%20%7C%20Week%2010/30.webp)
+![XSS 5](/posts/penetration-testing-week-10/assets/30.webp)
 
 글을 생성한 후, 게시물을 열람하면 서버 응답에 정상적으로 악성 스크립트가 포함됨을 확인하였다.
 
-![XSS 5](/posts/Penetration%20Testing%20%7C%20Week%2010/31.webp)
+![XSS 5](/posts/penetration-testing-week-10/assets/31.webp)
 
 게시물 열람 페이지의 URL을 확인한 후, 관리자 방문 Bot 페이지에서 관리자가 해당 URL로 접근하도록 하였다.
 
-![XSS 5](/posts/Penetration%20Testing%20%7C%20Week%2010/32.webp)
+![XSS 5](/posts/penetration-testing-week-10/assets/32.webp)
 
 이후 RequestBin에서 요청이 정상적으로 수신되었고, 쿠키 정보에 플래그가 포함되어 출력되었다.
 
-![XSS 5](/posts/Penetration%20Testing%20%7C%20Week%2010/33.webp){:style="padding: 0 20%; background-color: white"}
+![XSS 5](/posts/penetration-testing-week-10/assets/33.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">ClientCheckNone</span>}</span>
 {:style="text-align: center;"}
@@ -302,11 +319,11 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### XSS 6
 
-![XSS 6](/posts/Penetration%20Testing%20%7C%20Week%2010/34.webp){:style="padding: 0 25%; background-color: white"}
+![XSS 6](/posts/penetration-testing-week-10/assets/34.webp){:style="padding: 0 25%; background-color: white"}
 
 취약점 탐색 과정에서 로그인 페이지에 XSS 취약점이 존재한다는 것을 확인하였다. 따라서 로그인 페이지로 이동 후 다음과 같이 악성 스크립트가 포함된 페이로드를 입력하였다.
 
-![XSS 6](/posts/Penetration%20Testing%20%7C%20Week%2010/35.webp)
+![XSS 6](/posts/penetration-testing-week-10/assets/35.webp)
 
 입력한 페이로드는 다음과 같다.
 
@@ -319,7 +336,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 로그인 시도 후 `<script>` 태그의 내용에 정상적으로 악성 스크립트가 포함된 것을 확인하였다.
 
-![XSS 6](/posts/Penetration%20Testing%20%7C%20Week%2010/36.webp)
+![XSS 6](/posts/penetration-testing-week-10/assets/36.webp)
 
 이때 한 가지 문제에 직면했는데, RequestBin 측에 HTTP 요청이 정상적으로 수신되지 않는 현상이 발생했기 때문이었다. 그 이유를 파악하기 위해 다양한 자료를 조사해 본 결과, 해당 문제가 두 번째 `<script>` 태그에 포함된 리다이렉션 코드에 기인하는 것으로 확인되었다.
 
@@ -335,19 +352,19 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 `login.html`로의 리다이렉션 코드는 수정할 수 없으므로, 해당 스크립트보다 상위에 RequestBin 엔드포인트로의 리다이렉션 코드를 삽입하여 뒤의 코드를 무효화하는 방법을 선택하였다.
 
-![XSS 6](/posts/Penetration%20Testing%20%7C%20Week%2010/37.webp)
+![XSS 6](/posts/penetration-testing-week-10/assets/37.webp)
 
 페이로드 수정 후 악성 스크립트가 정상적으로 삽입되는 것을 확인하였다. 로그인 데이터가 POST 방식으로 전송되고 있었으므로, 요청 방식을 변경한 뒤 URL을 복사하였다.
 
-![XSS 6](/posts/Penetration%20Testing%20%7C%20Week%2010/38.webp)
+![XSS 6](/posts/penetration-testing-week-10/assets/38.webp)
 
 복사한 URL을 관리자 방문 Bot 페이지에 붙여 넣은 후 관리자가 해당 URL로 접근하도록 하였다.
 
-![XSS 6](/posts/Penetration%20Testing%20%7C%20Week%2010/39.webp)
+![XSS 6](/posts/penetration-testing-week-10/assets/39.webp)
 
 이후 RequestBin에서 요청이 정상적으로 수신되었고, 쿠키 정보에 플래그가 포함되어 출력되었다.
 
-![XSS 6](/posts/Penetration%20Testing%20%7C%20Week%2010/40.webp){:style="padding: 0 20%; background-color: white"}
+![XSS 6](/posts/penetration-testing-week-10/assets/40.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">keyLogger</span>}</span>
 {:style="text-align: center;"}
