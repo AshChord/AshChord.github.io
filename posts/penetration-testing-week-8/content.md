@@ -33,9 +33,9 @@ $stmt->execute();
 
 Prepared Statement를 사용하는 기본적인 PHP 코드이다. 위 코드는 `prepare()` 함수를 통해 실행할 SQL 쿼리 템플릿을 사전에 데이터베이스에 전달하고, 변수가 삽입될 위치를 `?` 기호를 사용하여 명시한다. 이후 실제로 `?` 자리에 데이터를 삽입하는 경우 `bind_param()` 함수를 사용해 `"user@example.com"`이라는 값을 안전하게 바인딩한다. 마지막으로 `execute()` 함수를 통해 쿼리를 실행하면 준비된 쿼리가 데이터베이스에서 실행되고 그 결과를 조회할 수 있다.
 
-이러한 방식을 사용하면 사용자가 전송하는 데이터가 SQL 쿼리에 그대로 삽입되는 것이 아니라, 미리 컴파일되어 저수준의 언어로 변환된 쿼리 구조 내에 변수로서 삽입된다. 따라서, 해당 데이터에 `'`와 같은 특수 기호가 포함되어 있더라도 SQL 문법으로 해석되지 않고 순수한 문자열 데이터로 안전하게 처리된다. 이러한 구조적 특성에 따라 SQL Injection이 원천적으로 차단된다.
+이러한 방식을 사용하면 사용자가 전송하는 데이터가 SQL 쿼리에 그대로 삽입되는 것이 아니라, 미리 준비된 쿼리 구조의 파라미터로 전달되어 별도로 처리된다. 따라서, 해당 데이터에 `'`와 같은 특수 기호가 포함되어 있더라도 SQL 문법으로 해석되지 않고 순수한 문자열 데이터로 안전하게 처리된다. 이러한 구조적 특성에 따라 SQL Injection이 원천적으로 차단된다.
 
-그러나 Prepared Statement를 사용할 수 없는 예외적인 경우도 존재한다. 대표적인 사례로는 `ORDER BY` 절이 있으며, 이는 해당 절에서 사용되는 값이 변수가 아닌 컬럼명이기 때문이다. 테이블명, 컬럼명 등과 같이 데이터베이스에 실제로 정의된 객체는 Prepared Statement의 바인딩 기능을 통해 동적으로 지정할 수 없다. 다시 말해, 이러한 식별자는 `?`와 같은 플레이스홀더로 대체할 수 없으며, 변수를 바인딩하여 처리하는 방식이 적용되지 않는다.
+그러나 Prepared Statement를 사용할 수 없는 예외적인 경우도 존재한다. 대표적인 사례로는 `ORDER BY` 절이 있으며, 이는 해당 절에서 사용되는 값이 변수가 아닌 컬럼명(또는 컬럼을 참조하는 표현식)이기 때문이다. 테이블명, 컬럼명 등과 같이 데이터베이스에 실제로 정의된 객체는 Prepared Statement의 바인딩 기능을 통해 동적으로 지정할 수 없다. 다시 말해, 이러한 식별자는 `?`와 같은 플레이스홀더로 대체할 수 없으며, 변수를 바인딩하여 처리하는 방식이 적용되지 않는다.
 
 이로 인해, `ORDER BY` 절과 같이 식별자가 동적으로 결정되는 구문에서는 Prepared Statement의 보안 효과를 활용할 수 없다. 특히 웹 애플리케이션에서 `sort`, `ord` 등과 같은 파라미터명을 통해 정렬 기준을 전달하는 방식이 사용되는 경우, 해당 값이 `ORDER BY` 절에 직접 삽입되는지 여부를 검토하고 SQL Injection이 유효한지 확인해 보는 것이 좋다.
 
@@ -45,6 +45,9 @@ Prepared Statement를 사용하는 기본적인 PHP 코드이다. 위 코드는 
 
 **Whitelist Filtering**이란 허용된 항목만 통과시키고 나머지는 차단하는 보안 방식을 말한다. 이를테면 `' or '1' = '1`과 같은 페이로드를 막기 위해 다음과 같은 방법을 사용할 수 있다.
 
+<style id="code-1">
+  #code-1 + pre data[value="14"] span {color: #24292E !important;}
+</style>
 ```php
 function isValidUsername($username) {
   // preg_match(): 정규표현식과 비교하여 패턴에 맞으면 1, 아니면 0을 반환하는 함수
@@ -62,7 +65,7 @@ if (isValidUsername($user_input)) {
 ...
 ```
 
-위 코드는 Whitelist Flitering 방식을 사용하는 대표적인 예시이다. 해당 코드에서는 `$username` 변수가 영문 대소문자 및 숫자로만 구성된 경우에 한해 SQL 쿼리 실행을 허용하며, 이외의 모든 경우에는 쿼리 실행을 차단한다. 이러한 방식은 `' or '1' = '1`과 같은 SQL Injection 공격 페이로드를 효과적으로 차단하는 데 유용하다.
+위 코드는 Whitelist Filtering 방식을 사용하는 대표적인 예시이다. 해당 코드에서는 `$username` 변수가 영문 대소문자 및 숫자로만 구성된 경우에 한해 SQL 쿼리 실행을 허용하며, 이외의 모든 경우에는 쿼리 실행을 차단한다. 이러한 방식은 `' or '1' = '1`과 같은 SQL Injection 공격 페이로드를 효과적으로 차단하는 데 유용하다.
 
 이와 대비되는 개념으로 **Blacklist Filtering** 방식이 존재한다. 이는 사전에 지정된 항목들을 차단 목록(Blacklist)에 등록하고, 해당 목록에 포함된 항목에 대해서만 필터링 및 차단을 수행하는 방식이다. 블랙 리스트 방식은 차단 항목을 미리 정의하여 관리하는 특성상, 알려지지 않은 공격 패턴에 취약할 수 있다는 한계가 존재한다.
 
@@ -169,7 +172,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![SQL Injection Point 2](/posts/penetration-testing-week-8/assets/14.webp)
 
-검색 기준을 작성자로 설정하고 `an`을 검색하면, 서버에는 `option_val=username&board_result=an`과 같은 데이터가 전달된다. 따라서 `option_val` 파라미터에 검색 기준이 되는 컬럼명이 전달되며, `board_result`에는 실제 데이터와 대응되는 검색어가 전달되는 것을 알 수 있다. `an`을 입력했을 때 작성자가 `any`인 게시물이 검색되었으므로, `select column_name(s) from table_name where $option_val like '%$board_result%'`와 같은 형태의 쿼리가 사용될 것으로 예측되었다. 따라서 `board_result` 파라미터에 `an%' and '1%' = '1`를 입력하여 요청을 전송해 보았다.
+검색 기준을 작성자로 설정하고 `an`을 검색하면, 서버에는 `option_val=username&board_result=an`과 같은 데이터가 전달된다. 따라서 `option_val` 파라미터에 검색 기준이 되는 컬럼명이 전달되며, `board_result`에는 실제 데이터와 대응되는 검색어가 전달되는 것을 알 수 있다. `an`을 입력했을 때 작성자가 `any`인 게시물이 검색되었으므로, `select column_name(s) from table_name where [option_val] like '%[board_result]%'`와 같은 형태의 쿼리가 사용될 것으로 예측되었다. 따라서 `board_result` 파라미터에 `an%' and '1%' = '1`를 입력하여 요청을 전송해 보았다.
 
 ![SQL Injection Point 2](/posts/penetration-testing-week-8/assets/15.webp)
 
@@ -211,7 +214,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![SQL Injection Point 3](/posts/penetration-testing-week-8/assets/23.webp)
 
-게시판 페이지에서 검색을 수행했을 때, `sort`라는 파라미터가 같이 전달된다는 사실을 파악할 수 있었다. 따라서 게시물 검색에 사용되는 쿼리를 `select column_name(s) from table_name where $option_val like '%$board_result%' order by $sort`와 같은 형태로 예측하였다. `ORDER BY` 절은 특히 Prepared Statement를 사용할 수 없다는 특징이 있어 더욱 취약한 지점 중 하나이기 때문에, `sort` 파라미터를 사용해 SQL Injection을 시도해 보기로 결정하였다.
+게시판 페이지에서 검색을 수행했을 때, `sort`라는 파라미터가 같이 전달된다는 사실을 파악할 수 있었다. 따라서 게시물 검색에 사용되는 쿼리를 `select column_name(s) from table_name where [option_val] like '%[board_result]%' order by [sort]`와 같은 형태로 예측하였다. `ORDER BY` 절은 특히 Prepared Statement를 사용할 수 없다는 특징이 있어 더욱 취약한 지점 중 하나이기 때문에, `sort` 파라미터를 사용해 SQL Injection을 시도해 보기로 결정하였다.
 
 예시 게시물을 작성한 뒤, `sort` 파라미터에 `case when (1 = 1) then 1 else (select 1 union select 2) end`를 입력하고 요청을 전송해 보았다.
 
@@ -235,7 +238,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 ![SQL Injection Point 3](/posts/penetration-testing-week-8/assets/25.webp)
 
-이번에는 검색 결과가 반환되지 않는다. 그 이유는 페이로드의 조건식이 거짓이기 때문에 `select 1 union select 2`의 값으로 변환되기 때문이다. 이는 하나의 값이 아닌 2개 행으로 이루어진 테이블 형태이므로, `ORDER BY` 절 뒤에 결합되면 오류가 발생한다. 따라서 정상적으로 쿼리 결과가 반환될 수 없다.
+이번에는 검색 결과가 반환되지 않는다. 그 이유는 조건식이 거짓이기 때문에 `CASE` 표현식의 값으로 `select 1 union select 2`가 선택되기 때문이다. 이는 하나의 값이 아닌 2개 행으로 이루어진 테이블 형태이므로, `ORDER BY` 절 뒤에 결합되면 오류가 발생한다. 따라서 정상적으로 쿼리 결과가 반환될 수 없다.
 
 > `CASE`를 사용하지 않고 다음과 같은 형태를 사용하는 것도 가능하다.
 >
@@ -248,8 +251,8 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 이로써 조건식의 진릿값에 따른 애플리케이션의 동작 차이를 확인하였다. 이번에는 데이터가 출력되는 위치를 확인할 수 없으므로, 바로 Blind SQL Injection을 사용하기로 결정하였다. 7주 차에 사용했던 자동화 스크립트를 소폭 수정하여 실행해 보았다.
 
-<style id="code-1">
-  #code-1 + pre data:is([value="17"], [value="20"]) span {color: #24292E !important;}
+<style id="code-2">
+  #code-2 + pre data:is([value="17"], [value="20"]) span {color: #24292E !important;}
 </style>
 ```python
 # blind_sqli.py
@@ -322,7 +325,7 @@ SQL Injection 취약점을 탐색하던 도중 SQL Injection Point 2에서 발�
 
 또한, 기대한 바와 같이 플래그가 존재하는 테이블명 역시 출력되었음을 확인할 수 있었다.
 
-이제 컬럼명을 추출하기 위해 `option_val` 파라미터에 `1 = 1 union select 1, column_name, 3, 4, 5, 6, 7, 8, 9, 10 from information_schema.columns where table_name = 'flagHere'#`를 입력할 차례이다. 필터링을 우회하기 위해 마찬가지로 `where table_name = 'flagHere'` 구문을 삭제하고 그 중 테이블명이 `flagHere`인 컬럼을 직접 찾는 방법도 있겠지만, 어떤 문자가 필터링되는지 명확하게 확인하였기 때문에 문자열을 바이너리 데이터로 바꾸는 방법을 사용하였다. `flagHere` 문자열을 16진수 바이너리 값으로 변환하면 `0x666c616748657265`이므로, `'flagHere'` 위치에 해당 값을 대신 삽입한 뒤 요청을 전송해 보았다.
+이제 컬럼명을 추출하기 위해 `option_val` 파라미터에 `1 = 1 union select 1, column_name, 3, 4, 5, 6, 7, 8, 9, 10 from information_schema.columns where table_name = 'flagHere'#`를 입력할 차례이다. 필터링을 우회하기 위해 마찬가지로 `where table_name = 'flagHere'` 구문을 삭제하고 그 중 테이블명이 `flagHere`인 컬럼을 직접 찾는 방법도 있겠지만, 어떤 문자가 필터링되는지 명확하게 확인하였기 때문에 문자열을 바이너리 데이터로 바꾸는 방법을 사용하였다. `flagHere` 문자열을 16진수로 표현하면 `0x666c616748657265`이므로, `'flagHere'` 위치에 해당 값을 대신 삽입한 뒤 요청을 전송해 보았다.
 
 ![SQL Injection Point 5](/posts/penetration-testing-week-8/assets/34.webp)
 
