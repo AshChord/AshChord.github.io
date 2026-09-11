@@ -48,17 +48,6 @@ XSS 취약점에 `alert(1);` 대신 위와 같은 스크립트를 삽입하면 �
 >
 > 다음은 간단한 HTML 문서와 그에 해당하는 DOM 트리의 예시이다.
 >
-> <pre class="dom-html"><button class="copy-button"></button><code class="language-html" highlighted><data class="code-line" value="1"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
-> </data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-> </data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-> </data><data class="code-line" value="4" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>DOM<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
-> </data><data class="code-line" value="5" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-> </data><data class="code-line" value="6" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-> </data><data class="code-line" value="7" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>header<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-> </data><data class="code-line" value="8" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>paragraph<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-> </data><data class="code-line" value="9" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-> </data><data class="code-line" value="10"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;
-> </data></code></pre>
 > ```html
 > <!DOCTYPE html>
 > <html>
@@ -72,6 +61,7 @@ XSS 취약점에 `alert(1);` 대신 위와 같은 스크립트를 삽입하면 �
 > </html>
 > ```
 > {: .dom-html}
+>
 > ```text
 > document
 > └── html
@@ -85,6 +75,19 @@ XSS 취약점에 `alert(1);` 대신 위와 같은 스크립트를 삽입하면 �
 >             └── "paragraph"
 > ```
 > {: .dom-tree}
+
+> 여기는 냅두기용
+> <pre class="dom-html"><button class="copy-button"></button><code class="language-html" highlighted><data class="code-line" value="1"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+> </data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+> </data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+> </data><data class="code-line" value="4" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>DOM<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+> </data><data class="code-line" value="5" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+> </data><data class="code-line" value="6" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+> </data><data class="code-line" value="7" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>header<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+> </data><data class="code-line" value="8" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>paragraph<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+> </data><data class="code-line" value="9" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+> </data><data class="code-line" value="10"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;
+> </data></code></pre>
 > <pre class="dom-tree"><button class="copy-button"></button><code class="language-text" highlighted><data class="code-line" value="1">document
 > </data><data class="code-line" value="2">└── html
 > </data><data class="code-line" value="3" style="--indent: 4ch;">    ├── head
