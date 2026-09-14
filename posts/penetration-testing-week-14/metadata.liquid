@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: penetration-testing-week-14
+permalink: /posts/penetration-testing-week-14.html
+
+# Summary #
+title: Penetration Testing | Week 14
+date: 2025/07/13
+excerpt: 파일 업로드 취약점
+categories: 모의 해킹
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page.path | markdownify }}

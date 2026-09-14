@@ -30,14 +30,8 @@ CSRF 공격을 방지하기 위해 서버는 요청을 수신할 때마다 `Refe
 
 따라서 `Referer` 헤더 검증만으로 CSRF를 방지하는 것은 불완전한 방식이며, 추가적인 보안 대책들을 함께 고려할 필요가 있다.
 
-<style>
-.referrer-note li:last-child {
-  margin-bottom: 0;
-}
-</style>
 > - HTTP 헤더 이름으로 사용되는 `Referer`는 `Referrer`의 오기이며, 초기 HTTP 사양에서 잘못 표기된 것이 그대로 표준으로 굳어지게 되었다.
-> - `<meta>` 태그의 `name` 속성, JavaScript의 `document` 객체 속성 등에서는 올바른 표기인 `referrer`를 사용한다.
-{: .referrer-note}
+> - {: style="margin-bottom: 0;"} `<meta>` 태그의 `name` 속성, JavaScript의 `document` 객체 속성 등에서는 올바른 표기인 `referrer`를 사용한다.
 
 <br>
 
