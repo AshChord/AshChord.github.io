@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: penetration-testing-week-13
+permalink: /posts/penetration-testing-week-13.html
+
+# Summary #
+title: Penetration Testing | Week 13
+date: 2025/07/05
+excerpt: CSRF 대응 방안 및 웹 보안 정책
+categories: 모의 해킹
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page.path | markdownify }}

@@ -1,13 +1,4 @@
----
-layout: article
-permalink: /posts/Penetration Testing | Week 13
-title: Penetration Testing | Week 13
-date: 2025/07/05
-excerpt: CSRF 대응 방안 및 웹 보안 정책
-categories: 모의 해킹
----
-
-{{ site.pages.first.content | split: page.path }}
+# Penetration Testing | Week 13
 
 ## 강의 노트
 
@@ -39,12 +30,14 @@ CSRF 공격을 방지하기 위해 서버는 요청을 수신할 때마다 `Refe
 
 따라서 `Referer` 헤더 검증만으로 CSRF를 방지하는 것은 불완전한 방식이며, 추가적인 보안 대책들을 함께 고려할 필요가 있다.
 
-<blockquote>
-<ul>
-<li>HTTP 헤더 이름으로 사용되는 <code>Referer</code>는 <code>Referrer</code>의 오기이며, 초기 HTTP 사양에서 잘못 표기된 것이 그대로 표준으로 굳어지게 되었다.</li>
-<li style="margin-bottom: 0;"><code>&lt;meta&gt;</code> 태그의 <code>name</code> 속성, JavaScript의 <code>document</code> 객체 속성 등에서는 올바른 표기인 <code>referrer</code>를 사용한다.</li>
-</ul>
-</blockquote>
+<style>
+.referrer-note li:last-child {
+  margin-bottom: 0;
+}
+</style>
+
+> - HTTP 헤더 이름으로 사용되는 `Referer`는 `Referrer`의 오기이며, 초기 HTTP 사양에서 잘못 표기된 것이 그대로 표준으로 굳어지게 되었다.
+> - `<meta>` 태그의 `name` 속성, JavaScript의 `document` 객체 속성 등에서는 올바른 표기인 `referrer`를 사용한다.{: style="margin-bottom: 0;"}
 
 <br>
 
@@ -117,11 +110,3 @@ CSRF 공격을 방어하기 위한 보다 근본적인 방안으로는, 요청 �
 
 > 일부 서버 구현에서는 `ACAO` 헤더에 `*`를 사용하는 대신, 모든 요청에 대해 `Origin` 헤더 값(요청이 발생한 출처)을 그대로 반영하여 응답하는 방식을 채택하기도 한다.  
 > 그러나 이 방식은 실질적으로 출처에 대한 검증이 수행되지 않아 SOP의 보안 취지를 저해할 우려가 있으며, 특히 자격 증명 정보가 포함된 요청에 대해서는 민감한 정보의 노출로 이어질 수 있으므로 지양되어야 한다.
-
-<br>
-<br>
-<br>
-
-## 과제
-
-### 웹 개발
