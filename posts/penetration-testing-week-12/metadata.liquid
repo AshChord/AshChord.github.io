@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: penetration-testing-week-12
+permalink: /posts/penetration-testing-week-12.html
+
+# Summary #
+title: Penetration Testing | Week 12
+date: 2025/07/02
+excerpt: Cross Site Request Forgery(CSRF)
+categories: 모의 해킹
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page.path | markdownify }}

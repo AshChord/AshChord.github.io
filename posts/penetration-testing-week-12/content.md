@@ -1,13 +1,4 @@
----
-layout: article
-permalink: /posts/Penetration Testing | Week 12
-title: Penetration Testing | Week 12
-date: 2025/07/02
-excerpt: Cross Site Request Forgery(CSRF)
-categories: 모의 해킹
----
-
-{{ site.pages.first.content | split: page.path }}
+# Penetration Testing | Week 12
 
 ## 강의 노트
 
@@ -25,7 +16,7 @@ CSRF 공격을 통해 GET 방식의 요청이 전송되는 과정을 예시와 �
 
 이때 공격자가 사용자로 하여금 본인 계좌(`attacker`)에게 금전을 송금하도록 유도하고자 할 경우, 사용자가 해당 인터넷 뱅킹 서비스에 로그인된 상태에서 `http://bank.com/transfer?to=attacker&amount=10000`와 같은 주소로 접속하도록 만들기만 하면 된다. 이 URL로의 접속 요청은 사용자가 로그인된 상태에서 전송되므로, 인터넷 뱅킹 서비스의 서버는 해당 요청의 쿠키에 포함된 세션 식별 정보를 통해 이를 정상적인 사용자의 요청으로 인식하게 되며 결과적으로 공격자에게 정상적으로 송금이 이루어질 수 있다.
 
-사용자가 해당 주소로 접근하도록 유도하는 방법은 여러 가지가 있다. 그 중 가장 기본적인 방법은 해당 주소를 하이퍼링크 형태로 전달하는 것이다. 이것만으로도 CSRF 공격이 충분히 효과적으로 수행할 수 있다. 그러나 단순히 링크만을 제공하는 방식은 사용자에게 의심을 유발할 수 있으며, 사용자가 해당 링크에 대한 경계심을 갖고 클릭을 회피할 가능성이 높다. 이러한 한계를 보완하고 공격의 은밀성을 높이기 위해, 보다 정교한 접근 방식이 고려될 수 있다.
+사용자가 해당 주소로 접근하도록 유도하는 방법은 여러 가지가 있다. 그 중 가장 기본적인 방법은 해당 주소를 하이퍼링크 형태로 전달하는 것이다. 이것만으로도 CSRF 공격을 충분히 효과적으로 수행할 수 있다. 그러나 단순히 링크만을 제공하는 방식은 사용자에게 의심을 유발할 수 있으며, 사용자가 해당 링크에 대한 경계심을 갖고 클릭을 회피할 가능성이 높다. 이러한 한계를 보완하고 공격의 은밀성을 높이기 위해, 보다 정교한 접근 방식이 고려될 수 있다.
 
 가장 효과적인 방식 중 하나는 XSS 취약점과의 연계를 통해 공격을 수행하는 것이다. 이를테면 다음과 같은 스크립트를 취약 지점에 삽입함으로써 사용자의 개입 없이 자동으로 요청이 전송되도록 할 수 있다.
 
@@ -103,7 +94,7 @@ CSRF 토큰이란 사용자가 특정 페이지에 접속하였을 때 서버가
 
 ### CSRF CTF
 
-![CSRF CTF](/posts/Penetration%20Testing%20%7C%20Week%2012/1.webp)
+![CSRF CTF](/posts/penetration-testing-week-12/assets/1.webp)
 
 CTF를 해결하며 CSRF 공격을 실습해 보자.
 
@@ -111,34 +102,34 @@ CTF를 해결하며 CSRF 공격을 실습해 보자.
 
 #### GET Admin 1
 
-![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/2.webp){:style="padding: 0 25%; background-color: white;"}
+![GET Admin 1](/posts/penetration-testing-week-12/assets/2.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크를 통해 접속하면 회원제 게시판 애플리케이션으로 이동한다.
 
 회원 가입을 진행하여 `any`/`any` 계정을 생성하고, 로그인 후 계정 정보가 포함된 마이페이지로 이동하였다.
 
-![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/3.webp)
+![GET Admin 1](/posts/penetration-testing-week-12/assets/3.webp)
 
 마이페이지에는 비밀번호 변경 기능을 제공한다. 따라서 기본적으로 생각해 볼 수 있는 전략은, 비밀번호를 변경하는 URL을 관리자에게 링크로 전달하여 관리자 계정의 비밀번호를 획득하는 것이다. 그러기 위해서는 서버가 GET 방식의 요청을 허용하고 있어야 하므로, Burp Suite를 통해 비밀번호 변경 요청을 자세히 분석해 보았다.
 
-![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/4.webp)
-![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/5.webp)
+![GET Admin 1](/posts/penetration-testing-week-12/assets/4.webp)
+![GET Admin 1](/posts/penetration-testing-week-12/assets/5.webp)
 
 비밀번호를 `any0`으로 변경한 후 요청을 확인해 보니, 기본적으로 POST 방식으로 데이터가 전달됨을 알 수 있었다. 하지만 요청 방식을 GET 방식으로 수정하여 전송해도 정상적으로 응답이 반환됨을 확인하였다.
 
 이때 전송 데이터에는 CSRF 토큰과 같은 별도의 인증 정보가 포함되지 않으므로 요청 URL을 그대로 관리자에게 전달하면 관리자 계정의 비밀번호를 강제로 변경시킬 수 있다. 따라서 관리자 visit Bot 페이지로 이동하여 비밀번호를 `any`로 변경하는 URL을 전달해 보았다.
 
-![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/6.webp)
+![GET Admin 1](/posts/penetration-testing-week-12/assets/6.webp)
 
 그 결과 관리자가 알아차렸다는 메시지가 출력되었다. 이에 대해 고민해 본 결과, 서버 측 응답에서 그 이유를 파악할 수 있었다.
 
-![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/7.webp){:style="padding: 0 12%; background-color: #2b2b2b;"}
+![GET Admin 1](/posts/penetration-testing-week-12/assets/7.webp){:style="padding: 0 12%; background-color: #2b2b2b;"}
 
 비밀번호를 변경한 후 사용자의 브라우저에는 회원 정보 수정에 성공했다는 내용의 알림 창이 표시된다. 관리자 visit Bot이 전달받은 URL로 접속하면 동일하게 알림 창이 표시될 것이고, 따라서 비정상적인 동작이 이루어졌다는 것을 짐작할 수 있는 것이다.
 
 이를 해결하기 위해 XSS 취약점과 연계한 공격을 활용하기로 결정하고 취약점을 탐색해 보았다.
 
-![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/8.webp)
+![GET Admin 1](/posts/penetration-testing-week-12/assets/8.webp)
 
 게시물 작성 페이지에서 특수 문자가 별도 변환 처리 없이 그대로 서버로 전송됨을 확인하였다. `<script>` 태그 역시 마찬가지로 사용 가능한 것을 확인한 후, 다음과 같이 페이로드를 작성하였다.
 
@@ -149,15 +140,15 @@ CTF를 해결하며 CSRF 공격을 실습해 보자.
 </script>
 ```
 
-![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/9.webp)
+![GET Admin 1](/posts/penetration-testing-week-12/assets/9.webp)
 
 페이로드를 삽입하여 게시물을 작성한 후 열람하면 서버 응답에 스크립트가 정상적으로 포함되는 것을 확인하였고, 해당 게시물 열람 페이지의 URL을 관리자 visit Bot에게 전달하였다.
 
-![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/10.webp)
+![GET Admin 1](/posts/penetration-testing-week-12/assets/10.webp)
 
 별도의 오류 없이 관리자가 접속했다는 메시지가 출력되었다. 이에 따라 관리자 계정의 비밀번호가 `any`로 변경되었을 것이므로, 로그인 페이지로 이동하여 `any_admin`/`any`를 입력하여 로그인을 시도하였다.
 
-![GET Admin 1](/posts/Penetration%20Testing%20%7C%20Week%2012/11.webp)
+![GET Admin 1](/posts/penetration-testing-week-12/assets/11.webp)
 
 로그인에 성공하여 알림 창에 플래그가 출력되었다.
 
@@ -168,24 +159,23 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### GET Admin 2
 
-![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/12.webp){:style="padding: 0 25%; background-color: white;"}
+![GET Admin 2](/posts/penetration-testing-week-12/assets/12.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크를 통해 접속하여 `any`/`any` 계정을 생성해 로그인한 후, 마이페이지에서 비밀번호를 변경해 보았다.
 
-![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/13.webp)
-![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/14.webp)
+![GET Admin 2](/posts/penetration-testing-week-12/assets/13.webp)
+![GET Admin 2](/posts/penetration-testing-week-12/assets/14.webp)
 
 이번에는 서버가 POST 방식의 요청만을 허용하고 있다는 사실을 알 수 있었다. 따라서 `<form>` 태그를 통한 공격을 활용하기로 결정하고 XSS 취약점을 탐색해 보았다.
 
-![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/15.webp)
+![GET Admin 2](/posts/penetration-testing-week-12/assets/15.webp)
 
 GET Admin 1과 동일한 위치에서 XSS 취약점을 발견하였다. 이후 다음과 같이 페이로드를 작성하였다.
 
 ```html
 <iframe name="secret" style="display: none;"></iframe>
 
-<form method="POST" action="http://ctf.segfaulthub.com:7575/csrf_2/mypage_update.php"
- id="exploit" target="secret">
+<form method="POST" action="http://ctf.segfaulthub.com:7575/csrf_2/mypage_update.php" id="exploit" target="secret">
   <input type="hidden" name="id" value="">
   <input type="hidden" name="info" value="">
   <input type="hidden" name="pw" value="any">
@@ -198,24 +188,24 @@ GET Admin 1과 동일한 위치에서 XSS 취약점을 발견하였다. 이후 �
 
 페이로드를 삽입하여 게시물을 작성한 후 열람하자 예상치 못한 동작을 확인하였다.
 
-![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/16.webp)
+![GET Admin 2](/posts/penetration-testing-week-12/assets/16.webp)
 
 현재 창에서 회원 정보를 수정했다는 내용의 알림 창이 표시되었다. 해당 알림 창이 `<iframe>` 요소 내에 표시되어 보이지 않을 것으로 예상되었으나, `alert()` 함수는 항상 현재 창을 기준으로 알림 창이 표시되는 듯했다. 따라서 알림 창이 표시되지 않게 하기 위한 방법을 조사해 보았다.
 
-![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/17.webp)
+![GET Admin 2](/posts/penetration-testing-week-12/assets/17.webp)
 
-HTML 공식 문서를 통해 해결책을 찾을 수 있었다. `<iframe>` 태그에 `sandbox` 속성을 사용하면 보안을 위해 다양한 종류의 제한 사항을 적용하는데, 이 중 스크립트 실행 차단 역시 포함되어 있다. 즉, `alert()` 함수의 실행이 원천적으로 차단된다는 의미이다. 따라서 작성한 페이로드의 `<iframe>` 태그에 `sandbox` 속성을 추가한 후 다시 게시물을 생성하여 열람해 보았다.
+HTML 공식 문서를 통해 해결책을 찾을 수 있었다. `<iframe>` 태그에 `sandbox` 속성을 사용하면 보안을 위해 다양한 종류의 제한 사항이 적용되는데, 이 중 스크립트 실행 차단 역시 포함되어 있다. 즉, `alert()` 함수의 실행이 원천적으로 차단된다는 의미이다. 따라서 작성한 페이로드의 `<iframe>` 태그에 `sandbox` 속성을 추가한 후 다시 게시물을 생성하여 열람해 보았다.
 
-![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/18.webp)
-![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/19.webp)
+![GET Admin 2](/posts/penetration-testing-week-12/assets/18.webp)
+![GET Admin 2](/posts/penetration-testing-week-12/assets/19.webp)
 
 비밀번호 변경 요청이 정상적으로 전송되고 서버 응답에 `alert()` 함수가 포함되었으나, 게시물 열람 페이지의 `<iframe>` 요소에서 스크립트 실행이 차단되어 알림 창이 표시되지 않음을 확인하였다. 이후 해당 페이지의 URL을 관리자 visit Bot에게 전달하였다.
 
-![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/20.webp)
+![GET Admin 2](/posts/penetration-testing-week-12/assets/20.webp)
 
 별도의 오류 없이 관리자가 접속했다는 메시지가 출력되었다. 이에 따라 관리자 계정의 비밀번호가 `any`로 변경되었을 것이므로, 로그인 페이지로 이동하여 `any_admin`/`any`를 입력하여 로그인을 시도하였다.
 
-![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/21.webp)
+![GET Admin 2](/posts/penetration-testing-week-12/assets/21.webp)
 
 로그인에 성공하여 알림 창에 플래그가 출력되었다.
 
@@ -226,28 +216,26 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### GET Admin 3
 
-![GET Admin 3](/posts/Penetration%20Testing%20%7C%20Week%2012/22.webp){:style="padding: 0 25%; background-color: white;"}
+![GET Admin 3](/posts/penetration-testing-week-12/assets/22.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크를 통해 접속하여 `any`/`any` 계정을 생성해 로그인한 후, 마이페이지에서 비밀번호를 변경해 보았다.
 
-![GET Admin 3](/posts/Penetration%20Testing%20%7C%20Week%2012/23.webp)
-![GET Admin 3](/posts/Penetration%20Testing%20%7C%20Week%2012/24.webp)
-![GET Admin 3](/posts/Penetration%20Testing%20%7C%20Week%2012/25.webp)
+![GET Admin 3](/posts/penetration-testing-week-12/assets/23.webp)
+![GET Admin 3](/posts/penetration-testing-week-12/assets/24.webp)
+![GET Admin 3](/posts/penetration-testing-week-12/assets/25.webp)
 
 이번에는 CSRF 토큰이 사용되고 있으며, 마찬가지로 POST 방식의 요청만이 허용됨을 알 수 있었다. 따라서 비밀번호 변경 요청을 서버에 전송시키기 위해서는 관리자의 CSRF 토큰을 탈취하는 과정이 선행되어야 한다. 이를 위해서는 JavaScript의 사용이 필수적이므로, 우선 XSS 취약점을 탐색해 보았다.
 
-![GET Admin 3](/posts/Penetration%20Testing%20%7C%20Week%2012/26.webp)
+![GET Admin 3](/posts/penetration-testing-week-12/assets/26.webp)
 
 GET Admin 1, 2와 마찬가지로 게시물 작성 페이지에서 XSS 취약점을 발견하였다. 다음으로 CSRF 토큰을 탈취하고 서버에 비밀번호 변경 요청을 전송하기 위해 페이로드를 작성하였다.
 
 ```html
-<iframe id="mypage" src="http://ctf.segfaulthub.com:7575/csrf_3/mypage.php"
- style="display: none;"></iframe>
+<iframe id="mypage" src="http://ctf.segfaulthub.com:7575/csrf_3/mypage.php" style="display: none;"></iframe>
 
 <iframe name="secret" style="display: none;" sandbox></iframe>
 
-<form method="POST" action="http://ctf.segfaulthub.com:7575/csrf_3/mypage_update.php"
- id="exploit" target="secret">
+<form method="POST" action="http://ctf.segfaulthub.com:7575/csrf_3/mypage_update.php" id="exploit" target="secret">
   <input type="hidden" name="id" value="">
   <input type="hidden" name="info" value="">
   <input type="hidden" name="pw" value="any">
@@ -268,16 +256,16 @@ GET Admin 1, 2와 마찬가지로 게시물 작성 페이지에서 XSS 취약점
 
 우선 `<iframe>` 요소 내에 마이페이지를 로드한 후, 발급되는 CSRF 토큰의 값을 획득한다. 이후 `<form>` 태그를 활용해 비밀번호 변경 요청을 전송하며, 이때 마이페이지에서 획득한 CSRF 토큰의 값을 함께 전달한다.
 
-![GET Admin 3](/posts/Penetration%20Testing%20%7C%20Week%2012/27.webp)
-![GET Admin 3](/posts/Penetration%20Testing%20%7C%20Week%2012/28.webp)
+![GET Admin 3](/posts/penetration-testing-week-12/assets/27.webp)
+![GET Admin 3](/posts/penetration-testing-week-12/assets/28.webp)
 
 페이로드를 삽입하여 게시물을 작성한 후 열람하면 서버 응답에 스크립트가 정상적으로 포함되는 것을 확인하였고, CSRF 토큰을 포함한 비밀번호 변경 요청이 전송되는 것을 확인하였다. 이후 해당 게시물 열람 페이지의 URL을 관리자 visit Bot에게 전달하였다.
 
-![GET Admin 3](/posts/Penetration%20Testing%20%7C%20Week%2012/29.webp)
+![GET Admin 3](/posts/penetration-testing-week-12/assets/29.webp)
 
 별도의 오류 없이 관리자가 접속했다는 메시지가 출력되었다. 이에 따라 관리자 계정의 비밀번호가 `any`로 변경되었을 것이므로, 로그인 페이지로 이동하여 `any_admin`/`any`를 입력하여 로그인을 시도하였다.
 
-![GET Admin 2](/posts/Penetration%20Testing%20%7C%20Week%2012/30.webp)
+![GET Admin 3](/posts/penetration-testing-week-12/assets/30.webp)
 
 로그인에 성공하여 알림 창에 플래그가 출력되었다.
 
