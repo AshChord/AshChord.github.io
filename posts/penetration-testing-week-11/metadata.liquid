@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: penetration-testing-week-11
+permalink: /posts/penetration-testing-week-11.html
+
+# Summary #
+title: Penetration Testing | Week 11
+date: 2025/06/25
+excerpt: XSS 취약점 응용
+categories: 모의 해킹
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page.path | markdownify }}

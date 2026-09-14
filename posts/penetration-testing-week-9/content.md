@@ -129,7 +129,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 <script>
   (() => {
     window.patchCodeLine = (lineNumber, override) => {
-      const code = document.currentScript.previousElementSibling.querySelector('pre code');
+      const code = document.currentScript.previousElementSibling.querySelector('code');
 
       const patch = () => {
         if (code.classList.contains('language-text')) {
