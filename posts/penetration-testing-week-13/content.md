@@ -37,7 +37,8 @@ CSRF 공격을 방지하기 위해 서버는 요청을 수신할 때마다 `Refe
 </style>
 
 > - HTTP 헤더 이름으로 사용되는 `Referer`는 `Referrer`의 오기이며, 초기 HTTP 사양에서 잘못 표기된 것이 그대로 표준으로 굳어지게 되었다.
-> - `<meta>` 태그의 `name` 속성, JavaScript의 `document` 객체 속성 등에서는 올바른 표기인 `referrer`를 사용한다.{: style="margin-bottom: 0;"}
+> - `<meta>` 태그의 `name` 속성, JavaScript의 `document` 객체 속성 등에서는 올바른 표기인 `referrer`를 사용한다.
+{: style="margin-bottom: 0;"}
 
 <br>
 
