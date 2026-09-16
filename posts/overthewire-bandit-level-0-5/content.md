@@ -19,7 +19,7 @@ password: bandit0
 >
 > - [Secure Shell - Wikipedia](https://en.wikipedia.org/wiki/Secure_Shell)  
 > - [SSH to Port Other Than 22 - It’s FOSS](https://itsfoss.com/ssh-to-port/)  
-> - {:style="margin-bottom: 0;"} [How to Use SSH(with Pictures) - wikiHow](https://www.wikihow.com/Use-SSH)
+> - [How to Use SSH(with Pictures) - wikiHow](https://www.wikihow.com/Use-SSH)
 
 ---
 
@@ -83,7 +83,7 @@ Password for Level 1: <span style="color: green; overflow-wrap: anywhere;">ZjLjT
 > **참고 자료**
 >
 > - [dashed filename - Google Search](https://www.google.com/search?q=dashed+filename)  
-> - {:style="margin-bottom: 0;"} [Special Characters - Linux die.net](https://linux.die.net/abs-guide/special-chars.html)
+> - [Special Characters - Linux die.net](https://linux.die.net/abs-guide/special-chars.html)
 
 ---
 
@@ -152,7 +152,7 @@ Password for Level 2: <span style="color: green; overflow-wrap: anywhere;">263JG
 
 > **참고 자료**
 >
-> - {:style="margin-bottom: 0;"} [spaces in filename - Google Search](https://www.google.com/search?q=spaces+in+filename)
+> - [spaces in filename - Google Search](https://www.google.com/search?q=spaces+in+filename)
 
 ---
 
