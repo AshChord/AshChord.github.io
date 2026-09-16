@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: penetration-testing-week-15
+permalink: /posts/penetration-testing-week-15.html
+
+# Summary #
+title: Penetration Testing | Week 15
+date: 2025/07/20
+excerpt: 파일 포함 취약점 및 파일 다운로드 취약점
+categories: 모의 해킹
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page.path | markdownify }}

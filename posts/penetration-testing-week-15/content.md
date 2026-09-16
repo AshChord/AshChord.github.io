@@ -1,13 +1,4 @@
----
-layout: article
-permalink: /posts/Penetration Testing | Week 15
-title: Penetration Testing | Week 15
-date: 2025/07/20
-excerpt: 파일 포함 취약점 및 파일 다운로드 취약점
-categories: 모의 해킹
----
-
-{{ site.pages.first.content | split: page.path }}
+# Penetration Testing | Week 15
 
 ## 강의 노트
 
@@ -19,6 +10,9 @@ categories: 모의 해킹
 
 웹 애플리케이션 상의 파일 업로드 기능이 확장자 기반의 필터링 로직을 적용하고 있을 경우, 해당 로직의 구현 방식에 따라 이중 확장자를 이용한 우회가 가능할 수 있다. 예를 들어, 업로드한 파일명을 `.`를 기준으로 분할한 뒤 첫 번째 구분자 이후의 문자열을 확장자로 간주하는 경우, 실제 최종 확장자가 아닌 선행 확장자만을 검사하게 되어 우회가 발생한다. 다음의 예시 코드를 보자.
 
+<style id="code-1">
+  #code-1 + pre data[value="15"] span {color: #24292E !important;}
+</style>
 ```php
 <?php
 $allowed = ['jpg', 'png'];
@@ -48,6 +42,9 @@ if (!in_array(strtolower($ext), $allowed)) {
 
 다음의 예시 코드를 살펴보자.
 
+<style id="code-2">
+  #code-2 + pre data[value="3"] span {color: #24292E !important;}
+</style>
 ```php
 <?php
 // 확장자 기반 필터링
@@ -178,20 +175,20 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 
 #### Web Shell 3
 
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/1.webp){:style="padding: 0 25%; background-color: white;"}
+![Web Shell 1](/posts/penetration-testing-week-15/assets/1.webp){:style="padding: 0 25%; background-color: white;"}
 
 링크를 통해 접속하면 다음과 같은 회원제 게시판 애플리케이션으로 이동한다.
 
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/2.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/3.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/4.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/5.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/6.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/7.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/8.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/9.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/10.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/11.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/2.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/3.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/4.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/5.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/6.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/7.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/8.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/9.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/10.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/11.webp)
 경고 메시지 출력됨
 그럼 소스 코드에 대충 `include("themes/" . $_COOKIE['theme']);` 이런 코드가 있는거임. 현재 include 함수가 실행되는 위치가 /index.php이니까, themes 디렉터리는 index.php와 같은 위치에 있다.
 
@@ -208,36 +205,36 @@ CTF를 해결하며 파일 업로드 공격을 실습해 보자.
 ```
 
 그럼 파일 구조가 대충 위와 같은 형태.
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/12.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/13.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/12.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/13.webp)
 
 왜 안될까? 웹셸 코드엔 분명 이렇게 써 있다. `system($_GET['cmd']);` 이건 URL의 쿼리 스트링에서 cmd라는 파라미터의 값을 명령어로서 실행하라는 의미이다. 그런데 URL의 쿼리 스트링을 보면..? 아무것도 없다. /index.php로 요청을 보낸 거니까.. 그러니까 우리는 103_webshell.php 뒤에 ?cmd=ls를 붙이는 게 아니라 /index.php?cmd=ls로 요청을 보내야 하는 거다.
 
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/14.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/15.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/16.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/14.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/15.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/16.webp)
 
 segfault{CanExecuteImage}
 
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/17.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/18.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/19.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/20.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/17.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/18.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/19.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/20.webp)
 Content-Description: File Transfer
 Content-Disposition: attachment; filename="index.php"
 여기서 이거 설명하고 넘어가고.
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/21.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/21.webp)
 segfault{downloadSourceCode}
 
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/22.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/23.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/24.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/25.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/26.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/27.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/28.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/29.webp)
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/30.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/22.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/23.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/24.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/25.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/26.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/27.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/28.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/29.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/30.webp)
 글자비교
-![Web Shell 1](/posts/Penetration%20Testing%20%7C%20Week%2015/31.webp)
+![Web Shell 1](/posts/penetration-testing-week-15/assets/31.webp)
 segfault{byPassFiltering}
