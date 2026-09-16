@@ -28,12 +28,12 @@ categories: Dreamhack, 워게임
 ![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20II/3.webp)
 ![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20II/4.webp)
 
-`/vuln` 엔드포인트는 CSRF 취약점이 존재하는 페이지로 `param` 파라미터로 전달받은 값을 출력한다. 내부에 XSS 공격을 방지하기 위한 필터링 로직이 구현되어 있어, 파라미터 값에 `frame`, `script`, `on` 문자열이 포함된 경우 이를 `*`로 치환하도록 되어 있다. 링크를 클릭하여 해당 페이지로 이동하면 기본적으로 `param=<script>alert(1)</script>`의 값이 설정되어 있는데, `script` 문자열이 `*`로 치환되어 스크립트는 실행되지 않는 것을 확인할 수 있다.
+`/vuln` 엔드포인트는 CSRF 취약점이 존재하는 페이지로 `param` 파라미터로 전달받은 값을 출력한다. 내부에 XSS 공격을 방지하기 위한 필터링 로직이 구현되어 있어, 파라미터 값에 `frame`, `script`, `on` 문자열이 포함된 경우 이를 `*`로 치환하도록 되어 있다. 링크를 통해 해당 페이지로 이동하면 기본적으로 `param=<script>alert(1)</script>`의 값이 설정되어 있는데, `script` 문자열이 `*`로 치환되어 스크립트는 실행되지 않는 것을 확인할 수 있다.
 
 ![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20II/5.webp)
 ![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20II/6.webp)
 
-`/memo` 엔드포인트는 `memo` 파라미터로 전달받은 값을 `memo_text`에 추가한 뒤 화면에 출력하는 페이지이다. 링크를 클릭하여 해당 페이지로 이동하면 기본적으로 `memo=hello`의 값이 설정되어 있어, `hello` 문자열이 출력되는 것을 확인할 수 있다.
+`/memo` 엔드포인트는 `memo` 파라미터로 전달받은 값을 `memo_text`에 추가한 뒤 화면에 출력하는 페이지이다. 링크를 통해 해당 페이지로 이동하면 기본적으로 `memo=hello`의 값이 설정되어 있어, `hello` 문자열이 출력되는 것을 확인할 수 있다.
 
 ![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20II/7.webp)
 ![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20II/8.webp)

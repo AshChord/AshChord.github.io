@@ -1,19 +1,10 @@
----
-layout: article
-permalink: /posts/Dreamhack Wargames | Web Hacking I
-title: Dreamhack Wargames | Web Hacking I
-date: 2025/10/05
-excerpt: Web Hacking 워게임 풀이 I
-categories: Dreamhack, 워게임
----
-
-{{ site.pages.first.content | split: page.path }}
+# Dreamhack Wargames | Web Hacking I
 
 ## devtools-sources
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/1.webp)
+![Description](/posts/dreamhack-wargames-web-hacking-i/assets/1.webp)
 
 ---
 
@@ -21,19 +12,19 @@ categories: Dreamhack, 워게임
 
 첨부 파일을 다운로드하고 압축을 해제하면 웹 페이지를 구성하는 다양한 파일들을 확인할 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/2.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/2.webp)
 
 대부분의 웹 페이지에서 진입점 페이지에 해당하는 `index.html` 파일을 브라우저를 사용하여 열람해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/3.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/3.webp)
 
 개발자 도구의 Sources 탭 기능을 활용하여 `DH{...}` 형식의 플래그를 찾아야 하므로, `DH` 문자열을 검색함으로써 소스 내에 존재하는 플래그를 발견할 수 있을 것으로 예상된다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/4.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/4.webp)
 
 개발자 도구를 연 뒤 Sources 탭으로 이동하면 위와 같이 페이지를 구성하고 있는 요소들을 확인할 수 있다. 이때 각각의 파일을 클릭하고 `Ctrl + F`(Mac의 경우 `Cmd + F`) 단축키를 사용하여 문자열 검색을 수행할 수도 있으나, `Ctrl + Shift + F`(Mac의 경우 `Cmd + Opt + F`) 단축키를 사용하면 모든 파일을 대상으로 문자열을 검색할 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/5.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/5.webp)
 
 해당 커맨드를 입력한 뒤 검색 패널에서 `DH` 문자열을 검색하면, `main.scss` 파일에 포함된 플래그가 출력된다.
 
@@ -48,7 +39,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/6.webp)
+![Description](/posts/dreamhack-wargames-web-hacking-i/assets/6.webp)
 
 ---
 
@@ -57,11 +48,11 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 첨부 파일을 다운로드하고 압축을 해제하면 `jack-o-lantern.html` 파일을 확인할 수 있다.  
 파일을 열람하면 다음과 같은 페이지가 나타난다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/7.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/7.webp)
 
 호박 이미지를 10,000번 클릭하면 플래그가 출력될 확률이 높으나 시간적 소모가 상당할 것이므로, 이를 우회하기 위해 소스 코드를 확인해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/8.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/8.webp)
 
 웹 페이지의 JavaScript 코드 내용을 확인해 보면, 사용자의 클릭 횟수는 `counter` 변수에 저장되며 총 10,000번의 클릭이 이루어지는 동안 화면에 그림을 그리는 것을 알 수 있다.
 
@@ -80,7 +71,7 @@ if (counter <= 10000 && counter % 100 == 0) {
 
 이에 따른 간단한 해결 방안으로, 매 클릭 시 `counter` 변수가 100씩 증가하도록 코드를 수정(`counter += 100`)한 후 100회 클릭을 수행하여 동작을 검증해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/9.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/9.webp)
 
 그 결과 화면에 플래그가 정상적으로 렌더링되는 것을 확인할 수 있었다.
 
@@ -95,7 +86,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/10.webp)
+![Description](/posts/dreamhack-wargames-web-hacking-i/assets/10.webp)
 
 ---
 
@@ -104,20 +95,20 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 첨부 파일을 다운로드하고 압축을 해제하면 `index.html` 파일을 확인할 수 있다.  
 파일을 열람하면 다음과 같은 페이지가 나타난다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/11.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/11.webp)
 
 소스 코드를 확인해 보면, 다음과 같은 JavaScript 코드가 존재한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/12.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/12.webp)
 
 분석 대상인 `main()` 함수가 난독화되어 있어 동작을 파악하기 어려웠으므로, 실제로 데이터를 입력한 후 브라우저의 개발자 도구를 활용하여 `main()` 함수를 실행 상태에서 디버깅해 보기로 결정하였다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/13.webp)
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/14.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/13.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/14.webp)
 
 위와 같이 `main()` 함수에 중단점을 설정한 후, `test` 문자열을 입력하고 제출해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/15.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/15.webp)
 
 실행 흐름을 따라가면 입력한 문자열이 `flag` 변수에 저장되는 것을 확인할 수 있다. 이후 `text2img()` 함수가 호출되며, `return` 문에 도달함과 동시에 함수 실행이 종료된다. 메인 함수의 반환 지점을 자세히 살펴보면 다음과 같다.
 
@@ -137,7 +128,7 @@ text2img(flag);
 
 코드 내에서 `_0x374fd6()` 함수의 반환 결과가 반복적으로 사용되는 것을 알 수 있다. `_0x374fd6()` 함수는 상단에 정의되어 있으며, 해당 선언문이 이미 실행된 이후의 시점이므로 콘솔을 통해 이 함수의 반환값을 직접 확인 가능하다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/16.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/16.webp)
 
 `_0x374fd6(0x17c)`는 문자열 `length`를, `_0x374fd6(0x176)`는 문자열 `charCodeAt`을, `_0x374fd6(0x185)`는 문자열 `NOP !`를 각각 반환함을 확인하였다. 따라서 위의 코드는 다음과 같이 수정할 수 있다.
 
@@ -168,7 +159,7 @@ for (var i = 0; i < 36; i++) {
     operator[i % operator['length']](_0x4949[i], _0x42931[i]))
 };
 ```
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/17.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/17.webp)
 
 성공적으로 플래그가 출력되었다.
 
@@ -183,7 +174,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/18.webp)
+![Description](/posts/dreamhack-wargames-web-hacking-i/assets/18.webp)
 
 ---
 
@@ -192,15 +183,15 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 첨부 파일을 다운로드하고 압축을 해제하면 `secure-mail.html` 파일을 확인할 수 있다.  
 파일을 열람하면 다음과 같은 페이지가 나타난다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/19.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/19.webp)
 
 무작위 생년월일을 입력한 뒤 `Confirm` 버튼을 누르면 다음과 같이 알림 창에 `Wrong` 메시지가 표시된다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/20.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/20.webp)
 
 웹 사이트의 동작을 분석하기 위해 소스 코드를 확인해 보았다. JavaScript 코드 전체가 난독화되어 있고 분량이 매우 방대한 관계로 분석 과정에서 핵심적으로 살펴본 부분만을 발췌하였다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/21.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/21.webp)
 
 생년월일을 입력한 후 `Confirm` 버튼을 클릭하면, 입력된 생년월일이 인자로 전달되어 `_0x9a220()` 함수가 실행됨을 확인할 수 있다. `_0x9a220()` 함수의 정의는 JavaScript 코드의 최하단에 위치하며, 상단의 코드를 분석하지 않는 이상 내부 동작을 명확히 파악하기는 어렵다. 다만 `Wrong` 알림 창을 출력하는 코드의 위치는 확인 가능하다. 해당 부분의 전후 코드를 보다 자세히 살펴보자.
 
@@ -214,7 +205,7 @@ return document['write'](_0x540d50('0x66', 'AZ$r') + odradurs1 + '\x22>'),
 
 `_0x9a220()` 함수는 특정 조건이 참일 경우 `Wrong` 알림 창을 표시하고 `![]`를 반환하며, 조건이 거짓일 경우 화면에 특정 데이터를 출력하며 `!![]`를 반환한다. 반환값 앞에 `!` 연산자가 사용된 것으로 미루어 불리언 값일 것으로 추정되었는데, 실제 콘솔에서 확인한 결과 `![]`는 `false`, `!![]`는 `true`를 의미하는 것으로 확인되었다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/22.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/22.webp)
 
 > **Truthy & Falsy**
 >
@@ -253,7 +244,7 @@ for (var i = 0; i < 100; i++) {
 
 `_0x9a220()` 함수는 `false`를 반환하는 경우 동시에 알림 창을 출력하므로, 반복문 실행 시마다 알림 창의 확인 버튼을 수동으로 처리해야 하는 상황을 방지하기 위해 소스 코드에서 `alert('Wrong')`을 제거한 상태로 위의 스크립트를 실행하였다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/23.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/23.webp)
 
 스크립트를 실행한 결과 정답 생년월일은 `960229`임을 확인할 수 있었으며, `_0x9a220()` 함수가 `true`를 반환함과 동시에 플래그 값이 포함된 이미지가 출력되었다.
 
@@ -268,7 +259,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/24.webp)
+![Description](/posts/dreamhack-wargames-web-hacking-i/assets/24.webp)
 
 ---
 
@@ -276,30 +267,30 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 제공된 웹 사이트에 접속하면 다음과 같은 페이지가 나타난다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/25.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/25.webp)
 
 `Login` 버튼을 클릭하면 로그인 화면으로 이동한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/26.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/26.webp)
 
 목표는 admin 계정으로 로그인하는 것이지만, 현재로서는 파악된 정보가 전무한 상태이므로 우선 첨부 파일을 다운로드하여 소스 코드를 확인해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/27.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/27.webp)
 
 `index()` 함수를 보면 admin 계정으로 로그인된 경우 메인 페이지에 플래그가 출력되는 것을 알 수 있다. 핵심은 현재 로그인된 계정을 판단하는 방식인데, 쿠키에 저장된 값 중 `username`에 해당하는 값을 기준으로 계정 유형을 판별한다.
 
 `login()` 함수는 로그인 과정을 처리하며, 인증에 성공할 경우 현재 로그인된 계정의 `username`을 쿠키에 저장한다. `users` 객체에 guest 계정 정보가 존재하므로, 우선 해당 계정으로 로그인을 시도해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/28.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/28.webp)
 
 `guest`/`guest`를 입력하고 로그인하면 메인 페이지로 이동하며 `you are not admin`이라는 메시지가 출력된다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/29.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/29.webp)
 
 개발자 도구를 통해 쿠키 값을 확인하면 `username` 필드에 `guest`가 저장되어 있음을 알 수 있다. `index()` 함수는 오직 쿠키의 `username` 필드에 저장된 값만을 기준으로 로그인된 계정을 판별하므로, 해당 값을 `guest`에서 `admin`으로 변경하면 admin 계정으로 로그인한 것처럼 동작하게 할 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/30.webp)
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/31.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/30.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/31.webp)
 
 쿠키 값을 수정한 뒤 페이지를 새로고침하면 플래그가 출력된다.
 
@@ -314,7 +305,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/32.webp)
+![Description](/posts/dreamhack-wargames-web-hacking-i/assets/32.webp)
 
 ---
 
@@ -322,11 +313,11 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 제공된 웹 사이트에 접속하면 다음과 같은 페이지가 나타난다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/33.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/33.webp)
 
 admin 계정으로 로그인하기 위한 단서를 찾기 위해 첨부 파일을 다운로드하여 소스 코드를 확인해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/34.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/34.webp)
 
 `index()` 함수는 admin 계정으로 로그인된 경우 메인 페이지에 플래그를 출력시키는 함수이다. 로그인된 계정의 유형을 판별하기 위해 쿠키에 저장된 세션 ID(`sessionid`)에 대응되는 `username` 값을 조회한다.
 
@@ -338,20 +329,20 @@ admin 계정으로 로그인하기 위한 단서를 찾기 위해 첨부 파일�
 
 현재까지 확인된 정보를 바탕으로, 플래그를 획득하기 위해 다음 절차를 수행하였다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/35.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/35.webp)
 
 `guest`/`guest`를 입력하여 guest 계정으로 로그인한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/36.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/36.webp)
 
 `/admin` 주소에 접근하여 admin 계정의 세션 ID를 획득한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/37.webp)
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/38.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/37.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/38.webp)
 
 개발자 도구를 통해 쿠키 값에 저장된 guest 계정의 세션 ID를 admin 계정의 세션 ID로 수정한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/39.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/39.webp)
 
 이후 메인 페이지에 접속하면 플래그가 출력된다.
 
@@ -366,7 +357,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/40.webp)
+![Description](/posts/dreamhack-wargames-web-hacking-i/assets/40.webp)
 
 ---
 
@@ -374,22 +365,22 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 제공된 웹 사이트에 접속하면 메인 페이지를 제외하고 총 3개의 페이지가 존재함을 알 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/41.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/41.webp)
 
 첨부 파일을 다운로드한 뒤 소스 코드를 확인하며 각 페이지가 수행하는 기능을 파악해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/42.webp)
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/43.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/42.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/43.webp)
 
-`/vuln` 엔드포인트는 XSS 취약점이 존재하는 페이지로, `param` 파라미터로 전달받은 값을 별도의 검증 없이 그대로 출력한다. 링크를 클릭하여 해당 페이지로 이동하면 기본적으로 `param=<script>alert(1)</script>`의 값이 설정되어 있는데, 해당 스크립트가 브라우저에 의해 실행되어 알림 창이 표시되는 것을 확인할 수 있다.
+`/vuln` 엔드포인트는 XSS 취약점이 존재하는 페이지로, `param` 파라미터로 전달받은 값을 별도의 검증 없이 그대로 출력한다. 링크를 통해 해당 페이지로 이동하면 기본적으로 `param=<script>alert(1)</script>`의 값이 설정되어 있는데, 해당 스크립트가 브라우저에 의해 실행되어 알림 창이 표시되는 것을 확인할 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/44.webp)
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/45.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/44.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/45.webp)
 
-`/memo` 엔드포인트는 `memo` 파라미터로 전달받은 값을 `memo_text`에 추가한 뒤 화면에 출력하는 페이지이다. 링크를 클릭하여 해당 페이지로 이동하면 기본적으로 `memo=hello`의 값이 설정되어 있어, `hello` 문자열이 출력되는 것을 확인할 수 있다.
+`/memo` 엔드포인트는 `memo` 파라미터로 전달받은 값을 `memo_text`에 추가한 뒤 화면에 출력하는 페이지이다. 링크를 통해 해당 페이지로 이동하면 기본적으로 `memo=hello`의 값이 설정되어 있어, `hello` 문자열이 출력되는 것을 확인할 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/46.webp)
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/47.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/46.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/47.webp)
 
 `/flag` 엔드포인트는 입력받은 URL을 확인하는 봇이 구현된 페이지이다.  
 `read_url()` 함수는 `url`과 `cookie` 값을 매개변수로 받는 함수이다. `driver.add_cookie(cookie)`, `driver.get(url)`와 같은 코드를 고려하면, 이 함수는 전달된 `cookie` 데이터를 쿠키에 저장하고 `url` 파라미터로 지정된 주소에 접속하는 동작을 수행함을 유추할 수 있다.  
@@ -406,8 +397,8 @@ XSS 공격을 통해 쿠키를 탈취하기 위해 `param` 파라미터에 다�
 
 일반적으로 탈취한 쿠키 값을 전달받기 위해서는 외부에서 접근 가능한 웹 서버를 사용하지만, 본 애플리케이션에는 전달된 값을 화면에 출력하는 `/memo` 엔드포인트가 존재하므로 이를 활용하였다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/48.webp)
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/49.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/48.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/49.webp)
 
 해당 스크립트를 입력한 후 `/memo` 엔드포인트에서 플래그가 출력되는 것을 확인하였다.
 
@@ -422,7 +413,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/40.webp)
+![Description](/posts/dreamhack-wargames-web-hacking-i/assets/40.webp)
 
 ---
 
@@ -430,39 +421,43 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 제공된 웹 사이트에 접속하면 xss-1과 동일한 형태의 페이지가 나타난다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/50.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/50.webp)
 
 xss-1과의 유일한 차이점은 `/vuln` 엔드포인트에서 확인할 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/51.webp)
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/52.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/51.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/52.webp)
 
 xss-2에서는 `/vuln` 엔드포인트가 단순히 `vuln.html`을 렌더링한다. 이에 따라 `vuln.html`을 살펴보면, 쿼리 스트링에서 `param` 파라미터에 해당하는 값을 `innerHTML`을 통해 직접 DOM에 삽입하고 있음을 확인할 수 있다. 이때 삽입하는 값에 대해 어떠한 검증도 수행하지 않으므로 XSS 취약점이 존재할 것으로 예상된다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/53.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/53.webp)
 
 그러나 실제로 `/vuln` 엔드포인트에 접근하면 `param` 파라미터에 전달된 스크립트가 실행되지 않아 알림 창이 표시되지 않는 것을 확인할 수 있다. 그 이유가 무엇일까?
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/54.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/54.webp)
 
 공식 문서에 따르면 `innerHTML` 속성은 대표적인 XSS 공격 벡터(공격 경로)이기 때문에 `<script>` 태그가 삽입된 경우 해당 스크립트의 실행을 제한하도록 동작한다고 한다. 그러나 스크립트 실행을 위한 다른 방법들에 대해 취약하다는 설명에서 알 수 있듯이, 여전히 `/vuln` 엔드포인트에는 XSS 취약점이 존재한다. 이를테면, `<script>` 태그 대신 `<img>` 태그를 활용한 다음 페이로드를 `param` 파라미터에 전달해 보자.
 
-<pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"x"</span> <span class="hljs-attr">onerror</span>=<span class="hljs-string">"</span><span class="hljs-title function_">alert</span>(<span class="hljs-number">1</span>);<span class="hljs-string">"</span>&gt;</span>
-</data></code></pre>
+```html
+<img src="x" onerror="alert(1);">
+```
 
-
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/55.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/55.webp)
 
 예상대로 알림 창이 표시되었다. 이후 xss-1에서와 동일한 방법을 적용하면 플래그를 획득할 수 있다.  
-`/flag`로 이동한 뒤 다음 스크립트를 입력한다.
+`/flag`로 이동한 뒤 다음 페이로드를 입력한다.
 
-<pre><button class="copy-button"></button><code class="language-js" highlighted><data class="code-line" value="1"><span class="hljs-tag">&lt;<span class="hljs-name">img</span>
-</data><data class="code-line" value="2" style="--indent: 2ch;">  <span class="hljs-attr">src</span>=<span class="hljs-string">"x"</span>
-</data><data class="code-line" value="3" style="--indent: 2ch;">  <span class="hljs-attr">onerror</span>=<span class="hljs-string">"</span><span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>(); img.<span class="hljs-property">src</span> = <span class="hljs-string">'/memo?memo='</span> + <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>;<span class="hljs-string">"</span>
-</data><data class="code-line" value="4">&gt;</span>
-</data></code></pre>
+<style id="code-1">
+  #code-1 + pre data[value="3"] span:nth-of-type(17) {color: #24292E !important;}
+</style>
+```html
+<img
+  src="x"
+  onerror="var img = new Image(); img.src = '/memo?memo=' + document.cookie;"
+>
+```
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Web%20Hacking%20I/56.webp)
+![Write-Up](/posts/dreamhack-wargames-web-hacking-i/assets/56.webp)
 
 `/memo`로 이동하면 플래그가 출력된다.
 
