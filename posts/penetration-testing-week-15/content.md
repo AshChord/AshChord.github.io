@@ -15,20 +15,20 @@
 </style>
 ```php
 <?php
-$allowed = ['jpg', 'png'];
-$filename = $_GET['filename'];
+  $allowed = ['jpg', 'png'];
+  $filename = $_GET['filename'];
 
-// explode(): 구분자를 기준으로 문자열을 잘라 배열로 반환하는 함수
-$ext = explode('.', $filename)[1];
+  // explode(): 구분자를 기준으로 문자열을 잘라 배열로 반환하는 함수
+  $ext = explode('.', $filename)[1];
 
-// strtolower(): 문자열을 모두 소문자로 변환하는 함수
-if (!in_array(strtolower($ext), $allowed)) {
-  echo "This file type is not allowed.";
-  exit;
-}
+  // strtolower(): 문자열을 모두 소문자로 변환하는 함수
+  if (!in_array(strtolower($ext), $allowed)) {
+    echo "This file type is not allowed.";
+    exit;
+  }
 
-// 파일 업로드 처리
-...
+  // 파일 업로드 처리
+  ...
 ?>
 ```
 
@@ -46,20 +46,20 @@ if (!in_array(strtolower($ext), $allowed)) {
   #code-2 + pre data[value="3"] span {color: #24292E !important;}
 </style>
 ```php
-<?php
-// 확장자 기반 필터링
-...
+  <?php
+  // 확장자 기반 필터링
+  ...
 
-$upload_dir = 'uploads/';
-$filename = $_FILES['file']['name'];
-$target = $upload_dir . $filename;
+  $upload_dir = 'uploads/';
+  $filename = $_FILES['file']['name'];
+  $target = $upload_dir . $filename;
 
-//move_uploaded_file(): 서버에 업로드된 임시 파일을 지정된 새 위치로 이동시키는 함수
-if (move_uploaded_file($_FILES['file']['tmp_name'], $target)) {
-    echo "Upload successful!";
-} else {
-    echo "Upload failed.";
-}
+  //move_uploaded_file(): 서버에 업로드된 임시 파일을 지정된 새 위치로 이동시키는 함수
+  if (move_uploaded_file($_FILES['file']['tmp_name'], $target)) {
+      echo "Upload successful!";
+  } else {
+      echo "Upload failed.";
+  }
 ?>
 ```
 

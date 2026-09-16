@@ -357,9 +357,13 @@ Apache의 웹 루트에 해당하는 `/var/www/html` 경로에 로그인 기능�
 ```
 <script>
   patchCodeLine(1, '<span style="color:#6A737D">// login.php</span>');
+
   patchCodeLine(10, '<span style="color:#6A737D">    // External CSS File for Styling</span>');
+
   patchCodeLine(15, '<span style="color:#6A737D">    // Container that Holds the Login Form</span>');
+
   patchCodeLine(19, '<span style="color:#6A737D">      // Form Submission Directed to \'login_proc.php\' with POST Method</span>');
+  
   patchCodeLine(22, '<span style="color:#6A737D">        // Input Fields for Username and Password, and the Submit Button</span>');
 </script>
 

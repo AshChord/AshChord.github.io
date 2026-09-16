@@ -217,11 +217,12 @@ RUN /bin/sh -c rm *
       '<span style="color:#24292E">).read()</span>',
       '<span style="color:#032F62">"`</span>'
     ].join(''));
+
     patchCodeLine(3, [
       '<span style="color:#D73A49">RUN</span>',
       '<span style="color:#6F42C1"> /bin/sh</span>',
       '<span style="color:#005CC5"> -c</span>',
-      '<span style="color:#032F62"> rm</span>',
+      '<span style="color:#6F42C1"> rm</span>',
       '<span style="color:#005CC5"> *</span>'
     ].join(''));
   })();
@@ -356,21 +357,83 @@ Password의 경우, 정규식 표현 `/\d*\@\d{2,3}(31)+[^0-8\"]\!/`에 해당�
 | `\!`       | `!` 문자                                |
 
 <style id="code-3">
-  #code-3 + pre data[value="10"] span {color: #24292E !important;}
+  #code-3 + pre data[value="11"] span {color: #24292E !important;}
 </style>
 ```php
 if ($name === "dnyang0310" && $pw === "d4y0r50ng+1+13") {
   echo '
-  <h4>Step 2 : Almost done...</h4>
-  <div class="door_box">
-    <div class="door_black"></div>
-    <div class="door">
-      <div class="door_cir"></div>
+    <h4>Step 2 : Almost done...</h4>
+    <div class="door_box">
+      <div class="door_black"></div>
+      <div class="door">
+        <div class="door_cir"></div>
+      </div>
     </div>
-  </div>';
+  ';
   ...
 }
 ```
+<script>
+  patchCodeLine(3, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">h4</span>',
+    '<span style="color:#24292E">&gt;Step 2 : Almost done...&lt;/</span>',
+    '<span style="color:#22863A">h4</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(4, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#6F42C1"> class</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"door_box"</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(5, [
+    '<span style="color:#24292E">      &lt;</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#6F42C1"> class</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"door_black"</span>',
+    '<span style="color:#24292E">&gt;&lt;/</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(6, [
+    '<span style="color:#24292E">      &lt;</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#6F42C1"> class</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"door"</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(7, [
+    '<span style="color:#24292E">        &lt;</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#6F42C1"> class</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"door_cir"</span>',
+    '<span style="color:#24292E">&gt;&lt;/</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(8, [
+    '<span style="color:#24292E">      &lt;/</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(9, [
+    '<span style="color:#24292E">    &lt;/</span>',
+    '<span style="color:#22863A">div</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+</script>
 
 Nickname과 Password를 각각 치환한 결과가 `dnyang0310`, `d4y0r50ng+1+13`인 경우 조건문을 통과하며 `Step 2: Almost done...`이 출력된다.
 조건문 통과를 위한 알맞은 Nickname과 Password 값의 예시는 다음과 같다.
@@ -390,7 +453,8 @@ if ($cmd === "") {
         <input type="hidden" name="input2" value="'.$input_pw.'">
         <input type="text" placeholder="Command" name="cmd">
         <input type="submit" value="제출">
-        <br/><br/>
+        <br/>
+        <br/>
       </form>
     </p>
   ';
@@ -404,6 +468,144 @@ else if (preg_match("/flag/i", $cmd)) {
   echo "</pre>";
 }
 ```
+<script>
+  patchCodeLine(5, [
+    '<span style="color:#24292E">    &lt;</span>',
+    '<span style="color:#22863A">p</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(6, [
+    '<span style="color:#24292E">      &lt;</span>',
+    '<span style="color:#22863A">form</span>',
+    '<span style="color:#6F42C1"> method</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"post"</span>',
+    '<span style="color:#6F42C1"> action</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"/step2.php"</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(7, [
+    '<span style="color:#24292E">        &lt;</span>',
+    '<span style="color:#22863A">input</span>',
+    '<span style="color:#6F42C1"> type</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"hidden"</span>',
+    '<span style="color:#6F42C1"> name</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"input1"</span>',
+    '<span style="color:#6F42C1"> value</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"\'</span>',
+    '<span style="color:#D73A49">.</span>',
+    '<span style="color:#24292E">$input_name</span>',
+    '<span style="color:#D73A49">.</span>',
+    '<span style="color:#032F62">\'"&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(8, [
+    '<span style="color:#24292E">        &lt;</span>',
+    '<span style="color:#22863A">input</span>',
+    '<span style="color:#6F42C1"> type</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"hidden"</span>',
+    '<span style="color:#6F42C1"> name</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"input2"</span>',
+    '<span style="color:#6F42C1"> value</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"\'</span>',
+    '<span style="color:#D73A49">.</span>',
+    '<span style="color:#24292E">$input_name</span>',
+    '<span style="color:#D73A49">.</span>',
+    '<span style="color:#032F62">\'"&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(9, [
+    '<span style="color:#24292E">        &lt;</span>',
+    '<span style="color:#22863A">input</span>',
+    '<span style="color:#6F42C1"> type</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"text"</span>',
+    '<span style="color:#6F42C1"> placeholder</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"Command"</span>',
+    '<span style="color:#6F42C1"> name</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"cmd"</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(10, [
+    '<span style="color:#24292E">        &lt;</span>',
+    '<span style="color:#22863A">input</span>',
+    '<span style="color:#6F42C1"> type</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"submit"</span>',
+    '<span style="color:#6F42C1"> value</span>',
+    '<span style="color:#24292E">=</span>',
+    '<span style="color:#032F62">"제출"</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(11, [
+    '<span style="color:#24292E">        &lt;</span>',
+    '<span style="color:#22863A">br</span>',
+    '<span style="color:#24292E">/&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(12, [
+    '<span style="color:#24292E">        &lt;</span>',
+    '<span style="color:#22863A">br</span>',
+    '<span style="color:#24292E">/&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(13, [
+    '<span style="color:#24292E">      &lt;/</span>',
+    '<span style="color:#22863A">form</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(14, [
+    '<span style="color:#24292E">    &lt;/</span>',
+    '<span style="color:#22863A">p</span>',
+    '<span style="color:#24292E">&gt;</span>'
+  ].join(''));
+
+  patchCodeLine(19, [
+    '<span style="color:#005CC5">  echo</span>',
+    '<span style="color:#032F62"> "</span>',
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">pre</span>',
+    '<span style="color:#24292E">&gt;Error!&lt;/</span>',
+    '<span style="color:#22863A">pre</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#032F62"> "</span>',
+    '<span style="color:#24292E">;</span>',
+  ].join(''));
+
+  patchCodeLine(21, [
+    '<span style="color:#005CC5">  echo</span>',
+    '<span style="color:#032F62"> "</span>',
+    '<span style="color:#24292E">&lt;</span>',
+    '<span style="color:#22863A">pre</span>',
+    '<span style="color:#24292E">&gt;--Output--\\n</span>',
+    '<span style="color:#032F62">"</span>',
+    '<span style="color:#24292E">;</span>',
+  ].join(''));
+
+  patchCodeLine(23, [
+    '<span style="color:#005CC5">  echo</span>',
+    '<span style="color:#032F62"> "</span>',
+    '<span style="color:#24292E">&lt;/</span>',
+    '<span style="color:#22863A">pre</span>',
+    '<span style="color:#24292E">&gt;</span>',
+    '<span style="color:#032F62">"</span>',
+    '<span style="color:#24292E">;</span>',
+  ].join(''));
+</script>
 
 이후 서버는 POST 요청으로 전달받은 `cmd` 파라미터를 확인하며, 값이 없을 경우 조건문을 통과하여 새로운 입력 양식을 생성한다. 해당 양식은 `cmd` 값을 `step2.php`로 제출하도록 설정되어 있다.  
 첫 로그인 시에는 `cmd` 값이 없기 때문에 반드시 입력 양식이 생성되고, 이후 `cmd` 값을 제출하면 `else if` 문으로 흐름이 넘어간다. 이때 `cmd` 값에 `flag`(대소문자 불구분)가 존재하면 에러가 발생하며, 그렇지 않으면 `system($cmd)`을 통해 해당 명령어가 실행된다.
