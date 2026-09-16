@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: dreamhack-wargames-web-hacking-ii
+permalink: /posts/dreamhack-wargames-web-hacking-ii.html
+
+# Summary #
+title: Dreamhack Wargames | Web Hacking II
+date: 2025/10/11
+excerpt: Dreamhack Wargames 풀이 II
+categories: Dreamhack, 워게임
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page.path | markdownify }}
