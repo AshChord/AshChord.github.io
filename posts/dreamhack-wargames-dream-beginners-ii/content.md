@@ -1,19 +1,10 @@
----
-layout: article
-permalink: /posts/Dreamhack Wargames | Dream Beginners II
-title: Dreamhack Wargames | Dream Beginners II
-date: 2025/09/17
-excerpt: Dream Beginners 워게임 풀이 II
-categories: Dreamhack, 워게임
----
-
-{{ site.pages.first.content | split: page.path }}
+# Dreamhack Wargames | Dream Beginners II
 
 ## Exercise: Welcome-Beginners
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/1.webp)
+![Description](/posts/dreamhack-wargames-dream-beginners-ii/assets/1.webp)
 
 ---
 
@@ -21,12 +12,12 @@ categories: Dreamhack, 워게임
 
 제공된 서버 정보를 통해 Host와 Port를 확인할 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/2.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/2.webp)
 
 <strong>Netcat(nc)</strong>을 활용하면 서버에 접속할 수 있다.  
 터미널에서 `nc host8.dreamhack.games 18338`를 입력하여 접속하였다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/3.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/3.webp)
 
 > **포트 포워딩과 `18338/tcp → 31337/tcp`의 의미**
 >
@@ -35,7 +26,7 @@ categories: Dreamhack, 워게임
 
 이후 `Dreamhack`을 입력하면 플래그가 출력된다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/4.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/4.webp)
 
 Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">d6398f06b35117877a855ade8d2015fc3b142c3ca6686ce3198e372b9ef8a644</span>}</span>
 {:style="text-align: center;"}
@@ -48,7 +39,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/5.webp)
+![Description](/posts/dreamhack-wargames-dream-beginners-ii/assets/5.webp)
 
 ---
 
@@ -56,19 +47,19 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 SSH를 통해 서버에 접속해야 하므로, 터미널에 `ssh chall@[host] -p [port]`의 형식으로 입력한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/6.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/6.webp)
 
 비밀번호 `dhbgssh`를 입력한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/7.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/7.webp)
 
 제공된 서버로 원격 접속에 성공하였다. 이후 서버 내에 어떤 파일들이 존재하는지 파악하기 위해 `ls`를 입력하였다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/8.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/8.webp)
 
 현재 디렉터리에 `flag` 파일이 존재함을 확인하였다. `cat flag`를 입력하여 내용을 확인한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/9.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/9.webp)
 
 성공적으로 플래그가 출력되었다.
 
@@ -83,7 +74,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/10.webp)
+![Description](/posts/dreamhack-wargames-dream-beginners-ii/assets/10.webp)
 
 ---
 
@@ -92,28 +83,28 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 Docker를 사용하기 위해, 첨부 파일을 다운로드한 뒤 폴더 전체를 리눅스 환경으로 옮긴다.  
 이후 터미널 환경에서 해당 디렉터리를 확인해 보면 다음과 같이 `Dockerfile`이 존재함을 확인할 수 있다. 
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/11.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/11.webp)
 
 `docker build .`를 실행하여 이미지를 빌드한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/12.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/12.webp)
 
 빌드가 완료되면 `docker images` 명령어를 통해 생성된 이미지를 확인할 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/13.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/13.webp)
 
 빌드 시 이미지의 이름과 태그를 지정하지 않았기 때문에 `<none>:<none>` 이미지가 생성되었음을 알 수 있다.  
 빌드된 이미지의 `ID`가 `555e1d2f83dd`이므로, `docker run -it 555e1d2f83dd /bin/bash`를 실행하면 해당 이미지로부터 컨테이너를 생성·실행하여 bash 셸을 열 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/14.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/14.webp)
 
 성공적으로 컨테이너 환경에 접속하였다. 이후 어떤 파일들이 존재하는지 파악하기 위해 `ls`를 입력하였다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/15.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/15.webp)
 
 현재 디렉터리에 `flag` 파일이 존재함을 확인하였다. `cat flag`를 입력하여 내용을 확인한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/16.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/16.webp)
 
 성공적으로 플래그가 출력되었다.
 
@@ -128,7 +119,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/17.webp)
+![Description](/posts/dreamhack-wargames-dream-beginners-ii/assets/17.webp)
 
 ---
 
@@ -136,22 +127,22 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 분석해야 하는 이미지는 Docker Hub의 `dreamhackofficial/blue-whale` 레포지토리에 위치하며 태그는 `1`이므로, 터미널에 `docker pull dreamhackofficial/blue-whale:1`를 입력한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/18.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/18.webp)
 
 `docker images`를 실행하면 성공적으로 이미지가 다운로드되었음을 확인할 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/19.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/19.webp)
 
 본격적으로 해당 이미지를 분석하기에 앞서, 문제 설명에 포함된 Hint 링크에 접속해 보았다.  
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/20.webp)
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/21.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/20.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/21.webp)
 
 해당 링크는 이미지 분석에 사용되는 도구인 dive의 GitHub 레포지토리이다.  
 기능 설명을 보면 이미지의 콘텐츠를 레이어별로 나타내고, 각 레이어에서 변경된 점을 표시한다고 한다.  
 레이어라는 용어가 생소했기에 Docker의 공식 홈페이지를 통해 조사해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/22.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/22.webp)
 
 도커 이미지는 여러 레이어로 구성되며, 각 레이어는 파일 시스템의 변경 사항을 담고 있다. Dockerfile에 작성한 명령어에 의해 파일이 추가·삭제되는 등 변화가 발생할 때마다 레이어가 생성되는 구조이다.
 
@@ -159,31 +150,82 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 이후 곧바로 dive 설치를 진행하였다. Ubuntu 환경에서의 설치 방법은 README 문서에 안내되어 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/23.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/23.webp)
 
 ARM64 아키텍처용 Ubuntu를 사용 중이므로 `dive_${DIVE_VERSION}_linux_arm64.deb`를 설치하였다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/24.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/24.webp)
 
 dive는 다음과 같이 간단하게 사용 가능하다. 터미널에 `dive dreamhackofficial/blue-whale:1`를 입력한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/25.webp)
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/26.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/25.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/26.webp)
 
 dive가 실행되면 다음과 같은 화면이 나타난다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/27.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/27.webp)
 
 좌측 상단의 Layers 탭에는 각 레이어가 어떤 명령어에 의해 생성되었는지 표시되며, 우측의 Current Layer Contents 탭에서는 현재 선택된 레이어의 파일 구조를 확인할 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/28.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/28.webp)
 
 각 레이어를 탐색하던 도중 다음 3개의 명령을 확인하였다.
+<style id="code-1">
+  #code-1 + pre data[value="1"] span:nth-of-type(2) {color: #6F42C1 !important;}
+</style>
+```dockerfile
+WORKDIR /home/chall
+RUN /bin/sh -c touch `python3 -c "print(open('./flag', 'r').read())"`
+RUN /bin/sh -c rm *
+```
+<script>
+  (() => {
+    window.patchCodeLine = (lineNumber, override) => {
+      const code = document.currentScript.previousElementSibling.querySelector('code');
 
-<pre><button class="copy-button"></button><code class="language-dockerfile" highlighted><data class="code-line" value="1"><span class="hljs-keyword">WORKDIR</span> /home/chall
-</data><data class="code-line" value="2"><span class="hljs-keyword">RUN</span> /bin/sh -c <span class="hljs-built_in">touch</span> <span class="hljs-string">`python3 -c "print(open('./flag', 'r').read())"`</span>
-</data><data class="code-line" value="3"><span class="hljs-keyword">RUN</span> /bin/sh -c <span class="hljs-built_in">rm</span> <span class="hljs-number">*</span>
-</data></code></pre>
+      const patch = () => {
+        const line = code.querySelector(`.code-line[value="${lineNumber}"]`);
+        const lineContent = new DOMParser().parseFromString(override, 'text/html');
+
+        line.replaceChildren(...lineContent.body.childNodes);
+        line.appendChild(document.createTextNode('\n'));
+
+        observer.disconnect();
+      };
+
+      const observer = new MutationObserver(patch);
+
+      observer.observe(code, { attributes: true, attributeFilter: ['highlighted'] });
+
+      if (code.hasAttribute('highlighted')) patch();
+    };
+
+    patchCodeLine(2, [
+      '<span style="color:#D73A49">RUN</span>',
+      '<span style="color:#6F42C1"> /bin/sh touch</span>',
+      '<span style="color:#032F62"> `</span>',
+      '<span style="color:#6F42C1">python3</span>',
+      '<span style="color:#005CC5"> -c</span>',
+      '<span style="color:#032F62"> "</span>',
+      '<span style="color:#005CC5">print</span>',
+      '<span style="color:#24292E">(</span>',
+      '<span style="color:#005CC5">open</span>',
+      '<span style="color:#24292E">(</span>',
+      '<span style="color:#032F62">\'./flag\'</span>',
+      '<span style="color:#24292E">, </span>',
+      '<span style="color:#032F62">\'r\'</span>',
+      '<span style="color:#24292E">).read()</span>',
+      '<span style="color:#032F62">"`</span>'
+    ].join(''));
+    patchCodeLine(3, [
+      '<span style="color:#D73A49">RUN</span>',
+      '<span style="color:#6F42C1"> /bin/sh</span>',
+      '<span style="color:#005CC5"> -c</span>',
+      '<span style="color:#032F62"> rm</span>',
+      '<span style="color:#005CC5"> *</span>'
+    ].join(''));
+  })();
+</script>
 
 각 명령의 동작을 요약하면 다음과 같다.
 
@@ -193,11 +235,11 @@ dive가 실행되면 다음과 같은 화면이 나타난다.
 
 예상대로, 이미지 빌드 도중 플래그 파일을 삭제하는 작업이 존재했다. 따라서 파일이 삭제되기 직전 <code>RUN /bin/sh -c touch \`python3 -c "print(open('./flag', 'r').read())"\`</code> 명령에 의해 생성된 레이어를 살펴보면, `/home/chall` 디렉터리 내에 플래그 값을 제목으로 갖는 파일이 존재할 것이다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/29.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/29.webp)
 
 해당 레이어에서 파일 구조를 확인하면, `/home/chall` 내에 플래그 값을 제목으로 갖는 파일이 생성되었음을 알 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/30.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/30.webp)
 
 화면에 플래그가 모두 표시되지 않을 경우, `Ctrl + B` 단축키를 사용하여 파일 속성을 숨기면 플래그의 전체 내용을 확인할 수 있다.
 
@@ -212,7 +254,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/31.webp)
+![Description](/posts/dreamhack-wargames-dream-beginners-ii/assets/31.webp)
 
 ---
 
@@ -220,12 +262,12 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 제공된 웹 사이트에 접속하면 다음과 같은 입력 양식이 포함된 페이지가 나타난다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/32.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/32.webp)
 
 특정 정규식 표현과 일치하는 문자열을 입력하면 플래그가 출력되는 구조로 예상된다.  
 이후 첨부 파일을 다운로드하여 소스 코드를 확인해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/33.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/33.webp)
 
 플래그는 `FLAG` 변수에 저장되어 있고, 사용자가 입력한 문자열이 정규식 표현 `r'dr\w{5,7}e\d+am@[a-z]{3,7}\.\w+'`와 일치할 때 출력되는 것을 알 수 있다.
 
@@ -246,7 +288,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 해당 정규식 표현에 맞춰 구성된 예시 입력 문자열은 `draaaaae1am@aaa.a`와 같은 형태가 될 수 있다.  
 웹 페이지에서 해당 문자열을 입력해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/34.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/34.webp)
 
 성공적으로 플래그가 출력되었다.
 
@@ -261,7 +303,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/35.webp)
+![Description](/posts/dreamhack-wargames-dream-beginners-ii/assets/35.webp)
 
 ---
 
@@ -269,19 +311,22 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 제공된 웹 사이트에 접속하면 다음과 같은 로그인 페이지가 나타난다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/36.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/36.webp)
 
 알맞은 Nickname과 Password를 알아내기 위해, 첨부 파일을 다운로드하여 소스 코드를 확인해 보았다.  
 소스 코드는 다음과 같이 `index.php`와 `step2.php`로 구성되어 있다. CSS 관련 코드는 생략하였다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/37.webp)
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/38.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/37.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/38.webp)
 
 `index.php`의 소스 코드를 보면 로그인 양식을 `step2.php`로 제출한다는 것을 알 수 있다.
 `step2.php`에는 사용자 입력값을 받아 로그인을 처리하는 PHP 코드가 포함되어 있다.  
 
 구체적인 로그인 처리 절차는 다음과 같다.
 
+<style id="code-2">
+  #code-2 + pre data[value="4"] span {color: #24292E !important;}
+</style>
 ```php
 if (preg_match("/[a-zA-Z]/", $input_pw)) {
   echo "alphabet in the pw :(";
@@ -310,6 +355,9 @@ Password의 경우, 정규식 표현 `/\d*\@\d{2,3}(31)+[^0-8\"]\!/`에 해당�
 | `[^0-8\"]` | `0 - 8` 범위의 숫자 및 `"` 문자를 제외한 나머지 |
 | `\!`       | `!` 문자                                |
 
+<style id="code-3">
+  #code-3 + pre data[value="10"] span {color: #24292E !important;}
+</style>
 ```php
 if ($name === "dnyang0310" && $pw === "d4y0r50ng+1+13") {
   echo '
@@ -364,11 +412,11 @@ else if (preg_match("/flag/i", $cmd)) {
 
 플래그 출력을 위한 방법이 정리되었으므로, 웹 페이지로 이동하여 `dnynyangang0310`/`@11319!+1+13`를 입력해 보자.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/39.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/39.webp)
 
 예상대로 `Step 2: Almost done...`가 출력되며 명령어 입력 양식이 생성되었다. `cat ../dream/fla?.txt`를 입력한다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/40.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/40.webp)
 
 성공적으로 플래그가 출력되었다.
 
@@ -383,7 +431,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/41.webp)
+![Description](/posts/dreamhack-wargames-dream-beginners-ii/assets/41.webp)
 
 ---
 
@@ -392,13 +440,13 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 첨부 파일을 다운로드하고 압축을 해제하면 `index.html` 파일을 확인할 수 있다.  
 파일을 열람하면 다음과 같은 화면이 출력된다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/42.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/42.webp)
 
 출력된 문자열은 플래그를 Rail Fence 암호화 → Base64 인코딩 → ROT13 암호화한 값에 해당한다. 따라서 역순으로 ROT13 복호화 → Base64 디코딩 → Rail Fence 복호화를 수행하면 플래그를 획득할 수 있다. 
 
 Dreamhack Tools의 Cyberchef를 활용하면 여러 종류의 인코딩/디코딩, 암호화/복호화를 한 번에 수행할 수 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20II/43.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-ii/assets/43.webp)
 
 올바른 순서로 복호화 및 디코딩을 진행하여 플래그가 출력되었다.
 

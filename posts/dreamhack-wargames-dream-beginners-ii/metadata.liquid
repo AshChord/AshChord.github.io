@@ -1,0 +1,20 @@
+---
+# Type #
+layout: content
+
+# Location #
+slug: dreamhack-wargames-dream-beginners-ii
+permalink: /posts/dreamhack-wargames-dream-beginners-ii.html
+
+# Summary #
+title: Dreamhack Wargames | Dream Beginners II
+date: 2025/09/17
+excerpt: Dream Beginners 워게임 풀이 II
+categories: Dreamhack, 워게임
+---
+
+{% capture document %}
+{{ site.pages | map: page.layout | first }}
+{% include_relative content.md %}
+{% endcapture %}
+{{ document | remove: page.path | markdownify }}
