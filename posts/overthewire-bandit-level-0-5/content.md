@@ -13,7 +13,7 @@ user: bandit0
 password: bandit0
 ```
 
-**관련 명령어**&emsp;|&emsp;`ssh`
+**관련 명령어**&emsp;\|&emsp;`ssh`
 
 > **참고 자료**
 >
@@ -45,7 +45,7 @@ password: bandit0
 
 `bandit1` 계정으로 로그인하기 위한 비밀번호가 홈 디렉터리에 위치한 `readme` 파일에 저장되어 있다. 해당 비밀번호를 사용해 동일한 호스트와 포트로 SSH 접속을 수행해야 한다.
 
-**관련 명령어**&emsp;|&emsp;`ls`&ensp;`cd`&ensp;`cat`&ensp;`file`&ensp;`du`&ensp;`find`
+**관련 명령어**&emsp;\|&emsp;`ls`&ensp;`cd`&ensp;`cat`&ensp;`file`&ensp;`du`&ensp;`find`
 
 ---
 
@@ -78,7 +78,7 @@ Password for Level 1: <span style="color: green; overflow-wrap: anywhere;">ZjLjT
 
 `bandit2` 계정의 비밀번호는 홈 디렉터리에 위치한 `-` 파일에 저장되어 있다.
 
-**관련 명령어**&emsp;|&emsp;`ls`&ensp;`cd`&ensp;`cat`&ensp;`file`&ensp;`du`&ensp;`find`
+**관련 명령어**&emsp;\|&emsp;`ls`&ensp;`cd`&ensp;`cat`&ensp;`file`&ensp;`du`&ensp;`find`
 
 > **참고 자료**
 >
@@ -148,7 +148,7 @@ Password for Level 2: <span style="color: green; overflow-wrap: anywhere;">263JG
 
 `bandit3` 계정의 비밀번호는 홈 디렉터리에 위치한 `--spaces in this filename--` 파일에 저장되어 있다.
 
-**관련 명령어**&emsp;|&emsp;`ls`&ensp;`cd`&ensp;`cat`&ensp;`file`&ensp;`du`&ensp;`find`
+**관련 명령어**&emsp;\|&emsp;`ls`&ensp;`cd`&ensp;`cat`&ensp;`file`&ensp;`du`&ensp;`find`
 
 > **참고 자료**
 >
@@ -195,7 +195,7 @@ Password for Level 3: <span style="color: green; overflow-wrap: anywhere;">MNk8K
 
 `bandit4` 계정의 비밀번호는 `inhere` 디렉터리에 위치한 숨김 파일에 저장되어 있다.
 
-**관련 명령어**&emsp;|&emsp;`ls`&ensp;`cd`&ensp;`cat`&ensp;`file`&ensp;`du`&ensp;`find`
+**관련 명령어**&emsp;\|&emsp;`ls`&ensp;`cd`&ensp;`cat`&ensp;`file`&ensp;`du`&ensp;`find`
 
 ---
 
@@ -236,7 +236,7 @@ Password for Level 4: <span style="color: green; overflow-wrap: anywhere;">2WmrD
 
 `bandit5` 계정의 비밀번호는 `inhere` 디렉터리에 위치한 파일들 중, 사람이 읽을 수 있는 형식으로 기록된 유일한 파일에 저장되어 있다.
 
-**관련 명령어**&emsp;|&emsp;`ls`&ensp;`cd`&ensp;`cat`&ensp;`file`&ensp;`du`&ensp;`find`
+**관련 명령어**&emsp;\|&emsp;`ls`&ensp;`cd`&ensp;`cat`&ensp;`file`&ensp;`du`&ensp;`find`
 
 ---
 

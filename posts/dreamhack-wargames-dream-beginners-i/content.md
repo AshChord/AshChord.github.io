@@ -1,19 +1,10 @@
----
-layout: article
-permalink: /posts/Dreamhack Wargames | Dream Beginners I
-title: Dreamhack Wargames | Dream Beginners I
-date: 2025/09/14
-excerpt: Dream Beginners 워게임 풀이 I
-categories: Dreamhack, 워게임
----
-
-{{ site.pages.first.content | split: page.path }}
+# Dreamhack Wargames | Dream Beginners I
 
 ## Introduction to Dreamhack
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/1.webp)
+![Description](/posts/dreamhack-wargames-dream-beginners-i/assets/1.webp)
 
 ---
 
@@ -22,7 +13,7 @@ categories: Dreamhack, 워게임
 첨부 파일을 다운로드하고 압축을 해제하면 `flag.txt` 파일을 확인할 수 있다.  
 파일을 열람하면 플래그가 출력된다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/2.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-i/assets/2.webp)
 
 Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">21008c3ae798aac87cc4939917b855b54b5a5799</span>}</span>
 {:style="text-align: center;"}
@@ -35,7 +26,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/3.webp)
+![Description](/posts/dreamhack-wargames-dream-beginners-i/assets/3.webp)
 
 ---
 
@@ -44,7 +35,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 첨부 파일을 다운로드하고 압축을 해제하면 `index.html` 파일을 확인할 수 있다.  
 소스 코드를 살펴보면 숨겨진 `<input>` 태그의 `value` 속성에 Base64 인코딩된 것으로 보이는 문자열이 지정되어 있다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/4.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-i/assets/4.webp)
 
 해당 문자열을 Base64 디코딩하면 다음과 같은 Python 스크립트를 획득할 수 있다.
 
@@ -60,7 +51,7 @@ print(flag)
 
 위의 스크립트는 `asc` 리스트에 담긴 아스키 코드 값들을 문자로 변환한 뒤, 이를 순서대로 이어 붙여 최종 문자열을 생성하고 출력하는 코드이다. 스크립트를 실행하면 다음과 같이 플래그가 출력된다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/5.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-i/assets/5.webp)
 
 Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wrap:anywhere;">be046b7522aa2e28f276e0c910521f23a0587005a8377370a11e5e4dc15fb2ab</span>}</span>
 {:style="text-align: center;"}
@@ -89,7 +80,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 ### Description
 
-![Description](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/6.webp)
+![Description](/posts/dreamhack-wargames-dream-beginners-i/assets/6.webp)
 
 ---
 
@@ -97,27 +88,27 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 
 제공된 웹 사이트에 접속하면 다음과 같은 입력 양식이 포함된 페이지가 나타난다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/7.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-i/assets/7.webp)
 
 `$(...)`는 괄호 내 명령어의 실행 결과를 문자열로 치환하는 구문이다. 이를 `echo` 명령어로 출력하여, Result 칸에 표시하는 구조로 보인다. 예시로 `ls` 명령어를 입력해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/8.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-i/assets/8.webp)
 
 `ls` 명령어의 실행 결과로 현재 디렉터리에 존재하는 파일 및 디렉터리 목록이 출력되었다. 이 중 `hint.txt`에 문제 풀이를 위한 힌트가 존재할 것으로 추측되어 `cat hint.txt`를 입력해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/9.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-i/assets/9.webp)
 
 플래그가 `./dream/hack/hello` 경로에 위치함을 확인하였다. 따라서 `ls ./dream/hack/hello`를 입력하여 어떤 파일이 존재하는지 확인해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/10.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-i/assets/10.webp)
 
 해당 경로에 `flag.txt` 파일이 존재함을 확인하였다. 이어서 `cat ./dream/hack/hello/flag.txt`를 입력하여 파일 내용 열람을 시도하였다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/11.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-i/assets/11.webp)
 
 그러자 `No!`라는 메시지가 출력되었다. `flag.txt`의 내용이 `No!`일 가능성은 낮으므로, 단순한 방법으로는 파일 내용을 확인할 수 없도록 처리되어 있는 듯했다. 정확한 서버 측 동작을 알아 내기 위해 첨부 파일을 다운로드하여 소스 코드를 확인해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/12.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-i/assets/12.webp)
 
 첨부 파일을 다운로드하고 압축을 해제하면 `app.py` 파일을 확인할 수 있다. 참고로 웹 페이지에서 `cat app.py`를 입력해도 동일한 소스 코드가 출력된다.
 
@@ -138,7 +129,7 @@ Flask를 사용할 때는 먼저 `Flask` 모듈을 임포트하고, `Flask` 객�
 
 이를 우회하기 위한 방법으로 와일드카드의 사용을 고려할 수 있다. `*`는 `a-z`, `0-9` 범위 내의 0개 이상 문자를 대체할 수 있으므로, 웹 페이지에서 `cat ./dream/hack/hello/*.txt`를 대신 입력해 보았다.
 
-![Write-Up](/posts/Dreamhack%20Wargames%20%7C%20Dream%20Beginners%20I/13.webp)
+![Write-Up](/posts/dreamhack-wargames-dream-beginners-i/assets/13.webp)
 
 성공적으로 플래그가 출력되었다.
 
