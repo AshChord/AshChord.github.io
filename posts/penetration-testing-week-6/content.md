@@ -23,6 +23,7 @@
 | 3    | GOOGL  | Alphabet(Google) | $1.9T      |
 | 4    | AMZN   | Amazon           | $1.7T      |
 | 5    | NVDA   | NVIDIA           | $1.5T      |
+
 <script>
   (() => {
     const script = document.currentScript;
