@@ -50,18 +50,8 @@ window.addEventListener('resize', () => {
     searchBar?.removeAttribute('open');
   }
 
-  // 화면 높이보다 목차가 길면 숨김 처리
-  if (outline && outline.children.length > 0) {
-    const headingList = outline.querySelector('.heading-list');
-    if (headingList) {
-      const outlineHeight = headingList.offsetHeight;
-      outline.style.setProperty('--height', `${outlineHeight}px`);
-      outline.style.visibility = window.innerHeight < outlineHeight ? 'hidden' : 'visible';
-    }
-  }
+  outline.dispatchEvent(new CustomEvent('refresh'));
 });
-
-window.dispatchEvent(new Event('resize'));
 
 // ---------------------------------------------------------
 // 3. 검색 폼 UI 상태 제어 및 제출 검증

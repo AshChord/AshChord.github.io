@@ -179,22 +179,34 @@ async function renderContent() {
 
   // 목차 렌더링
   (function renderOutline() {
-    const headings = content.querySelectorAll('h2, h3, h4, h5, h6');
     const headingList = outline.querySelector('.heading-list');
 
-    headings.forEach((hdg, idx) => {
-      hdg.id = `heading-${idx}`;
+    if (headingList.children.length == 0) {
+      const headings = content.querySelectorAll('h2, h3, h4, h5, h6');
 
-      const linkToHeading = document.createElement('a');
-      const indentLevel = Number(hdg.tagName[1]) - 2;
+      headings.forEach((hdg, idx) => {
+        hdg.id = `heading-${idx}`;
 
-      linkToHeading.href = `#${hdg.id}`;
-      linkToHeading.textContent = hdg.textContent;
-      linkToHeading.style.paddingLeft = `${indentLevel * 12}px`;
+        const linkToHeading = document.createElement('a');
+        const indentLevel = Number(hdg.tagName[1]) - 2;
 
-      headingList.appendChild(linkToHeading);
-    });
+        linkToHeading.href = `#${hdg.id}`;
+        linkToHeading.textContent = hdg.textContent;
+        linkToHeading.style.paddingLeft = `${indentLevel * 12}px`;
+
+        headingList.appendChild(linkToHeading);
+      });
+    }
+
+    // 화면 높이보다 목차가 길면 숨김 처리
+    const outlineHeight = headingList.offsetHeight;
+    outline.style.setProperty('--height', `${outlineHeight}px`);
+    outline.style.visibility = innerHeight < outlineHeight ? 'hidden' : 'visible';
+
+    return renderOutline;
   })();
+
+  outline.addEventListener('refresh', renderOutline);
 }
 
 // 페이지네이션 렌더링

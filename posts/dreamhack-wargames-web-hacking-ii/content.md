@@ -282,9 +282,6 @@ Command Injection을 통해 플래그를 획득하는 문제이므로, 우선 �
 
 플래그는 `flag.py`에 존재하므로, 해당 파일의 내용을 읽기 위해 다음 페이로드를 입력하였다.
 
-<style id="code-4">
-  #code-4 + pre data[value="2"] span {color: #24292E !important;}
-</style>
 ```sh
 # host
 8.8.8.8"; cat "flag.py
