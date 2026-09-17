@@ -85,7 +85,8 @@ const filteredPosts = dataflow.node(async () => {
 
 // 4. paginationData
 const paginationData = dataflow.node(async () => {
-  const { postLimit, pageLimit } = pgnData;
+  const postLimit = 5;
+  const pageLimit = 6;
 
   const params = new URLSearchParams(window.location.search);
   const requestedPage = Number(params.get('page')) || 1;
@@ -104,7 +105,7 @@ const paginationData = dataflow.node(async () => {
 // 5. postsForCurrPage
 const postsForCurrPage = dataflow.node(async () => {
   const { currPage } = await paginationData;
-  const { postLimit } = pgnData;
+  const postLimit = 5;
 
   return (await filteredPosts).slice((currPage - 1) * postLimit, currPage * postLimit);
 });

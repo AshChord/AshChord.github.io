@@ -6,7 +6,7 @@ context: markdown
 {% for post in posts %}
   {% assign title = post.title %}
   {% assign description = post.excerpt %}
-  {% assign url = site.url | append: post.dir | append: post.slug %}
+  {% assign url = post.url | split: "." | pop %}
   {% assign image = url | append: "/thumbnail.webp" %}
 
   {::nomarkdown type="{{ post.path }}"}

@@ -26,10 +26,10 @@ async function renderFeed() {
     const feedItem = feedTemplate.content.cloneNode(true);
 
     const preview = feedItem.querySelector('.preview');
-    preview.href = `/posts/${encodeURIComponent(post.title)}`;
+    preview.href = `/posts/${post.slug}`;
 
     const thumbnail = feedItem.querySelector('.thumbnail');
-    thumbnail.src = `/posts/${encodeURIComponent(post.title)}/thumbnail.webp`;
+    thumbnail.src = `/posts/${post.slug}/thumbnail.webp`;
     thumbnail.alt = post.title;
 
     const title = feedItem.querySelector('.title');
