@@ -179,6 +179,7 @@ async function renderContent() {
 
   // 목차 렌더링
   (function renderOutline() {
+    console.log("renderOutline!");
     const headingList = outline.querySelector('.heading-list');
 
     if (headingList.children.length == 0) {
