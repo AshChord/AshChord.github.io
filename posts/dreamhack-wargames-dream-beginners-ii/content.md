@@ -206,16 +206,7 @@ RUN /bin/sh -c rm *
       '<span style="color:#032F62"> `</span>',
       '<span style="color:#6F42C1">python3</span>',
       '<span style="color:#005CC5"> -c</span>',
-      '<span style="color:#032F62"> "</span>',
-      '<span style="color:#005CC5">print</span>',
-      '<span style="color:#24292E">(</span>',
-      '<span style="color:#005CC5">open</span>',
-      '<span style="color:#24292E">(</span>',
-      '<span style="color:#032F62">\'./flag\'</span>',
-      '<span style="color:#24292E">, </span>',
-      '<span style="color:#032F62">\'r\'</span>',
-      '<span style="color:#24292E">).read()</span>',
-      '<span style="color:#032F62">"`</span>'
+      '<span style="color:#032F62"> "print(open(\'./flag\', \'r\').read()"`</span>',
     ].join(''));
 
     patchCodeLine(3, [

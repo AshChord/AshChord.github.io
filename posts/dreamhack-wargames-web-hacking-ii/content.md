@@ -292,6 +292,36 @@ Command Injection을 통해 플래그를 획득하는 문제이므로, 우선 �
 # cmd
 ping -c 3 "8.8.8.8"; cat "flag.py"
 ```
+<script>
+  (() => {
+    window.patchCodeLine = (lineNumber, override) => {
+      const code = document.currentScript.previousElementSibling.querySelector('code');
+
+      const patch = () => {
+        const line = code.querySelector(`.code-line[value="${lineNumber}"]`);
+        const lineContent = new DOMParser().parseFromString(override, 'text/html');
+
+        line.replaceChildren(...lineContent.body.childNodes);
+        line.appendChild(document.createTextNode('\n'));
+
+        observer.disconnect();
+      };
+
+      const observer = new MutationObserver(patch);
+
+      observer.observe(code, { attributes: true, attributeFilter: ['highlighted'] });
+
+      if (code.hasAttribute('highlighted')) patch();
+    };
+
+    patchCodeLine(2, [
+      '<span style="color:#032F62">8.8.8.8"</span>',
+      '<span style="color:#24292E">; </span>',
+      '<span style="color:#6F42C1">cat</span>',
+      '<span style="color:#032F62"> "flag.py</span>'
+    ].join(''));
+  })();
+</script>
 
 페이로드 입력 후 `Ping!` 버튼을 클릭하면 다음과 같은 경고문이 출력된다.
 

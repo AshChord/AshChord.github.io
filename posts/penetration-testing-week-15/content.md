@@ -46,7 +46,7 @@
   #code-2 + pre data[value="3"] span {color: #24292E !important;}
 </style>
 ```php
-  <?php
+<?php
   // 확장자 기반 필터링
   ...
 

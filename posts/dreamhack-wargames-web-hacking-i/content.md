@@ -228,7 +228,7 @@ function toTwoDigits(num) {
 
 // 연도 범위(00 ~ 99)
 for (var i = 0; i < 100; i++) {
-  // 달 범위(01 ~ 12)
+  // 월 범위(01 ~ 12)
   for (var j = 1; j < 13; j++) {
     // 일 범위(01 ~ 31)
     for (var k = 1; k < 32; k++) {

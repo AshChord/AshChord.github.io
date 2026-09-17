@@ -105,7 +105,7 @@ const paginationData = dataflow.node(async () => {
 // 5. postsForCurrPage
 const postsForCurrPage = dataflow.node(async () => {
   const { currPage } = await paginationData;
-  const postLimit = 5;
+  const postLimit = 6;
 
   return (await filteredPosts).slice((currPage - 1) * postLimit, currPage * postLimit);
 });

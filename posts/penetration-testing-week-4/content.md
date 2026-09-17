@@ -40,7 +40,7 @@ Burp Suite에서 프록시 기능을 사용하려면 <strong>프록시 리스너
 : 리스너를 특정 IP 주소에 바인딩한다. 특정 IP 주소로부터의 트래픽만 받을 수 있다.
 
 프록시 리스너를 설정했다면, 웹 브라우저에서 프록시 설정을 통해 프록시 서버를 지정해 주어야 한다.  
-Chrome에서 [설정] - [시스템] - [컴퓨터 프록시 설정 열기]를 선택하여 다음과 같이 설정한다.
+Chrome에서는 [설정] - [시스템] - [컴퓨터 프록시 설정 열기]를 선택하여 다음과 같이 설정한다.
 
 ![프록시 설정](/posts/penetration-testing-week-4/assets/5.webp){:style="padding: 0 20%; background-color: white"}
 
