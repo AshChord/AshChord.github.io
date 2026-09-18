@@ -51,6 +51,7 @@ window.addEventListener('resize', () => {
   }
 
     const outlineHeight = outline.offsetHeight;
+    outline.style.setProperty('--height', `${outlineHeight}px`);
     outline.style.visibility = innerHeight < outlineHeight ? 'hidden' : 'visible';
 });
 
