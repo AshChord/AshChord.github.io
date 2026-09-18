@@ -3,8 +3,8 @@
 // ---------------------------------------------------------
 // 정적 DOM 엘리먼트 캐싱
 // ---------------------------------------------------------
-const menuBtn = document.querySelector('.menu-button'); // 햄버거 메뉴 버튼
-const searchBtn = document.querySelector('.search-button'); // 돋보기 버튼
+const menuBtn = document.querySelector('menu'); // 햄버거 메뉴 버튼
+const searchBtn = document.querySelector('search'); // 돋보기 버튼
 const categoryPanel = document.querySelector('.category-panel'); // 카테고리 패널 (필요시 메뉴버튼 자신일 수도 있음)
 const searchBar = document.querySelector('.search-bar');
 const searchInput = document.querySelector('.search-input');
