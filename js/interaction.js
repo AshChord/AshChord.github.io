@@ -50,7 +50,8 @@ window.addEventListener('resize', () => {
     searchBar?.removeAttribute('open');
   }
 
-  outline.dispatchEvent(new CustomEvent('refresh'));
+    const outlineHeight = outline.offsetHeight;
+    outline.style.visibility = innerHeight < outlineHeight ? 'hidden' : 'visible';
 });
 
 // ---------------------------------------------------------
