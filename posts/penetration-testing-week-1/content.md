@@ -1,5 +1,3 @@
-# Penetration Testing | Week 1
-
 ## 강의 노트
 
 ### 웹 서버

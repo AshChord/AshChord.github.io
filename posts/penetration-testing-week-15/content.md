@@ -1,5 +1,3 @@
-# Penetration Testing | Week 15
-
 ## 강의 노트
 
 ### 기타 파일 업로드 공격 기법(확장자 필터링 우회)

@@ -1,5 +1,3 @@
-# Dreamhack Wargames | Web Hacking II
-
 ## csrf-1
 
 ### Description

@@ -1,5 +1,3 @@
-# Penetration Testing | Week 10
-
 ## 강의 노트
 
 ### XSS 취약점의 활용(Exploitation)

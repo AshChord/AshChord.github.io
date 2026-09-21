@@ -1,5 +1,3 @@
-# Penetration Testing | Week 5
-
 ## 강의 노트
 
 ### SQL Injection

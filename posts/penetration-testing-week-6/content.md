@@ -1,5 +1,3 @@
-# Penetration Testing | Week 6
-
 ## 강의 노트
 
 ### UNION 연산자

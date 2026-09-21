@@ -1,5 +1,3 @@
-# Penetration Testing | Week 11
-
 ## 강의 노트
 
 ### XSS 대응 방안 및 우회 기법

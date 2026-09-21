@@ -1,5 +1,3 @@
-# Penetration Testing | Week 7
-
 ## 강의 노트
 
 ### Error-Based SQL Injection

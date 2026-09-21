@@ -1,5 +1,3 @@
-# Dreamhack Wargames | Dream Beginners II
-
 ## Exercise: Welcome-Beginners
 
 ### Description

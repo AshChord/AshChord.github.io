@@ -1,5 +1,3 @@
-# Penetration Testing | Week 2
-
 ## 강의 노트
 
 ### 로그인 페이지 구조

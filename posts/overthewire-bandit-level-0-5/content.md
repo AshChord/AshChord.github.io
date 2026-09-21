@@ -1,5 +1,3 @@
-# OverTheWire Bandit | Level 0 ~ 5
-
 ## Level 0
 
 ### Description

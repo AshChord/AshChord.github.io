@@ -1,5 +1,3 @@
-# Dreamhack Wargames | Dream Beginners I
-
 ## Introduction to Dreamhack
 
 ### Description

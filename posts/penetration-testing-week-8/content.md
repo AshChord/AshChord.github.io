@@ -1,5 +1,3 @@
-# Penetration Testing | Week 8
-
 ## 강의 노트
 
 ### SQL Injection 취약점 탐색

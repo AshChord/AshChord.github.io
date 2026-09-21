@@ -1,5 +1,3 @@
-# Penetration Testing | Week 14
-
 ## 강의 노트
 
 ### 파일 업로드 취약점

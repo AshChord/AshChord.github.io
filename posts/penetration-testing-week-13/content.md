@@ -1,5 +1,3 @@
-# Penetration Testing | Week 13
-
 ## 강의 노트
 
 ### CSRF 대응 방안

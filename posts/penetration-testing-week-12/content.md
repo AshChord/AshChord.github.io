@@ -1,5 +1,3 @@
-# Penetration Testing | Week 12
-
 ## 강의 노트
 
 ### Cross Site Request Forgery

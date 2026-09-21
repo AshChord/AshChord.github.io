@@ -1,5 +1,3 @@
-# Penetration Testing | Week 4
-
 ## 강의 노트
 
 ### 웹 프록시

@@ -1,5 +1,3 @@
-# Penetration Testing | Week 9
-
 ## 강의 노트
 
 ### Cross Site Scripting

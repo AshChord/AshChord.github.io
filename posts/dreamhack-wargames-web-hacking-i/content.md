@@ -1,5 +1,3 @@
-# Dreamhack Wargames | Web Hacking I
-
 ## devtools-sources
 
 ### Description

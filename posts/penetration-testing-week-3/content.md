@@ -1,5 +1,3 @@
-# Penetration Testing | Week 3
-
 ## 강의 노트
 
 ### 식별과 인증
