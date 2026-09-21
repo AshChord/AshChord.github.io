@@ -29,7 +29,7 @@ header {
   margin: 0 auto 0 0;
   color: black;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: bold;
   text-decoration: none;
 
   @media (min-width: 768px) {
