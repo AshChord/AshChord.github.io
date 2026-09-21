@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-size: 14px;
-  font-family: system-ui;
+  font-family: system-ui, -apple-system, sans-serif;
 
   &:not(:has(main)) {
     visibility: hidden;
