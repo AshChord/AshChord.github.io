@@ -20,22 +20,22 @@ document.addEventListener('click', (e) => {
   // 트리거 버튼 클릭 시 open 토글 (모바일 전용)
   if (isMobile) {
     // 메뉴 버튼 클릭
-    if (menuBtn && (target === menuBtn || menuBtn.contains(target))) {
-      categoryPanel?.toggleAttribute('open');
+    if (target === menuBtn || menuBtn.contains(target)) {
+      menuBtn.toggleAttribute('open');
       return;
     }
     // 검색 버튼 클릭
-    if (searchBtn && (target === searchBtn || searchBtn.contains(target))) {
-      searchBar?.toggleAttribute('open');
+    if (target === searchBtn || searchBtn.contains(target)) {
+      searchBar.toggleAttribute('open');
       return;
     }
   }
 
   // 요소 외부 클릭 시 닫기
-  if (categoryPanel?.hasAttribute('open') && !categoryPanel.contains(target)) {
-    categoryPanel.removeAttribute('open');
+  if (menuBtn.hasAttribute('open') && !menuBtn.contains(target)) {
+    menuBtn.removeAttribute('open');
   }
-  if (searchBar?.hasAttribute('open') && !searchBar.contains(target)) {
+  if (searchBar.hasAttribute('open') && !searchBar.contains(target)) {
     searchBar.removeAttribute('open');
   }
 });
@@ -46,8 +46,8 @@ document.addEventListener('click', (e) => {
 window.addEventListener('resize', () => {
   // 넓은 화면에서 열림 상태 강제 초기화
   if (window.innerWidth >= 768) {
-    categoryPanel?.removeAttribute('open');
-    searchBar?.removeAttribute('open');
+    menuBtn.removeAttribute('open');
+    searchBar.removeAttribute('open');
   }
 
     const outlineHeight = outline.offsetHeight;
