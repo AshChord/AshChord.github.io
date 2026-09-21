@@ -67,11 +67,14 @@ menu {
   box-sizing: border-box;
   width: 100vw;
   margin: 0 0 0 calc(108px - 100vw);
+  padding: 20px 24px;
   background: white;
-  font-weight: 500;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 20px;
   transform: translateY(44px);
   transition: color 0.3s ease;
-  cursor: pointer;
   user-select: text;
 
   menu[open] & {
@@ -80,18 +83,6 @@ menu {
 
     &:last-child {
       border-bottom: 1px solid gainsboro;
-    }
-  }
-
-  a {
-    all: unset;
-
-    menu[open] & {
-      display: block;
-      box-sizing: border-box;
-      width: 100%;
-      padding: 20px 24px;
-      line-height: 20px;
     }
   }
 
@@ -177,6 +168,7 @@ search {
   outline: 0;
   background-color: ghostwhite;
   box-shadow: 0 1px 2px gainsboro;
+  font-family: inherit;
   font-size: 16px;
   line-height: 24px;
 
