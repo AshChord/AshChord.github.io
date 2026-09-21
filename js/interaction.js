@@ -5,10 +5,10 @@
 // ---------------------------------------------------------
 const menuBtn = document.querySelector('menu'); // 햄버거 메뉴 버튼
 const searchBtn = document.querySelector('search'); // 돋보기 버튼
-const categoryPanel = document.querySelector('.category-panel'); // 카테고리 패널 (필요시 메뉴버튼 자신일 수도 있음)
+const categoryPanel = document.querySelector('.category-panel'); // 카테고리 패널
 const searchBar = document.querySelector('.search-bar');
 const searchInput = document.querySelector('.search-input');
-const resetBtn = document.querySelector('.reset-button');
+const resetBtn = document.querySelector('.search-reset-button');
 
 // ---------------------------------------------------------
 // 1. 모바일 UI 토글 및 외부 클릭 감지 (이벤트 위임)
@@ -17,9 +17,7 @@ document.addEventListener('click', (e) => {
   const target = e.target;
   const isMobile = window.innerWidth < 768;
 
-  // 트리거 버튼 클릭 시 open 토글 (모바일 전용)
   if (isMobile) {
-    // 메뉴 버튼 클릭
     if (target === menuBtn) {
       menuBtn.toggleAttribute('open');
       searchBar.removeAttribute('open');
@@ -31,15 +29,17 @@ document.addEventListener('click', (e) => {
       menuBtn.removeAttribute('open');
       return;
     }
+  
+    if (menuBtn.contains(target) || searchBar.contains(target)) return;
+  
+    // 5. 바깥 영역을 클릭한 경우 둘 다 닫기
+    menuBtn.removeAttribute('open');
+    searchBar.removeAttribute('open');
   }
 
-  if (menuBtn.contains(target) || searchBar.contains(target)) {
-    return;
+  if (!categoryPanel.contains(target)) {
+    categoryPanel.removeAttribute('open');
   }
-
-  // 5. 바깥 영역을 클릭한 경우 둘 다 닫기
-  menuBtn.removeAttribute('open');
-  searchBar.removeAttribute('open');
 });
 
 // ---------------------------------------------------------
