@@ -20,24 +20,26 @@ document.addEventListener('click', (e) => {
   // 트리거 버튼 클릭 시 open 토글 (모바일 전용)
   if (isMobile) {
     // 메뉴 버튼 클릭
-    if (target === menuBtn || menuBtn.contains(target)) {
+    if (target === menuBtn) {
       menuBtn.toggleAttribute('open');
+      searchBar.removeAttribute('open');
       return;
     }
     // 검색 버튼 클릭
-    if (target === searchBtn || searchBtn.contains(target)) {
+    if (target === searchBtn) {
       searchBar.toggleAttribute('open');
+      menuBtn.removeAttribute('open');
       return;
     }
   }
 
-  // 요소 외부 클릭 시 닫기
-  if (menuBtn.hasAttribute('open') && !menuBtn.contains(target)) {
-    menuBtn.removeAttribute('open');
+  if (menuBtn.contains(target) || searchBar.contains(target)) {
+    return;
   }
-  if (searchBar.hasAttribute('open') && !searchBar.contains(target)) {
-    searchBar.removeAttribute('open');
-  }
+
+  // 5. 바깥 영역을 클릭한 경우 둘 다 닫기
+  menuBtn.removeAttribute('open');
+  searchBar.removeAttribute('open');
 });
 
 // ---------------------------------------------------------
