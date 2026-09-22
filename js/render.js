@@ -194,12 +194,9 @@ async function renderContent() {
 
       headingList.appendChild(linkToHeading);
     });
-
-    // 화면 높이보다 목차가 길면 숨김 처리
-    const outlineHeight = headingList.offsetHeight;
-    outline.style.setProperty('--height', `${outlineHeight}px`);
-    outline.style.visibility = innerHeight < outlineHeight ? 'hidden' : 'visible';
   })();
+
+  document.dispatchEvent(new Event('contentRendered'));
 }
 
 // 페이지네이션 렌더링

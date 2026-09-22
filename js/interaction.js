@@ -9,9 +9,6 @@ const categoryPanel = document.querySelector('.category-panel'); // 카테고리
 const searchBar = document.querySelector('.search-bar');
 const searchInput = document.querySelector('.search-input');
 const resetBtn = document.querySelector('.search-reset-button');
-const headings = content.querySelectorAll('h2, h3, h4, h5, h6');
-const links = outline.querySelectorAll('a');
-const linkMap = new Map([...links].map(link => [link.getAttribute('href'), link]));
 
 // ---------------------------------------------------------
 // 1. 모바일 UI 토글 및 외부 클릭 감지 (이벤트 위임)
@@ -117,47 +114,60 @@ outline.addEventListener('click', (e) => {
 });
 
 // 스크롤 스파이 (현재 읽는 위치 하이라이팅)
-let currentHdg = null;
-let currentLink = null;
-let ticking = false;
+document.addEventListener('contentRendered', () => {
+  window.dispatchEvent(new Event('resize'));
 
-window.addEventListener('scroll', () => {
-  if (ticking) return;
+  const headings = content.querySelectorAll('h2, h3, h4, h5, h6');
+  const links = outline.querySelectorAll('a');
 
-  ticking = true;
+  const linkMap = new Map([...links].map(link => [link.getAttribute('href'), link]));
 
-  requestAnimationFrame(() => {
-    ticking = false;
+  let currentHdg = null;
+  let currentLink = null;
+  let ticking = false;
 
-    const triggerY = 100;
-    let newCurrentHdg = null;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
 
-    for (let i = 0; i < headings.length; i++) {
-      const rect = headings[i].getBoundingClientRect();
+    ticking = true;
 
-      if (rect.top <= triggerY) {
-        newCurrentHdg = headings[i];
-      } else {
-        break;
+    requestAnimationFrame(() => {
+      ticking = false;
+
+      const triggerY = 100;
+      let newCurrentHdg = null;
+
+      // 100px 기준선을 통과한 가장 마지막 헤딩 찾기
+      for (let i = 0; i < headings.length; i++) {
+        const rect = headings[i].getBoundingClientRect();
+
+        if (rect.top <= triggerY) {
+          newCurrentHdg = headings[i];
+        } else {
+          break;
+        }
       }
-    }
 
-    if (newCurrentHdg === currentHdg) return;
+      // 현재 헤딩과 같으면 아무 작업도 하지 않음
+      if (newCurrentHdg === currentHdg) return;
 
-    currentHdg = newCurrentHdg;
+      currentHdg = newCurrentHdg;
 
-    if (currentLink) {
-      currentLink.classList.remove('current');
-    }
-
-    if (currentHdg) {
-      currentLink = linkMap.get(`#${currentHdg.id}`);
-
+      // 이전 링크의 current 제거
       if (currentLink) {
-        currentLink.classList.add('current');
+        currentLink.classList.remove('current');
       }
-    } else {
-      currentLink = null;
-    }
-  });
-}, { passive: true });
+
+      // 새로운 헤딩에 해당하는 링크 활성화
+      if (currentHdg) {
+        currentLink = linkMap.get(`#${currentHdg.id}`);
+
+        if (currentLink) {
+          currentLink.classList.add('current');
+        }
+      } else {
+        currentLink = null;
+      }
+    });
+  }, { passive: true });
+});
