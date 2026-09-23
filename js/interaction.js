@@ -134,7 +134,7 @@ document.addEventListener('contentRendered', () => {
     requestAnimationFrame(() => {
       ticking = false;
 
-      const triggerY = 100;
+      const triggerY = 20;
       let newCurrentHdg = null;
 
       // 100px 기준선을 통과한 가장 마지막 헤딩 찾기

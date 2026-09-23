@@ -61,6 +61,18 @@ menu {
   }
 }
 
+@keyframes slideDown {
+  from {
+    height: var(--start-height);
+    opacity: 0;
+  }
+
+  to {
+    height: var(--end-height);
+    opacity: 1;
+  }
+}
+
 .menu-item {
   display: none;
   box-sizing: border-box;
@@ -78,6 +90,8 @@ menu {
 
   menu[open] & {
     display: block;
+    --start-height: 40px;
+    --end-height: 60px;
     animation: slideDown 0.3s ease-in-out forwards;
 
     &:last-child {
@@ -95,18 +109,6 @@ menu {
     margin-left: 40px;
     padding: 0;
     transform: none;
-  }
-}
-
-@keyframes slideDown {
-  from {
-    height: 40px;
-    opacity: 0;
-  }
-
-  to {
-    height: 60px;
-    opacity: 1;
   }
 }
 
@@ -137,17 +139,19 @@ search {
 
   &[open] {
     display: block;
+    box-sizing: border-box;
     position: absolute;
     z-index: 10;
     top: 64px;
     right: 0;
-    width: 320px;
+    width: 100%;
     padding: 16px;
     border-bottom: 1px solid gainsboro;
-    border-left: 1px solid gainsboro;
-    border-bottom-left-radius: 16px;
     background-color: white;
     cursor: auto;
+    --start-height: 54px;
+    --end-height: 81px;
+    animation: slideDown 0.3s ease-in-out forwards;
   }
 
   @media (min-width: 768px) {
@@ -170,6 +174,9 @@ search {
   font-family: inherit;
   font-size: 16px;
   line-height: 24px;
+  --start-height: 32px;
+  --end-height: 48px;
+  animation: slideDown 0.3s ease-in-out forwards;
 
   &::placeholder {
     color: darkgray;
