@@ -146,6 +146,7 @@ search {
     right: 0;
     width: 100%;
     padding: 16px;
+    overflow: hidden;
     border-bottom: 1px solid gainsboro;
     background-color: white;
     cursor: auto;
@@ -158,13 +159,16 @@ search {
     display: block;
     position: relative;
     width: clamp(240px, 30vw, 320px);
+    height: 48px;
     margin-left: 40px;
   }
 }
 
 .search-input {
   box-sizing: border-box;
-  width: 100%;
+  position: absolute;
+  top: 50%;
+  width: calc(100% - 32px);
   padding: 12px 72px 12px 20px;
   border: none;
   border-radius: 8px;
@@ -174,12 +178,14 @@ search {
   font-family: inherit;
   font-size: 16px;
   line-height: 24px;
-  animation: slideDown 0.3s ease-in-out forwards;
-  --start-height: 32px;
-  --end-height: 48px;
+  transform: translateY(-50%);
 
   &::placeholder {
     color: darkgray;
+  }
+
+  @media (min-width: 768px) {
+    width: 100%;
   }
 }
 
