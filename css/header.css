@@ -90,9 +90,9 @@ menu {
 
   menu[open] & {
     display: block;
+    animation: slideDown 0.3s ease-in-out forwards;
     --start-height: 40px;
     --end-height: 60px;
-    animation: slideDown 0.3s ease-in-out forwards;
 
     &:last-child {
       border-bottom: 1px solid gainsboro;
@@ -149,9 +149,9 @@ search {
     border-bottom: 1px solid gainsboro;
     background-color: white;
     cursor: auto;
+    animation: slideDown 0.3s ease-in-out forwards;
     --start-height: 54px;
     --end-height: 81px;
-    animation: slideDown 0.3s ease-in-out forwards;
   }
 
   @media (min-width: 768px) {
@@ -174,9 +174,9 @@ search {
   font-family: inherit;
   font-size: 16px;
   line-height: 24px;
+  animation: slideDown 0.3s ease-in-out forwards;
   --start-height: 32px;
   --end-height: 48px;
-  animation: slideDown 0.3s ease-in-out forwards;
 
   &::placeholder {
     color: darkgray;
