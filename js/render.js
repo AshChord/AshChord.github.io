@@ -213,7 +213,7 @@ async function renderPagination() {
   const configurePageLink = (link, page, isActive, className = '', text = '') => {
     const params = new URLSearchParams(window.location.search);
     params.set('page', page);
-    link.href = `?${params.toString()}`;
+    link.href = `/posts?${params.toString()}`;
 
     if (!link.classList.length) link.className = className;
     if (!isActive) link.removeAttribute('href');

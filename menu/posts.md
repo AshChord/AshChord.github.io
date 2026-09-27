@@ -1,10 +1,10 @@
 ---
-layout: null
+layout: menu
 permalink: /posts
 ---
 
 {% assign index = site.pages | where: "name", "index.html" | first %}
-{% assign posts = site.pages | where_exp: "page", "page.date" | sort: "date" | reverse %}
+{% assign posts = site.pages | where: "layout", "content" | sort: "date" | reverse %}
 
 {% capture posts_data %}
 [
@@ -15,8 +15,6 @@ permalink: /posts
     "date": {{ post.date | jsonify }},
     "excerpt": {{ post.excerpt | jsonify }},
     "categories": {{ post.categories | split: ", " | jsonify }},
-    "path": {{ post.path | jsonify }},
-    "dir": {{ post.dir | jsonify }}
   }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ]

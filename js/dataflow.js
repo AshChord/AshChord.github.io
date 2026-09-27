@@ -27,12 +27,9 @@ class Dataflow {
 const dataflow = new Dataflow();
 
 // 1. posts
-// 1. posts
 const posts = dataflow.node(async () => {
-  const res = await fetch('/posts');
-  const htmlText = await res.text();
+  const htmlText = await fetch('/posts').then(res => res.text());
   const doc = new DOMParser().parseFromString(htmlText, 'text/html');
-
   const postsData = doc.querySelector('.posts-data');
 
   return JSON.parse(postsData.textContent);
