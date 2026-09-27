@@ -28,9 +28,7 @@ document.addEventListener('click', (e) => {
   }
 
   // 2. 모바일 메뉴 및 검색 바 토글 로직
-  const isMobile = window.innerWidth < 768;
-
-  if (isMobile) {
+  if (window.innerWidth < 768) {
     if (target === menuBtn) {
       menuBtn.toggleAttribute('open');
       searchBar.removeAttribute('open');
@@ -66,7 +64,7 @@ window.addEventListener('resize', () => {
     searchBar.removeAttribute('open');
   }
 
-    const outlineHeight = outline.offsetHeight;
+    const outlineHeight = outline.scrollHeight;
     outline.style.setProperty('--height', `${outlineHeight}px`);
     outline.style.visibility = innerHeight < outlineHeight ? 'hidden' : 'visible';
 });
