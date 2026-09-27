@@ -1,5 +1,5 @@
 body {
-  /*visibility: hidden;*/
+  visibility: hidden;
   margin: 0;
   font-size: 14px;
 
@@ -74,25 +74,31 @@ menu {
 .menu-item {
   display: none;
   box-sizing: border-box;
-  width: 100vw;
-  margin: 0 0 0 calc(108px - 100vw);
+  width: 100%;
   padding: 20px 24px;
   background: white;
   color: black;
   font-weight: bold;
   text-decoration: none;
   line-height: 20px;
-  transform: translateY(44px);
   transition: color 0.3s ease;
   user-select: text;
 
   menu[open] & {
     display: block;
+    position: fixed;
+    top: 124px;
+    left: 0;
     animation: slideDown 0.3s ease-in-out forwards;
     --start-height: 40px;
     --end-height: 60px;
 
+    &:first-child {
+      top: 64px;
+    }
+
     &:last-child {
+      top: 184px;
       border-bottom: 1px solid gainsboro;
     }
   }
