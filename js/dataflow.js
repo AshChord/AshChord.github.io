@@ -27,27 +27,15 @@ class Dataflow {
 const dataflow = new Dataflow();
 
 // 1. posts
+// 1. posts
 const posts = dataflow.node(async () => {
   const res = await fetch('/posts');
   const htmlText = await res.text();
   const doc = new DOMParser().parseFromString(htmlText, 'text/html');
 
-  const postContainers = doc.querySelectorAll('ul');
-  const finalPosts = [];
+  const postsData = doc.querySelector('.posts-data');
 
-  postContainers.forEach(container => {
-    const listItems = container.querySelectorAll('li');
-
-    finalPosts.push({
-      slug: listItems[0].innerText,
-      title: decodeURIComponent(listItems[1].innerText),
-      date: listItems[2].innerText,
-      excerpt: listItems[3].innerText,
-      categories: listItems[4].innerText.split(',').map(cat => cat.trim())
-    });
-  });
-
-  return finalPosts;
+  return JSON.parse(postsData.textContent);
 });
 
 // 2. categorizedPosts
