@@ -14,7 +14,7 @@ permalink: /posts
     "title": {{ post.title | jsonify }},
     "date": {{ post.date | jsonify }},
     "excerpt": {{ post.excerpt | jsonify }},
-    "categories": {{ post.categories | jsonify }},
+    "categories": {{ post.categories | split: ", " | jsonify }},
     "path": {{ post.path | jsonify }},
     "dir": {{ post.dir | jsonify }}
   }{% unless forloop.last %},{% endunless %}
