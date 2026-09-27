@@ -10,14 +10,18 @@ permalink: /posts
 [
 {% for post in posts %}
   {
-    "slug": {{ post.url | split: "/" | last | split: "." | pop | jsonify }},
+    "slug": {{ post.url | split: "/" | last | split: "." | first | jsonify }},
     "title": {{ post.title | jsonify }},
     "date": {{ post.date | jsonify }},
     "excerpt": {{ post.excerpt | jsonify }},
-    "categories": {{ post.categories | jsonify }}
+    "categories": {{ post.categories | jsonify }},
+    "path": {{ post.path | jsonify }},
+    "dir": {{ post.dir | jsonify }}
   }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ]
 {% endcapture %}
 
+{::nomarkdown}
 {{ index.content | replace: '[]', posts_data }}
+{:/nomarkdown}
