@@ -1,6 +1,7 @@
 main {
   display: grid;
   grid-template-columns: 1fr;
+  visibility: visible;
   border-top: 1px solid gainsboro;
 }
 
