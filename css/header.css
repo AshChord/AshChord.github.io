@@ -74,6 +74,9 @@ menu {
 .menu-item {
   display: none;
   box-sizing: border-box;
+  position: absolute;
+  top: 64px;
+  left: 0;
   width: 100%;
   padding: 20px 24px;
   background: white;
@@ -86,19 +89,17 @@ menu {
 
   menu[open] & {
     display: block;
-    position: fixed;
-    top: 124px;
-    left: 0;
+    transform: translateY(100%);
     animation: slideDown 0.3s ease-in-out forwards;
     --start-height: 40px;
     --end-height: 60px;
 
     &:first-child {
-      top: 64px;
+      transform: none;
     }
 
     &:last-child {
-      top: 184px;
+      transform: translateY(200%);
       border-bottom: 1px solid gainsboro;
     }
   }
@@ -109,10 +110,9 @@ menu {
 
   @media (min-width: 768px) {
     display: block;
-    width: auto;
+    position: static;
     margin-left: 40px;
     padding: 0;
-    transform: none;
   }
 }
 
