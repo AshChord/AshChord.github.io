@@ -127,31 +127,31 @@ search {
 
 .search-bar {
   visibility: hidden;
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 10;
+  top: 64px;
+  right: 0;
+  width: 100%;
+  padding: 16px;
+  border-bottom: 1px solid gainsboro;
+  background-color: white;
   opacity: 0;
+  cursor: auto;
 
   &[open] {
     visibility: visible;
-    box-sizing: border-box;
-    position: absolute;
-    z-index: 10;
-    top: 64px;
-    right: 0;
-    width: 100%;
-    padding: 16px;
-    border-bottom: 1px solid gainsboro;
-    background-color: white;
     opacity: 1;
-    cursor: auto;
     transition: opacity 0.3s ease;
   }
 
   @media (min-width: 768px) {
-    visibility: visible;
+    all: unset;
+    display: block;
     position: relative;
     width: clamp(240px, 30vw, 320px);
     height: 48px;
     margin-left: 40px;
-    opacity: 1;
   }
 }
 
@@ -170,10 +170,6 @@ search {
 
   &::placeholder {
     color: darkgray;
-  }
-
-  @media (min-width: 768px) {
-    width: 100%;
   }
 }
 
