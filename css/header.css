@@ -59,27 +59,16 @@ menu {
   }
 }
 
-@keyframes slideDown {
-  from {
-    height: var(--start-height);
-    opacity: 0;
-  }
-
-  to {
-    height: var(--end-height);
-    opacity: 1;
-  }
-}
-
 .menu-item {
-  display: none;
+  visibility: hidden;
   box-sizing: border-box;
   position: absolute;
-  top: 64px;
+  top: 124px;
   left: 0;
   width: 100%;
   padding: 20px 24px;
   background: white;
+  opacity: 0;
   color: black;
   font-weight: bold;
   text-decoration: none;
@@ -87,32 +76,31 @@ menu {
   transition: color 0.3s ease;
   user-select: text;
 
-  menu[open] & {
-    display: block;
-    transform: translateY(100%);
-    animation: slideDown 0.3s ease-in-out forwards;
-    --start-height: 40px;
-    --end-height: 60px;
-
-    &:first-child {
-      transform: none;
-    }
-
-    &:last-child {
-      transform: translateY(200%);
-      border-bottom: 1px solid gainsboro;
-    }
-  }
-
   &:hover {
     color: gray;
   }
 
+  menu[open] & {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+
+    &:first-child {
+      top: 64px;
+    }
+
+    &:last-child {
+      top: 184px;
+      border-bottom: 1px solid gainsboro;
+    }
+  }
+
   @media (min-width: 768px) {
-    display: block;
+    visibility: visible;
     position: static;
     margin-left: 40px;
     padding: 0;
+    opacity: 1;
   }
 }
 
@@ -138,10 +126,11 @@ search {
 }
 
 .search-bar {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
 
   &[open] {
-    display: block;
+    visibility: visible;
     box-sizing: border-box;
     position: absolute;
     z-index: 10;
@@ -149,29 +138,26 @@ search {
     right: 0;
     width: 100%;
     padding: 16px;
-    overflow: hidden;
     border-bottom: 1px solid gainsboro;
     background-color: white;
+    opacity: 1;
     cursor: auto;
-    animation: slideDown 0.3s ease-in-out forwards;
-    --start-height: 54px;
-    --end-height: 81px;
+    transition: opacity 0.3s ease;
   }
 
   @media (min-width: 768px) {
-    display: block;
+    visibility: visible;
     position: relative;
     width: clamp(240px, 30vw, 320px);
     height: 48px;
     margin-left: 40px;
+    opacity: 1;
   }
 }
 
 .search-input {
   box-sizing: border-box;
-  position: absolute;
-  top: 50%;
-  width: calc(100% - 32px);
+  width: 100%;
   padding: 12px 72px 12px 20px;
   border: none;
   border-radius: 8px;
@@ -181,7 +167,6 @@ search {
   font-size: 16px;
   font-family: inherit;
   line-height: 24px;
-  transform: translateY(-50%);
 
   &::placeholder {
     color: darkgray;
