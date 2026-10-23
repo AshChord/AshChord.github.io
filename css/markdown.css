@@ -1,14 +1,11 @@
 .content-header {
   display: block;
+  visibility: hidden;
   padding: 0;
-  opacity: 0;
-
-  &:has(.title:not(:empty)) {
-    opacity: 1;
-  }
 
   .category-list {
     display: block;
+    visibility: visible;
     margin: 0;
     padding: 0;
     border: none;
@@ -25,6 +22,7 @@
   }
 
   .title {
+    visibility: visible;
     margin: 8px 0;
     border-bottom: 1px solid gainsboro;
     font-size: 22px;
@@ -39,6 +37,7 @@
   }
 
   .date {
+    visibility: visible;
     margin: 8px 0;
     font-size: 12px;
     line-height: 24px;
@@ -51,6 +50,7 @@
   }
 
   .thumbnail {
+    visibility: visible;
     box-sizing: border-box;
     margin: 28px 0 84px 0;
     border: 2px solid whitesmoke;
