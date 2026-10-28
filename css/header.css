@@ -83,13 +83,14 @@ menu {
   user-select: text;
 
   &:hover {
+    background-color: color-mix(gainsboro, white);
     color: gray;
   }
 
   menu[open] & {
     visibility: visible;
     opacity: 1;
-    transition: opacity 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
 
     &:first-child {
       top: 64px;
@@ -97,7 +98,7 @@ menu {
 
     &:last-child {
       top: 184px;
-      border-bottom: 1px solid gainsboro;
+      border-bottom: 1px solid color-mix(gainsboro, white);
     }
   }
 

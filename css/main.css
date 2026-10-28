@@ -2,10 +2,10 @@ main {
   display: grid;
   grid: 1fr auto auto / 1fr;
   visibility: visible;
-  min-height: calc(100vh - 89px);
+  min-height: calc(100vh - 65px);
 
   @media (min-width: 768px) {
-    min-height: calc(100vh - 65px);
+    min-height: calc(100vh - 89px);
   }
 }
 
