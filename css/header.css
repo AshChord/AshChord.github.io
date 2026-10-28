@@ -1,3 +1,7 @@
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   visibility: hidden;
   margin: 0;
@@ -12,13 +16,16 @@ header {
   display: flex;
   align-items: center;
   visibility: visible;
+  position: sticky;
+  z-index: 10;
+  top: 0;
   box-sizing: border-box;
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 20px;
+  border-bottom: 1px solid color-mix(gainsboro, white);
+  background-color: white;
 
   @media (min-width: 768px) {
-    padding: 20px 32px;
+    padding: 20px max(20px, calc((100% - 1200px) / 2));
   }
 }
 
@@ -36,7 +43,6 @@ header {
 
 menu {
   display: block;
-  z-index: 10;
   width: 24px;
   height: 24px;
   margin: 0;
@@ -61,13 +67,13 @@ menu {
 
 .menu-item {
   visibility: hidden;
-  box-sizing: border-box;
   position: absolute;
   top: 124px;
   left: 0;
+  box-sizing: border-box;
   width: 100%;
   padding: 20px 24px;
-  background: white;
+  background-color: white;
   opacity: 0;
   color: black;
   font-weight: bold;
@@ -128,10 +134,9 @@ search {
 .search-bar {
   visibility: hidden;
   position: absolute;
-  box-sizing: border-box;
-  z-index: 10;
   top: 64px;
   right: 0;
+  box-sizing: border-box;
   width: 100%;
   padding: 16px;
   border-bottom: 1px solid gainsboro;

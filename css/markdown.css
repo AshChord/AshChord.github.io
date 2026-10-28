@@ -1,5 +1,6 @@
 .content-header {
   display: block;
+  position: static;
   padding: 0;
   opacity: 0;
 
