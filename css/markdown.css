@@ -403,8 +403,7 @@
 
 .outline {
   display: none;
-  grid-column-start: 1;
-  grid-row-start: 1;
+  grid-area: 1 / 1;
   justify-self: end;
   position: sticky;
   top: calc(50vh - var(--height) / 2);
