@@ -7,8 +7,8 @@ main {
 .feed {
   display: grid;
   grid: auto / minmax(0, 1fr);
-  gap: 24px;
   grid-area: 1 / 1;
+  gap: 24px;
   box-sizing: border-box;
   width: 100%;
   max-width: 1200px;
@@ -28,8 +28,7 @@ main {
     margin: 60px auto;
   }
 
-  .not-found,
-  .no-results {
+  .not-found, .no-results {
     grid-column: 1 / -1;
     padding: 48px;
     text-align: center;
@@ -286,4 +285,28 @@ main {
 
 .count {
   color: gray;
+}
+
+.credits {
+  box-sizing: border-box;
+  height: 44px;
+  padding: 12px;
+  background-color: color-mix(gainsboro, white);
+
+  @media (min-width: 768px) {
+    height: 60px;
+    padding: 20px;
+  }
+}
+
+.copyright, .platform {
+  margin: 0;
+  color: gray;
+  font-size: 12px;
+  text-align: center;
+  line-height: 20px;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 }
