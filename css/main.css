@@ -92,7 +92,7 @@ main {
 .category-list {
   margin-top: -57px;
   padding: 16px 24px;
-  border-top: 1px solid color-mix(gainsboro, white);
+  border-top: 1px solid whitesmoke;
   pointer-events: none;
 }
 
@@ -296,7 +296,7 @@ main {
   box-sizing: border-box;
   height: 44px;
   padding: 12px;
-  background-color: color-mix(gainsboro, white);
+  background-color: whitesmoke;
   color: gray;
   font-size: 12px;
   text-align: center;
