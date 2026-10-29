@@ -107,7 +107,7 @@ main {
   font-weight: 500;
   text-decoration: none;
   line-height: 16px;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   pointer-events: auto;
 
   &:hover {
@@ -121,7 +121,7 @@ main {
   grid-area: 1 / 1;
   justify-self: end;
   position: sticky;
-  top: 32px;
+  top: 121px;
   height: fit-content;
   margin: 32px;
   border: 1px solid gainsboro;
@@ -172,7 +172,7 @@ main {
 }
 
 .category-menu-item {
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
   user-select: text;
 
   &:hover {

@@ -2,16 +2,15 @@
   display: block;
   position: static;
   padding: 0;
-  opacity: 0;
-
-  &:has(.title:not(:empty)) {
-    opacity: 1;
-  }
 
   .category-list {
     margin: 0;
     padding: 0;
     border: none;
+
+    &:empty {
+      visibility: hidden;
+    }
   }
 
   .category {
@@ -31,6 +30,10 @@
     line-height: 44px;
     white-space: normal;
 
+    &:empty {
+      visibility: hidden;
+    }
+
     @media (min-width: 768px) {
       margin: 12px 0;
       font-size: 28px;
@@ -42,6 +45,10 @@
     margin: 8px 0;
     font-size: 12px;
     line-height: 24px;
+
+    &:empty {
+      visibility: hidden;
+    }
 
     @media (min-width: 768px) {
       margin: 12px 0;
@@ -56,6 +63,10 @@
     border: 2px solid whitesmoke;
     border-radius: 2px;
     aspect-ratio: 16 / 9;
+
+    &[src=""] {
+      visibility: hidden;
+    }
 
     @media (min-width: 768px) {
       border: 4px solid whitesmoke;
@@ -420,7 +431,7 @@
     display: block;
     color: darkgray;
     text-decoration: none;
-    transition: color 0.2s ease, text-shadow 0.2s ease;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 
     &:hover {
       text-decoration: underline;
