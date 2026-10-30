@@ -25,7 +25,7 @@ header {
   background-color: white;
 
   &:has([open]) {
-    border-color: white;
+    border-color: whitesmoke;
   }
 
   @media (min-width: 768px) {
@@ -72,7 +72,7 @@ menu {
 .menu-item {
   visibility: hidden;
   position: absolute;
-  top: 124px;
+  top: 125px;
   left: 0;
   box-sizing: border-box;
   width: 100%;
@@ -96,11 +96,11 @@ menu {
     transition: opacity 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 
     &:first-child {
-      top: 64px;
+      top: 65px;
     }
 
     &:last-child {
-      top: 184px;
+      top: 185px;
       border-bottom: 1px solid gainsboro;
     }
 
@@ -142,11 +142,11 @@ search {
 .search-bar {
   visibility: hidden;
   position: absolute;
-  top: 64px;
+  top: 65px;
   right: 0;
   box-sizing: border-box;
   width: 100%;
-  padding: 0 20px 20px;
+  padding: 18px;
   border-bottom: 1px solid gainsboro;
   background-color: white;
   opacity: 0;
@@ -171,25 +171,31 @@ search {
 .search-input {
   box-sizing: border-box;
   width: 100%;
-  padding: 12px 72px 12px 20px;
+  padding: 10px 72px 10px 18px;
   border: none;
   border-radius: 8px;
   outline: 0;
   background-color: ghostwhite;
   box-shadow: 0 1px 2px gainsboro;
-  font-size: 16px;
+  font-size: 14px;
   font-family: inherit;
-  line-height: 24px;
+  line-height: 21px;
 
   &::placeholder {
     color: darkgray;
+  }
+
+  @media (min-width: 768px) {
+    padding: 12px 72px 12px 20px;
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 
 .search-reset-button {
   display: none;
   position: absolute;
-  top: 16px;
+  top: 50%;
   right: 64px;
   width: 16px;
   height: 16px;
@@ -200,6 +206,7 @@ search {
   background-image: url("/assets/icon-X.svg");
   background-size: 100%;
   filter: invert(100%);
+  transform: translateY(-50%);
   cursor: pointer;
 
   &:hover {
@@ -213,7 +220,7 @@ search {
 
 .search-submit-button {
   position: absolute;
-  top: 14px;
+  top: 50%;
   right: 32px;
   width: 20px;
   height: 20px;
@@ -222,6 +229,7 @@ search {
   background-color: gray;
   mask-image: url("/assets/icon-search.svg");
   mask-size: 100%;
+  transform: translateY(-50%);
   cursor: pointer;
 
   &:hover {
