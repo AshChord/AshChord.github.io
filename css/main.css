@@ -304,6 +304,10 @@ main {
   text-align: center;
   line-height: 20px;
 
+  a {
+    color: inherit;
+  }
+
   @media (min-width: 768px) {
     height: 60px;
     padding: 20px;
