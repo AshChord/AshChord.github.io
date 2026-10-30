@@ -146,8 +146,7 @@ search {
   right: 0;
   box-sizing: border-box;
   width: 100%;
-  margin-top: -20px;
-  padding: 20px;
+  padding: 0 20px 20px;
   border-bottom: 1px solid gainsboro;
   background-color: white;
   opacity: 0;
@@ -190,7 +189,7 @@ search {
 .search-reset-button {
   display: none;
   position: absolute;
-  top: 50%;
+  top: 16px;
   right: 64px;
   width: 16px;
   height: 16px;
@@ -201,7 +200,6 @@ search {
   background-image: url("/assets/icon-X.svg");
   background-size: 100%;
   filter: invert(100%);
-  transform: translateY(-50%);
   cursor: pointer;
 
   &:hover {
@@ -215,16 +213,15 @@ search {
 
 .search-submit-button {
   position: absolute;
-  top: 50%;
+  top: 14px;
   right: 32px;
-  width: 21px;
-  height: 21px;
+  width: 20px;
+  height: 20px;
   padding: 0;
   border: none;
   background-color: gray;
   mask-image: url("/assets/icon-search.svg");
   mask-size: 100%;
-  transform: translateY(-50%);
   cursor: pointer;
 
   &:hover {
