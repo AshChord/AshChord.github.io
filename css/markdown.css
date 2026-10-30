@@ -4,14 +4,14 @@
   padding: 0;
   border: none;
 
+  *:empty {
+    visibility: hidden;
+  }
+
   .category-list {
     margin: 0;
     padding: 0;
     border: none;
-
-    &:empty {
-      visibility: hidden;
-    }
   }
 
   .category {
@@ -31,10 +31,6 @@
     line-height: 44px;
     white-space: normal;
 
-    &:empty {
-      visibility: hidden;
-    }
-
     @media (min-width: 768px) {
       margin: 12px 0;
       font-size: 28px;
@@ -46,10 +42,6 @@
     margin: 8px 0;
     font-size: 12px;
     line-height: 24px;
-
-    &:empty {
-      visibility: hidden;
-    }
 
     @media (min-width: 768px) {
       margin: 12px 0;
@@ -65,8 +57,8 @@
     border-radius: 2px;
     aspect-ratio: 16 / 9;
 
-    &[src=""] {
-      visibility: hidden;
+    &:not([src=""]) {
+      visibility: visible;
     }
 
     @media (min-width: 768px) {
