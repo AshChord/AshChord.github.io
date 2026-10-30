@@ -24,6 +24,10 @@ header {
   border-bottom: 1px solid gainsboro;
   background-color: white;
 
+  *:has([open]) {
+    border-color: white;
+  }
+
   @media (min-width: 768px) {
     padding: 20px max(20px, calc((100% - 1136px) / 2));
   }

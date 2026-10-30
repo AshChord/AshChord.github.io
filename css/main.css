@@ -216,6 +216,10 @@ main {
   gap: 8px;
   margin: -32px auto 0;
 
+  &:not(:has(.page-number)) {
+    visibility: hidden;
+  }
+
   @media (min-width: 768px) {
     margin: -60px auto 0;
   }
@@ -262,9 +266,9 @@ main {
 }
 
 .page-number {
-  margin: 34px 0;
   width: 32px;
   height: 14px;
+  margin: 34px 0;
   color: gray;
   font-size: 14px;
   text-decoration: none;
@@ -283,9 +287,9 @@ main {
   }
 
   @media (min-width: 768px) {
-    margin: 42px 0;
     width: 36px;
     height: 16px;
+    margin: 42px 0;
     font-size: 16px;
   }
 }
