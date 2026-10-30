@@ -24,7 +24,7 @@ header {
   border-bottom: 1px solid gainsboro;
   background-color: white;
 
-  *:has([open]) {
+  &:has([open]) {
     border-color: white;
   }
 
@@ -146,7 +146,8 @@ search {
   right: 0;
   box-sizing: border-box;
   width: 100%;
-  padding: 16px;
+  margin-top: -20px;
+  padding: 20px;
   border-bottom: 1px solid gainsboro;
   background-color: white;
   opacity: 0;
