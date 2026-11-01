@@ -212,15 +212,14 @@ main {
 }
 
 .pagination {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  visibility: hidden;
+  display: none;
   height: 80px;
   margin: -32px auto 0;
 
   &:has(.page-number) {
-    visibility: visible;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   @media (min-width: 768px) {

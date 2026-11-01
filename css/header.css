@@ -38,7 +38,7 @@ header {
   margin: 0 auto 0 0;
   color: black;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 600;
   text-decoration: none;
 
   @media (min-width: 768px) {
@@ -81,7 +81,7 @@ menu {
   background-color: white;
   opacity: 0;
   color: black;
-  font-weight: bold;
+  font-weight: 600;
   text-decoration: none;
   line-height: 20px;
   transition: color 0.3s ease;
