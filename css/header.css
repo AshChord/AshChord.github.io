@@ -6,7 +6,7 @@ body {
   visibility: hidden;
   margin: 0;
   font-size: 14px;
-  font-family: -apple-system, BlinkMacSystemFont;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   @media (min-width: 768px) {
     font-size: 16px;
   }
