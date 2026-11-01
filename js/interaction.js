@@ -74,12 +74,12 @@ window.addEventListener('resize', () => {
 // ---------------------------------------------------------
 // 입력 시 리셋 버튼 표시 토글
 searchInput.addEventListener('input', () => {
-  resetBtn.style.display = searchInput.value ? 'block' : 'none';
+  resetBtn.style.visibility = searchInput.value ? 'visible' : 'hidden';
 });
 
 // 폼 리셋 이벤트 (X버튼 클릭)
 searchBar.addEventListener('reset', () => {
-  resetBtn.style.display = 'none';
+  resetBtn.style.visibility = 'hidden';
   searchInput.focus(); // 초기화 틱 이후에 포커스
 });
 

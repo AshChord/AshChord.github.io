@@ -57,12 +57,12 @@ menu {
   background-image: url("/assets/icon-dropdown-menu.svg");
   background-position: center;
   background-size: 100%;
-  box-shadow: inset 0 0 0 12px color-mix(white, transparent);
+  background-blend-mode: lighten;
   cursor: pointer;
   user-select: none;
 
   &:hover:not(:has(*:hover)) {
-    box-shadow: none;
+    background-color: transparent;
   }
 
   @media (min-width: 768px) {
@@ -82,7 +82,7 @@ menu {
   background-color: white;
   opacity: 0;
   color: black;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   line-height: 20px;
   transition: color 0.3s ease;
@@ -97,6 +97,10 @@ menu {
     opacity: 1;
     transition: background-color 0.3s ease, opacity 0.3s ease, color 0.3s ease;
 
+    &:hover {
+      background-color: whitesmoke;
+    }
+
     &:first-child {
       top: 65px;
     }
@@ -104,10 +108,6 @@ menu {
     &:last-child {
       top: 185px;
       border-bottom: 1px solid gainsboro;
-    }
-
-    &:hover {
-      background-color: whitesmoke;
     }
   }
 
@@ -195,7 +195,7 @@ search {
 }
 
 .search-reset-button {
-  display: none;
+  visibility: hidden;
   position: absolute;
   top: 50%;
   right: 64px;

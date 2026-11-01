@@ -299,7 +299,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 60%, 0%;
-    box-shadow: 0 2px 4px gainsboro, inset 0 0 0 16px color-mix(white, transparent);
+    box-shadow: 0 2px 4px gainsboro, inset 0 0 0 12px color-mix(white, transparent);
     cursor: pointer;
     transform: scale(1.2);
 
