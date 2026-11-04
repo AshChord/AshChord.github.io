@@ -105,13 +105,13 @@ async function renderContent() {
     };
 
     const [core, engine, wasm] = await Promise.all([
-      import(`${host}/shiki/esnext/core.bundle.mjs/+esm`),
-      import(`${host}/@shikijs/engine-oniguruma/esnext/engine-oniguruma.mjs/+esm`),
-      import(`${host}/@shikijs/engine-oniguruma/esnext/wasm-inlined.mjs/+esm`)
+      import(`${host}/shiki/core/+esm`),
+      import(`${host}/@shikijs/engine-oniguruma/+esm`),
+      import(`${host}/@shikijs/engine-oniguruma/wasm-inlined/+esm`)
     ]);
 
     const highlighter = await core.createHighlighterCore({
-      themes: [import(`${host}/@shikijs/themes/esnext/github-light.mjs`)],
+      themes: [import(`${host}/@shikijs/themes/github-light/+esm`)],
       langs: [],
       engine: await engine.createOnigurumaEngine(wasm.default)
     });
@@ -127,7 +127,7 @@ async function renderContent() {
     languages.delete('text');
 
     await Promise.all([...languages].map((lang) =>
-      highlighter.loadLanguage(import(`${host}/@shikijs/langs/esnext/${lang}.mjs/+esm`))
+      highlighter.loadLanguage(import(`${host}/@shikijs/langs/dist/${lang}.mjs/+esm`))
     ));
 
     for (const { codeBlock, lang } of codeData) {
