@@ -96,7 +96,7 @@ async function renderContent() {
     const host = 'https://cdn.jsdelivr.net/npm/@shikijs';
 
     const [core, engine, wasm] = await Promise.all([
-      import(`'${host}/core/+esm'`),
+      import(`${host}/core/+esm'`),
       import(`${host}/engine-oniguruma/dist/index.mjs`),
       import(`${host}/engine-oniguruma/dist/wasm-inlined.mjs`)
     ]);
