@@ -102,7 +102,7 @@ async function renderContent() {
     const highlighter = await core.createHighlighterCore({
       themes: [import(`${host}/@shikijs/themes/esnext/github-light.mjs`)],
       langs: [],
-      engine: await engine.createOnigurumaEngine(wasm.default)
+      engine: engine.createOnigurumaEngine(wasm.default)
     });
 
     const codeBlocks = document.querySelectorAll('pre code:not([highlighted])');
