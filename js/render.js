@@ -104,16 +104,15 @@ async function renderContent() {
       return import(URL.createObjectURL(blob));
     };
 
-    const [core, engine, wasm] = await Promise.all([
+    const [core, engine] = await Promise.all([
       import(`${host}/shiki/esnext/core.bundle.mjs`),
-      import(`${host}/@shikijs/engine-oniguruma/esnext/engine-oniguruma.mjs`),
-      import(`${host}/@shikijs/engine-oniguruma/esnext/wasm-inlined.mjs`)
+      import(`${host}/@shikijs/engine-javascript/esnext/raw.mjs`)
     ]);
 
     const highlighter = await core.createHighlighterCore({
       themes: [import(`${host}/@shikijs/themes/esnext/github-light.mjs`)],
       langs: [],
-      engine: await engine.createOnigurumaEngine(wasm.default)
+      engine: engine.createJavaScriptRawEngine()
     });
 
     const codeBlocks = document.querySelectorAll('pre code:not([highlighted])');
@@ -127,7 +126,7 @@ async function renderContent() {
     languages.delete('text');
 
     await Promise.all([...languages].map((lang) =>
-      highlighter.loadLanguage(import(`${host}/@shikijs/langs@/esnext/${lang}.mjs`))
+      highlighter.loadLanguage(import(`${host}/@shikijs/langs-precompiled/esnext/${lang}.mjs`))
     ));
 
     for (const { codeBlock, lang } of codeData) {
