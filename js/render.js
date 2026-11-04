@@ -95,75 +95,74 @@ async function renderContent() {
   (async function renderCode() {
     const host = 'https://esm.sh';
 
-    // 1. Collect code blocks
+    const importBlob = async (url) => {
+      const source = await fetch(url).then((res) => res.text());
+      const fileName = url.split('/').pop();
+      const variant = source.replace(/import[^;]+;/, '') + `\n//# sourceURL=${fileName}`;
+      const blob = new Blob([variant], { type: 'text/javascript' });
+
+      return import(URL.createObjectURL(blob));
+    };
+
+    const [core, engine, wasm] = await Promise.all([
+      importBlob(`${host}/shiki/es2022/core.bundle.mjs`),
+      importBlob(`${host}/@shikijs/engine-oniguruma/es2022/engine-oniguruma.mjs`),
+      import(`${host}/@shikijs/engine-oniguruma/es2022/wasm-inlined.mjs`)
+    ]);
+
+    const highlighter = await core.createHighlighterCore({
+      themes: [import(`${host}/@shikijs/themes/es2022/github-light.mjs`)],
+      langs: [],
+      engine: await engine.createOnigurumaEngine(wasm.default)
+    });
+
     const codeBlocks = document.querySelectorAll('pre code:not([highlighted])');
 
-    if (codeBlocks.length) {
-      // 2. Load Shiki Core and JavaScript Engine
-      const [
-        { createHighlighterCore },
-        { createJavaScriptRegexEngine }
-      ] = await Promise.all([
-        import(`${host}/shiki/core`),
-        import(`${host}/shiki/engine/javascript`)
-      ]);
+    const codeData = [...codeBlocks].map((codeBlock) => ({
+      codeBlock,
+      lang: codeBlock.className.replace(/^language-/, '') || 'text'
+    }));
 
-      // 3. Collect required languages
-      const codeData = [...codeBlocks].map((codeBlock) => ({
-        codeBlock,
-        lang: codeBlock.className.replace(/^language-/, '') || 'text'
-      }));
+    const languages = new Set(codeData.map(({ lang }) => lang));
+    languages.delete('text');
 
-      const languages = new Set(codeData.map(({ lang }) => lang));
-      languages.delete('text');
+    await Promise.all([...languages].map((lang) =>
+      highlighter.loadLanguage(import(`${host}/@shikijs/langs@/es2022/${lang}.mjs`))
+    ));
 
-      // 4. Create Highlighter with only required resources
-      const highlighter = await createHighlighterCore({
-        themes: [
-          import(`${host}/@shikijs/themes/github-light`)
-        ],
-        langs: [...languages].map((lang) =>
-          import(`${host}/@shikijs/langs/${lang}`)
-        ),
-        engine: createJavaScriptRegexEngine()
+    for (const { codeBlock, lang } of codeData) {
+      const copyBtn = document.createElement('button');
+      copyBtn.classList.add('copy-button');
+      codeBlock.parentElement.prepend(copyBtn);
+
+      const codeText = codeBlock.textContent.trimEnd();
+      const originalLines = codeText.split('\n');
+
+      const highlighted = highlighter.codeToHtml(codeText, {
+        lang,
+        theme: 'github-light'
       });
 
-      // 5. Highlight code blocks
-      for (const { codeBlock, lang } of codeData) {
-        const copyBtn = document.createElement('button');
-        copyBtn.classList.add('copy-button');
-        codeBlock.parentElement.prepend(copyBtn);
+      const doc = new DOMParser().parseFromString(highlighted, 'text/html');
 
-        const codeText = codeBlock.textContent.trimEnd();
-        const originalLines = codeText.split('\n');
+      const fragment = document.createDocumentFragment();
 
-        const highlighted = highlighter.codeToHtml(codeText, {
-          lang,
-          theme: 'github-light'
-        });
+      doc.querySelectorAll('.line').forEach((line, lineIdx) => {
+        const currentLine = document.createElement('data');
+        currentLine.className = 'code-line';
+        currentLine.value = lineIdx + 1;
 
-        const doc = new DOMParser().parseFromString(highlighted, 'text/html');
+        const indent = originalLines[lineIdx].search(/\S/);
+        if (indent > 0) currentLine.style.setProperty('--indent', `${indent}ch`);
 
-        const fragment = document.createDocumentFragment();
+        currentLine.append(...line.childNodes, '\n');
+        fragment.appendChild(currentLine);
+      });
 
-        doc.querySelectorAll('.line').forEach((line, lineIdx) => {
-          const currentLine = document.createElement('data');
-          currentLine.className = 'code-line';
-          currentLine.value = lineIdx + 1;
-
-          const indent = originalLines[lineIdx].search(/\S/);
-          if (indent > 0) currentLine.style.setProperty('--indent', `${indent}ch`);
-
-          currentLine.append(...line.childNodes, '\n');
-          fragment.appendChild(currentLine);
-        });
-
-        codeBlock.replaceChildren(fragment);
-        codeBlock.setAttribute('highlighted', '');
-      }
+      codeBlock.replaceChildren(fragment);
+      codeBlock.setAttribute('highlighted', '');
     }
 
-    // 6. Inline code handling (UNCHANGED)
     document.querySelectorAll('code:not(pre code)').forEach((code) => {
       const tokens = code.textContent.split(/([^a-zA-Z0-9\s])/g).filter(Boolean);
 
