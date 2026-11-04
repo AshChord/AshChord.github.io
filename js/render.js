@@ -93,46 +93,43 @@ async function renderContent() {
   document.querySelector('.content-body').append(...contentNodes);
 
   (async function renderCode() {
-    const host = 'https://cdn.jsdelivr.net/npm/@shikijs';
+    const shikiBase = 'https://cdn.jsdelivr.net/npm/@shikijs';
 
     const [core, engine, wasm] = await Promise.all([
       import(`https://esm.sh/shiki/esnext/core.bundle.mjs`),
-      import(`${host}/engine-oniguruma/dist/index.mjs`),
-      import(`${host}/engine-oniguruma/dist/wasm-inlined.mjs`)
+      import(`${shikiBase}/engine-oniguruma/dist/index.mjs`),
+      import(`${shikiBase}/engine-oniguruma/dist/wasm-inlined.mjs`)
     ]);
 
     const highlighter = await core.createHighlighterCore({
-      themes: [import(`${host}/themes/dist/github-light.mjs`)],
-      langs: [],
+      themes: [import(`${shikiBase}/themes/dist/github-light.mjs`)],
       engine: engine.createOnigurumaEngine(wasm.default)
     });
 
     const codeBlocks = document.querySelectorAll('pre code:not([highlighted])');
+    const languages = new Set();
 
-    const codeData = [...codeBlocks].map((codeBlock) => ({
-      codeBlock,
-      lang: codeBlock.className.replace(/^language-/, '') || 'text'
-    }));
+    const codeData = Array.from(codeBlocks, (codeBlock) => {
+      const codeText = codeBlock.textContent.trimEnd();
+      const lang = codeBlock.className.replace(/^language-/, '') || 'text';
+      if (lang !== 'text') languages.add(lang);
 
-    const languages = new Set(codeData.map(({ lang }) => lang));
-    languages.delete('text');
+      return { codeBlock, codeText, lang };
+    });
 
-    await Promise.all([...languages].map((lang) =>
-      highlighter.loadLanguage(import(`${host}/langs/dist/${lang}.mjs`))
+    await Promise.all(Array.from(languages, (lang) =>
+      highlighter.loadLanguage(import(`${shikiBase}/langs/dist/${lang}.mjs`))
     ));
 
-    for (const { codeBlock, lang } of codeData) {
+    for (const { codeBlock, codeText, lang } of codeData) {
       const copyBtn = document.createElement('button');
       copyBtn.classList.add('copy-button');
       codeBlock.parentElement.prepend(copyBtn);
 
-      const codeText = codeBlock.textContent.trimEnd();
       const originalLines = codeText.split('\n');
 
       const highlighted = highlighter.codeToHtml(codeText, {lang, theme: 'github-light'});
-
       const doc = new DOMParser().parseFromString(highlighted, 'text/html');
-
       const fragment = document.createDocumentFragment();
 
       doc.querySelectorAll('.line').forEach((line, lineIdx) => {
