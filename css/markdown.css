@@ -406,11 +406,13 @@
 }
 
 .outline {
+  --heading-count: 0;
   display: none;
   grid-area: 1 / 1;
   justify-self: end;
+  visibility: hidden;
   position: sticky;
-  top: calc(50vh - var(--height) / 2);
+  top: calc(50vh - 44px - 14px * var(--heading-count));
   width: calc(50vw - 539px);
   height: fit-content;
   max-height: 100vh;
@@ -419,6 +421,10 @@
   border-left: 1px solid gainsboro;
   font-size: 14px;
   line-height: 28px;
+
+  &[open] {
+    visibility: visible;
+  }
 
   a {
     display: block;

@@ -64,9 +64,10 @@ window.addEventListener('resize', () => {
     searchBar.removeAttribute('open');
   }
 
-    const outlineHeight = outline.scrollHeight;
-    outline.style.setProperty('--height', `${outlineHeight}px`);
-    outline.style.visibility = innerHeight < outlineHeight ? 'hidden' : 'visible';
+  const headingCount = Number(outline.getAttribute('heading-count'));
+  const outlineHeight = 28 * headingCount;
+
+  outline.toggleAttribute('open', window.innerHeight - 100 > outlineHeight);
 });
 
 // ---------------------------------------------------------
@@ -112,7 +113,7 @@ outline.addEventListener('click', (e) => {
 });
 
 // 스크롤 스파이 (현재 읽는 위치 하이라이팅)
-document.addEventListener('contentRendered', () => {
+document.addEventListener('outlineRendered', () => {
   window.dispatchEvent(new Event('resize'));
 
   const headings = content.querySelectorAll('h2, h3, h4, h5, h6');
@@ -132,7 +133,7 @@ document.addEventListener('contentRendered', () => {
     requestAnimationFrame(() => {
       ticking = false;
 
-      const triggerY = 20;
+      const triggerY = 108;
       let newCurrentHdg = null;
 
       // 100px 기준선을 통과한 가장 마지막 헤딩 찾기
