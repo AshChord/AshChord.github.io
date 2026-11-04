@@ -93,21 +93,10 @@ async function renderContent() {
   document.querySelector('.content-body').append(...contentNodes);
 
   (async function renderCode() {
-    const host = 'https://esm.sh';
-
-    const importBlob = async (url) => {
-      const source = await fetch(url).then((res) => res.text());
-      const fileName = url.split('/').pop();
-      const variant = source.replace(/import[^;]+;/, '') + `\n//# sourceURL=${fileName}`;
-      const blob = new Blob([variant], { type: 'text/javascript' });
-
-      return import(URL.createObjectURL(blob));
-    };
-
     const [core, engine, wasm] = await Promise.all([
-      import(`${host}/shiki/esnext/core.bundle.mjs`),
+      import(`https://esm.sh/shiki/esnext/core.bundle.mjs`),
       import(`https://cdn.jsdelivr.net/npm/@shikijs/engine-oniguruma/dist/index.mjs`),
-      import(`${host}/@shikijs/engine-oniguruma/esnext/wasm-inlined.mjs`)
+      import(`https://cdn.jsdelivr.net/npm/@shikijs/engine-oniguruma/dist/wasm-inlined.mjs`)
     ]);
 
     const highlighter = await core.createHighlighterCore({
@@ -127,7 +116,7 @@ async function renderContent() {
     languages.delete('text');
 
     await Promise.all([...languages].map((lang) =>
-      highlighter.loadLanguage(import(`${host}/@shikijs/langs@/esnext/${lang}.mjs`))
+      highlighter.loadLanguage(import(`${host}/@shikijs/langs/esnext/${lang}.mjs`))
     ));
 
     for (const { codeBlock, lang } of codeData) {
