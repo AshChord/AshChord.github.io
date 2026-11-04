@@ -104,16 +104,15 @@ async function renderContent() {
       return import(URL.createObjectURL(blob));
     };
 
-    const [core, engine, wasm] = await Promise.all([
+    const [core, engine] = await Promise.all([
       import(`${host}/shiki/esnext/core.bundle.mjs`),
-      importBlob(`${host}/@shikijs/engine-oniguruma/esnext/engine-oniguruma.mjs`),
-      import(`${host}/@shikijs/engine-oniguruma/esnext/wasm-inlined.mjs`)
+      import(`${host}/@shikijs/engine-javascript/es2022/engine-javascript.mjs`)
     ]);
 
     const highlighter = await core.createHighlighterCore({
       themes: [import(`${host}/@shikijs/themes/esnext/github-light.mjs`)],
       langs: [],
-      engine: await engine.createOnigurumaEngine(wasm.default)
+      engine: engine.createJavaScriptRegexEngine()
     });
 
     const codeBlocks = document.querySelectorAll('pre code:not([highlighted])');
