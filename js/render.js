@@ -93,7 +93,7 @@ async function renderContent() {
   document.querySelector('.content-body').append(...contentNodes);
 
   (async function renderCode() {
-    const host = 'https://cdn.jsdelivr.net/npm';
+    const host = 'https://esm.sh';
 
     const importBlob = async (url) => {
       const source = await fetch(url).then((res) => res.text());
