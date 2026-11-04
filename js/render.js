@@ -106,7 +106,7 @@ async function renderContent() {
 
     const [core, engine, wasm] = await Promise.all([
       import(`${host}/shiki/esnext/core.bundle.mjs`),
-      import(`${host}/@shikijs/engine-oniguruma/esnext/engine-oniguruma.mjs`),
+      import(`${host}/@shikijs/engine-oniguruma/esnext/engine-oniguruma.mjs?standalone`),
       import(`${host}/@shikijs/engine-oniguruma/esnext/wasm-inlined.mjs`)
     ]);
 
