@@ -93,25 +93,16 @@ async function renderContent() {
   document.querySelector('.content-body').append(...contentNodes);
 
   (async function renderCode() {
-    const host = 'https://esm.sh';
-
-    const importBlob = async (url) => {
-      const source = await fetch(url).then((res) => res.text());
-      const fileName = url.split('/').pop();
-      const variant = source.replace(/import[^;]+;/, '') + `\n//# sourceURL=${fileName}`;
-      const blob = new Blob([variant], { type: 'text/javascript' });
-
-      return import(URL.createObjectURL(blob));
-    };
+    const host = 'https://cdn.jsdelivr.net/npm';
 
     const [core, engine, wasm] = await Promise.all([
-      import(`${host}/shiki/esnext/core.bundle.mjs`),
-      import(`${host}/@shikijs/engine-oniguruma/esnext/engine-oniguruma.mjs?standalone`),
-      import(`${host}/@shikijs/engine-oniguruma/esnext/wasm-inlined.mjs`)
+      import(`${host}/@shikijs/core/dist/index.mjs`),
+      import(`${host}/@shikijs/engine-oniguruma/dist/index.mjs`),
+      import(`${host}/@shikijs/engine-oniguruma/dist/wasm-inlined.mjs`)
     ]);
 
     const highlighter = await core.createHighlighterCore({
-      themes: [import(`${host}/@shikijs/themes/esnext/github-light.mjs`)],
+      themes: [import(`${host}/@shikijs/themes/dist/github-light.mjs`)],
       langs: [],
       engine: await engine.createOnigurumaEngine(wasm.default)
     });
@@ -127,7 +118,7 @@ async function renderContent() {
     languages.delete('text');
 
     await Promise.all([...languages].map((lang) =>
-      highlighter.loadLanguage(import(`${host}/@shikijs/langs/esnext/${lang}.mjs`))
+      highlighter.loadLanguage(import(`${host}/@shikijs/langs/dist/${lang}.mjs`))
     ));
 
     for (const { codeBlock, lang } of codeData) {
