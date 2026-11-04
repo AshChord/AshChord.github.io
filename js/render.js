@@ -96,13 +96,13 @@ async function renderContent() {
     const host = 'https://cdn.jsdelivr.net/npm/@shikijs';
 
     const [core, engine, wasm] = await Promise.all([
-      import(`'${host}/@shikijs/core/+esm'`),
+      import(`'${host}/core/+esm'`),
       import(`${host}/engine-oniguruma/dist/index.mjs`),
       import(`${host}/engine-oniguruma/dist/wasm-inlined.mjs`)
     ]);
 
     const highlighter = await core.createHighlighterCore({
-      themes: [import(`${host}/themes@4.6.0/dist/github-light.mjs`)],
+      themes: [import(`${host}/themes/dist/github-light.mjs`)],
       langs: [],
       engine: engine.createOnigurumaEngine(wasm.default)
     });
@@ -129,10 +129,7 @@ async function renderContent() {
       const codeText = codeBlock.textContent.trimEnd();
       const originalLines = codeText.split('\n');
 
-      const highlighted = highlighter.codeToHtml(codeText, {
-        lang,
-        theme: 'github-light'
-      });
+      const highlighted = highlighter.codeToHtml(codeText, {lang, theme: 'github-light'});
 
       const doc = new DOMParser().parseFromString(highlighted, 'text/html');
 
