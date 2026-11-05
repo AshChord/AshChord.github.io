@@ -93,16 +93,17 @@ async function renderContent() {
   document.querySelector('.content-body').append(...contentNodes);
 
   (async function renderCode() {
-    const shikiBase = 'https://cdn.jsdelivr.net/npm/@shikijs';
+    const cdn = 'https://cdn.jsdelivr.net/npm';
 
-    const [core, engine, wasm] = await Promise.all([
-      import(`https://esm.sh/shiki/esnext/core.bundle.mjs`),
-      import(`${shikiBase}/engine-oniguruma/dist/index.mjs`),
-      import(`${shikiBase}/engine-oniguruma/dist/wasm-inlined.mjs`)
+    const [core, engine, wasm, theme] = await Promise.all([
+      import(`https://esm.sh/shiki@latest/esnext/core.bundle.mjs`),
+      import(`${cdn}/@shikijs/engine-oniguruma/dist/index.mjs`),
+      import(`${cdn}/@shikijs/engine-oniguruma/dist/wasm-inlined.mjs`),
+      import(`${cdn}/@shikijs/themes/dist/github-light.mjs`)
     ]);
 
     const highlighter = await core.createHighlighterCore({
-      themes: [import(`${shikiBase}/themes/dist/github-light.mjs`)],
+      themes: [theme],
       engine: engine.createOnigurumaEngine(wasm.default)
     });
 
@@ -118,7 +119,7 @@ async function renderContent() {
     });
 
     await Promise.all(Array.from(languages, (lang) =>
-      highlighter.loadLanguage(import(`${shikiBase}/langs/dist/${lang}.mjs`))
+      highlighter.loadLanguage(import(`${cdn}/@shikijs/langs/dist/${lang}.mjs`))
     ));
 
     for (const { codeBlock, codeText, lang } of codeData) {

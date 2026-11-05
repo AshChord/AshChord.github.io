@@ -412,7 +412,7 @@
   justify-self: end;
   visibility: hidden;
   position: sticky;
-  top: 116px;
+  top: calc(50vh + 44px - 14px * var(--heading-count));
   width: calc(50vw - 539px);
   height: fit-content;
   max-height: 100vh;
