@@ -3,11 +3,6 @@ main {
   display: grid;
   grid: auto 1fr auto / 1fr;
   visibility: visible;
-  min-height: calc(100vh - 65px);
-
-  @media (min-width: 768px) {
-    min-height: calc(100vh - 89px);
-  }
 }
 
 .feed {
