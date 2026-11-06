@@ -68,7 +68,7 @@ URL의 파일 경로는 <strong>웹 루트(Web Root)</strong>라 불리는 특�
           code.classList.replace('language-html', 'language-php');
         }
 
-        const line = code.querySelector(`.code-line[value="${lineNumber}"]`);
+        const line = code.querySelector(`.line[value="${lineNumber}"]`);
         const lineContent = new DOMParser().parseFromString(override, 'text/html');
 
         line.replaceChildren(...lineContent.body.childNodes);

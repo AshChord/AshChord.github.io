@@ -228,7 +228,7 @@ PHP 코드에서 위 테이블의 데이터를 사용하려면 어떻게 해야 
           code.classList.replace('language-html', 'language-php');
         }
 
-        const line = code.querySelector(`.code-line[value="${lineNumber}"]`);
+        const line = code.querySelector(`.line[value="${lineNumber}"]`);
         const lineContent = new DOMParser().parseFromString(override, 'text/html');
 
         line.replaceChildren(...lineContent.body.childNodes);

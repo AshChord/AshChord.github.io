@@ -1,31 +1,25 @@
 main {
-  display: grid;
-  grid: auto 1fr auto / 1fr;
   visibility: visible;
-  min-height: calc(100vh - 65px);
-
-  @media (min-width: 768px) {
-    min-height: calc(100vh - 89px);
-  }
 }
 
 .category-panel {
   display: none;
-  grid-area: 1 / 1;
   justify-self: end;
   position: sticky;
   z-index: 10;
   top: 121px;
-  height: fit-content;
   margin: 32px;
   border: 1px solid gainsboro;
   border-radius: 8px;
   background-color: white;
   user-select: none;
 
+  &[open] {
+    border-radius: 8px 8px 0 0;
+  }
+
   @media (min-width: 768px) {
-    display: flex;
-    flex-direction: column;
+    display: block;
   }
 }
 
@@ -51,6 +45,8 @@ main {
 }
 
 .category-panel-title {
+  box-sizing: border-box;
+  width: 200px;
   margin: -48px 0 0;
   padding: 16px 20px;
   font-size: 16px;
@@ -59,9 +55,14 @@ main {
 }
 
 .category-menu {
+  position: absolute;
   width: 200px;
-  margin: 0;
+  margin: 0 -1px;
   padding: 0;
+  border: 1px solid gainsboro;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background-color: white;
   list-style: none;
 }
 
@@ -92,25 +93,23 @@ main {
 .feed {
   display: grid;
   grid: auto / minmax(0, 1fr);
-  grid-area: 1 / 1;
   gap: 24px;
   box-sizing: border-box;
   width: 100%;
   max-width: 1200px;
-  height: fit-content;
-  margin: 32px 0;
-  padding: 0 32px;
+  margin-top: -50px;
+  padding: 32px;
 
   @media (min-width: 768px) {
     grid: auto / repeat(2, minmax(0, 1fr));
     gap: 28px;
-    margin: 60px 0;
+    padding-block: 60px;
   }
 
   @media (min-width: 1024px) {
     grid: auto / repeat(3, minmax(0, 1fr));
     gap: 32px;
-    margin: 60px auto;
+    margin-inline: auto;
   }
 
   .not-found, .no-results {
@@ -197,11 +196,9 @@ main {
 }
 
 .content {
-  grid-area: 1 / 1;
   box-sizing: border-box;
   width: 100%;
   max-width: 880px;
-  height: fit-content;
   margin: 40px auto 20px auto;
   padding: 0 20px;
 

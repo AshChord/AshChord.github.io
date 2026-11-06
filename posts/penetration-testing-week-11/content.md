@@ -72,7 +72,7 @@ Blacklist 필터링의 다양한 우회 기법들을 살펴보자. 예를 들어
       const code = document.currentScript.previousElementSibling.querySelector('code');
 
       const patch = () => {
-        const line = code.querySelector(`.code-line[value="${lineNumber}"]`);
+        const line = code.querySelector(`.line[value="${lineNumber}"]`);
         const lineContent = new DOMParser().parseFromString(override, 'text/html');
 
         line.replaceChildren(...lineContent.body.childNodes);
