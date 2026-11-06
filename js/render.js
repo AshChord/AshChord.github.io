@@ -125,20 +125,17 @@ async function renderContent() {
       copyBtn.classList.add('copy-button');
       codeBlock.parentElement.prepend(copyBtn);
 
-      const originalLines = codeText.split('\n');
-
       const highlighted = highlighter.codeToHtml(codeText, {lang, theme: 'github-light'});
       const doc = new DOMParser().parseFromString(highlighted, 'text/html');
 
       const lines = doc.querySelectorAll('.line');
       lines.forEach((line, lineIdx) => {
+        line.append('\n');
         line.className = 'code-line';
         line.setAttribute('line-number', lineIdx + 1);
 
-        const indent = originalLines[lineIdx].search(/\S/);
+        const indent = line.textContent.search(/\S/);
         if (indent > 0) line.style.setProperty('--indent', `${indent}ch`);
-
-        line.append('\n');
       });
 
       codeBlock.replaceChildren(...lines);
