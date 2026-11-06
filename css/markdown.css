@@ -319,7 +319,7 @@
     }
   }
 
-  .line {
+  .code-line {
     display: block;
     padding-left: var(--indent);
     text-indent: calc(-1 * var(--indent));

@@ -293,7 +293,7 @@ ping -c 3 "8.8.8.8"; cat "flag.py"
       const code = document.currentScript.previousElementSibling.querySelector('code');
 
       const patch = () => {
-        const line = code.querySelector(`.line[line-number="${lineNumber}"]`);
+        const line = code.querySelector(`.code-line[line-number="${lineNumber}"]`);
         const lineContent = new DOMParser().parseFromString(override, 'text/html');
 
         line.replaceChildren(...lineContent.body.childNodes);
