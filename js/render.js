@@ -130,12 +130,15 @@ async function renderContent() {
       const highlighted = highlighter.codeToHtml(codeText, {lang, theme: 'github-light'});
       const doc = new DOMParser().parseFromString(highlighted, 'text/html');
 
-      doc.querySelectorAll('.line').forEach((line, lineIdx) => {
+      const lines = doc.querySelectorAll('.line');
+      lines.forEach((line, lineIdx) => {
         const indent = originalLines[lineIdx].search(/\S/);
         if (indent > 0) line.style.setProperty('--indent', `${indent}ch`);
+
+        line.append('\n');
       });
 
-      codeBlock.replaceChildren(...doc.querySelector('code').childNodes);
+      codeBlock.replaceChildren(...lines);
       codeBlock.setAttribute('highlighted', '');
     }
 
