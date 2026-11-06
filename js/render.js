@@ -93,34 +93,32 @@ async function renderContent() {
   document.querySelector('.content-body').append(...contentNodes);
 
   (async function renderCode() {
-    const cdn = 'https://cdn.jsdelivr.net/npm';
-
-    const [core, engine, wasm, theme] = await Promise.all([
-      import(`https://esm.sh/shiki@latest/esnext/core.bundle.mjs`),
-      import(`${cdn}/@shikijs/engine-oniguruma/dist/index.mjs`),
-      import(`${cdn}/@shikijs/engine-oniguruma/dist/wasm-inlined.mjs`),
-      import(`${cdn}/@shikijs/themes/dist/github-light.mjs`)
-    ]);
-
-    const highlighter = await core.createHighlighterCore({
-      themes: [theme],
-      engine: engine.createOnigurumaEngine(wasm.default)
-    });
-
     const codeBlocks = document.querySelectorAll('pre code:not([highlighted])');
-    const languages = new Set();
+    const languageSet = new Set();
 
     const codeData = Array.from(codeBlocks, (codeBlock) => {
       const codeText = codeBlock.textContent.trimEnd();
       const lang = codeBlock.className.replace(/^language-/, '') || 'text';
-      if (lang !== 'text') languages.add(lang);
+      if (lang !== 'text') languageSet.add(lang);
 
       return { codeBlock, codeText, lang };
     });
 
-    await Promise.all(Array.from(languages, (lang) =>
-      highlighter.loadLanguage(import(`${cdn}/@shikijs/langs/dist/${lang}.mjs`))
-    ));
+    const cdn = 'https://cdn.jsdelivr.net/npm';
+
+    const [core, engine, wasm, theme, ...langs] = await Promise.all([
+      import('https://esm.sh/shiki/esnext/core.bundle.mjs'),
+      import(`${cdn}/@shikijs/engine-oniguruma/dist/index.mjs`),
+      import(`${cdn}/@shikijs/engine-oniguruma/dist/wasm-inlined.mjs`),
+      import(`${cdn}/@shikijs/themes/dist/github-light.mjs`),
+      ...Array.from(languageSet, lang => import(`${cdn}/@shikijs/langs/dist/${lang}.mjs`))
+    ]);
+
+    const highlighter = await core.createHighlighterCore({
+      engine: engine.createOnigurumaEngine(wasm.default),
+      themes: [theme],
+      langs: langs
+    });
 
     for (const { codeBlock, codeText, lang } of codeData) {
       const copyBtn = document.createElement('button');
@@ -131,21 +129,13 @@ async function renderContent() {
 
       const highlighted = highlighter.codeToHtml(codeText, {lang, theme: 'github-light'});
       const doc = new DOMParser().parseFromString(highlighted, 'text/html');
-      const fragment = document.createDocumentFragment();
 
       doc.querySelectorAll('.line').forEach((line, lineIdx) => {
-        const currentLine = document.createElement('data');
-        currentLine.className = 'code-line';
-        currentLine.value = lineIdx + 1;
-
         const indent = originalLines[lineIdx].search(/\S/);
-        if (indent > 0) currentLine.style.setProperty('--indent', `${indent}ch`);
-
-        currentLine.append(...line.childNodes, '\n');
-        fragment.appendChild(currentLine);
+        if (indent > 0) line.style.setProperty('--indent', `${indent}ch`);
       });
 
-      codeBlock.replaceChildren(fragment);
+      codeBlock.replaceChildren(...doc.querySelector('code').childNodes);
       codeBlock.setAttribute('highlighted', '');
     }
 

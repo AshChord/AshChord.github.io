@@ -281,12 +281,6 @@
     }
   }
 
-  data {
-    display: block;
-    padding-left: var(--indent);
-    text-indent: calc(-1 * var(--indent));
-  }
-
   .copy-button {
     float: right;
     width: 24px;
@@ -323,6 +317,12 @@
         box-shadow: 0 4px 8px gainsboro;
       }
     }
+  }
+
+  .line {
+    display: block;
+    padding-left: var(--indent);
+    text-indent: calc(-1 * var(--indent));
   }
 
   hr {
