@@ -37,7 +37,7 @@ normaltic' and extractvalue('<x/>', ':path') and '1' = '1
           code.classList.replace('language-text', 'language-sql');
         }
 
-        const line = code.querySelector(`.line[value="${lineNumber}"]`);
+        const line = code.querySelector(`.line[line-number="${lineNumber}"]`);
         const lineContent = new DOMParser().parseFromString(override, 'text/html');
 
         line.replaceChildren(...lineContent.body.childNodes);

@@ -132,6 +132,9 @@ async function renderContent() {
 
       const lines = doc.querySelectorAll('.line');
       lines.forEach((line, lineIdx) => {
+        line.className = 'code-line';
+        line.setAttribute('line-number', lineIdx + 1);
+
         const indent = originalLines[lineIdx].search(/\S/);
         if (indent > 0) line.style.setProperty('--indent', `${indent}ch`);
 

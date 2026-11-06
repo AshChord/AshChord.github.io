@@ -134,7 +134,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
           code.classList.replace('language-text', 'language-js');
         }
 
-        const line = code.querySelector(`.line[value="${lineNumber}"]`);
+        const line = code.querySelector(`.line[line-number="${lineNumber}"]`);
         const lineContent = new DOMParser().parseFromString(override, 'text/html');
 
         line.replaceChildren(...lineContent.body.childNodes);
