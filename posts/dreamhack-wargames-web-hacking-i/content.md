@@ -446,7 +446,7 @@ xss-2에서는 `/vuln` 엔드포인트가 단순히 `vuln.html`을 렌더링한�
 `/flag`로 이동한 뒤 다음 페이로드를 입력한다.
 
 <style id="code-1">
-  #code-1 + pre data[value="3"] span:nth-of-type(17) {color: #24292E !important;}
+  #code-1 + pre [line-number="3"] span:nth-of-type(17) {color: #24292E !important;}
 </style>
 ```html
 <img

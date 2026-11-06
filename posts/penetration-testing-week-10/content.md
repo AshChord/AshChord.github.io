@@ -242,7 +242,7 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 입력한 페이로드는 다음과 같다.
 
 <style id="code-1">
-  #code-1 + pre data[value="7"] span {color: #24292E !important; font-style: normal !important;}
+  #code-1 + pre [line-number="7"] span {color: #24292E !important; font-style: normal !important;}
 </style>
 ```html
 "/>

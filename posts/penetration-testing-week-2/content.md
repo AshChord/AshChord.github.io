@@ -12,7 +12,7 @@
 이러한 흐름을 구현하기 위해서, 다음과 같은 `index.php` 코드를 생각해 볼 수 있다.
 
 <style id="code-1">
-  #code-1 + pre data[value="10"] span {color: #24292E !important;}
+  #code-1 + pre [line-number="10"] span {color: #24292E !important;}
 </style>
 ```php
 // index.php
@@ -34,7 +34,7 @@
 `login.php`는 다음과 같이 작성할 수 있다.
 
 <style id="code-2">
-  #code-2 + pre data[value="20"] span {color: #24292E !important;}
+  #code-2 + pre [line-number="20"] span {color: #24292E !important;}
 </style>
 ```php
 // login.php
@@ -353,7 +353,7 @@ sudo systemctl restart apache2
 `db_check.php`를 약간 수정하여 해당 기능을 구현할 수 있다.
 
 <style id="code-3">
-  #code-3 + pre data[value="19"] span:nth-of-type(9) {color: #032F62 !important;}
+  #code-3 + pre [line-number="19"] span:nth-of-type(9) {color: #032F62 !important;}
 </style>
 ```php
 // get_score.php
@@ -467,7 +467,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 회원 가입이 완료되면 `login.php?sign_up=success`로 이동한다.
 
 <style id="code-4">
-  #code-4 + pre data[value="29"] span:is(:nth-of-type(6), :nth-of-type(8)) {color: #032F62 !important;}
+  #code-4 + pre [line-number="29"] span:is(:nth-of-type(6), :nth-of-type(8)) {color: #032F62 !important;}
 </style>
 ```php
 // sign_up.php
@@ -797,7 +797,7 @@ phpMyAdmin을 통해 `dev` 데이터베이스에 다음과 같은 `users` 테이
 계정이 없는 사용자를 위해 회원 가입 페이지로 이동할 수 있는 링크가 포함되어 있다.
 
 <style id="code-5">
-  #code-5 + pre data:is([value="1"], [value="20"], [value="26"]) span {color: #6A737D !important;}
+  #code-5 + pre :is([line-number="1"], [line-number="20"], [line-number="26"]) span {color: #6A737D !important;}
 </style>
 ```html
 // login.php

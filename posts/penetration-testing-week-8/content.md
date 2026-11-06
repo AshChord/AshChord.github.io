@@ -44,7 +44,7 @@ Prepared Statement를 사용하는 기본적인 PHP 코드이다. 위 코드는 
 **Whitelist Filtering**이란 허용된 항목만 통과시키고 나머지는 차단하는 보안 방식을 말한다. 이를테면 `' or '1' = '1`과 같은 페이로드를 막기 위해 다음과 같은 방법을 사용할 수 있다.
 
 <style id="code-1">
-  #code-1 + pre data[value="14"] span {color: #24292E !important;}
+  #code-1 + pre [line-number="14"] span {color: #24292E !important;}
 </style>
 ```php
 function isValidUsername($username) {
@@ -250,8 +250,8 @@ Flag: <span style="color: green">segfault{<span style="filter: blur(5px); overfl
 이로써 조건식의 진릿값에 따른 애플리케이션의 동작 차이를 확인하였다. 이번에는 데이터가 출력되는 위치를 확인할 수 없으므로, 바로 Blind SQL Injection을 사용하기로 결정하였다. 7주 차에 사용했던 자동화 스크립트를 소폭 수정하여 실행해 보았다.
 
 <style id="code-2">
-  #code-2 + pre data[value="12"] span:is(:nth-of-type(15), :nth-of-type(17)) {color: #032F62 !important;}
-  #code-2 + pre data:is([value="16"], [value="19"]) span {color: #24292E !important;}
+  #code-2 + pre [line-number="12"] span:is(:nth-of-type(15), :nth-of-type(17)) {color: #032F62 !important;}
+  #code-2 + pre :is([line-number="16"], [line-number="19"]) span {color: #24292E !important;}
 </style>
 ```python
 # blind_sqli.py

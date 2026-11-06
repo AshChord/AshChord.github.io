@@ -9,7 +9,7 @@
 SQL Injection의 동작 원리는 다음과 같다. 로그인 기능을 구현할 때 자주 사용되는 PHP 코드를 생각해 보자.
 
 <style id="code-1">
-  #code-1 + pre data[value="1"] span:nth-of-type(15) {color: #032F62 !important;}
+  #code-1 + pre [line-number="1"] span:nth-of-type(15) {color: #032F62 !important;}
 </style>
 ```php
 $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
@@ -18,7 +18,7 @@ $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$passwor
 사용자가 `username`에 `user`, `password`에 `1234`를 입력했다고 가정하면, `$sql` 변수에는 다음과 같은 쿼리가 저장된다.
 
 <style id="code-2">
-  #code-2 + pre data[value="1"] span:nth-of-type(10) {color: #24292E !important;}
+  #code-2 + pre [line-number="1"] span:nth-of-type(10) {color: #24292E !important;}
 </style>
 ```sql
 SELECT * FROM user WHERE username = 'user' AND password = '1234'
@@ -49,7 +49,7 @@ SQL에서는 문자열에 작은따옴표(`'`)를 포함해야 할 경우, 작�
 예를 들어 `username`에 `user'#`를 입력한다고 생각해 보자. 이때 SQL 쿼리는 다음과 같다.
 
 <style id="code-3">
-  #code-3 + pre data[value="1"] span:nth-last-of-type(-n+4) {color: #6A737D !important;}
+  #code-3 + pre [line-number="1"] span:nth-last-of-type(-n+4) {color: #6A737D !important;}
 </style>
 ```sql
 SELECT * FROM user WHERE username = 'user'#' AND password = '1234'
@@ -273,7 +273,7 @@ POST 방식으로 입력한 데이터가 전달되며 `index.php`로 리다이�
 SQL Injection 공격이 가능한지 확인하는 가장 쉬운 방법은 입력 데이터 뒤에 `'and '1' = '1`을 추가하는 것이다. 이를테면 다음과 같다.
 
 <style id="code-4">
-  #code-4 + pre data[value="1"] span:nth-of-type(15) {color: #032F62 !important;}
+  #code-4 + pre [line-number="1"] span:nth-of-type(15) {color: #032F62 !important;}
 </style>
 ```php
 $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
@@ -282,7 +282,7 @@ $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$passwor
 로그인 기능을 담당하는 SQL 쿼리이다. `username`에 `user`와 `user' and '1' = '1`을 각각 할당해 보자.
 
 <style id="code-5">
-  #code-5 + pre data:is([value="2"], [value="5"]) span:nth-last-of-type(3) {color: #24292E !important;}
+  #code-5 + pre :is([line-number="2"], [line-number="5"]) span:nth-last-of-type(3) {color: #24292E !important;}
 </style>
 ```sql
 /* username: user */
@@ -310,7 +310,7 @@ SELECT * FROM user WHERE username = 'user' and '1' = '1' AND password = '1234'
 `OR` 연산을 사용한 공격은 특히 유용한데, 그 이유는 다음과 같다.
 
 <style id="code-6">
-  #code-6 + pre data[value="2"] span:nth-of-type(14) {color: #24292E !important;}
+  #code-6 + pre [line-number="2"] span:nth-of-type(14) {color: #24292E !important;}
 </style>
 ```sql
 /* username: user' or '1' = '1 */
@@ -387,7 +387,7 @@ if ($user && $user['password'] == $password) {
 이러한 점을 고려하여 도출된 두 번째 가설은, 서버 측 코드에서 SQL 쿼리에 `OR` 연산이 포함되지 못하도록 제한하는 구문이 존재한다는 것이다. 이를테면 다음과 같은 방식이다.
 
 <style id="code-7">
-  #code-7 + pre data[value="9"] span:nth-of-type(15) {color: #032F62 !important;}
+  #code-7 + pre [line-number="9"] span:nth-of-type(15) {color: #032F62 !important;}
 </style>
 ```php
 $username = $_POST['UserId'];

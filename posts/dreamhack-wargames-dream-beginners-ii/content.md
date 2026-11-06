@@ -169,7 +169,7 @@ dive가 실행되면 다음과 같은 화면이 나타난다.
 
 각 레이어를 탐색하던 도중 다음 3개의 명령을 확인하였다.
 <style id="code-1">
-  #code-1 + pre data[value="1"] span:nth-of-type(2) {color: #6F42C1 !important;}
+  #code-1 + pre [line-number="1"] span:nth-of-type(2) {color: #6F42C1 !important;}
 </style>
 ```dockerfile
 WORKDIR /home/chall
@@ -315,7 +315,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 구체적인 로그인 처리 절차는 다음과 같다.
 
 <style id="code-2">
-  #code-2 + pre data[value="4"] span {color: #24292E !important;}
+  #code-2 + pre [line-number="4"] span {color: #24292E !important;}
 </style>
 ```php
 if (preg_match("/[a-zA-Z]/", $input_pw)) {
@@ -346,7 +346,7 @@ Password의 경우, 정규식 표현 `/\d*\@\d{2,3}(31)+[^0-8\"]\!/`에 해당�
 | `\!`       | `!` 문자                                |
 
 <style id="code-3">
-  #code-3 + pre data[value="11"] span {color: #24292E !important;}
+  #code-3 + pre [line-number="11"] span {color: #24292E !important;}
 </style>
 ```php
 if ($name === "dnyang0310" && $pw === "d4y0r50ng+1+13") {
@@ -438,10 +438,10 @@ if ($cmd === "") {
   echo '
     <p>
       <form method="post" action="/step2.php">
-        <input type="hidden" name="input1" value="'.$input_name.'">
-        <input type="hidden" name="input2" value="'.$input_pw.'">
+        <input type="hidden" name="input1" line-number="'.$input_name.'">
+        <input type="hidden" name="input2" line-number="'.$input_pw.'">
         <input type="text" placeholder="Command" name="cmd">
-        <input type="submit" value="제출">
+        <input type="submit" line-number="제출">
         <br/>
         <br/>
       </form>

@@ -48,7 +48,7 @@ URL의 파일 경로는 <strong>웹 루트(Web Root)</strong>라 불리는 특�
 다음과 같은 `score.php` 파일을 생각해 보자.
 
 <style id="code-1">
-  #code-1 + pre data[value="1"] span {color: #6A737D !important;}
+  #code-1 + pre [line-number="1"] span {color: #6A737D !important;}
 </style>
 ```html
 // score.php
@@ -133,7 +133,7 @@ GET 방식으로 데이터를 전달할 때 반드시 URL에 직접 쿼리 스�
 아래의 `name.php` 파일을 보자.
 
 <style id="code-2">
-  #code-2 + pre data[value="1"] span {color: #6A737D !important;}
+  #code-2 + pre [line-number="1"] span {color: #6A737D !important;}
 </style>
 ```html
 // name.php
@@ -170,7 +170,7 @@ GET 방식으로 데이터를 전달할 때 반드시 URL에 직접 쿼리 스�
 그렇다면 **POST 방식**은 무엇일까? `name.php`를 다음과 같이 수정해 보자.
 
 <style id="code-3">
-  #code-3 + pre data[value="1"] span {color: #6A737D !important;}
+  #code-3 + pre [line-number="1"] span {color: #6A737D !important;}
 </style>
 ```html
 // name.php

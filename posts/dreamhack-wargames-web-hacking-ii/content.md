@@ -179,7 +179,7 @@ Flag: <span style="color: green">DH{<span style="filter: blur(5px); overflow-wra
 코드를 살펴보면, `req.query`의 타입이 문자열로 지정되어 있지 않기 때문에 문자열 외의 자료형이 입력될 수 있다. 그렇다면 객체 형태의 자료형, 즉 연산자가 사용 가능하며 이를 통해 NoSQL Injection 공격을 수행할 수 있다. 이를테면 다음 쿼리 스트링을 입력해 보자.
 
 <style id="code-1">
-  #code-1 + pre data[value="2"] span {color: #24292E !important;}
+  #code-1 + pre [line-number="2"] span {color: #24292E !important;}
 </style>
 ```js
 // Query String:
@@ -198,7 +198,7 @@ db.collection('user').findOne({
 같은 방식을 사용해 admin 계정으로 로그인을 시도할 수 있으나, 필터링 조건에 의해 `admin`, `dh`, `admi` 문자열을 쿼리 내에 사용할 수 없다. 이를 우회하기 위해서는 다음과 같은 쿼리 스트링을 사용할 수 있다.
 
 <style id="code-2">
-  #code-2 + pre data[value="2"] span {color: #24292E !important;}
+  #code-2 + pre [line-number="2"] span {color: #24292E !important;}
 </style>
 ```js
 // Query String:
@@ -218,10 +218,10 @@ db.collection('user').findOne({
 성공적으로 `admin`이 출력되는 것을 확인하였다. 이후 `upw`의 정규식 패턴 뒤에 임의 문자를 하나씩 추가해 가며 정확한 문자열을 순차적으로 찾을 수 있다. 이를 수행하기 위해 다음과 같은 Python 스크립트를 작성하였다.
 
 <style id="code-3">
-  #code-3 + pre data[value="8"] span:nth-of-type(1) {color: #24292E !important;}
-  #code-3 + pre data[value="12"] span:nth-of-type(7) {color: #24292E !important;}
-  #code-3 + pre data[value="14"] span:nth-of-type(1) {color: #24292E !important;}
-  #code-3 + pre data[value="17"] span:nth-of-type(5) {color: #24292E !important;}
+  #code-3 + pre [line-number="8"] span:nth-of-type(1) {color: #24292E !important;}
+  #code-3 + pre [line-number="12"] span:nth-of-type(7) {color: #24292E !important;}
+  #code-3 + pre [line-number="14"] span:nth-of-type(1) {color: #24292E !important;}
+  #code-3 + pre [line-number="17"] span:nth-of-type(5) {color: #24292E !important;}
 </style>
 ```python
 # mango.py

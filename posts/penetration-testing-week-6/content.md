@@ -225,7 +225,7 @@ Unknown Column, 즉 해당 컬럼을 찾을 수 없다는 오류가 발생한다
 > <strong>`LIKE`</strong>는 WHERE 절에서 문자열 비교 시 특정 패턴을 식별하기 위해 사용하는 연산자이다.  
 > 주로 와일드카드 문자인 `%`와 함께 사용되며, 기본적인 사용 방식은 다음과 같다.
 > <style id="code-1">
->   #code-1 + pre data:is([value="5"], [value="7"]) span:nth-of-type(6) {color: #24292E !important;}
+>   #code-1 + pre :is([line-number="5"], [line-number="7"]) span:nth-of-type(6) {color: #24292E !important;}
 > </style>
 > ```sql
 > /* Syntax */

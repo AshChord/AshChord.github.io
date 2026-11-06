@@ -254,7 +254,7 @@ normaltic' and (substr((select 'test'), 1, 1) = 't') and '1' = '1
 > 사용 예시는 아래와 같다.
 >
 > <style id="code-1">
->   #code-1 + pre data[value="2"] span:nth-of-type(2) {color: #24292E !important;}
+>   #code-1 + pre [line-number="2"] span:nth-of-type(2) {color: #24292E !important;}
 > </style>
 > ```sql
 > /* Syntax */

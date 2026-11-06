@@ -19,7 +19,7 @@
 로그인 로직은 크게 **식별·인증 동시 처리 방식**과 **식별·인증 분리 처리 방식**이 있다. 각 로직을 예시 코드와 함께 살펴보자.
 
 <style id="code-1">
-  #code-1 + pre data[value="13"] span:nth-of-type(15) {color: #032F62 !important;}
+  #code-1 + pre [line-number="13"] span:nth-of-type(15) {color: #032F62 !important;}
 </style>
 ```php
 // 식별·인증 동시 처리
@@ -175,8 +175,8 @@ Login successful!
 #### 1\. 식별·인증 동시 처리 방식
 
 <style id="code-2">
-  #code-2 + pre data[value="16"] span:nth-of-type(15) {color: #032F62 !important;}
-  #code-2 + pre data[value="26"] span {color: #24292E !important;}
+  #code-2 + pre [line-number="16"] span:nth-of-type(15) {color: #032F62 !important;}
+  #code-2 + pre [line-number="26"] span {color: #24292E !important;}
 </style>
 ```php
 // login_proc_1.php
@@ -267,7 +267,7 @@ Login successful!
 #### 2\. 식별·인증 분리 처리 방식
 
 <style id="code-3">
-  #code-3 + pre data[value="33"] span {color: #24292E !important;}
+  #code-3 + pre [line-number="33"] span {color: #24292E !important;}
 </style>
 ```php
 // login_proc_2.php
@@ -366,8 +366,8 @@ Login successful!
 해시 함수로는 대표적인 해시 알고리즘 중 하나인 SHA-256을 사용하였다.
 
 <style id="code-4">
-  #code-4 + pre data[value="18"] span:nth-of-type(15) {color: #032F62 !important;}
-  #code-4 + pre data[value="28"] span {color: #24292E !important;}
+  #code-4 + pre [line-number="18"] span:nth-of-type(15) {color: #032F62 !important;}
+  #code-4 + pre [line-number="28"] span {color: #24292E !important;}
 </style>
 ```php
 // login_proc_3.php
@@ -438,7 +438,7 @@ Login successful!
 #### 4\. 식별·인증 분리 처리 방식(with Hashing)
 
 <style id="code-5">
-  #code-5 + pre data[value="35"] span {color: #24292E !important;}
+  #code-5 + pre [line-number="35"] span {color: #24292E !important;}
 </style>
 ```php
 // login_proc_4.php

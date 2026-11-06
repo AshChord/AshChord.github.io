@@ -43,7 +43,7 @@ Blacklist 필터링의 다양한 우회 기법들을 살펴보자. 예를 들어
 `onerror` 외에도 다양한 이벤트 속성이 존재하며, 여러 방식으로 XSS 공격에 활용될 수 있다. 아래는 대표적인 예시 중 일부이다.
 
 <style id="code-1">
-  #code-1 + pre data:is([value="1"], [value="4"]) span {color: #6A737D !important;}
+  #code-1 + pre :is([line-number="1"], [line-number="4"]) span {color: #6A737D !important;}
 </style>
 ```html
 // 웹 페이지 로드 후 스크립트 실행
@@ -245,7 +245,7 @@ Burp Suite를 활용하여 해당 위치가 정확히 어떤 요소인지 확인
 `<script>` 태그 역시 별도의 필터링 없이 서버 응답에 정상적으로 포함되었다. 따라서 XSS 공격이 가능하다고 판단하고 삽입할 페이로드를 다음과 같이 작성하였다.
 
 <style id="code-2">
-  #code-2 + pre data[value="10"] span {color: #24292E !important; font-style: normal !important;}
+  #code-2 + pre [line-number="10"] span {color: #24292E !important; font-style: normal !important;}
 </style>
 ```html
 "/>

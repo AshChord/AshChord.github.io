@@ -106,8 +106,8 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 그와 동시에 서버 응답에서 이상한 점이 발견되었는데, 응답 본문에 아래의 스크립트가 포함되어 있었기 때문이다.
 
 <style id="code-1">
-  #code-1 + pre data[value="3"] span:is(:nth-of-type(1), :nth-of-type(3)) {color: #24292E !important;}
-  #code-1 + pre data[value="3"] span:nth-of-type(2) {color: #22863A !important;}
+  #code-1 + pre [line-number="3"] span:is(:nth-of-type(1), :nth-of-type(3)) {color: #24292E !important;}
+  #code-1 + pre [line-number="3"] span:nth-of-type(2) {color: #22863A !important;}
 </style>
 ```html
 <script>
@@ -212,7 +212,7 @@ Burp Suite를 통해 확인해 보면, 입력한 데이터가 서버 응답에 �
 마이페이지 접속 요청을 변조하여 `user`를 `<'">`로 변경하였고, 그 결과 아이디난의 플레이스홀더에 입력한 텍스트 `<'">`가 그대로 출력되는 것을 확인하였다. 모든 문자가 별도의 변환 처리 없이 전송되는 것을 확인했으므로, 이번에는 `user`를 다음과 같이 변경하였다.
 
 <style id="code-1">
-  #code-1 + pre data[value="1"] span:nth-of-type(10) {color: #24292E !important; font-style: normal !important;}
+  #code-1 + pre [line-number="1"] span:nth-of-type(10) {color: #24292E !important; font-style: normal !important;}
 </style>
 ```html
 "/><script>alert(1);</script><

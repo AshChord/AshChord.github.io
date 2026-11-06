@@ -9,7 +9,7 @@
 웹 애플리케이션 상의 파일 업로드 기능이 확장자 기반의 필터링 로직을 적용하고 있을 경우, 해당 로직의 구현 방식에 따라 이중 확장자를 이용한 우회가 가능할 수 있다. 예를 들어, 업로드한 파일명을 `.`를 기준으로 분할한 뒤 첫 번째 구분자 이후의 문자열을 확장자로 간주하는 경우, 실제 최종 확장자가 아닌 선행 확장자만을 검사하게 되어 우회가 발생한다. 다음의 예시 코드를 보자.
 
 <style id="code-1">
-  #code-1 + pre data[value="15"] span {color: #24292E !important;}
+  #code-1 + pre [line-number="15"] span {color: #24292E !important;}
 </style>
 ```php
 <?php
@@ -41,7 +41,7 @@
 다음의 예시 코드를 살펴보자.
 
 <style id="code-2">
-  #code-2 + pre data[value="3"] span {color: #24292E !important;}
+  #code-2 + pre [line-number="3"] span {color: #24292E !important;}
 </style>
 ```php
 <?php
