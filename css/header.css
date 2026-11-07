@@ -1,13 +1,9 @@
 html {
-  height: 100%;
   scrollbar-gutter: stable;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
   visibility: hidden;
-  min-height: 100%;
   margin: 0;
   font-size: 14px;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
