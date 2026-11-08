@@ -162,6 +162,7 @@ main {
   margin: 0;
   padding: 0;
   list-style: none;
+  font-size: 16px;
 }
 
 .category-menu-item {
@@ -189,17 +190,14 @@ main {
 }
 
 .content {
-  grid-area: 1 / 1;
+  display: inline-block;
   box-sizing: border-box;
   width: 100%;
   max-width: 880px;
-  height: fit-content;
-  margin: 40px auto 20px auto;
-  padding: 0 20px;
+  padding: 40px 20px 20px;
 
   @media (min-width: 768px) {
-    margin: 80px auto 40px auto;
-    padding: 0 40px;
+    padding: 80px 40px 40px;
   }
 }
 
