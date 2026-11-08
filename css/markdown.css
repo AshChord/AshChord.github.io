@@ -406,15 +406,14 @@
 }
 
 .outline {
-  float: right;
   display: none;
   visibility: hidden;
   position: sticky;
   top: calc(50vh + 44px - 14px * var(--heading-count));
+  float: right;
   width: calc(50vw - 539px);
-  height: fit-content;
   max-height: 100vh;
-  margin: 251px -114px calc(50vh - 44px - 14px * var(--heading-count)) 0;
+  margin: 251px 50px calc(50vh - 44px - 14px * var(--heading-count)) 0;
   padding-left: 16px;
   border-left: 1px solid gainsboro;
   font-size: 14px;
@@ -425,7 +424,7 @@
   }
 
   a {
-    display: block;
+    display: table;
     color: darkgray;
     text-decoration: none;
     transition: color 0.3s ease, text-shadow 0.3s ease;
@@ -441,6 +440,6 @@
   }
 
   @media (min-width: 1536px) {
-    display: inline-block;
+    display: block;
   }
 }

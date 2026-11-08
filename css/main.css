@@ -14,8 +14,11 @@ main {
   gap: 24px;
   box-sizing: border-box;
   width: 100%;
-  margin-right: -266px;
   padding: 32px;
+
+  &:empty {
+    display: none;
+  }
 
   @media (min-width: 768px) {
     grid: auto / repeat(2, minmax(0, 1fr));
@@ -116,8 +119,9 @@ main {
   position: sticky;
   z-index: 10;
   top: 121px;
+  right: 32px;
   float: right;
-  margin: 32px;
+  margin-left: -202px;
   border: 1px solid gainsboro;
   border-radius: 8px;
   background-color: white;
@@ -196,6 +200,10 @@ main {
   max-width: 880px;
   padding: 40px 20px 20px;
 
+  &:empty {
+    display: none;
+  }
+
   @media (min-width: 768px) {
     padding: 80px 40px 40px;
   }
@@ -203,19 +211,23 @@ main {
 
 .pagination {
   display: flex;
-  align-items: center;
   gap: 8px;
   visibility: hidden;
-  height: 80px;
-  margin: -32px auto 0;
+  justify-self: center;
+  margin-top: -32px;
+  padding: 32px;
+
+  &:empty {
+    display: none;
+  }
 
   &:has(.page-number) {
     visibility: visible;
   }
 
   @media (min-width: 768px) {
-    height: 100px;
-    margin: -60px auto 0;
+    gap: 12px;
+    margin-top: -60px;
   }
 }
 
@@ -258,12 +270,13 @@ main {
 }
 
 .page-number {
-  width: 16px;
+  width: 18px;
   margin: 0 8px;
   color: gray;
   font-size: 14px;
   text-decoration: none;
   text-align: center;
+  line-height: 18px;
   transition: color 0.3s ease;
 
   &:hover {
@@ -280,6 +293,7 @@ main {
   @media (min-width: 768px) {
     width: 20px;
     font-size: 16px;
+    line-height: 20px;
   }
 }
 
