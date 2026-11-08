@@ -198,6 +198,8 @@ main {
 
 .content {
   display: inline-block;
+  position: relative;
+  left: max(0px, calc(50% - 440px));
   box-sizing: border-box;
   width: 100%;
   max-width: 880px;
@@ -216,6 +218,7 @@ main {
   display: flex;
   gap: 8px;
   visibility: hidden;
+  position: relative;
   justify-self: center;
   margin-top: -32px;
   padding: 32px;

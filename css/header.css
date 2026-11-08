@@ -30,7 +30,7 @@ header {
   }
 
   @media (min-width: 768px) {
-    padding: 20px max(20px, calc((100% - 1136px) / 2));
+    padding: 20px max(20px, calc((100% - 1200px) / 2));
   }
 }
 
