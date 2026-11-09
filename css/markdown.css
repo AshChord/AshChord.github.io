@@ -419,10 +419,6 @@
   font-size: 14px;
   line-height: 28px;
 
-  &:empty {
-    display: none;
-  }
-
   &[open] {
     visibility: visible;
   }
@@ -445,5 +441,9 @@
 
   @media (min-width: 1536px) {
     display: block;
+
+    &:empty {
+      display: none;
+    }
   }
 }

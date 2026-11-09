@@ -67,7 +67,7 @@ window.addEventListener('resize', () => {
   const headingCount = Number(outline.getAttribute('heading-count'));
   const outlineHeight = 28 * headingCount;
 
-  outline.toggleAttribute('open', window.innerHeight - 100 > outlineHeight);
+  outline.toggleAttribute('open', window.innerHeight - 100 > outlineHeight && outlineHeight > 0);
 });
 
 // ---------------------------------------------------------
