@@ -33,12 +33,6 @@ main {
     grid: auto / repeat(3, minmax(0, 1fr));
     gap: 32px;
   }
-
-  .not-found, .no-results {
-    grid-column: 1 / -1;
-    padding: 48px;
-    text-align: center;
-  }
 }
 
 .feed-item {
@@ -115,6 +109,13 @@ main {
     background-color: color-mix(mediumslateblue 70%, white 30%);
     color: white;
   }
+}
+
+.not-found, .no-results {
+  grid-column: 1 / -1;
+  padding: 48px;
+  font-size: 16px;
+  text-align: center;
 }
 
 .category-panel {
