@@ -1,11 +1,11 @@
 main {
   visibility: visible;
-  min-height: calc(100vh - 117px);
+  min-height: calc(100svh - 117px);
   font-size: 0;
   text-align: center;
 
   @media (min-width: 768px) {
-    min-height: calc(100vh - 149px);
+    min-height: calc(100svh - 149px);
   }
 }
 
