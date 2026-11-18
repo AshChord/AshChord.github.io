@@ -188,7 +188,7 @@ async function renderContent() {
 // 목차 렌더링
 async function renderOutline() {
   const contentNodes = await window.contentNodes;
-  const headings = [...contentNodes].filter(node => node.matches('h2, h3, h4, h5, h6'));
+  const headings = contentNodes.filter(node => node.matches('h2, h3, h4, h5, h6'));
   const headingList = outline.querySelector('.heading-list');
 
   headings.forEach((hdg, idx) => {

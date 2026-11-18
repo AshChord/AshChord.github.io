@@ -1,7 +1,7 @@
 async function hydrate() {
   const skeletonSource = await fetch('/').then(res => res.text());
   const skeleton = new DOMParser().parseFromString(skeletonSource, 'text/html');
-  const contentNodes = document.body.children;
+  const contentNodes = [...document.body.children];
 
   document.body.replaceWith(skeleton.body);
 
