@@ -93,6 +93,7 @@
       margin: 36px 0 24px;
       font-size: 24px;
       line-height: 48px;
+      scroll-margin-top: 89px;
     }
   }
 
@@ -105,6 +106,7 @@
       margin: 32px 0 24px;
       font-size: 20px;
       line-height: 40px;
+      scroll-margin-top: 89px;
     }
   }
 
@@ -117,6 +119,7 @@
       margin: 28px 0 24px;
       font-size: 18px;
       line-height: 36px;
+      scroll-margin-top: 89px;
     }
   }
 
@@ -129,6 +132,7 @@
       margin: 24px 0;
       font-size: 16px;
       line-height: 32px;
+      scroll-margin-top: 89px;
     }
   }
 
@@ -141,6 +145,7 @@
       margin: 20px 0;
       font-size: 14px;
       line-height: 28px;
+      scroll-margin-top: 89px;
     }
   }
 
@@ -414,7 +419,7 @@
   float: right;
   width: calc(50% - 587px);
   max-height: 100vh;
-  margin: 251px -50% 28px 0;
+  margin: 251px 0 28px -50%;
   padding-left: 16px;
   border-left: 1px solid gainsboro;
   font-size: 14px;
