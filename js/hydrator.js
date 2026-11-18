@@ -5,6 +5,7 @@ async function hydrate() {
   const skeleton = new DOMParser().parseFromString(skeletonSource, 'text/html');
 
   const nodes = [...document.body.childNodes];
+  console.log(nodes);
   const contentNodes = nodes.slice(nodes.indexOf(hydrator) + 1);
 
   document.body.replaceWith(skeleton.body);

@@ -65,7 +65,7 @@ const filteredPosts = dataflow.node(async () => {
     );
   }
 
-  return posts;
+  return await posts;
 });
 
 // 4. paginationData
