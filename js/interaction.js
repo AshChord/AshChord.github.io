@@ -106,9 +106,7 @@ outline.addEventListener('click', (e) => {
   const targetId = link.getAttribute('href').slice(1);
   const targetHdg = document.getElementById(targetId);
   
-  if (targetHdg) {
-    targetHdg.scrollIntoView({ behavior: 'smooth' });
-  }
+  if (targetHdg) targetHdg.scrollIntoView();
 });
 
 // 스크롤 스파이 (현재 읽는 위치 하이라이팅)
