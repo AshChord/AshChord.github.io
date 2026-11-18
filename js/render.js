@@ -161,12 +161,6 @@ async function renderContent() {
     const headings = content.querySelectorAll('h2, h3, h4, h5, h6');
     const headingList = outline.querySelector('.heading-list');
 
-    const markdownStyle = [...document.styleSheets].find(sheet => sheet.href.endsWith('/markdown.css'));
-    const outlineRule = markdownStyle.cssRules[markdownStyle.cssRules.length - 1];
-
-    outline.setAttribute('heading-count', headings.length);
-    outlineRule.style.setProperty('--heading-count', headings.length);
-
     headings.forEach((hdg, idx) => {
       hdg.id = `heading-${idx}`;
 

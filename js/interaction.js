@@ -59,15 +59,14 @@ document.addEventListener('click', (e) => {
 // ---------------------------------------------------------
 window.addEventListener('resize', () => {
   // 넓은 화면에서 열림 상태 강제 초기화
-  if (window.innerWidth >= 768) {
+  if (innerWidth >= 768) {
     menuBtn.removeAttribute('open');
     searchBar.removeAttribute('open');
   }
 
-  const headingCount = Number(outline.getAttribute('heading-count'));
-  const outlineHeight = 28 * headingCount;
-
-  outline.toggleAttribute('open', window.innerHeight - 100 > outlineHeight && outlineHeight > 0);
+  const outlineHeight = outline.scrollHeight;
+  const canOpenOutline = innerWidth >= 1536 && outlineHeight && innerHeight - 145 > outlineHeight;
+  outline.toggleAttribute('open', canOpenOutline);
 });
 
 // ---------------------------------------------------------

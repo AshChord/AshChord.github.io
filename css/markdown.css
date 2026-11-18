@@ -409,12 +409,12 @@
   display: none;
   visibility: hidden;
   position: sticky;
-  top: calc(50vh + 44px - 14px * var(--heading-count));
+  top: 117px;
   right: 98px;
   float: right;
   width: calc(50% - 587px);
   max-height: 100vh;
-  margin: 251px -50% calc(50vh - 44px - 14px * var(--heading-count)) 0;
+  margin: 251px -50% 28px 0;
   padding-left: 16px;
   border-left: 1px solid gainsboro;
   font-size: 14px;
