@@ -410,14 +410,15 @@
   visibility: hidden;
   position: sticky;
   top: calc(50vh + 44px - 14px * var(--heading-count));
-  right: 50px;
+  right: 98px;
   float: right;
-  width: calc(50% - 539px);
+  width: calc(50% - 587px);
   max-height: 100vh;
   margin: 251px -50% calc(50vh - 44px - 14px * var(--heading-count)) 0;
   padding-left: 16px;
   border-left: 1px solid gainsboro;
   font-size: 14px;
+  text-align: left;
   line-height: 28px;
 
   &[open] {
@@ -425,7 +426,8 @@
   }
 
   a {
-    display: table;
+    display: block;
+    width: fit-content;
     color: darkgray;
     text-decoration: none;
     transition: color 0.3s ease, text-shadow 0.3s ease;

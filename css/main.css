@@ -219,7 +219,6 @@ main {
   justify-content: center;
   gap: 8px;
   visibility: hidden;
-  justify-self: center;
   margin-top: -32px;
   padding: 32px;
 
