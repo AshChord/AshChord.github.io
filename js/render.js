@@ -6,9 +6,6 @@ const categoryMenu = document.querySelector('.category-menu');
 
 // 피드(목록) 렌더링
 async function renderFeed() {
-  content.replaceChildren();
-  outline.replaceChildren();
-
   const posts = await dataflow.evaluate(postsForCurrPage);
 
   if (posts.length === 0) {
@@ -88,9 +85,6 @@ async function renderCategoryPanel() {
 
 // 본문(단일 포스트) 렌더링
 async function renderContent() {
-  feed.replaceChildren();
-  pagination.replaceChildren();
-
   const post = await dataflow.evaluate(currentPost);
 
   // 헤더 렌더링
@@ -250,10 +244,6 @@ async function renderPagination() {
 
 // 404 렌더링
 function renderNotFound() {
-  content.replaceChildren();
-  outline.replaceChildren();
-  pagination.replaceChildren();
-
   const notFoundDiv = document.createElement('div');
   notFoundDiv.className = 'not-found';
 

@@ -1,17 +1,18 @@
 // 피드(목록) 라우팅
 async function resolveFeed(queryParams) {
+  content.replaceChildren();
+  outline.replaceChildren();
+
   const queryCat = queryParams.get('category');
   const queryKw = queryParams.get('keyword');
 
-  let titlePfx = "Posts";
+  if (location.pathname === '/posts') document.title = "Posts";
 
   if (queryCat) {
-    titlePfx = `Category: ${queryCat}`;
+    document.title = `Category: ${queryCat}`;
   } else if (queryKw) {
-    titlePfx = `Search: ${queryKw}`;
+    document.title = `Search: ${queryKw}`;
   }
-
-  updateTitle(titlePfx);
 
   await renderFeed();
   await renderCategoryPanel();
@@ -20,21 +21,25 @@ async function resolveFeed(queryParams) {
 
 // 본문(단일 포스트) 라우팅
 async function resolveContent() {
+  feed.replaceChildren();
+  pagination.replaceChildren();
+
   const post = await dataflow.evaluate(currentPost);
-
-  if (!post) {
-    resolveNotFound();
-    return;
+  if (post) {
+    await renderCategoryPanel();
+    await renderContent();
+    await renderOutline();
+  } else {
+    await resolveNotFound();
   }
-
-  await renderCategoryPanel();
-  await renderContent();
-  await renderOutline();
 }
 
 // 404 라우팅
 async function resolveNotFound() {
-  updateTitle("Page Not Found");
+  content.replaceChildren();
+  outline.replaceChildren();
+  pagination.replaceChildren();
+
   await renderCategoryPanel();
   renderNotFound();
 }
@@ -57,18 +62,11 @@ const routes = [
 
 // 라우터 디스패치
 async function router() {
-  const path = window.location.pathname;
-  const queryParams = new URLSearchParams(window.location.search);
+  const path = location.pathname;
+  const queryParams = new URLSearchParams(location.search);
 
   const matchRoute = routes.find(route => route.match(path));
-
   await matchRoute.handler(queryParams);
-}
-
-// 문서 제목 업데이트
-function updateTitle(pfx) {
-  const sfx = "AshChord.log";
-  document.title = pfx ? `${pfx} - ${sfx}` : sfx;
 }
 
 router();
