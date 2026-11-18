@@ -23,8 +23,8 @@ async function resolveFeed(path, queryParams) {
   updateTitle(titlePfx);
 
   // 인자를 넘길 필요가 없음! 뷰가 알아서 데이터플로우에서 꺼내 씀
-  await renderCategoryPanel();
   await renderFeed();
+  await renderCategoryPanel();
   await renderPagination();
 }
 
@@ -32,6 +32,7 @@ async function resolveFeed(path, queryParams) {
 async function resolveContent(path) {
   await renderCategoryPanel();
   await renderContent();
+  await renderOutline();
   /*/ 데이터플로우를 찔러서 포스트가 존재하는지 확인
   const postContent = await dataflow.evaluate(contentForCurrPage);
 

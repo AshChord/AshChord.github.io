@@ -58,6 +58,34 @@ async function renderFeed() {
   feed.replaceChildren(feedFragment);
 }
 
+// 카테고리 패널 렌더링
+async function renderCategoryPanel() {
+  const categoryMap = await dataflow.evaluate(categorizedPosts);
+  const categoryMenuFrag = document.createDocumentFragment();
+
+  for (const [category, postsArr] of categoryMap.entries()) {
+    const li = document.createElement("li");
+    li.className = "category-menu-item";
+
+    const categoryLink = document.createElement('a');
+    categoryLink.href = `/posts?category=${encodeURIComponent(category)}`;
+
+    const categoryName = document.createElement("span");
+    categoryName.className = "category-name";
+    categoryName.textContent = category;
+
+    const categoryCount = document.createElement("span");
+    categoryCount.className = "count";
+    categoryCount.textContent = `(${postsArr.length})`;
+
+    categoryLink.append(categoryName, categoryCount);
+    li.append(categoryLink);
+    categoryMenuFrag.appendChild(li);
+  }
+
+  categoryMenu.replaceChildren(categoryMenuFrag);
+}
+
 // 본문(단일 포스트) 렌더링
 async function renderContent() {
   feed.replaceChildren();
@@ -155,27 +183,28 @@ async function renderContent() {
       code.replaceChildren(...brokenTokens);
     });
   })();
+}
 
-  // 목차 렌더링
-  (function renderOutline() {
-    const headings = content.querySelectorAll('h2, h3, h4, h5, h6');
-    const headingList = outline.querySelector('.heading-list');
+// 목차 렌더링
+async function renderOutline() {
+  const contentNodes = await window.contentNodes;
+  const headings = [...contentNodes].filter(node => node.matches('h2, h3, h4, h5, h6'));
+  const headingList = outline.querySelector('.heading-list');
 
-    headings.forEach((hdg, idx) => {
-      hdg.id = `heading-${idx}`;
+  headings.forEach((hdg, idx) => {
+    hdg.id = `heading-${idx}`;
 
-      const linkToHeading = document.createElement('a');
-      const indentLevel = Number(hdg.tagName[1]) - 2;
+    const linkToHeading = document.createElement('a');
+    const indentLevel = Number(hdg.tagName[1]) - 2;
 
-      linkToHeading.href = `#${hdg.id}`;
-      linkToHeading.textContent = hdg.textContent;
-      linkToHeading.style.paddingLeft = `${indentLevel * 12}px`;
+    linkToHeading.href = `#${hdg.id}`;
+    linkToHeading.textContent = hdg.textContent;
+    linkToHeading.style.paddingLeft = `${indentLevel * 12}px`;
 
-      headingList.appendChild(linkToHeading);
-    });
+    headingList.appendChild(linkToHeading);
+  });
 
-    document.dispatchEvent(new Event('outlineRendered'));
-  })();
+  document.dispatchEvent(new Event('outlineRendered'));
 }
 
 // 페이지네이션 렌더링
@@ -217,34 +246,6 @@ async function renderPagination() {
     if (currPage === i) pageNumLink.classList.add('current');
     pageNextLink.before(pageNumLink);
   }
-}
-
-// 카테고리 패널 렌더링
-async function renderCategoryPanel() {
-  const categoryMap = await dataflow.evaluate(categorizedPosts);
-  const categoryMenuFrag = document.createDocumentFragment();
-
-  for (const [category, postsArr] of categoryMap.entries()) {
-    const li = document.createElement("li");
-    li.className = "category-menu-item";
-
-    const categoryLink = document.createElement('a');
-    categoryLink.href = `/posts?category=${encodeURIComponent(category)}`;
-
-    const categoryName = document.createElement("span");
-    categoryName.className = "category-name";
-    categoryName.textContent = category;
-
-    const categoryCount = document.createElement("span");
-    categoryCount.className = "count";
-    categoryCount.textContent = `(${postsArr.length})`;
-
-    categoryLink.append(categoryName, categoryCount);
-    li.append(categoryLink);
-    categoryMenuFrag.appendChild(li);
-  }
-
-  categoryMenu.replaceChildren(categoryMenuFrag);
 }
 
 // 404 렌더링
