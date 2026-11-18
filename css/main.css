@@ -2,6 +2,7 @@ main {
   visibility: visible;
   min-height: calc(100vh - 117px);
   font-size: 0;
+  text-align: center;
 
   @media (min-width: 768px) {
     min-height: calc(100vh - 149px);
@@ -12,12 +13,11 @@ main {
   display: inline-grid;
   grid: auto / minmax(0, 1fr);
   gap: 24px;
-  position: relative;
-  left: max(0px, calc(50% - 632px));
   box-sizing: border-box;
   width: 100%;
   max-width: 1264px;
   padding: 32px;
+  text-align: left;
 
   &:empty {
     display: none;
@@ -124,10 +124,11 @@ main {
   top: 121px;
   right: 32px;
   float: right;
-  margin-left: -202px;
+  margin-left: -50%;
   border: 1px solid gainsboro;
   border-radius: 8px;
   background-color: white;
+  text-align: left;
   user-select: none;
 
   @media (min-width: 768px) {
@@ -198,12 +199,11 @@ main {
 
 .content {
   display: inline-block;
-  position: relative;
-  left: max(0px, calc(50% - 440px));
   box-sizing: border-box;
   width: 100%;
   max-width: 880px;
   padding: 40px 20px 20px;
+  text-align: left;
 
   &:empty {
     display: none;
@@ -216,9 +216,9 @@ main {
 
 .pagination {
   display: flex;
+  justify-content: center;
   gap: 8px;
   visibility: hidden;
-  position: relative;
   justify-self: center;
   margin-top: -32px;
   padding: 32px;
