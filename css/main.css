@@ -277,12 +277,13 @@ main {
 
 .page-number {
   width: 18px;
+  height: 18px;
   margin: 0 8px;
   color: gray;
   font-size: 14px;
   text-decoration: none;
-  text-align: center;
-  line-height: 18px;
+  text-box: trim-both cap alphabetic;
+  align-content: center;
   transition: color 0.3s ease;
 
   &:hover {
@@ -298,8 +299,8 @@ main {
 
   @media (min-width: 768px) {
     width: 20px;
+    height: 20px;
     font-size: 16px;
-    line-height: 20px;
   }
 }
 
