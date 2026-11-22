@@ -12,11 +12,7 @@ html {
 body {
   visibility: hidden;
   margin: 0;
-  font-size: 14px;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  @media (min-width: 768px) {
-    font-size: 16px;
-  }
 }
 
 header {
@@ -40,7 +36,7 @@ header {
   }
 
   @media (min-width: 1280px) {
-    padding-inline: calc(50% - 608px);
+    padding: 20px calc(50% - 600px);
   }
 }
 
