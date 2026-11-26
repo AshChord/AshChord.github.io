@@ -32,11 +32,7 @@ header {
   }
 
   @media (min-width: 768px) {
-    padding: 20px 32px;
-  }
-
-  @media (min-width: 1280px) {
-    padding: 20px calc(50% - 600px);
+    padding: 20px max(32px, calc(50% - 608px));
   }
 }
 

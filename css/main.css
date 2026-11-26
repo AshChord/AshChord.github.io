@@ -30,12 +30,6 @@ main {
 
   @media (min-width: 1024px) {
     grid: auto / repeat(3, minmax(0, 1fr));
-    gap: 32px;
-  }
-
-  @media (min-width: 1280px) {
-    gap: 40px;
-    padding: 60px 40px;
   }
 }
 
